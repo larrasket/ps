@@ -1,0 +1,10 @@
+#+TITLE: Problem Solving Tracking Map
+
+Problem in ~built~ directory are either not completed or wrong answers. The Main OJ is
+~leetcode~, all CF problems from the last reposotiery are removed.
+
+
+| Problem                                                    | Tags          | Difficulty | Judge | Statue   |
+|------------------------------------------------------------+---------------+------------+-------+----------|
+| [[https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/][4. Find First and Last Position of Element in Sorted Array]] | Binary Search | Medium     | LC    | [[file:34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]] |
+|                                                            |               |            |       |          |

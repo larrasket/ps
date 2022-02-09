@@ -28,28 +28,21 @@ using namespace std;
 
 int maxSubArray(vector<int> &nums) {
   int n = nums.size();
-  if (n == 1)
-    return nums[0];
-  int lastmainsum = 0, lastsubsum = 0, max = INT_MIN, all;
-
-  for (int i = 0; i < n; i++) {
-    lastmainsum += nums[i];
-  }
-  all = lastmainsum;
-  for (int i = 0; i < n; i++) {
-    lastmainsum -= (i == 0) ? 0 : nums[i - 1];
-    lastsubsum = lastmainsum;
-    for (int j = n - 1; j >= i; j--) {
-      lastsubsum -= ((j == n - 1) ? 0 : nums[j + 1]);
-      cout << lastsubsum << endl;
-      if (lastsubsum > max)
-        max = lastsubsum;
+  int maxSum = INT_MIN;
+  int currSum = 0;
+  for (int i = 0; i <= n - 1; i++) {
+    currSum += nums[i];
+    if (currSum > maxSum) {
+      maxSum = currSum;
+    }
+    if (currSum < 0) {
+      currSum = 0;
     }
   }
-  return (max > all) ? max : all;
+  return maxSum;
 }
 
 int main() {
-  vector<int> arr{-2, -1, -4};
-  maxSubArray(arr);
+  vector<int> nums{-2, -1, -4};
+  maxSubArray(nums);
 }
