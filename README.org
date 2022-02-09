@@ -4,7 +4,18 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 ~leetcode~, all CF problems from the last reposotiery are removed.
 
 
-| Problem                                                    | Tags          | Difficulty | Judge | Statue   |
-|------------------------------------------------------------+---------------+------------+-------+----------|
-| [[https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/][4. Find First and Last Position of Element in Sorted Array]] | Binary Search | Medium     | LC    | [[file:34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]] |
-|                                                            |               |            |       |          |
+| Problem                                                    | Tags                | Difficulty | Judge | Statue              |
+|------------------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/][4. Find First and Last Position of Element in Sorted Array]] | Binary Search       | Medium     | LC    | [[file:34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/valid-sudoku/][36. Valid Sudoku]]                                           | Matrix              | Medium     | LC    | [[file:36.valid-sudoku.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/combination-sum/][39. Combination Sum]]                                        | Backtracking        | Medium     | LC    | [[file:39.combination-sum.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/maximum-subarray/][53. Maximum Subarray]]                                       | Array               | Easy       | LC    | [[file:53.maximum-subarray.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/rotate-array/][189. Rotate Array]]                                          | Two Pointers        | Medium     | LC    | [[file:189.rotate-array.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/missing-number/][268. Missing Number]]                                        | Math                | Easy       | LC    | [[file:268.missing-number.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/accounts-merge/][721. Accounts Merge]]                                        | Depth-Frist Seach   | Medium     | LC    | [[file:721.accounts-merge.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/3sum/][15. 3Sums]]                                                  | Two Pointers        | Medium     | LC    | [[file:built/15.3sums.cpp][Time Limit Exceeded]] |
+| [[https://leetcode.com/problems/decode-ways/][91. Decode Ways]]                                            | Dynamic Programming | Medium     | LC    | [[file:built/91.decode-ways.cpp][Time Limit Exceeded]] |
+| [[https://leetcode.com/problems/restore-ip-addresses/][93. Restore IP Addresses]]                                   | Backtracking        | Medium     | LC    | [[https://leetcode.com/problems/restore-ip-addresses/][Time Limit Exceeded]] |
+| [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                             | Backtracking        | Medium     | LC    | [[file:built/99.subsets-ii.cpp][Unkown]]              |
+| [[https://leetcode.com/problems/find-all-anagrams-in-a-string/][438. Find All Anagrams in a String]]                         | String              | Medium     | LC    | [[file:built/438.find-all-anagrams-in-a-string.cpp][Time Limit Exceeded]] |
+| [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]                          | Array               | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][Wrong Answer]]        |
