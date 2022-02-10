@@ -1,0 +1,13 @@
+#+TITLE: Notes
+
+
+* Notes
++ [[file:Algorithms/][Algorithms]]
+  + [[file:Algorithms/Computational Geometry/][Computational Geometry]]
+  + [[file:Algorithms/Dynamic Programming /][Dynamic Programming]]
+  + [[file:Algorithms/Convex Hull/][Convex Hull]]
+  + [[file:Algorithms/Graphs/][Graphs]]
++ [[file:C# Notes/][C# Notes]]
++ [[file:STD/][C++ STD]]
++ [[file:Problem Solving/][Problem Solving]]
++ [[file:PostgreSQL Notebook/][PostgreSQL]]

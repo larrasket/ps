@@ -1,4 +1,4 @@
-#+TITLE: Computer Science Notes
+#+TITLE: STD Notes
 * C/STD Notes
 ** Sorting
 *** Sorting Custom Objects
@@ -284,68 +284,9 @@ char a = '4';
 int ia = a - '0';
 #+end_src
 
-** Multiplay all elements of vector with 3
+** Multiplay all elements of vector with n
 #+begin_src c++
 std::transform(myv1.begin(), myv1.end(), myv1.begin(),
-               std::bind(std::multiplies<T>(), std::placeholders::_1, 3));
+               std::bind(std::multiplies<T>(), std::placeholders::_1, n));
 #+end_src
 
-* Algorithms
-** Get All Possible Sub-strings
-#+begin_src cpp
-// C++ implementation of the approach #include <bits/stdc++.h> using namespace std;
-
-// Function to return the number of // ways of partitioning int ways(string s, int n) {
-
-	int dp[n][n];
-
-	// Initialize DP table for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) {
-	dp[i][j] = 0; }
-
-	// Base Case for (int i = 0; i < n; i++) dp[0][i] = 1;
-
-	for (int i = 1; i < n; i++) {
-
-		// To store sub-string S[i][j] string temp; for (int j = i; j < n; j++) { temp +=
-		s[j];
-
-			// To store sub-string S[k][i-1] string test; for (int k = i - 1; k >= 0; k--) {
-			test += s[k]; if (test < temp) { dp[i][j] += dp[k][i - 1]; } } } }
-
-	int ans = 0; for (int i = 0; i < n; i++) { // Add all the ways where S[i][n-1] // will
-	be the last partition ans += dp[i][n - 1]; }
-
-	return ans; }
-
-// Driver code int main() { string s = "aabc"; int n = s.length();
-
-	cout << ways(s, n);
-
-	return 0; }
-
-#+end_src
-
-#+RESULTS:
-: 6
-** Orientation of 3 ordered points
-#+begin_src C++
-int orientation(Point p1, Point p2, Point p3) { int val = (p2.y - p1.y) * (p3.x - p2.x) -
-    (p2.x - p1.x) * (p3.y - p2.y);
-
-    if (val == 0) return 0; return (val > 0)? 1: 2; } #+end_src
-
-* Check [0/3]
-** [ ] [[https://stackoverflow.com/questions/3967177/when-to-use-const-and-const-reference-in-function-args][When to use conset]]
-** [ ] [[https://stackoverflow.blog/2021/12/30/how-often-do-people-actually-copy-and-paste-from-stack-overflow-now-we-know/][Copies from stackoverflow]]
-** [ ] [[https://www.fluentcpp.com/2022/01/24/programming-paradigm-gives-expressive-code/][Which Programming Paradigm Gives the Most Expressive Code?]]
-** .NET
-*** [ ] [[https://www.deleaker.com/blog/2021/03/19/unmanaged-memory-leaks-in-dotnet/][.NET unmanged resources]]
-*** [ ] [[https://adamsitnik.com/Value-Types-vs-Reference-Types/][Value vs reference types]]
-** Algorithms
-*** [ ] [[wikipedia:Floyd–Warshall_algorithm][Floyd–Warshall Algorithm]]
-*** [ ] [[wikipedia:Bellman–Ford_algorithm][Bellman–Ford Algorithm]]
-*** [ ] [[https://www.wikiwand.com/en/Divide-and-conquer_algorithm][Divide and Conquer Algorithm]]
-** Random
-*** [ ] [[https://en.wikipedia.org/wiki/Pseudorandom_number_generator][Pseudorandom number generator]]
-*** [ ] [[https://rosettacode.org/wiki/Subtractive_generator][Subtractive generator]]
-*** [ ] [[https://docs.microsoft.com/en-us/dotnet/api/system.random?view=net-6.0#Overriding][Random in C#]]
