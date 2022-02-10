@@ -1,0 +1,351 @@
+#+TITLE: Computer Science Notes
+* C/STD Notes
+** Sorting
+*** Sorting Custom Objects
+You can sort array of custom objects using the ~std::sort~ like this:
+#+begin_src cpp
+struct MyStruct
+{
+    int key;
+    std::string stringValue;
+
+    MyStruct(int k, const std::string& s) : key(k), stringValue(s) {}
+};
+
+struct less_than_key
+{
+    inline bool operator() (const MyStruct& struct1, const MyStruct& struct2)
+    {
+        return (struct1.key < struct2.key);
+    }
+};
+
+std::vector < MyStruct > vec;
+
+vec.push_back(MyStruct(4, "test"));
+vec.push_back(MyStruct(3, "a"));
+vec.push_back(MyStruct(2, "is"));
+vec.push_back(MyStruct(1, "this"));
+
+std::sort(vec.begin(), vec.end(), less_than_key());
+
+#+end_src
+Also, since C++14 you can write an embedded functions inside the sort function:
+#+begin_src cpp
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+vector< MyStruct > values;
+
+sort( values.begin( ), values.end( ), [ ]( const auto& lhs, const auto& rhs )
+{
+   return lhs.key < rhs.key;
+});
+#+end_src
+*** Sorting Descending
+#+begin_src cpp
+sort(begin, end, greater<int>());
+#+end_src
+*** When to return 1 in compare function
+-1 = means point 1 should comes before point 2
++1 = means point 2 should comes before point 1
+0 = means they r equal
+** Numbers
+*** Check If Prime Number
+#+begin_src C
+bool isPrimeNumber(int n) {
+   if (n <= 1) return false;
+   if (n <= 3) return true;
+   if (n%2 == 0 || n%3 == 0) return false;
+   for (int i=5; i*i<=n; i=i+6)
+      if (n%i == 0 || n%(i+2) == 0)
+         return false;
+   return true;
+}
+#+end_src
+*** Greater Common Divisor
+#+begin_src cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+	cout << __gcd(6, 20) << endl;
+}
+
+#+end_src
+
+#+RESULTS:
+: 2
+
+** ~for_each~
+https://en.cppreference.com/w/cpp/algorithm/for_each
+#+begin_src cpp
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+struct Sum
+{
+    void operator()(int n) { sum += n; }
+    int sum{0};
+};
+
+int main()
+{
+    std::vector<int> nums{3, 4, 2, 8, 15, 267};
+
+    auto print = [](const int& n) { std::cout << " " << n; };
+
+    std::cout << "before:";
+    std::for_each(nums.cbegin(), nums.cend(), print);
+    std::cout << '\n';
+
+    std::for_each(nums.begin(), nums.end(), [](int &n){ n++; });
+
+    // calls Sum::operator() for each number
+    Sum s = std::for_each(nums.begin(), nums.end(), Sum());
+
+    std::cout << "after: ";
+    std::for_each(nums.cbegin(), nums.cend(), print);
+    std::cout << '\n';
+    std::cout << "sum: " << s.sum << '\n';
+}
+#+end_src
+
+** Other
+*** Get Intersections
+#+begin_src cpp
+#include <iostream>     // std::cout
+#include <algorithm>    // std::set_intersection, std::sort
+#include <vector>       // std::vector
+
+int main () {
+  int first[] = {5,10,15,20,25};
+  int second[] = {50,40,30,20,10};
+  std::vector<int> v(10);                      // 0  0  0  0  0  0  0  0  0  0
+  std::vector<int>::iterator it;
+
+  std::sort (first,first+5);     //  5 10 15 20 25
+  std::sort (second,second+5);   // 10 20 30 40 50
+
+  it=std::set_intersection (first, first+5, second, second+5, v.begin());
+                                               // 10 20 0  0  0  0  0  0  0  0
+  v.resize(it-v.begin());                      // 10 20
+
+  std::cout << "The intersection has " << (v.size()) << " elements:\n";
+  for (it=v.begin(); it!=v.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+| The | intersection | has | 2 | elements: |
+|  10 |           20 |     |   |           |
+
+** Lambda
+Basic syntax:
+#+begin_src
+[ capture clause ] (parameters) -> return-type
+{
+   definition of method
+}
+#+end_src
+Basic example:
+#+begin_src C++
+int main() {
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int f = accumulate(arr, arr + 10, 1, [](int i, int j)
+    {
+        return i * j;
+    });
+    cout << "Factorial of 10 is : " << f << endl;
+}
+#+end_src
+
+Capturing methods:
+   -  [&] : capture all external variable by reference
+   -  [=] : capture all external variable by value
+   -  [a, &b] : capture a by value and b by reference
+
+Explicitly specifying a return type using ~ -> T ~:
+#+begin_src C++
+void func4(std::vector<double>& v) {
+    std::transform(v.begin(), v.end(), v.begin(),
+        [](double d) -> double {
+            if (d < 0.0001) {
+                return 0;
+            } else {
+                return d;
+            }
+        });
+}
+
+#+end_src
+
+** Strings
+Get all substrings
+#+begin_src c++
+void subString(string str, int n) {
+  for (int len = 1; len <= n; len++) {
+    for (int i = 0; i <= n - len; i++) {
+      int j = i + len - 1;
+      cout << str.substr(i, n - j);
+      cout << endl;
+    }
+  }
+}
+#+end_src
+** String/Char to int in C(++)
+#+begin_src cpp
+#include <sstream>
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s = "12345";
+    stringstream geek(s);
+    int x = 0;
+    geek >> x;
+    cout << "Value of x : " << x;
+}
+#+end_src
+#+RESULTS:
+: Value of x : 12345
+*** Using ~stoi()~
+#+begin_src cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string str1 = "45";
+    string str2 = "3.14159";
+    string str3 = "31337 geek";
+
+    int myint1 = stoi(str1);
+    int myint2 = stoi(str2);
+    int myint3 = stoi(str3);
+
+    cout << "stoi(\"" << str1 << "\") is "
+         << myint1 << '\n';
+    cout << "stoi(\"" << str2 << "\") is "
+         << myint2 << '\n';
+    cout << "stoi(\"" << str3 << "\") is "
+         << myint3 << '\n';
+
+    return 0;
+}
+#+end_src
+*** Using ~atoi()~
+#+begin_src c++
+#include <cstdlib>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    const char* str1 = "42";
+    const char* str2 = "3.14159";
+    const char* str3 = "31337 geek";
+
+    int num1 = atoi(str1);
+    int num2 = atoi(str2);
+    int num3 = atoi(str3);
+
+    cout << "atoi(\"" << str1 << "\") is " << num1 << '\n';
+    cout << "atoi(\"" << str2 << "\") is " << num2 << '\n';
+    cout << "atoi(\"" << str3 << "\") is " << num3 << '\n';
+
+    return 0;
+
+#+end_src
+*** Which one to use?
+I find std::atoi() a horrible function: It returns zero on error. If you consider zero as a
+valid input, then you cannot tell whether there was an error during the conversion or the
+input was zero. That's just bad.
+
+If you don't care about correctness or you know for sure that you won't have zero as input
+or you consider that an error anyway, then, perhaps the C functions might be faster
+(probably due to the lack of exception handling). It depends on your compiler, your standard
+library implementation, your hardware, your input, etc. The best way is to measure it.
+However, I suspect that the difference, if any, is negligible.
+
+*** Using char asci
+#+begin_src c
+char a = '4';
+int ia = a - '0';
+#+end_src
+
+** Multiplay all elements of vector with 3
+#+begin_src c++
+std::transform(myv1.begin(), myv1.end(), myv1.begin(),
+               std::bind(std::multiplies<T>(), std::placeholders::_1, 3));
+#+end_src
+
+* Algorithms
+** Get All Possible Sub-strings
+#+begin_src cpp
+// C++ implementation of the approach #include <bits/stdc++.h> using namespace std;
+
+// Function to return the number of // ways of partitioning int ways(string s, int n) {
+
+	int dp[n][n];
+
+	// Initialize DP table for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) {
+	dp[i][j] = 0; }
+
+	// Base Case for (int i = 0; i < n; i++) dp[0][i] = 1;
+
+	for (int i = 1; i < n; i++) {
+
+		// To store sub-string S[i][j] string temp; for (int j = i; j < n; j++) { temp +=
+		s[j];
+
+			// To store sub-string S[k][i-1] string test; for (int k = i - 1; k >= 0; k--) {
+			test += s[k]; if (test < temp) { dp[i][j] += dp[k][i - 1]; } } } }
+
+	int ans = 0; for (int i = 0; i < n; i++) { // Add all the ways where S[i][n-1] // will
+	be the last partition ans += dp[i][n - 1]; }
+
+	return ans; }
+
+// Driver code int main() { string s = "aabc"; int n = s.length();
+
+	cout << ways(s, n);
+
+	return 0; }
+
+#+end_src
+
+#+RESULTS:
+: 6
+** Orientation of 3 ordered points
+#+begin_src C++
+int orientation(Point p1, Point p2, Point p3) { int val = (p2.y - p1.y) * (p3.x - p2.x) -
+    (p2.x - p1.x) * (p3.y - p2.y);
+
+    if (val == 0) return 0; return (val > 0)? 1: 2; } #+end_src
+
+* Check [0/3]
+** [ ] [[https://stackoverflow.com/questions/3967177/when-to-use-const-and-const-reference-in-function-args][When to use conset]]
+** [ ] [[https://stackoverflow.blog/2021/12/30/how-often-do-people-actually-copy-and-paste-from-stack-overflow-now-we-know/][Copies from stackoverflow]]
+** [ ] [[https://www.fluentcpp.com/2022/01/24/programming-paradigm-gives-expressive-code/][Which Programming Paradigm Gives the Most Expressive Code?]]
+** .NET
+*** [ ] [[https://www.deleaker.com/blog/2021/03/19/unmanaged-memory-leaks-in-dotnet/][.NET unmanged resources]]
+*** [ ] [[https://adamsitnik.com/Value-Types-vs-Reference-Types/][Value vs reference types]]
+** Algorithms
+*** [ ] [[wikipedia:Floyd–Warshall_algorithm][Floyd–Warshall Algorithm]]
+*** [ ] [[wikipedia:Bellman–Ford_algorithm][Bellman–Ford Algorithm]]
+*** [ ] [[https://www.wikiwand.com/en/Divide-and-conquer_algorithm][Divide and Conquer Algorithm]]
+** Random
+*** [ ] [[https://en.wikipedia.org/wiki/Pseudorandom_number_generator][Pseudorandom number generator]]
+*** [ ] [[https://rosettacode.org/wiki/Subtractive_generator][Subtractive generator]]
+*** [ ] [[https://docs.microsoft.com/en-us/dotnet/api/system.random?view=net-6.0#Overriding][Random in C#]]
