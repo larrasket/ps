@@ -1,0 +1,6 @@
+#+TITLE: Readme
+* Algorithms
+  + [[file:geomtry/][Computational Geometry]]
+  + [[file:dp/][Dynamic Programming]]
+  + [[file:convex/][Convex Hull]]
+  + [[file:graphs/][Graphs]]
