@@ -2,7 +2,6 @@
 + [[file:algo/][Algorithms]]
   + [[file:algo/geomtry][Computational Geometry]]
   + [[file:algo/dp][Dynamic Programming]]
-  + [[file:algo/convex/][Convex Hull]]
   + [[file:algo/graphs/][Graphs]]
 + [[file:csharp/][C# Notes]]
 + [[file:STD/][C++ STD]]
