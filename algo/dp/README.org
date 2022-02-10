@@ -34,6 +34,7 @@ int main() {
 The process of compiling this file should look like this using a standard C compiler:
 
 [[file:Memory_And_Functions/2021-12-06_14-19-10_screenshot.png]]
+
 After this we get the standard executable file. Once you run it, first it is loaded into the
 random access memory -> process address space, which includes memory segmentation. It has
 the following segments:
@@ -70,7 +71,8 @@ When the program is executed, ~main()~ is the only active function, when main ca
 ~function_II~ they are all active and their activation records are in stack.
 
 [[file:Memory_And_Functions/2021-12-06_15-05-44_New Project.png]]
-/When ~function_II~ returns, its activation record is popped from the stack, and the
+
+When ~function_II~ returns, its activation record is popped from the stack, and the
 execution is back in ~function_I~, and so on with ~function_II~.
 
 + The size of the stack keeps change as the program is running and calling new functions.
@@ -109,6 +111,7 @@ After running the executable file of this program and loading it into your RAM, 
 function is not called yet and the memory looks like this:
 
 [[file:Memory_And_Functions/2021-12-06_16-28-23_screenshot.png]]
+
 The load variables are loaded in the Data Segment area. Then after ~main()~ functions is
 called, the memory looks as follows:
 
@@ -188,7 +191,6 @@ will in-turn call sum(1).
 At this point, the memory stack will have three activation records of function sum, each of
 them having a local variable n:
 
-#+DOWNLOADED: screenshot @ 2021-12-07 08:18:54
 [[file:Memory_And_Functions/2021-12-07_08-18-54_screenshot.png]]
 
 In the iterative solution, there is only one function call to ~sum(3)~ and three local
@@ -208,6 +210,7 @@ Consider finding the shortest path for traveling between two cities by car. A pe
 drive from city A to city C, city B lies in between the two cities.
 
 [[file:Optimal_Substructure/2021-12-07_13-59-52_screenshot.png]]
+
 The shortest path of going from A to C (30 km) will involve both, taking the shortest path
 from A to B and shortest path from B to C.
 
