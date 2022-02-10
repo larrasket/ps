@@ -1,4 +1,5 @@
-* Notes
+* MOST OF THE CONTENT WILL BE JUST A MIRROR OF http://salehmu.github.io/tags/computer-science/
+* Content
 + [[file:algo/][Algorithms]]
   + [[file:algo/geomtry][Computational Geometry]]
   + [[file:algo/dp][Dynamic Programming]]
