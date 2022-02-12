@@ -1,9 +1,8 @@
----
-title: "Introduction to Non-theoretical Computational Geometry"
-date: 2021-12-17T19:57:19+02:00
-description: The ultimate computational geometry for computer science tutorial
-draft: false
----
+#+title: "Introduction to Non-theoretical Computational Geometry"
+#+date: 2021-12-17T19:57:19+02:00
+#+description: The ultimate computational geometry for computer science tutorial
+#+draft: false
+#+hugo_tags: "Computer Science" "Algorithms"
 
 
 
@@ -185,22 +184,22 @@ points $(x_{1}, y{1})$ and $(x_{2}, y{2})$ and we what to find $A$, $B$ and $C$ 
 equation above, we can easily say:
 
 \begin{equation*}
-
-$A = y_{2}-y_{1}$
-
-$B = x_{1}-x_{2}$
-
-$C = Ax_{1}+By_{1}$
-
-
+a= y_2 - y_1
 \end{equation*}
 
+\begin{equation*}
+b= x_1 - x_2
+\end{equation*}
+
+\begin{equation*}
+c= ax_1+by_1
+\end{equation*}
 
 Since this is one of the most problems I noticed people have trouble with, let's try to
 simplify more than that, consider the following equation:
 
 \begin{equation}
-y= \underbrace{m}_{slope} \overbrace{x}^{x \ coordinate} + \underbrace{y}_{y \ intercept}
+y= \underbrace{m}_{slope} \times \overbrace{x}^{x \ coordinate} + \underbrace{y}_{y \ intercept}
 \end{equation}
 
 This basic formula is called /slope-intercept form/:
@@ -265,7 +264,6 @@ A_{1}x + B_{1}y = C_{1} \ \ \ (P_1,P_2)
 
 \begin{equation*}
 A_{2}x + B_{2}y = C_{2} \ \ \ (P_2,P_4)
-\cancel{3}
 \tag{2}
 \end{equation*}
 
@@ -275,7 +273,7 @@ exist in both of these lines and will satisfy both of their equations, so we nee
 for $x$ and then for $y$. But here is a point, you can't solve a single equation with
 multiple variables for just one of those variables, but if you have two equations that both
 contain the same two variables, you can combine them in the order to solve for one of those
-variable using simple algebra, let's combine the two equations, let's try to it, first let's
+variable using simple algebra, let's combine the two equations, first let's
 multiple both sides of the first equation by  $B_2$
 \begin{equation*}
 A_{1}B{2}x + B_{1} B_{2}y = C_{1} B_{2}
@@ -324,6 +322,58 @@ if (det == 0) {
   double y = (A1 * C2 - A2 * C1) / det
 }
 #+end_src
+* Finding The Equation of a Line for a Segment
+Let the given segment be $PQ$  i.e. the known coordinates of its ends $P_x, P_y, Q_x, Q_y$
+
+It is necessary to construct the equation of a line in the plane passing through this
+segment, i.e. find the coefficients  $A_x + B_y + C = 0$  in the equation of a line:
+
+
+Note that for the required triples  there are infinitely many solutions which describe the
+given segment: you can multiply all three coefficients by an arbitrary non-zero number and
+get the same straight line. Therefore, our task is to find one of these triples.
+
+It is easy to verify (by substitution of these expressions and the coordinates of the points
+and  into the equation of a straight line) that the following set of coefficients fits:
+
+\begin{align}
+A &= P_y - Q_y, \\
+B &= Q_x - P_x, \\
+C &= - A P_x - B P_y.
+\end{align}
+
+
+** TODO Real Case vs. Integer Case
+* Orientation of 3 Points
+To get the intuition of what is left and what is right turn, consider an example shown below.
+
+#+DOWNLOADED: screenshot @ 2022-02-10 21:33:40
+[[file:Orientation_of_3_Points/2022-02-10_21-33-40_screenshot.png]]
+
+Given two points $p_1(x1,y1)$ and $p_2(x2,y2)$, we need to first determine whether point
+$p_1$ is clockwise or is anti-clockwise from point $p2$ with respect to origin. One way of
+solving this problem is by calculating the angle made by both $\overline{p_1}$ and
+$\overline{p_2}$ with x-axis and the difference in the angle can tell whether one point is
+clockwise or anti-clockwise from other. There is an easier and efficient solution to this
+than finding the angle which is calculating the cross product of the vector $\overline{p_1}$
+and $\overline{p_2}$ Mathematically the cross product of two vectors $\overline{p_1}$ and
+$\overline{p_2}$ is given by
+
+$p_1 \times p_2 = x_1 y_2 - x_2 y_1$
+
+If the value of $p_1 \times p_2$ is positive then $p_1$ is clockwise from $p_2$ with respect
+to origin.
+
+Similarly, if $p_1 \times p_2$ is negative then p1 is anti-clockwise from $p_2$ with respect to origin and
+if the value is 0 then points $p_1, p_2$ and origin are collinear.
+
+ respectively. In order to calculate the cross product of two segments, we need to convert
+ them into the vectors. This can be done in the following way.
+
+ $\overline{p_1p_2} = (x_2 - x_1 , y_2 - y_1)$
+
+
+
 * Finding a Circle From 3 Points
 Given 3 points which are not colinear (all on the same line) those three points uniquely
 define a circle. But, how do you find the center and radius of that circle? This task turns
@@ -405,26 +455,27 @@ the rubber band is a convex hull.
 
 ** Jarvi's algorithm
 
+$O(n^2)$
+$O(n \cdot h)$
 
 There is two approaches to solve this problem, /Jarvi's algorithm/ and /Graham Scan/, in
 this article I'm going to use Jarvi's algorithm here, if you are autistic enough you can
 check [[http://www.dcs.gla.ac.uk/~pat/52233/slides/Hull1x1.pdf][Grahm Scan]].
 
-The core of Jarvi's algorithm is described in the following points:
+he core of Jarvi's algorithm is described in the following points:
 
 1. Initialize $p$ as leftmost point
 2. Do the following as long as we don't come back to the leftmost point again:
-   1. The next point $q$ is the point such that the triple $(p,\ q,\ r)$ is counterclockwise for any other point $r$.
+   1. The next point $q$ is the point such that the triple $(p,\ r,\ q)$ is counterclockwise for any other point $r$.
 
       To find this we simply initialize $q$ as the next point, then we traverse through the
       all points. For any point $i$, if $i$ is more counterclockwise, then we update $q =
-      i$. How to check if point is more counterclockwise? We can use orientation checker:
+      i$.
+      How to check if point is more counterclockwise? We can use orientation checker:
 
       [[file:Convex_Hull/2022-01-19_05-00-40_screenshot.png]]
 
-
-       (in this figure, clockwise triplet $ABC$: cross product of $AB$ and $AC$ vectors is
-      $> 0$ anticlockwise triplet $ACD$: cross product of $AC$ and $AD$ is negative.)
+       (in this figure, clockwise triplet $ABC$: cross product of $AB$ and $AC$ vectors is $> 0$ anticlockwise triplet $ACD$: cross product of $AC$ and $AD$ is negative.)
 
       #+begin_src c++
 int orientation(Point p, Point q, Point r)
@@ -436,14 +487,17 @@ int orientation(Point p, Point q, Point r)
     return (val > 0)? 1: 2; // clock or counterclock wise
 }
       #+end_src
+
       If we found that the points are collinear, we should consider taking the points with
       more distance, using a distance utility
+
       #+begin_src c++
 float dis(point p, point q) {
     return sqrt(   pow(p[x] - q[x], 2) +
                     pow(p[y] - q[y] , 2) * 1.0 );
 }
       #+end_src
+
    2. next[p] = q (store $q$ as next of $p$ in the output convex hull)
    3. $p = q$ (Set p as q for the next iteration)
 
@@ -467,7 +521,7 @@ int orinetation(point p, point q, point r) {
 }
 
 float dis(point p, point q) {
-    return sqrt(   pow(p[x] - q[x], 2) +
+    return sqrt(pow(p[x] - q[x], 2) +
                     pow(p[y] - q[y] , 2) * 1.0 );
 }
 
@@ -612,6 +666,8 @@ the complexity also depends on the number of output.
 - Mount, D. M. (n.d.). CMSC 754 Computational Geometry. Lecture. Retrieved August 23, 2018, from https://www.cs.umd.edu/class/spring2012/cmsc754/Lects/cmsc754-lects.pdf
 
 ** Grahm Scan
+$O(n \cdot log(n))$
+
 Graham scan is an algorithm to compute a convex hull of a given set of points in $O(n\log n)$
 time. This algorithm first sorts the set of points according to their polar angle and scans
 the points to find the convex hull vertices.
@@ -764,3 +820,6 @@ def graham_scan(points):
             stack_size += 1
     return stack
 #+end_src
+
+** TODO Monotone chain Algorithm
+$O(n \cdot log(n))$

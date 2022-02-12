@@ -1,4 +1,5 @@
-#+TITLE: PostgreSQL notes
+#+TITLE: PostgreSQL Notes
+#+hugo_tags: "Computer Science" "Databases"
 
 * Introduction into PostgreSQL
 Notes:
@@ -395,7 +396,7 @@ You might have noticed that it is to close to the clause ~WHERE~, that's almost 
 PostgreSQL evaluates the ~having~ clause after ~from~, ~where~ and ~group by~. ~WHERE~
 allows you to filter groups of rows according to a specified condition (see [[#where][where]]), ~HAVING~
 allows you to apply the condition to a group of rows instead. Thus, it's used more
-frequently with the clause ~GROUP BY~ (see [[#group_by][GROUP BY]]).
+frequently with the clause ~GROUP BY~.
 
 Consider the following example using group by to get the count numbers of each country:
 

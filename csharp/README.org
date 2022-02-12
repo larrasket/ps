@@ -1,11 +1,9 @@
--
-title: "C#"
-date: 2022-01-08T05:28:26+02:00
-tags: [".NET"]
-draft: true
-categories: ["Computer Science"]
-description: C# Notebook
----
+#+title: "C# & .NET Notes"
+#+date: 2022-01-08T05:28:26+02:00
+#+draft: false
+#+categories: ["Computer Science"]
+#+description: C# Notebook
+#+hugo_tags: "Computer Science" ".NET"
 * Speaking C#
 ** Discover C# Compiler Version
 With the C# 7.x generation, Microsoft decided to increase the cadence of language
@@ -706,7 +704,7 @@ following markup to add a project reference to ~PacketLibrary~:
 <ProjectReference Include="../PacktLibrary/PacktLibrary.csproj" />
 </ItemGroup>
 #+end_src
-*Note: ~..~ in this case is a /container directory/. ~../..~ means "up" twice* 
+*Note: ~..~ in this case is a /container directory/. ~../..~ means "up" twice*
 
 For example, if your current directory is ~C:/projects/a/b/c~ then ~../..~ will be ~C:/projects/a~
 
