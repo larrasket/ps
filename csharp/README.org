@@ -673,6 +673,23 @@ statements using ~checked~
 | ~int[][] jaggedArray = new int[6][];~                           | Declare a jagged array                                           |
 | ~jaggedArray[0] = new int[4] { 1, 2, 3, 4 };~                   | Set the values of the first array in the jagged array structure. |
 |-----------------------------------------------------------------+------------------------------------------------------------------|
+** Lambada
+*Check [[#delegates][delegates]] & [[#events][events]]*
+In C#, lambdas use special syntax. We pass lambda expressions to other methods to specify a behavior that the method uses.
+
+Remember that lambdas are just methods. They can always be replaced with class-level methods. We can use types like Action and Func to represent them.
+
+A common place to use lambdas is with List. Here we use FindIndex, which receives a Predicate method. We specify this as a lambda expression.
+
+#+begin_src csharp
+List<int> elements = new List<int>() { 10, 20, 31, 40 };
+int oddIndex = elements.FindIndex(x => x % 2 != 0);
+Console.WriteLine(elements[oddIndex]);
+#+end_src
+
+#+RESULTS:
+: 31
+
 * Building O.O.P
 An object in the real world is a thing, such as a car or a person, whereas an object in
 programming often represents something in the real world, such as a product or bank account,
@@ -1057,16 +1074,18 @@ together, or electrical standards for plugs and sockets.  If a type implements a
 then it is making a promise to the rest of .NET that it supports a certain feature.
 
 Here are some common interfaces that your types might need to implement:
-| Interface         | Method(s)                                              | Description                                                                                                     |
-|-------------------+--------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------|
-| ~IComparer~       | ~Compare(first, second)~                               | This defines a comparison method that a secondary type implements to order or sort instances of a primary type. |
-| ~IEnumerator~     | ~MoveNext()~, ~Reset()~                                | Makes your class iteratable on the ~foreach~ iteration statement                                                |
-| ~ICloneable~      | ~Clone()~                                              |                                                                                                                 |
-| ~ICompareable~    | ~CompareTo(other)~                                     | This defines a comparison method that a type implements to order or sort its instances.                         |
-| ~IDisposable~     | ~Dispose~                                              | This defines a disposal method to release unmanaged resources more efficiently than waiting for a finalizer     |
-| ~IFormattable~    | ~ToString(format, culture)~                            | This defines a culture-aware method to format the value of an object into a string representation.              |
-| ~IFormatter~      | ~Serializer(stream, object)~ and ~Deserialize(stream)~ | This defines methods to convert an object to and from a stream of bytes for storage or transfer.                |
-| ~IFormatProvider~ | ~GetFormate(type)~                                     | This defines a method to format inputs based on a language and region.                                          |
+| Interface           | Method(s)                                                                                                         | Description                                                                                                     |
+|---------------------+-------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------|
+| ~IComparer~         | ~Compare(first, second)~                                                                                          | This defines a comparison method that a secondary type implements to order or sort instances of a primary type. |
+| ~IEnumerator~       | ~MoveNext()~, ~Reset()~                                                                                           | Makes your class iteratable on the ~foreach~ iteration statement                                                |
+| ~ICloneable~        | ~Clone()~                                                                                                         | Supports cloning, which creates a new instance of a class with the same value as an existing instance.          |
+| ~IEqualityComparer~ | ~Equals(T,T)~, ~GetHashCode(T)~                                                                                   |                                                                                                                 |
+| ~ICompareable~      | ~CompareTo(other)~                                                                                                | This defines a comparison method that a type implements to order or sort its instances.                         |
+| ~IDisposable~       | ~Dispose~                                                                                                         | This defines a disposal method to release unmanaged resources more efficiently than waiting for a finalizer     |
+| ~IFormattable~      | ~ToString(format, culture)~                                                                                       | This defines a culture-aware method to format the value of an object into a string representation.              |
+| ~IFormatter~        | ~Serializer(stream, object)~ and ~Deserialize(stream)~                                                            | This defines methods to convert an object to and from a stream of bytes for storage or transfer.                |
+| ~IFormatProvider~   | ~GetFormate(type)~                                                                                                | This defines a method to format inputs based on a language and region.                                          |
+| ~IDictionary~       | ~Add(Object, Object)~, ~Clear()~, ~Contains(Object)~, ~CopyTo(Array, Int32)~, ~GetEnumerator()~, ~Remove(Object)~ | Adds an element with the provided key and value to the IDictionary object.                                      |
 *** ~IComparer~
 *Note*: When using any compare function that return an ~int~, you should consider the
 following cases:
@@ -1437,6 +1456,89 @@ class ShallowCopy :  ICloneable
 }
 #+end_src
 
+*** ~IEqualityComparer~
+:PROPERTIES:
+:CUSTOM_ID: IEquality
+:END:
+#+begin_src csharp
+using System;
+using System.Collections.Generic;
+
+class Example
+{
+   static void Main()
+   {
+      BoxEqualityComparer boxEqC = new BoxEqualityComparer();
+
+      var boxes = new Dictionary<Box, string>(boxEqC);
+
+      var redBox = new Box(4, 3, 4);
+      AddBox(boxes, redBox, "red");
+
+      var blueBox = new Box(4, 3, 4);
+      AddBox(boxes, blueBox, "blue");
+
+      var greenBox = new Box(3, 4, 3);
+      AddBox(boxes, greenBox, "green");
+      Console.WriteLine();
+
+      Console.WriteLine("The dictionary contains {0} Box objects.",
+                        boxes.Count);
+   }
+
+   private static void AddBox(Dictionary<Box, String> dict, Box box, String name)
+   {
+      try {
+         dict.Add(box, name);
+      }
+      catch (ArgumentException e) {
+         Console.WriteLine("Unable to add {0}: {1}", box, e.Message);
+      }
+   }
+}
+
+public class Box
+{
+    public Box(int h,  int l, int w)
+    {
+        this.Height = h;
+        this.Length = l;
+        this.Width = w;
+    }
+
+    public int Height { get; set; }
+    public int Length { get; set; }
+    public int Width { get; set; }
+
+    public override String ToString()
+    {
+       return String.Format("({0}, {1}, {2})", Height, Length, Width);
+    }
+}
+
+class BoxEqualityComparer : IEqualityComparer<Box>
+{
+    public bool Equals(Box b1, Box b2)
+    {
+        if (b2 == null && b1 == null)
+           return true;
+        else if (b1 == null || b2 == null)
+           return false;
+        else if(b1.Height == b2.Height && b1.Length == b2.Length
+                            && b1.Width == b2.Width)
+            return true;
+        else
+            return false;
+    }
+
+    public int GetHashCode(Box bx)
+    {
+        int hCode = bx.Height ^ bx.Length ^ bx.Width;
+        return hCode.GetHashCode();
+    }
+}
+#+end_src
+
 ** Interfaces: A point
 First and foremost, interfaces in C# are a means to get around the lack of multiple
 inheritances in C#, meaning you cannot inherit from multiple classes but you can implement
@@ -1571,10 +1673,13 @@ namespace InterfaceExample {
 #+end_src
 
 ** Delegates
+:PROPERTIES:
+:CUSTOM_ID: delegates
+:END:
 Delegate is just about passing a function as a paramter, consider the following C++ code:
 #+begin_src cpp
 bool Myfunction()
-{ // Make some calculations here
+{
     return true;
 }
 
@@ -1638,6 +1743,9 @@ Console.WriteLine(FunctionRec(() => true ));
 #+end_src
 
 ** Events
+:PROPERTIES:
+:CUSTOM_ID: events
+:END:
 Methods are often described as actions that an object can perform, either on itself or to
 related objects. For example, List can add an item to itself or clear itself, and File can
 create or delete a file in the filesystem.
@@ -1785,11 +1893,13 @@ A collection is a data structure in memory that can manage multiple items in
 different ways, although all collections have some shared functionality.
 
 *** ~List<T>~
+:PROPERTIES:
+:CUSTOM_ID: list
+:END:
 Lists are a good choice when you want to manually control the order of items in
 a collection. Each item in a list has a unique index (or position) that is automatically
 assigned. Items can be any type defined by T and items can be duplicated. Indexes
 are int types and start from 0, so the first item in a list is at index 0.
-
 **** Constructors
 | Constructor               | Description                                                                                                                                                                            |
 |---------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1841,21 +1951,263 @@ Time:     575 ms
 
 #+end_src
 
-***** Methods
+**** Methods
+| Method                                         | Description                                                                                                                                                                                                                                                                    |
+|------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ~Add(T)~                                       | Adds an object to the end of the List<T>.                                                                                                                                                                                                                                      |
+| ~AddRange(IEnumerable<T>)~                     | Adds the elements of the specified collection to the end of the List<T>. See [[#addrange][example]]                                                                                                                                                                                           |
+| ~AsReadOnly()~                                 | Returns a read-only ReadOnlyCollection<T> wrapper for the current collection.                                                                                                                                                                                                  |
+| ~BinarySearch(Int32, Int32, T, IComparer<T>l)~ | Searches a range of elements in the sorted List<T> for an element using the specified comparer and returns the zero-based index of the element. [[#binaryseach][Example]]                                                                                                                        |
+| ~Clear()~                                      | Removes all elements from the List<T>.                                                                                                                                                                                                                                         |
+| ~Contains(T)~                                  | Determines whether an element is in the List<T>.                                                                                                                                                                                                                               |
+| ~CopyTo(T[])~                                  | Copies the entire List<T> to a compatible one-dimensional array, starting at the beginning of the target array. [[#copyto][Example]]                                                                                                                                                        |
+| ~Exists(Predicate<T>)~                         | Determines whether the List<T> contains elements that match the conditions defined by the specified predicate. [[#exist][Example]]                                                                                                                                                         |
+| ~Find(Predicate<T>)~                           | Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire List<T>. [[#find][Example]]                                                                                                                    |
+| ~EnsureCapacity(Int32)~                        | Ensures that the capacity of this list is at least the specified capacity. If the current capacity is less than capacity, it is successively increased to twice the current capacity until it is at least the specified capacity.                                              |
+| ~FindAll(Predicate<T>)~                        | Retrieves all the elements that match the conditions defined by the specified predicate.                                                                                                                                                                                       |
+| ~FindIndex(Int32, Predicate<T>)~               | Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the range of elements in the List<T> that extends from the specified index to the last element.                        |
+| ~FindIndex(Int32, Int32, Predicate<T>)~        | Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the first occurrence within the range of elements in the List<T> that starts at the specified index and contains the specified number of elements. |
+| ~FindLast(Predicate<T>)~                       | Searches for an element that matches the conditions defined by the specified predicate, and returns the last occurrence within the entire List<T>.                                                                                                                             |
+| ~FindLastIndex(Int32, Int32, Predicate<T>)~    | Searches for an element that matches the conditions defined by the specified predicate, and returns the zero-based index of the last occurrence within the range of elements in the List<T> that contains the specified number of elements and ends at the specified index.    |
+| ~FindLastIndex(Int32, Predicate<T>)~           | ~                                                                                                                                                                                                                                                                              |
+| ~ForEach(Action<T>)~                           | Performs the specified action on each element of the List<T>. [[#foreach][Example]]                                                                                                                                                                                                          |
+| ~Insert(Int32, T)~                             | Inserts an element into the List<T> at the specified index.                                                                                                                                                                                                                    |
+| ~LastIndexOf(T)~                               | Searches for the specified object and returns the zero-based index of the last occurrence within the entire List<T>.                                                                                                                                                           |
+| ~Remove(T)~                                    | Removes the first occurrence of a specific object from the List<T>.                                                                                                                                                                                                            |
+| ~RemoveAll(Predicate<T>)~                      | Removes all the elements that match the conditions defined by the specified predicate.                                                                                                                                                                                         |
+| ~RemoveAt(Int32)~                              | Removes the element at the specified index of the List<T>.                                                                                                                                                                                                                     |
+| ~RemoveRange(Int32, Int32)~                    | Removes a range of elements from the List<T>.                                                                                                                                                                                                                                  |
+| ~Reverse()~                                    | Reverses the order of the elements in the entire List<T>.                                                                                                                                                                                                                      |
+| ~Reverse(Int32, Int32)~                        | Reverses the order of the elements in the specified range.                                                                                                                                                                                                                     |
+| ~Sort()~                                       | Sorts the elements in the entire List<T> using the default comparer.
 
-*** TODO ~Dictionary<T_Key, T_Value>~
-*** TODO ~ConcurrentDictionary<TKey,TValue>~
+                                                                                                                                                                                                                                                                               |   |   |
+                                                                                                                                                                                                                                                                               |   |   |
+                                                                                                                                                                                                                                                                               |   |   |
+                                                                                                                                                                                                                                                                               |   |   |
+***** ~AddRange(IEnumerable<T>)~ Example
+:PROPERTIES:
+:CUSTOM_ID: addrange
+:END:
+#+begin_src csharp
+var list = new List<int>();
+list.Add(1);
+list.Add(2);
+list.Add(5);
+list.Add(6);
+
+var array = new int[3];
+array[0] = 7;
+array[1] = 6;
+array[2] = 7;
+
+list.AddRange(array);
+foreach (int value in list) {
+    Console.WriteLine("VALUE: {0}", value);
+}
+#+end_src
+
+#+RESULTS:
+| VALUE: | 1 |
+| VALUE: | 2 |
+| VALUE: | 5 |
+| VALUE: | 6 |
+| VALUE: | 7 |
+| VALUE: | 6 |
+| VALUE: | 7 |
+
+***** ~BinarySearch(Int32, Int32, T, IComparer<T>l)~ Example
+:PROPERTIES:
+:CUSTOM_ID: binaryseach
+:END:
+#+begin_src csharp
+var data = new List<string>() { "banana", "peach", "apple" };
+
+// Part 1: ensure list is sorted.
+data.Sort();
+Console.WriteLine(string.Join(",", data));
+
+// Part 2: test the results of BinarySearch.
+int i = data.BinarySearch("peach");
+Console.WriteLine(i);
+
+i = data.BinarySearch("banana");
+Console.WriteLine(i);
+
+i = data.BinarySearch("apple");
+Console.WriteLine(i);
+#+end_src
+
+#+RESULTS:
+| apple,banana,peach |
+|                  2 |
+|                  1 |
+|                  0 |
+
+***** ~CopyTo(T[])~ Example
+
+#+begin_src csharp
+var list = new List<int>() { 10, 20, 30 };
+int[] array = new int[5];
+list.CopyTo(array, 2);
+Console.WriteLine("LIST:  " + string.Join(",", list));
+Console.WriteLine("ARRAY: " + string.Join(",", array));
+#+end_src
+
+#+RESULTS:
+| LIST:  10  20  30         |
+| ARRAY: 0    0  10  20  30 |
+
+Or:
+#+begin_src csharp
+var list = new List<int>() { 5, 6, 7 };
+int[] array = new int[list.Count];
+list.CopyTo(array);
+Console.WriteLine(array[0]);
+Console.WriteLine(array[1]);
+Console.WriteLine(array[2]);
+#+end_src
+
+#+RESULTS:
+| 5 |
+| 6 |
+| 7 |
+
+***** ~Exist(Predicate<T>)~ Example
+#+begin_src csharp
+List<int> list = new List<int>();
+list.Add(7);
+list.Add(11);
+list.Add(13);
+
+// See if any elements with values greater than 10 exist.
+bool exists = list.Exists(element => element > 10);
+Console.WriteLine(exists);
+
+// Check for numbers less than 7.
+exists = list.Exists(element => element < 7);
+Console.WriteLine(exists);
+#+end_src
+
+#+RESULTS:
+| True  |
+| False |
+
+***** ~Find(Predicate<T>)~ Example
+#+begin_src csharp
+List<int> list = new List<int>(new int[] { 19, 23, 29 });
+int result = list.Find(item => item > 20);
+Console.WriteLine(result);
+#+end_src
+#+RESULTS:
+: 23
+
+***** ~FindIndex(Int32, Predicate<T>)~ Example
+Start search from the index of the Int32
+#+begin_src csharp
+List<int> listOfNumers3 = new List<int> {1, 1, 3, 4, 5, 1 };
+Console.WriteLine(listOfNumers3.FindIndex(2, x=> x == 1));
+#+end_src
+
+#+RESULTS:
+: 5
+
+***** ~ForEach(Action<T>)~ Example
+#+begin_src csharp
+List<int> ListOfNumers_3 = new List<int> { 1, 2, 3, 4, 5, 6 };
+int[] MyNewList = new int[2];
+ListOfNumers_3.ForEach(x => Console.WriteLine(x));
+#+end_src
+**** Properties
+| Property    | Description                                                                                      |
+|-------------+--------------------------------------------------------------------------------------------------|
+| Capacity    | Gets or sets the total number of elements the internal data structure can hold without resizing. |
+| Count       | Gets the number of elements contained in the List<T>.                                            |
+| ~Item[int]~ | Gets or sets the element at the specified index.                                                 |
+
+*** ~Dictionary<T_Key, T_Value>~
+Dictionaries are a good choice when each value (or object) has a unique sub value
+(or a made-up value) that can be used as a key to quickly find the value in the
+collection later. The key must be unique. For example, if you are storing a list of
+people, you could choose to use a government-issued identity number as the key.
+
+Think of the key as being like an index entry in a real-world dictionary. It allows you
+to quickly find the definition of a word because the words (for example, keys) are
+kept sorted, and if we know we're looking for the definition of manatee, we would
+jump to the middle of the dictionary to start looking, because the letter M is in the
+middle of the alphabet.
+
+*Note: most of the C# predifend collections share the very corresponding methods,
+constructors and properties that are shown in [[#list][~List<T>~,]] (since all of them implement common
+interfaces like ~IEnumerable~ and others, to save time, I will not declare any of it again.*
+
+**** Constructors
+
+| Constructor                                                                                | Description                                                                                                                                                                                        |
+|--------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ~Dictionary<TKey,TValue>()~                                                                | Initializes a new instance of the Dictionary<TKey,TValue> class that is empty, has the default initial capacity, and uses the default equality comparer for the key type.                          |
+| ~Dictionary<TKey,TValue>(IDictionary<TKey,TValue>)~                                        | Initializes a new instance of the Dictionary<TKey,TValue> class that contains elements copied from the specified IDictionary<TKey,TValue> and uses the default equality comparer for the key type. |
+| ~Dictionary<TKey,TValue>(IDictionary<TKey,TValue>, IEqualityComparer<TKey>)~               | Initializes a new instance of the Dictionary<TKey,TValue> class that contains elements copied from the specified IDictionary<TKey,TValue> and uses the specified IEqualityComparer<T>.             |
+| ~Dictionary<TKey,TValue>(IEnumerable<KeyValuePair<TKey,TValue>>)~                          | Initializes a new instance of the Dictionary<TKey,TValue> class that contains elements copied from the specified IEnumerable<T>.                                                                   |
+| ~Dictionary<TKey,TValue>(IEnumerable<KeyValuePair<TKey,TValue>>, IEqualityComparer<TKey>)~ | Initializes a new instance of the Dictionary<TKey,TValue> class that contains elements copied from the specified IEnumerable<T> and uses the specified IEqualityComparer<T>.                       |
+| ~Dictionary<TKey,TValue>(IEqualityComparer<TKey>)~                                         | Initializes a new instance of the Dictionary<TKey,TValue> class that is empty, has the default initial capacity, and uses the specified IEqualityComparer<T>.                                      |
+| ~Dictionary<TKey,TValue>(Int32)~                                                           | Initializes a new instance of the Dictionary<TKey,TValue> class that is empty, has the specified initial capacity, and uses the default equality comparer for the key type.                        |
+| ~Dictionary<TKey,TValue>(Int32, IEqualityComparer<TKey>)~                                  | Initializes a new instance of the Dictionary<TKey,TValue> class that is empty, has the specified initial capacity, and uses the specified IEqualityComparer<T>.                                    |
+| ~Dictionary<TKey,TValue>(SerializationInfo, StreamingContext)~                             | Initializes a new instance of the Dictionary<TKey,TValue> class with serialized data.                                                                                                              |
+|--------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+**** Properties
+   | Properties | Description                                                                                                        |
+   |------------+--------------------------------------------------------------------------------------------------------------------|
+   | Comparer   | Gets the IEqualityComparer<T> that is used to determine equality of keys for the dictionary. See [[#IEquality][IEqualityComparer]] |
+   | Count Gets | the number of key/value pairs contained in the Dictionary<TKey,TValue>.                                            |
+   | Item[TKey] | Gets or sets the value associated with the specified key.                                                          |
+   | Keys       | Gets a collection containing the keys in the Dictionary<TKey,TValue>.                                              |
+   | Values     | Gets a collection containing the values in the Dictionary<TKey,TValue>.                                            |
+
+*** ~Stack~
+:PROPERTIES:
+:CUSTOM_ID: stack
+:END:
+Stacks are a good choice when you want to implement the last-in, first-out (LIFO)
+behavior. With a stack, you can only directly access or remove the one item at the top
+of the stack, although you can enumerate to read through the whole stack of items.
+You cannot, for example, directly access the second item in a stack.
+**** Constructors
+| Constructor                | Description                                                                                                                                                                            |
+| ~Stack<T>()~               | Initializes a new instance of the Stack<T> class that is empty and has the default initial capacity.                                                                                   |
+| ~Stack<T>(IEnumerable<T>)~ | Initializes a new instance of the Stack<T> class that contains elements copied from the specified collection and has sufficient capacity to accommodate the number of elements copied. |
+| ~Stack<T>(Int32)~          | Initializes a new instance of the Stack<T> class that is empty and has the specified initial capacity or the default initial capacity, whichever is greater.                           |
+
+
+**** Methods
+| Method       | Description                                                                                                                                                                                  |
+| ~Peek()~     | Returns the object at the top of the Stack<T> without removing it.                                                                                                                           |
+| ~Pop()~      | Removes and returns the object at the top of the Stack<T>.                                                                                                                                   |
+| ~TryPeek(T)~ | Returns a value that indicates whether there is an object at the top of the Stack<T>, and if one is present, copies it to the result parameter. The object is not removed from the Stack<T>. |
+| ~TryPop(T)~  | Returns a value that indicates whether there is an object at the top of the Stack<T>, and if one is present, copies it to the result parameter, and removes it from the Stack<T>.            |
+
+**** Properties
++ ~Count~: Gets the number of elements contained in the Stack<T>.
+
+
+*** ~Queue~
+Queues are a good choice when you want to implement the first-in, first-out (FIFO)
+behavior. With a queue, you can only directly access or remove the one item at the
+front of the queue, although you can enumerate to read through the whole queue of
+items. You cannot, for example, directly access the second item in a queue.
+
 *** TODO ~HashSet<T>~
-*** TODO ~HashTable~
+SCHEDULED: <2022-02-15 Tue>
 *** TODO ~SortedList~
-*** TODO ~SortedList<TKey,TValue>~
-*** TODO ~Queue~
-*** TODO ~ConcurrentQueue<T>~
-*** TODO ~ConcurrentQueue<T>~
-*** TODO ~Stack~
-*** TODO ~ConcurrentStack<T>~
+SCHEDULED: <2022-02-15 Tue>
 *** TODO ~LinkedList<T>~
+SCHEDULED: <2022-02-15 Tue>
 
+*** TODO ~ConcurrentQueue<T>~
+*** TODO ~ConcurrentQueue<T>~
+*** TODO ~ConcurrentStack<T>~
+*** TODO ~ConcurrentDictionary<TKey,TValue>~
 * Assemblies, Namespaces, Packages, and Frameworks
 An *assembly* is where a type is stored in the filesystem. Assemblies are a mechanism
 for _deploying code_. For example, the ~System.Data.dll~ assembly contains types for
@@ -2298,8 +2650,7 @@ class MyClass
 
 #+end_src
 
-** ~checked~ and ~unchecked~
-
+** TODO ~checked~ and ~unchecked~
 * Take a Look
 - [[https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading#overloadable-operators][Overloadable operators]]
 - [[https://docs.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions][Best practices for exceptions]]
