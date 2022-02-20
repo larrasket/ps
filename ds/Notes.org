@@ -1,0 +1,196 @@
+#+TITLE: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Notebook
+#+Description: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Answers Notebook
+#+hugo_tags: "Computer Science"
+
+
+* TODO Data Structures & Algorithms
+* TODO Mathematical Preliminaries
+* TODO Algorithm Analysis
+* TODO Lists, Stacks, and Queues
+** Lists
+
+We all have an intuitive understanding of what we mean by a “list.” Our first step is
+to define precisely what is meant so that this intuitive understanding can eventually
+be converted into a concrete data structure and its operations. The most important
+concept related to lists is that of position. In other words, we perceive that there
+is a first element in the list, a second element, and so on.
+
+We define a list to be a finite, ordered sequence of data items known as ele-
+ments. “Ordered” in this definition means that each element has a position in the
+list. (We will not use “ordered” in this context to mean that the list elements are
+sorted by value.) Each list element has a data type. In the simple list implemen-
+tations discussed in this chapter, all elements of the list have the same data type,
+although there is no conceptual objection to lists whose elements have differing
+data types if the application requires it
+
+A list is said to be empty when it contains no elements. The number of ele-
+ments currently stored is called the length of the list. The beginning of the list is
+called the head, the end of the list is called the tail. There might or might not be
+some relationship between the value of an element and its position in the list. For
+example, sorted lists have their elements positioned in ascending order of value,
+while unsorted lists have no particular relationship between element values and
+positions. This section will consider only unsorted lists.
+
+The ADT for a list:
+#+begin_src c++
+template <typename E> class List { // List ADT
+private:
+void operator =(const List&) {}
+// Protect assignment
+List(const List&) {}
+// Protect copy constructor
+public:
+List() {}
+// efault constructor
+virtual ˜List() {} // Base destructor
+// Clear contents from the list, to make it empty.
+virtual void clear() = 0;
+// Insert an element at the current location.
+// item: The element to be inserted
+virtual void insert(const E& item) = 0;
+// Append an element at the end of the list.
+// item: The element to be appended.
+virtual void append(const E& item) = 0;
+// Remove and return the current element.
+// Return: the element that was removed.
+virtual E remove() = 0;
+// Set the current position to the start of the list
+virtual void moveToStart() = 0;
+// Set the current position to the end of the list
+virtual void moveToEnd() = 0;
+// Move the current position one step left. No change
+// if already at beginning.
+virtual void prev() = 0;
+// Move the current position one step right. No change
+// if already at end.
+virtual void next() = 0;
+// Return: The number of elements in the list.
+virtual int length() const = 0;
+// Return: The position of the current element.
+virtual int currPos() const = 0;
+// Set current position.
+// pos: The position to make current.
+virtual void moveToPos(int pos) = 0;
+// Return: The current element.
+virtual const E& getValue() const = 0;
+};
+#+end_src
+
+*** Array-Based Implementation
+Class AList’s private portion contains the data members for the array-based
+list. These include listArray, the array which holds the list elements. Because
+listArray must be allocated at some fixed size, the size of the array must be
+known when the list object is created. Note that an optional parameter is declared
+for the AList constructor. With this parameter, the user can indicate the maximum
+number of elements permitted in the list. The phrase “=defaultSize” indicates
+that the parameter is optional. If no parameter is given, then it takes the value
+defaultSize, which is assumed to be a suitably defined constant value.
+
+Because each list can have a differently sized array, each list must remember
+its maximum permitted size. Data member maxSize serves this purpose. At any
+given time the list actually holds some number of elements that can be less than the
+maximum allowed by the array. This value is stored in listSize. Data member
+curr stores the current position. Because listArray, maxSize, listSize,
+and curr are all declared to be private, they may only be accessed by methods
+of Class AList.
+
+Class AList stores the list elements in the first listSize contiguous array
+positions. Array positions correspond to list positions. In other words, the element
+at position i in the list is stored at array cell i. The head of the list is always at
+position 0. This makes random access to any element in the list quite easy. Given
+some position in the list, the value of the element in that position can be accessed
+directly. Thus, access to any element using the moveToPos method followed by
+the getValue method takes $Θ(1)$ time.
+
+*** Linked List
+The second traditional approach to implementing lists makes use of pointers and is
+usually called a linked list. The linked list uses dynamic memory allocation, that
+is, it allocates memory for new list elements as needed.
+
+A linked list is made up of a series of objects, called the nodes of the list.
+Because a list node is a distinct object (as opposed to simply a cell in an array), it is
+good practice to make a separate list node class. An additional benefit to creating a
+list node class is that it can be reused by the linked implementations for the stack
+and queue data structures presented later.
+
+The Link class is quite simple. There are two forms for its constructor, one
+with an initial element value and one without. Because the Link class is also
+used by the stack and queue implementations presented later, its data members are
+made public. While technically this is breaking encapsulation, in practice the Link
+class should be implemented as a private class of the linked list (or stack or queue)
+implementation, and thus not visible to the rest of the program.
+
+Shows a graphical depiction for a linked list storing four integers.
+The value stored in a pointer variable is indicated by an arrow “pointing” to some-
+thing. C++ uses the special symbol ~NULL~ for a pointer value that points nowhere,
+such as for the last list node’s next field. A NULL pointer is indicated graphically
+by a diagonal slash through a pointer variable’s box. The vertical line between the
+nodes labeled 23 and 12 in the figure indicates the current position (immediately
+to the right of this line).
+
+
+[[file:Lists,_Stacks,_and_Queues/2022-02-16_15-34-23_screenshot.png]]
+
+*The list’s first node is accessed from a pointer named ~head~*. *To speed access
+to the end of the list, and to allow the append method to be performed in constant
+time, a pointer named ~tail~ is also kept to the last link of the list*. The position of
+the current element is indicated by another pointer, *named ~curr~.* Finally, because
+there is no simple way to compute the length of the list simply from these three
+pointers, the list length must be stored explicitly, and updated by every operation
+that modifies the list size. The value cnt stores the length of the list
+
+Class ~LList~ also includes private helper methods init and removeall.
+They are used by ~LList~ ’s constructor, destructor, and clear methods.
+
+*** Doubly Linked List
+A doubly linked list allows convenient
+access from a list node to the next node and also to the preceding node on the list.
+The doubly linked list node accomplishes this in the obvious way by storing two
+pointers: one to the node following it (as in the singly linked list), and a second
+pointer to the node preceding it. The most common reason to use a doubly linked
+list is because it is easier to implement than a singly linked list. While the code for
+the doubly linked implementation is a little longer than for the singly linked version,
+it tends to be a bit more “obvious” in its intention, and so easier to implement
+and debug. Figure 4.12 illustrates the doubly linked list concept. Whether a list
+implementation is doubly or singly linked should be hidden from the List class
+user.
+#+DOWNLOADED: screenshot @ 2022-02-16 23:00:07
+[[file:Lists,_Stacks,_and_Queues/2022-02-16_23-00-07_screenshot.png]]
+
+Like our singly linked list implementation, the doubly linked list implementa-
+tion makes use of a header node. We also add a tailer node to the end of the list.
+The tailer is similar to the header, in that it is a node that contains no value, and it
+always exists. When the doubly linked list is initialized, the header and tailer nodes
+are created. Data member head points to the header node, and tail points to
+the tailer node. The purpose of these nodes is to simplify the insert, append,
+and remove methods by eliminating all need for special-case code when the list
+is empty, or when we insert at the head or tail of the list.
+
+* Commented
+# * TODO [4.7] Lists, Stacks, and Queues
+# * TODO [5.8] Binary Trees
+# * TODO [5.9] Binary Trees
+# * TODO [6.7] Non-Binary Trees
+# * TODO [6.8] Non-Binary Trees
+# * TODO [7.11] Internal Sorting
+# * TODO [7.12] Internal Sorting
+# * TODO [8.7] File Processing and External Sorting
+# * TODO [8.9] File Processing and External Sorting
+# * TODO [9.6] Searching
+# * TODO [9.7] Searching
+# * TODO [10.7] Indexing
+# * TODO [10.8] Indexing
+# * TODO [11.7] Graphs
+# * TODO [11.8] Graphs
+# * TODO [12.5] Lists and Arrays Revisited
+# * TODO [12.6] Lists and Arrays Revisited
+# * TODO [13.5] Advanced Tree Structures
+# * TODO [13.6] Advanced Tree Structures
+# * TODO [14.5] Analysis Techniques
+# * TODO [14.6] Analysis Techniques
+# * TODO [15.9] Lower Bounds Exercises
+# * TODO [15.10] Lower Bounds Projects
+# * TODO [16.5] Pattern of Algorithms
+# * TODO [16.6] Pattern of Algorithms
+# * TODO [17.5] Limited to Computation
+# * TODO [17.6] Limited to Computation

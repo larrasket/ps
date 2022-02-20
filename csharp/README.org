@@ -1,4 +1,4 @@
-#+title: "C# & .NET Notes"
+#+title: ".NET Notes in C#"
 #+date: 2022-01-08T05:28:26+02:00
 #+draft: false
 #+categories: ["Computer Science"]
@@ -1678,8 +1678,7 @@ namespace InterfaceExample {
 :END:
 Delegate is just about passing a function as a paramter, consider the following C++ code:
 #+begin_src cpp
-bool Myfunction()
-{
+bool Myfunction() {
     return true;
 }
 
@@ -2179,7 +2178,6 @@ You cannot, for example, directly access the second item in a stack.
 | ~Stack<T>(IEnumerable<T>)~ | Initializes a new instance of the Stack<T> class that contains elements copied from the specified collection and has sufficient capacity to accommodate the number of elements copied. |
 | ~Stack<T>(Int32)~          | Initializes a new instance of the Stack<T> class that is empty and has the specified initial capacity or the default initial capacity, whichever is greater.                           |
 
-
 **** Methods
 | Method       | Description                                                                                                                                                                                  |
 | ~Peek()~     | Returns the object at the top of the Stack<T> without removing it.                                                                                                                           |
@@ -2190,20 +2188,34 @@ You cannot, for example, directly access the second item in a stack.
 **** Properties
 + ~Count~: Gets the number of elements contained in the Stack<T>.
 
-
 *** ~Queue~
 Queues are a good choice when you want to implement the first-in, first-out (FIFO)
 behavior. With a queue, you can only directly access or remove the one item at the
 front of the queue, although you can enumerate to read through the whole queue of
 items. You cannot, for example, directly access the second item in a queue.
 
-*** TODO ~HashSet<T>~
-SCHEDULED: <2022-02-15 Tue>
-*** TODO ~SortedList~
-SCHEDULED: <2022-02-15 Tue>
-*** TODO ~LinkedList<T>~
-SCHEDULED: <2022-02-15 Tue>
-
+*** ~LinkedList<T>~
+A linked list is a linear collection of data elements whose order is not given by their
+physical placement in memory. Instead, each element points to the next. It is a data
+structure consisting of a collection of nodes which together represent a sequence.
+**** Methods
+| Method                                            | Description                                                                                             |
+|---------------------------------------------------+---------------------------------------------------------------------------------------------------------|
+| ~AddAfter(LinkedListNode<T>, LinkedListNode<T>)~  | Adds the specified new node after the specified existing node in the LinkedList<T>.                     |
+| ~AddAfter(LinkedListNode<T>, T)~                  | Adds a new node containing the specified value after the specified existing node in the LinkedList<T>.  |
+| ~AddBefore(LinkedListNode<T>, LinkedListNode<T>)~ | Adds the specified new node before the specified existing node in the LinkedList<T>.                    |
+| ~AddBefore(LinkedListNode<T>, T)~                 | Adds a new node containing the specified value before the specified existing node in the LinkedList<T>. |
+| ~AddFirst(LinkedListNode<T>)~                     | Adds the specified new node at the start of the LinkedList<T>.                                          |
+| ~AddFirst(T)~                                     | Adds a new node containing the specified value at the start of the LinkedList<T>.                       |
+| ~AddLast(LinkedListNode<T>)~                      | Adds the specified new node at the end of the LinkedList<T>.                                            |
+| ~AddLast(T)~                                      | Adds a new node containing the specified value at the end of the LinkedList<T>.                         |
+**** Properties
+| Property | Description                                                       |
+|----------+-------------------------------------------------------------------|
+| ~Count~  | Gets the number of nodes actually contained in the LinkedList<T>. |
+| ~First~  | Gets the first node of the LinkedList<T>.                         |
+| ~Last~   | Gets the last node of the LinkedList<T>.                          |
+*** TODO ~HashSet~, ~SortedSet~
 *** TODO ~ConcurrentQueue<T>~
 *** TODO ~ConcurrentQueue<T>~
 *** TODO ~ConcurrentStack<T>~
@@ -2667,14 +2679,15 @@ class MyClass
 
 * TODOs Topics..
 ** TODO Comments
-** TODO Lambda
+** TODO Attributes
+** STRT Lambda
 https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions
 ** TODO Exception (Check All Types)
 ** TODO Implement ~IDisposable~
 ** TODO Implement ~IFormatter~
 ** TODO Implement ~IFormattable~
 ** TODO Implement ~IFormatProvider~
-** TODO GetHash
+** PROJ GetHash
 ** TODO [[https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/query-keywords][Query Keywords]]
 * Thinking
 - How to end function of if statements? using return 0 or else with last value?
@@ -2699,3 +2712,7 @@ Array.Sort(people, new PersonCompare());
   #+begin_src csharp
 Array.Sort(people, PersonCompare);
   #+end_src
+
+* TODO Now today
++ IDipose
++ ETC...

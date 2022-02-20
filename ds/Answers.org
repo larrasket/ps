@@ -1,0 +1,37 @@
+#+TITLE: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Answers Notebook
+#+Description: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Answers Notebook
+#+hugo_tags: "Computer Science"
+* TODO [1.6] Data Structures & Algorithms Exercises
+* TODO [2.9] Mathematical Preliminaries Exercises
+* TODO [3.13] Algorithm Analysis Exercises
+* TODO [3.14] Algorithm Analysis Projects
+-----
+
+* TODO [4.6] Lists, Stacks, and Queues Exercises
+* TODO [4.7] Lists, Stacks, and Queues Projects
+* TODO [5.8] Binary Trees Exercises
+* TODO [5.9] Binary Trees Projects
+* TODO [6.7] Non-Binary Trees Exercises
+* TODO [6.8] Non-Binary Trees Projects
+* TODO [7.11] Internal Sorting Exercises
+* TODO [7.12] Internal Sorting Projects
+* TODO [8.7] File Processing and External Sorting Exercises
+* TODO [8.9] File Processing and External Sorting Projects
+* TODO [9.6] Searching Exercises
+* TODO [9.7] Searching Projects
+* TODO [10.7] Indexing Exercises
+* TODO [10.8] Indexing Projects
+* TODO [11.7] Graphs Exercises
+* TODO [11.8] Graphs Projects
+* TODO [12.5] Lists and Arrays Revisited Exercises
+* TODO [12.6] Lists and Arrays Revisited Projects
+* TODO [13.5] Advanced Tree Structures Exercises
+* TODO [13.6] Advanced Tree Structures Projects
+* TODO [14.5] Analysis Techniques Exercises
+* TODO [14.6] Analysis Techniques Projects
+* TODO [15.9] Lower Bounds Exercises
+* TODO [15.10] Lower Bounds Projects
+* TODO [16.5] Pattern of Algorithms Exercises
+* TODO [16.6] Pattern of Algorithms Processing
+* TODO [17.5] Limited to Computation Exercises
+* TODO [17.6] Limited to Computation Projects

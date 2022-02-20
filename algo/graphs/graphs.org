@@ -1,4 +1,4 @@
-#+title: "Representations, Implementations and Searching of Graphs"
+#+title: "Representations, Implementations and Algorithms of Graphs (and Trees)"
 #+date: 2022-01-03T14:56:42+02:00
 #+categories: ["Computer Science"]
 #+hugo_tags: "Grahps" "Algorithms" "Computer Science"
@@ -218,7 +218,7 @@ weighted graph. The linked list can slightly be changed to even store the weight
 edge, it looks like this in memory:
 
 [[file:Adjacency_Matrix_vs._Adjacency_List/2022-01-03_20-25-56_screenshot.png]]
-/a is the Adjacency List representation of the graph a/
+/a is the adjacency List representation of the graph a/
 
 However, such a representation is not always efficient, at least from complexity
 perspective, if we need to know the relation between two nodes, we can't ever know that in
@@ -229,7 +229,7 @@ In the other hand, the adjacency matrix represent looks like this:
 
 #+DOWNLOADED: screenshot @ 2022-01-03 20:31:26
  [[file:Adjacency_Matrix_vs._Adjacency_List/2022-01-03_20-31-26_screenshot.png]]
-/a is the Adjacency Matrix representation of the graph a/
+/b is the Adjacency Matrix representation of the graph a/
 
 Can we know the relation between any two nodes in a constant time? Yes. We just have to
 check which node in the other's list, i.e. if we want to know the relationship between W and
@@ -419,7 +419,6 @@ graphs, in the case of ambiguity you can backtrack the definitions from here.
 | Mother Vertex                 | A mother vertex in a graph $G = (V,E)$ is a vertex $v$ such that all other vertices in $G$ can be reached by a path from $v$.                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Strongly Connected Components | A directed graph is strongly connected if there is a path between all pairs of vertices.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Equivalence of nodes          | For a directed graph $G$ = $(V,E)$, $\forall u, v \in V, u \equiv v$ if $\exists a$ path from $u$ to $v$ and a path from $v$ to $u$                                                                                                                                                                                                                                                                                                                                                                                                             |
-
 
 
 
@@ -712,9 +711,7 @@ int main(){
 
 
 
-
 * Problems
-
 ** Reach The Mother Vertex
 /Hint: Review the Mother Vertex in the [[#sheet][definition sheet]] above/
 The mother vertex in the following graph is ~[1, 3, 4]~:
@@ -777,6 +774,7 @@ There is many ways to resolve the same problem if we want to get more than 1 mot
 vertex, for example we can tack the last $n$ visited points in the DFS process and check
 them.
 
+
 * TODOs Topics
 ** TODO BFS
 ** TODO Handling Disconnected graphs
@@ -784,6 +782,11 @@ them.
 ** TODO Floyd–Warshall algorithm
 ** TODO Union-Find Algorithm
 ** TODO Tarjan's strongly connected components algorithm
+
+** TODO Shortest Path
+** TODO Longest Path
+** TODO Tree
+** TODO Tree Diamteter /(aka. Logest Path)/
 
 * Footnotes
 

@@ -3,10 +3,11 @@
 * 2022
 ** Daily
 **** TODO Daily Read
-SCHEDULED:  <2022-01-08 Sat ++1d>
+SCHEDULED:  <2022-01-17 Mon ++1d>
 :PROPERTIES:
-:LAST_REPEAT: [2022-01-04 Tue 02:36]
+:LAST_REPEAT: [2022-02-20 Sun 14:15]
 :END:
+- State "DONE"       from "TODO"       [2022-02-20 Sun 14:15]
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:36]
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:36]
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:36]
@@ -28,11 +29,13 @@ SCHEDULED: <2022-02-16 Wed ++1d>
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:36]
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:35]
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:35]
-**** TODO [[org:problems.org][Problems]]
-SCHEDULED: <2022-02-14 Mon ++1d>
+**** TODO [[org:problems.org][n-problems]]
+SCHEDULED: <2022-02-20 Sun ++1d>
 :PROPERTIES:
-:LAST_REPEAT: [2022-02-13 Sun 13:42]
+:LAST_REPEAT: [2022-02-17 Thu 01:12]
 :END:
+- State "DONE"       from "TODO"       [2022-02-17 Thu 01:12]
+- State "DONE"       from "TODO"       [2022-02-15 Tue 17:32]
 - State "DONE"       from "TODO"       [2022-02-13 Sun 13:42]
 - State "DONE"       from "TODO"       [2022-02-09 Wed 21:08]
 - State "DONE"       from "TODO"       [2022-02-08 Tue 16:08]
@@ -62,20 +65,29 @@ SCHEDULED: <2022-02-14 Mon ++1d>
 - State "DONE"       from "TODO"       [2021-11-22 Mon 06:24]
 - State "DONE"       from "TODO"       [2021-10-18 Mon 11:16]
 
+**** TODO Oldto Problems
+SCHEDULED: <2022-02-21 Mon ++1d>
+:PROPERTIES:
+:LAST_REPEAT: [2022-02-20 Sun 14:16]
+:END:
+- State "DONE"       from "TODO"       [2022-02-20 Sun 14:16]
+**** TODO Translate
+SCHEDULED: <2022-02-20 Sun ++1d>
 
 ** General
 --------------------
  Time is too limited.
 ---------------------
-**** Learning [0/26]
-***** TODO Implement DS
+**** Learning [1/27]
+***** STRT Implement DS
 SCHEDULED: <2022-02-08 Tue>
-****** TODO Implement Monotonic Stack
+****** DONE Implement Monotonic Stack
 SCHEDULED: <2022-02-10 Thu>
 
 ***** TODO Attributes
-SCHEDULED: <2022-02-09 Wed>
-***** TODO Collections
+SCHEDULED: <2022-03-21 Mon>
+***** TODO Stream I/O && Dispose
+***** DONE [[org:csharp/README.org][Collections]]
 SCHEDULED: <2022-02-09 Wed>
 ***** TODO Algorithms Notebook
 ***** PROJ .NET Relase and ~dotnet~ commands
@@ -106,8 +118,8 @@ SCHEDULED: <2022-02-09 Wed>
 ****** PROJ System Analysis
 ****** PROJ Distributed Systems
 ***** PROJ Software Engineering
-***** PROJ Watch [[https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/][NULL]]
-SCHEDULED: <2022-02-15 Tue>
+***** TODO Watch [[https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/][NULL]]
+SCHEDULED: <2022-04-11 Mon>
 ***** PROJ Artificial Intelligence
 ***** PROJ Embedded Systems
 ***** PROJ Security
@@ -115,6 +127,7 @@ SCHEDULED: <2022-02-15 Tue>
 ***** PROJ Testing
 
 ***** TODO [[https://en.wikipedia.org/wiki/Branch_predictor][Branch Predictor]]
+
 **** Learning CS related [6/10]
 ***** PROJ Pointers in STDs (Smart pointers and weak pointers)
 ***** PROJ Rust
@@ -169,7 +182,7 @@ Design Principles and Design Pattern
 ****** [ ] [[https://rosettacode.org/wiki/Subtractive_generator][Subtractive generator]]
 ****** [ ] [[https://docs.microsoft.com/en-us/dotnet/api/system.random?view=net-6.0#Overriding][Random in C#]]
 
-** Common TODO [38/43]
+** Common TODO [41/53]
 ******* DONE study physics chapter
 ******* DONE Focus ch15, solve all.
 SCHEDULED: <2021-08-29 Sun>
@@ -232,9 +245,8 @@ DEADLINE: <2021-12-02 Thu>
 
 ******* DONE Understand Jarvi's algorithm :algorithms:
 ******* DONE Read [[https://en.wikipedia.org/wiki/Recursion_(computer_science)#Recursion_versus_iteration][Iteration versus recursion]]
-******* TODO Abdo's birthday
+******* TODO Abdo Muhammed birthday
 SCHEDULED: <2022-03-04 Fri>
-******* TODO Algorithm Video
 ******* DONE Organize DOTS
 ******* DONE Presentation
 DEADLINE: <2021-12-31 Fri>
@@ -262,11 +274,40 @@ SCHEDULED: <2022-01-04 Tue>
 SCHEDULED: <2022-01-04 Tue>
 
 ******* TODO Trees
-SCHEDULED: <2022-02-01 Tue>
+SCHEDULED: <2022-03-04 Fri>
+******* TODO Algorithm Video
+Convex hull
 ******* TODO Visualize Amazon
-SCHEDULED: <2022-02-13 Sun>
-******* TODO Implement Interfaces
+SCHEDULED: <2022-03-06 Sun>
+******* STRT Implement Interfaces
 SCHEDULED: <2022-02-15 Tue>
+
+******* TODO Queue
+SCHEDULED: <2022-02-22 Tue>
+******* TODO Tree
+SCHEDULED: <2022-02-23 Wed>
+******* TODO Heap
+SCHEDULED: <2022-02-24 Thu>
+******* TODO Dij
+SCHEDULED: <2022-02-25 Fri>
+******* TODO Flowyed
+SCHEDULED: <2022-02-26 Sat>
+******* TODO DB problems
+SCHEDULED: <2022-04-01 Fri>
+https://learngitbranching.js.org/
+
+******* TODO Regex
+SCHEDULED: <2022-04-15 Fri>
+https://regexone.com/
+https://regex101.com/
+
+******* DONE Wash Your Teath
+SCHEDULED: <2022-02-19 Sat>
+******* DONE Implement Doubly Linked List
+SCHEDULED: <2022-02-17 Thu>
+
+******* DONE Solve Linked List Problems
+SCHEDULED: <2022-02-17 Thu>
 
 ** Write [1/9]
 ***** DONE Oracle
@@ -313,6 +354,7 @@ SCHEDULED: <2022-01-31 Mon>
 *** [X] [[pdfview:~/source/Books/Politics/General/(Critical, Digital and Social Media Studies) Joan Pedro-Caranana_ Daniel Broudy_ Jefferey Klaehn - The Propaganda Model Today_ Filtering Perception and Awareness-University of Westminster Press (2018).pdf][Propaganda Model]]
 *** [ ] سيكولوجيا العلاقات الجنسية
 *** TODO Psychology of Sexual Relationships
+
 
 * Draft For What is Done
 
