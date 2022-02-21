@@ -30,10 +30,11 @@ SCHEDULED: <2022-02-16 Wed ++1d>
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:35]
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:35]
 **** TODO [[org:problems.org][n-problems]]
-SCHEDULED: <2022-02-20 Sun ++1d>
+SCHEDULED: <2022-02-22 Tue ++1d>
 :PROPERTIES:
-:LAST_REPEAT: [2022-02-17 Thu 01:12]
+:LAST_REPEAT: [2022-02-21 Mon 13:30]
 :END:
+- State "DONE"       from "TODO"       [2022-02-21 Mon 13:30]
 - State "DONE"       from "TODO"       [2022-02-17 Thu 01:12]
 - State "DONE"       from "TODO"       [2022-02-15 Tue 17:32]
 - State "DONE"       from "TODO"       [2022-02-13 Sun 13:42]
@@ -66,10 +67,11 @@ SCHEDULED: <2022-02-20 Sun ++1d>
 - State "DONE"       from "TODO"       [2021-10-18 Mon 11:16]
 
 **** TODO Oldto Problems
-SCHEDULED: <2022-02-21 Mon ++1d>
+SCHEDULED: <2022-02-22 Tue ++1d>
 :PROPERTIES:
-:LAST_REPEAT: [2022-02-20 Sun 14:16]
+:LAST_REPEAT: [2022-02-21 Mon 13:02]
 :END:
+- State "DONE"       from "TODO"       [2022-02-21 Mon 13:02]
 - State "DONE"       from "TODO"       [2022-02-20 Sun 14:16]
 **** TODO Translate
 SCHEDULED: <2022-02-20 Sun ++1d>
@@ -78,12 +80,16 @@ SCHEDULED: <2022-02-20 Sun ++1d>
 --------------------
  Time is too limited.
 ---------------------
-**** Learning [1/27]
+**** Learning [1/29]
 ***** STRT Implement DS
 SCHEDULED: <2022-02-08 Tue>
 ****** DONE Implement Monotonic Stack
 SCHEDULED: <2022-02-10 Thu>
 
+***** TODO Handling Cycle Graphs
+SCHEDULED: <2022-02-21 Mon>
+***** TODO Binary Search
+SCHEDULED: <2022-02-24 Thu>
 ***** TODO Attributes
 SCHEDULED: <2022-03-21 Mon>
 ***** TODO Stream I/O && Dispose
@@ -92,6 +98,8 @@ SCHEDULED: <2022-02-09 Wed>
 ***** TODO Algorithms Notebook
 ***** PROJ .NET Relase and ~dotnet~ commands
 ***** PROJ Memory Management (in .NET)
+***** PROJ SOLID. :oop:
+Design Principles and Design Pattern
 ***** PROJ Probability
 ****** PROJ Discrete Probability
 ****** PROJ Statics
@@ -143,8 +151,6 @@ SCHEDULED: <2022-04-11 Mon>
 **** Misc Topics [0/11]
 ***** PROJ [[http://www.youtube.com/playlist?list=PLwCMLs3sjOY4aVMg7hgQGHyQBZnHgFjJk][Regular Expression]]
 ***** PROJ Check Robert C. Martin's paper. :oop:
-***** PROJ SOLID. :oop:
-Design Principles and Design Pattern
 ***** PROJ [[pdf:/mnt/0E08DBBF08DBA3CD/aur/vim-gtk-vim-syntax/src/gtk-vim-syntax/cok/cs-related/analysis.pdf::330][Hashing]]
 ***** PROJ Setter/Getter good/evil :oop:
 ****** PROJ [[https://www.yegor256.com/2014/09/16/getters-and-setters-are-evil.html][Getters/Setters. Evil. Period.]]

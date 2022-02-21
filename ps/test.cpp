@@ -2,6 +2,9 @@
 #include <bits/types/cookie_io_functions_t.h>
 #include <cassert>
 #include <iostream>
+#include <iterator>
+#include <list>
+#include <string>
 #include <vector>
 
 using std::cout;
@@ -20,11 +23,13 @@ class anotherclass : public mainlist {
 };
 
 int main() {
-  int i = 3;
-  int *k = &i;
-  auto p = k;
-  int r = 4;
-  k = &r;
+  std::list<std::string> mylist;
+  mylist.push_back("qweq");
+  mylist.push_back("2");
+  mylist.push_back("wjijijeq");
+  auto k = mylist.begin();
+  std::advance(k, 2);
+  std::advance(k, -2);
 
-  cout << *p << endl;
+  cout << *(k);
 }

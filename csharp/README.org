@@ -1821,6 +1821,51 @@ namespace MainClass
     }
 }
 #+end_src
+** Attributes
+Reflection is a programming feature that allows code to understand and manipulate
+itself. An assembly is made up of up to four parts:
+
++ Assembly metadata and manifest: Name, assembly, and file version, referenced assemblies, and so on.
++ Type metadata: Information about the types, their members, and so on.
++ IL code: Implementation of methods, properties, constructors, and so on.
++ Embedded Resources (optional): Images, strings, JavaScript, and so on.
+
+  The metadata comprises items of information about your code. The metadata is applied to
+  your code using attributes.
+
+Attributes can be applied at multiple levels: to assemblies, to types, and to their
+members, as shown in the following code:
+
+#+begin_src csharp
+[assembly: AssemblyTitle("Working with Reflection")]
+// a type-level attribute
+[Serializable]
+public class Person
+// a member-level attribute
+[Obsolete("Deprecated: use Run instead.")]
+public void Walk()
+{
+// ...
+}
+#+end_src
+
+
+Version numbers in .NET are a combination of three numbers, with two optional additions. If
+you follow the rules of semantic versioning:
+
++ Major: Breaking changes.
++ Minor: Non-breaking changes, including new features and bug fixes.
++ Patch: Non-breaking bug fixes.
+
+When updating a NuGet package, you should specify an optional flag to make sure that you
+only upgrade to the highest minor to avoid breaking changes, or to the highest patch if you
+are extra cautious and only want to receive bug fixes, as shown in the following commands:
+#+begin_src bash
+Update-Package Newtonsoft.Json -ToHighestMinor
+Update-Package EPiServer.Cms -ToHighestPatch
+#+end_src
+
+Consider the following code of setting and using metadata:
 * Common Types
 ** String
 In C#, string is an object of System.String class that represent sequence of characters. We
@@ -2662,7 +2707,6 @@ class MyClass
 
 #+end_src
 
-** TODO ~checked~ and ~unchecked~
 * Take a Look
 - [[https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading#overloadable-operators][Overloadable operators]]
 - [[https://docs.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions][Best practices for exceptions]]
@@ -2678,16 +2722,14 @@ class MyClass
 - [[https://docs.microsoft.com/en-us/dotnet/api/system.string.isnormalized?view=net-6.0][Is Normalized]]
 
 * TODOs Topics..
-** TODO Comments
-** TODO Attributes
-** STRT Lambda
-https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions
 ** TODO Exception (Check All Types)
 ** TODO Implement ~IDisposable~
 ** TODO Implement ~IFormatter~
 ** TODO Implement ~IFormattable~
 ** TODO Implement ~IFormatProvider~
 ** PROJ GetHash
+** TODO ~checked~ and ~unchecked~
+** TODO ~Span~
 ** TODO [[https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/query-keywords][Query Keywords]]
 * Thinking
 - How to end function of if statements? using return 0 or else with last value?
@@ -2713,6 +2755,3 @@ Array.Sort(people, new PersonCompare());
 Array.Sort(people, PersonCompare);
   #+end_src
 
-* TODO Now today
-+ IDipose
-+ ETC...
