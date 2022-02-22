@@ -1,15 +1,31 @@
-﻿using System;
-using System.Reflection;
+﻿#define DEBUG
+using System;
+using System.Diagnostics;
 
-namespace Lists
+public class Myclass
 {
-    internal class Program
+    [Conditional("DEBUG")]
+
+    public static void Message(string msg)
     {
-        public static void Main(string[] args)
-        {
-        Console.WriteLine("Assembly Metadata");
-        var assembly = Assembly.GetEntryAssembly();
-        Console.WriteLine("Location" + assembly.Location);
-        }
+        Console.WriteLine(msg);
+    }
+}
+class Test
+{
+    static void function1()
+    {
+        Myclass.Message("In Function 1.");
+        function2();
+    }
+    static void function2()
+    {
+        Myclass.Message("In Function 2.");
+    }
+    public static void Main()
+    {
+        Myclass.Message("In Main function.");
+        function1();
+        Console.ReadKey();
     }
 }

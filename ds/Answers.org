@@ -1,37 +1,90 @@
 #+TITLE: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Answers Notebook
 #+Description: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Answers Notebook
 #+hugo_tags: "Computer Science"
-* TODO [1.6] Data Structures & Algorithms Exercises
-* TODO [2.9] Mathematical Preliminaries Exercises
-* TODO [3.13] Algorithm Analysis Exercises
-* TODO [3.14] Algorithm Analysis Projects
------
+* Introduction [0/4]
+** TODO [1.6] Data Structures & Algorithms Exercises
+** TODO [2.9] Mathematical Preliminaries Exercises
+** TODO [3.13] Algorithm Analysis Exercises
+** TODO [3.14] Algorithm Analysis Projects
+* Applied
+** TODO 4.6. Lists, Stacks, and Queues Exercises [4/20]
+*** DONE 1.
+         #+begin_src c++
+         for (MyList.moveToStart(); MyList.currPos() < MyList.length();
+              MyList.next()) {
+           if (MyList.getValue() == 15)
+             MyList.remove();
+             break;
+         }
+         #+end_src
+*** DONE 2.
+   a. The current position is in the end of the list (tail).
+   b. Current position is pointing to 39.
+*** DONE 3.
+      #+begin_src cpp
+     ArrayList<int> MyList(20);
+     MyList.append(2);
+     MyList.append(23);
+     MyList.append(15);
+     MyList.append(5);
+     MyList.append(9);
+     MyList.moveToPos(2); // MyList is 0-indexed, so it points at 15.
+      #+end_src
+*** DONE 4.
+     #+begin_src csharp
+  // Extending Linked List Implementation
+    void interchange() {
+      assert(current != tail && count > 2);
+      t temp = current->element; // remember current val
+      current->element = current->next->element;
+      current->next->element = temp;
+    }
+     #+end_src
+*** TODO 5.
+*** TODO 6.
+*** TODO 7.
+*** TODO 8.
+*** TODO 9.
+*** TODO 10.
+*** TODO 11.
+*** TODO 12.
+*** TODO 13.
+*** TODO 14.
+*** TODO 15.
+*** TODO 16.
+*** TODO 17.
+*** TODO 18.
+*** TODO 19.
+*** TODO 20.
 
-* TODO [4.6] Lists, Stacks, and Queues Exercises
-* TODO [4.7] Lists, Stacks, and Queues Projects
-* TODO [5.8] Binary Trees Exercises
-* TODO [5.9] Binary Trees Projects
-* TODO [6.7] Non-Binary Trees Exercises
-* TODO [6.8] Non-Binary Trees Projects
-* TODO [7.11] Internal Sorting Exercises
-* TODO [7.12] Internal Sorting Projects
-* TODO [8.7] File Processing and External Sorting Exercises
-* TODO [8.9] File Processing and External Sorting Projects
-* TODO [9.6] Searching Exercises
-* TODO [9.7] Searching Projects
-* TODO [10.7] Indexing Exercises
-* TODO [10.8] Indexing Projects
-* TODO [11.7] Graphs Exercises
-* TODO [11.8] Graphs Projects
-* TODO [12.5] Lists and Arrays Revisited Exercises
-* TODO [12.6] Lists and Arrays Revisited Projects
-* TODO [13.5] Advanced Tree Structures Exercises
-* TODO [13.6] Advanced Tree Structures Projects
-* TODO [14.5] Analysis Techniques Exercises
-* TODO [14.6] Analysis Techniques Projects
-* TODO [15.9] Lower Bounds Exercises
-* TODO [15.10] Lower Bounds Projects
-* TODO [16.5] Pattern of Algorithms Exercises
-* TODO [16.6] Pattern of Algorithms Processing
-* TODO [17.5] Limited to Computation Exercises
-* TODO [17.6] Limited to Computation Projects
+
+
+** TOD O 4.7. Lists, Stacks, and Queues Projects
+** TODO 5.8. Binary Trees Exercises
+** TODO 5.9. Binary Trees Projects
+** TODO 6.7. Non-Binary Trees Exercises
+** TODO 6.8. Non-Binary Trees Projects
+** TODO 7.11. Internal Sorting Exercises
+** TODO 7.12. Internal Sorting Projects
+** TODO 8.7. File Processing and External Sorting Exercises
+** TODO 8.9. File Processing and External Sorting Projects
+** TODO 9.6. Searching Exercises
+** TODO 9.7. Searching Projects
+** TODO 10.7. Indexing Exercises
+** TODO 10.8. Indexing Projects
+** TODO 11.7. Graphs Exercises
+** TODO 11.8. Graphs Projects
+** TODO 12.5. Lists and Arrays Revisited Exercises
+** TODO 12.6. Lists and Arrays Revisited Projects
+** TODO 13.5. Advanced Tree Structures Exercises
+** TODO 13.6. Advanced Tree Structures Projects
+** TODO 14.5. Analysis Techniques Exercises
+** TODO 14.6. Analysis Techniques Projects
+** TODO 15.9. Lower Bounds Exercises
+** TODO 15.10. Lower Bounds Projects
+** TODO 16.5. Pattern of Algorithms Exercises
+** TODO 16.6. Pattern of Algorithms Processing
+** TODO 17.5. Limited to Computation Exercises
+** TODO 17.6. Limited to Computation Projects
+* To Solve [0/1]
+** TODO 4.5

@@ -1074,18 +1074,15 @@ together, or electrical standards for plugs and sockets.  If a type implements a
 then it is making a promise to the rest of .NET that it supports a certain feature.
 
 Here are some common interfaces that your types might need to implement:
-| Interface           | Method(s)                                                                                                         | Description                                                                                                     |
-|---------------------+-------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------|
-| ~IComparer~         | ~Compare(first, second)~                                                                                          | This defines a comparison method that a secondary type implements to order or sort instances of a primary type. |
-| ~IEnumerator~       | ~MoveNext()~, ~Reset()~                                                                                           | Makes your class iteratable on the ~foreach~ iteration statement                                                |
-| ~ICloneable~        | ~Clone()~                                                                                                         | Supports cloning, which creates a new instance of a class with the same value as an existing instance.          |
-| ~IEqualityComparer~ | ~Equals(T,T)~, ~GetHashCode(T)~                                                                                   |                                                                                                                 |
-| ~ICompareable~      | ~CompareTo(other)~                                                                                                | This defines a comparison method that a type implements to order or sort its instances.                         |
-| ~IDisposable~       | ~Dispose~                                                                                                         | This defines a disposal method to release unmanaged resources more efficiently than waiting for a finalizer     |
-| ~IFormattable~      | ~ToString(format, culture)~                                                                                       | This defines a culture-aware method to format the value of an object into a string representation.              |
-| ~IFormatter~        | ~Serializer(stream, object)~ and ~Deserialize(stream)~                                                            | This defines methods to convert an object to and from a stream of bytes for storage or transfer.                |
-| ~IFormatProvider~   | ~GetFormate(type)~                                                                                                | This defines a method to format inputs based on a language and region.                                          |
-| ~IDictionary~       | ~Add(Object, Object)~, ~Clear()~, ~Contains(Object)~, ~CopyTo(Array, Int32)~, ~GetEnumerator()~, ~Remove(Object)~ | Adds an element with the provided key and value to the IDictionary object.                                      |
+| Interface           | Method(s)                       | Description                                                                                                     |
+|---------------------+---------------------------------+-----------------------------------------------------------------------------------------------------------------|
+| ~IComparer~         | ~Compare(first, second)~        | This defines a comparison method that a secondary type implements to order or sort instances of a primary type. |
+| ~IComparable~       | ~CompareTo(other)~              | This defines a comparison method that a type implements to order or sort its instances.                         |
+| ~IEnumerator~       | ~MoveNext()~, ~Reset()~         | Makes your class iteratable on the ~foreach~ iteration statement                                                |
+| ~ICloneable~        | ~Clone()~                       | Supports cloning, which creates a new instance of a class with the same value as an existing instance.          |
+| ~IEqualityComparer~ | ~Equals(T,T)~, ~GetHashCode(T)~ |                                                                                                                 |
+| ~IDisposable~       | ~Dispose~                       | This defines a disposal method to release unmanaged resources more efficiently than waiting for a finalizer     |
+|---------------------+---------------------------------+-----------------------------------------------------------------------------------------------------------------|
 *** ~IComparer~
 *Note*: When using any compare function that return an ~int~, you should consider the
 following cases:
@@ -1122,6 +1119,7 @@ following cases:
         }
     }
     #+end_src
+*** ~IComparable~
 *** ~IEnumerator~
 IEnumerator is the base interface for all non-generic enumerators. Its generic equivalent is
 the System.Collections.Generic.IEnumerator<T> interface.
@@ -1865,7 +1863,175 @@ Update-Package Newtonsoft.Json -ToHighestMinor
 Update-Package EPiServer.Cms -ToHighestPatch
 #+end_src
 
-Consider the following code of setting and using metadata:
+The .Net Framework provides three pre-defined attributes −
+
++ AttributeUsage
++ Conditional
++ Obsolete
+
+The pre-defined attribute AttributeUsage describes how a custom attribute class can be used.
+It specifies the types of items to which the attribute can be applied.
+
+Syntax for specifying this attribute is as follows −
+
+#+begin_src csharp
+[AttributeUsage (
+   validon,
+   AllowMultiple = allowmultiple,
+   Inherited = inherited
+)]
+#+end_src
+
+Where,
+
++ The parameter validon specifies the language elements on which the attribute can be placed. It is a combination of the value of an enumerator AttributeTargets. The default value is AttributeTargets.All.
+
++ The parameter allowmultiple (optional) provides value for the AllowMultiple property of this attribute, a Boolean value. If this is true, the attribute is multiuse. The default is false (single-use).
+
++ The parameter inherited (optional) provides value for the Inherited property of this attribute, a Boolean value. If it is true, the attribute is inherited by derived classes. The default value is false (not inherited).
+
+For example:
+#+begin_src csharp
+[AttributeUsage(
+   AttributeTargets.Class |
+   AttributeTargets.Constructor |
+   AttributeTargets.Field |
+   AttributeTargets.Method |
+   AttributeTargets.Property,
+   AllowMultiple = true)]
+#+end_src
+
+*** Conditional Attribute
+This predefined attribute marks a conditional method whose execution depends on a specified
+preprocessing identifier.
+
+It causes conditional compilation of method calls, depending on the specified value such as
+Debug or Trace. For example, it displays the values of the variables while debugging a code.
+
+For example:
+#+begin_src csharp
+[Conditional("DEBUG")]
+#+end_src
+
+#+begin_src csharp
+#define DEBUG
+using System;
+using System.Diagnostics;
+
+public class Myclass {
+   [Conditional("DEBUG")]
+
+   public static void Message(string msg) {
+      Console.WriteLine(msg);
+   }
+}
+class Test {
+   static void function1() {
+      Myclass.Message("In Function 1.");
+      function2();
+   }
+   static void function2() {
+      Myclass.Message("In Function 2.");
+   }
+   public static void Main() {
+      Myclass.Message("In Main function.");
+      function1();
+      Console.ReadKey();
+   }
+}
+#+end_src
+
+
+*** Obselete Attribute
+
+This predefined attribute marks a program entity that should not be used. It enables you to
+inform the compiler to discard a particular target element. For example, when a new method
+is being used in a class and if you still want to retain the old method in the class, you
+may mark it as obsolete by displaying a message the new method should be used, instead of
+the old method.
+
+Syntax for specifying this attribute is as follows:
+
+#+begin_src csharp
+Obsolete (
+   message
+)]
+
+[Obsolete (
+   message,
+   iserror
+)]
+
+#+end_src
+
+Where,
+
+The parameter message, is a string describing the reason why the item is obsolete and what
+to use instead.
+
+The parameter iserror, is a Boolean value. If its value is true, the compiler should treat
+the use of the item as an error. Default value is false (compiler generates a warning).
+
+
+
+The following program demonstrates this −
+
+
+#+begin_src csharp
+using System;
+
+public class MyClass {
+   [Obsolete("Don't use OldMethod, use NewMethod instead", true)]
+
+   static void OldMethod() {
+      Console.WriteLine("It is the old method");
+   }
+   static void NewMethod() {
+      Console.WriteLine("It is the new method");
+   }
+   public static void Main() {
+      OldMethod();
+   }
+}
+#+end_src
+When you try to compile the program, the compiler gives an error message stating −
+
+#+begin_src bash
+ Don't use OldMethod, use NewMethod instead
+#+end_src
+*** Creating Custom Attribute
+The .Net Framework allows creation of custom attributes that can be used to store
+declarative information and can be retrieved at run-time. This information can be related to
+any target element depending upon the design criteria and application need.
+
+Creating and using custom attributes involve four steps −
+
+- Declaring a custom attribute
+- Constructing the custom attribute
+- Apply the custom attribute on a target program element
+- Accessing Attributes Through Reflection
+
+The Last step involves writing a simple program to read through the metadata to find various
+notations. Metadata is data about data or information used for describing other data. This
+program should use reflections for accessing attributes at runtime. This we will discuss in
+the next chapter.
+
+
+A new custom attribute should is derived from the System.Attribute class. For example,
+
+#+begin_src csharp
+//a custom attribute BugFix to be assigned to a class and its members
+[AttributeUsage(
+   AttributeTargets.Class |
+   AttributeTargets.Constructor |
+   AttributeTargets.Field |
+   AttributeTargets.Method |
+   AttributeTargets.Property,
+   AllowMultiple = true)]
+
+public class DeBugInfo : System.Attribute
+#+end_src
+
 * Common Types
 ** String
 In C#, string is an object of System.String class that represent sequence of characters. We

@@ -3,7 +3,7 @@
 * 2022
 ** Daily
 **** TODO Daily Read
-SCHEDULED:  <2022-01-17 Mon ++1d>
+SCHEDULED:  <2022-03-28 Mon ++1d>
 :PROPERTIES:
 :LAST_REPEAT: [2022-02-20 Sun 14:15]
 :END:
@@ -15,10 +15,11 @@ SCHEDULED:  <2022-01-17 Mon ++1d>
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:35]
 - State "DONE"       from "TODO"       [2022-01-04 Tue 02:25]
 **** TODO [[pdf:/home/ghd/source/Books/cs-related/misc/Mark J. Price - C# 8.0 and .NET Core 3.0 – Modern Cross-Platform Development Fourth Edition-Packt (2019).pdf::][C#]]
-SCHEDULED: <2022-02-16 Wed ++1d>
+SCHEDULED: <2022-02-22 Tue ++1d>
 :PROPERTIES:
-:LAST_REPEAT: [2022-02-15 Tue 02:19]
+:LAST_REPEAT: [2022-02-21 Mon 19:25]
 :END:
+- State "DONE"       from "TODO"       [2022-02-21 Mon 19:25]
 - State "DONE"       from "TODO"       [2022-02-15 Tue 02:19]
 - State "DONE"       from "TODO"       [2022-02-07 Mon 23:07]
 - State "DONE"       from "TODO"       [2022-01-30 Sun 16:11]
@@ -66,7 +67,21 @@ SCHEDULED: <2022-02-22 Tue ++1d>
 - State "DONE"       from "TODO"       [2021-11-22 Mon 06:24]
 - State "DONE"       from "TODO"       [2021-10-18 Mon 11:16]
 
-**** TODO Oldto Problems
+**** TODO Linked List Problem
+SCHEDULED: <2022-02-22 Tue ++1d>
+:PROPERTIES:
+:LAST_REPEAT: [2022-02-21 Mon 13:02]
+:END:
+- State "DONE"       from "TODO"       [2022-02-21 Mon 13:02]
+- State "DONE"       from "TODO"       [2022-02-20 Sun 14:16]
+**** TODO Graph Problem
+SCHEDULED: <2022-02-22 Tue ++1d>
+:PROPERTIES:
+:LAST_REPEAT: [2022-02-21 Mon 13:02]
+:END:
+- State "DONE"       from "TODO"       [2022-02-21 Mon 13:02]
+- State "DONE"       from "TODO"       [2022-02-20 Sun 14:16]
+**** TODO Stack Problem
 SCHEDULED: <2022-02-22 Tue ++1d>
 :PROPERTIES:
 :LAST_REPEAT: [2022-02-21 Mon 13:02]
@@ -74,19 +89,26 @@ SCHEDULED: <2022-02-22 Tue ++1d>
 - State "DONE"       from "TODO"       [2022-02-21 Mon 13:02]
 - State "DONE"       from "TODO"       [2022-02-20 Sun 14:16]
 **** TODO Translate
-SCHEDULED: <2022-02-20 Sun ++1d>
+SCHEDULED: <2022-02-22 Tue ++1d>
 
+**** TODO Solve Some in DS Questions
+SCHEDULED: <2022-02-23 Wed ++2d>
+:PROPERTIES:
+:LAST_REPEAT: [2022-02-21 Mon 20:36]
+:END:
+
+- State "DONE"       from "TODO"       [2022-02-21 Mon 20:36]
 ** General
---------------------
+----    ----------------
  Time is too limited.
 ---------------------
-**** Learning [1/29]
-***** STRT Implement DS
+**** Learning [3/30]
+***** DONE Implement DS
 SCHEDULED: <2022-02-08 Tue>
 ****** DONE Implement Monotonic Stack
 SCHEDULED: <2022-02-10 Thu>
 
-***** TODO Handling Cycle Graphs
+***** DONE Handling Cycle Graphs
 SCHEDULED: <2022-02-21 Mon>
 ***** TODO Binary Search
 SCHEDULED: <2022-02-24 Thu>
@@ -136,7 +158,7 @@ SCHEDULED: <2022-04-11 Mon>
 
 ***** TODO [[https://en.wikipedia.org/wiki/Branch_predictor][Branch Predictor]]
 
-**** Learning CS related [6/10]
+**** Learning CS related [6/11]
 ***** PROJ Pointers in STDs (Smart pointers and weak pointers)
 ***** PROJ Rust
 ***** PROJ OO Terms
@@ -147,6 +169,8 @@ SCHEDULED: <2022-04-11 Mon>
 ***** DONE [[https://stackoverflow.com/questions/8750275/vim-super-fast-navigation]]
 ***** DONE Vim lists [[https://youtu.be/IoyW8XYGqjM]]
 ***** DONE Org/Latex
+
+***** TODO Check IComparable in .NET :dotnet:
 
 **** Misc Topics [0/11]
 ***** PROJ [[http://www.youtube.com/playlist?list=PLwCMLs3sjOY4aVMg7hgQGHyQBZnHgFjJk][Regular Expression]]
@@ -188,7 +212,7 @@ SCHEDULED: <2022-04-11 Mon>
 ****** [ ] [[https://rosettacode.org/wiki/Subtractive_generator][Subtractive generator]]
 ****** [ ] [[https://docs.microsoft.com/en-us/dotnet/api/system.random?view=net-6.0#Overriding][Random in C#]]
 
-** Common TODO [41/53]
+** Common TODO [42/54]
 ******* DONE study physics chapter
 ******* DONE Focus ch15, solve all.
 SCHEDULED: <2021-08-29 Sun>
@@ -285,7 +309,7 @@ SCHEDULED: <2022-03-04 Fri>
 Convex hull
 ******* TODO Visualize Amazon
 SCHEDULED: <2022-03-06 Sun>
-******* STRT Implement Interfaces
+******* DONE Implement Interfaces
 SCHEDULED: <2022-02-15 Tue>
 
 ******* TODO Queue
@@ -315,10 +339,13 @@ SCHEDULED: <2022-02-17 Thu>
 ******* DONE Solve Linked List Problems
 SCHEDULED: <2022-02-17 Thu>
 
-** Write [1/9]
+******* TODO DFS, Graphs
+SCHEDULED: <2022-02-22 Tue>
+
+** Write [2/9]
 ***** DONE Oracle
+***** DONE Ibn Rushed and Kenddy
 ***** PROJ Harassment
-***** PROJ Ibn Rushed \and Kenddy
 ***** PROJ A.C.A.B
 ***** PROJ (Parasite): What normie needs
 ***** PROJ Abky 3ka Kabol
@@ -362,7 +389,7 @@ SCHEDULED: <2022-01-31 Mon>
 *** TODO Psychology of Sexual Relationships
 
 
-* Draft For What is Done
+* Draft  #What_is_the_use_of_this :tag:
 
 **** [[org:sql.org][PSQL]]
 - State "DONE"       from "TODO"       [2022-01-23 Sun 23:27]
