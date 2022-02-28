@@ -5,6 +5,7 @@
 #include "Link.h"
 #include "List.h"
 #include <cassert>
+#include <stack>
 
 template <typename t> class LinkedList : public List<t> {
 protected:
@@ -76,7 +77,6 @@ public:
   int length() const { return count; }
 
   int currPos() const {
-    //    assert(current != nullptr);
     int counter;
     Link<t> *temp = head;
     for (counter = 0; temp != current; ++counter) {
@@ -112,12 +112,23 @@ public:
     count--;
     return val;
   }
-
   void interchange() {
     assert(current != tail && count > 2);
     t temp = current->element; // remember current val
     current->element = current->next->element;
     current->next->element = temp;
+  }
+
+  void reverse() {
+    Link<t> *current = head, *prev = nullptr, *next = nullptr;
+    head = tail;
+    tail = current;
+    while (current) {
+      next = current->next;
+      current->next = prev;
+      prev = current;
+      current = next;
+    }
   }
 };
 

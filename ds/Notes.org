@@ -1,13 +1,9 @@
 #+TITLE: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Notebook
-#+Description: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Answers Notebook
+#+Description: Data Structures and Algorithm Notes
 #+hugo_tags: "Computer Science"
 
 
-* TODO Data Structures & Algorithms
-* TODO Mathematical Preliminaries
-* TODO Algorithm Analysis
-* TODO Lists, Stacks, and Queues
-** Lists
+* Lists
 
 We all have an intuitive understanding of what we mean by a “list.” Our first step is
 to define precisely what is meant so that this intuitive understanding can eventually
@@ -165,6 +161,17 @@ are created. Data member head points to the header node, and tail points to
 the tailer node. The purpose of these nodes is to simplify the insert, append,
 and remove methods by eliminating all need for special-case code when the list
 is empty, or when we insert at the head or tail of the list.
+
+* B-Tree
+
+A B-tree is a tree data structure that keeps data sorted and allows searches, insertions,
+and deletions in logarithmic amortized time. Unlike self-balancing binary search trees, it
+is optimized for systems that read and write large blocks of data. It is most commonly used
+in database and file systems.
+
+*Important properties of a B-tree:*
+- B-tree nodes have many more than two children.
+- A B-tree node may contain more than just a single element
 
 * Commented
 # * TODO [4.7] Lists, Stacks, and Queues

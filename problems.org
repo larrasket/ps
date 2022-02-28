@@ -1,0 +1,66 @@
+#+TITLE: Problems
+** [ ] https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/
+* List [12/45]
+** [X] https://leetcode.com/problems/missing-number/
+** [X] https://leetcode.com/problems/maximum-sum-circular-subarray/
+** [X] https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/
+** [X] https://leetcode.com/problems/search-a-2d-matrix-ii/
+** [X] https://leetcode.com/problems/longest-mountain-in-array/
+** [X] https://leetcode.com/problems/kth-largest-element-in-an-array/
+** [X] https://leetcode.com/problems/k-closest-points-to-origin/
+** [X] https://leetcode.com/problems/partition-list/
+** [X] https://leetcode.com/problems/remove-nth-node-from-end-of-list/ :ds:
+** [X] https://leetcode.com/problems/maximum-product-of-three-numbers/
+** [X] https://leetcode.com/problems/linked-list-cycle/
+** [X] https://leetcode.com/problems/linked-list-cycle-ii/
+** [ ] https://leetcode.com/problems/find-the-duplicate-number/
+** [ ] https://leetcode.com/problems/maximum-performance-of-a-team/
+** [ ] https://leetcode.com/problems/verifying-an-alien-dictionary/
+** [ ] https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/
+** [ ] https://leetcode.com/problems/range-sum-query-2d-immutable/
+** [ ] https://leetcode.com/problems/longest-consecutive-sequence/description/
+** [ ] https://leetcode.com/problems/diameter-of-binary-tree/
+** [ ] https://leetcode.com/problems/lru-cache/
+** [ ] https://leetcode.com/problems/subtree-of-another-tree/
+** [ ] https://leetcode.com/problems/flip-equivalent-binary-trees/
+** [ ] https://leetcode.com/problems/largest-rectangle-in-histogram/
+** [ ] https://leetcode.com/problems/maximal-rectangle/
+** [ ] https://leetcode.com/problems/largest-submatrix-with-rearrangements/
+** [ ] https://leetcode.com/problems/maximal-square/
+** [ ] https://leetcode.com/problems/merge-k-sorted-lists/
+** [ ] https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+** [ ] https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iii/
+** [ ] https://leetcode.com/problems/intersection-of-two-linked-lists/
+** [ ] https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+** [ ] https://leetcode.com/problems/lfu-cache/
+** [ ] https://leetcode.com/problems/group-shifted-strings/
+** [ ] https://leetcode.com/problems/exclusive-time-of-functions/
+** [ ] https://leetcode.com/problems/number-of-matching-subsequences/
+** [ ] https://leetcode.com/problems/binary-search-tree-iterator/
+** [ ] https://leetcode.com/problems/insert-delete-getrandom-o1/
+** [ ] https://leetcode.com/problems/sparse-matrix-multiplication/
+** [ ] https://leetcode.com/problems/first-unique-number/
+** [ ] https://leetcode.com/problems/sliding-window-maximum/
+** [ ] https://leetcode.com/problems/recover-binary-search-tree/
+** [ ] https://leetcode.com/problems/insert-into-a-sorted-circular-linked-list/
+** [ ] https://leetcode.com/problems/longest-valid-parentheses/
+** [ ] https://leetcode.com/problems/copy-list-with-random-pointer/
+
+** [ ] https://leetcode.com/problems/cheapest-flights-within-k-stops/
+** Design problems
+
+* TODO Qustions [0/10]
+
+** [ ] [[https://leetcode.com/problems/sort-colors/][https://leetcode.com/problems/sort-colors/]] :sorting:
+** [ ] https://leetcode.com/problems/partition-list/ :sorting:
+** [ ] https://leetcode.com/problems/pancake-sorting/ :sorting:
+** [ ] https://leetcode.com/problems/sort-list/ :sorting:
+** [ ] https://leetcode.com/problems/binary-tree-right-side-view/ :bt:
+** [ ] https://leetcode.com/problems/binary-tree-maximum-path-sum/ :bt:
+** [ ] https://leetcode.com/problems/max-value-of-equation/ :heap:
+** [ ] https://leetcode.com/problems/find-median-from-data-stream/ :heap:
+** [ ] https://leetcode.com/problems/daily-temperatures/ :stack:
+** [ ] https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/ :permutation:
+** [ ] https://leetcode.com/problems/next-permutation/
+* TODO Understand
+** [ ] https://leetcode.com/problems/flatten-binary-tree-to-linked-list/ :bt:

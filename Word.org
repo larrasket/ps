@@ -1,0 +1,12 @@
+#+TITLE: Vocabulary
+
+| Word       | Dictionary                                                                  |
+|------------+-----------------------------------------------------------------------------|
+| Pervasive  | Spreading widely throughout an area, especially of an unwelcome infuluence. |
+| Pervailing | Having the most apeal or infuluence.                                        |
+| Plumbing   | A system of pipes                                                           |
+| Retrieve   | Get a thing                                                                 |
+| Fragile    | Easly broken                                                                |
+| Insidious  | proceeding in a gradual, subtle way, but with very harmful effects.         |
+| Intrinsic  | belonging naturally; essential.                                             |
+| anomlay    | something that deviates from what is standard, normal, expected             |

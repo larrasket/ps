@@ -291,3 +291,9 @@ std::transform(myv1.begin(), myv1.end(), myv1.begin(),
                std::bind(std::multiplies<T>(), std::placeholders::_1, n));
 #+end_src
 
+** Extract Vector
+#+begin_src csharp
+vector<T>::const_iterator first = myVec.begin() + 100000;
+vector<T>::const_iterator last = myVec.begin() + 101000;
+vector<T> newVec(first, last);
+#+end_src

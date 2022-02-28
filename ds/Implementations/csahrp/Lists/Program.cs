@@ -24,8 +24,11 @@ class Test
     }
     public static void Main()
     {
-        Myclass.Message("In Main function.");
-        function1();
-        Console.ReadKey();
+        string[] words = new string[] { "Hello", "Wonderful", "Linq", "Beatiful", "World" };
+        var shortWords =
+            from word in words
+            where word.Length <= 5
+            select word;
+        foreach (var word in shortWords) Console.WriteLine(word);
     }
 }

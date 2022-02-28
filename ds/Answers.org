@@ -7,7 +7,7 @@
 ** TODO [3.13] Algorithm Analysis Exercises
 ** TODO [3.14] Algorithm Analysis Projects
 * Applied
-** TODO 4.6. Lists, Stacks, and Queues Exercises [4/20]
+** TODO 4.6. Lists, Stacks, and Queues Exercises [6/19]
 *** DONE 1.
          #+begin_src c++
          for (MyList.moveToStart(); MyList.currPos() < MyList.length();
@@ -41,9 +41,45 @@
     }
      #+end_src
 *** TODO 5.
-*** TODO 6.
-*** TODO 7.
-*** TODO 8.
+*** DONE 6.
+#+begin_src c++
+void reverse() {
+  Link<t> *current = head, *prev = nullptr, *next = nullptr;
+  head = tail;
+  tail = current;
+  while (current) {
+    next = current->next;
+    current->next = prev;
+    prev = current;
+    current = next;
+  }
+}
+#+end_src
+*** DONE 7.
+#+begin_src c++
+ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
+  ListNode usage(INT_MIN);
+  ListNode *head = &usage;
+  while (list1 && list2) {
+    if (list1->val < list2->val) {
+      head->next = list1;
+      list1 = list1->next;
+    } else {
+      head->next = list2;
+      list2 = list2->next;
+    }
+    head = head->next;
+  }
+  head->next = list1 ? list1 : list2;
+  return usage.next;
+}
+#+end_src
+*** 8.
+The solution is just to change the appending style, instead of the tail pointing to
+~nullptr~ as next value, it will point to ~head~.
+#+begin_src c++
+//TODO
+#+end_src
 *** TODO 9.
 *** TODO 10.
 *** TODO 11.
@@ -58,8 +94,7 @@
 *** TODO 20.
 
 
-
-** TOD O 4.7. Lists, Stacks, and Queues Projects
+** TODO 4.7. Lists, Stacks, and Queues Projects
 ** TODO 5.8. Binary Trees Exercises
 ** TODO 5.9. Binary Trees Projects
 ** TODO 6.7. Non-Binary Trees Exercises
