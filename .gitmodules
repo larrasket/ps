@@ -1,0 +1,3 @@
+[submodule ".doom.d/doom-todo-ivy"]
+	path = .doom.d/doom-todo-ivy
+	url = https://github.com/jsmestad/doom-todo-ivy.git

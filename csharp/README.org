@@ -6,9 +6,9 @@
 #+hugo_tags: "Computer Science" ".NET"
 * Resoruces
 + *Textbooks*:
-  +  Andrew Lock - ASP.NET Core in Action-Manning (2018)
-  +  Concurrency in C# Cookbook: Asynchronous, Parallel, and Multithreaded Programming
-  +  LINQ in Action by Fabrice Marguerie, Steve Eichert, Jim Wooley (z-lib.org)
+  +  Andrew Lock - ASP.NET Core in Action-Manning (2018).
+  +  Concurrency in C# Cookbook: Asynchronous, Parallel, and Multithreaded Programming.
+  +  LINQ in Action by Fabrice Marguerie, Steve Eichert, Jim Wooley.
 + *Websites:*
   + [[https://www.npgsql.org/doc/index.html][Npgsql Docs]]
 * Speaking C#
@@ -2177,7 +2177,7 @@ Time:     575 ms
 | ~BinarySearch(Int32, Int32, T, IComparer<T>l)~ | Searches a range of elements in the sorted List<T> for an element using the specified comparer and returns the zero-based index of the element. [[#binaryseach][Example]]                                                                                                                        |
 | ~Clear()~                                      | Removes all elements from the List<T>.                                                                                                                                                                                                                                         |
 | ~Contains(T)~                                  | Determines whether an element is in the List<T>.                                                                                                                                                                                                                               |
-| ~CopyTo(T[])~                                  | Copies the entire List<T> to a compatible one-dimensional array, starting at the beginning of the target array. [[#copyto][Example]]                                                                                                                                                        |
+| ~opyTo(T[])~                                   | Copies the entire List<T> to a compatible one-dimensional array, starting at the beginning of the target array. [[#copyto][Example]]                                                                                                                                                        |
 | ~Exists(Predicate<T>)~                         | Determines whether the List<T> contains elements that match the conditions defined by the specified predicate. [[#exist][Example]]                                                                                                                                                         |
 | ~Find(Predicate<T>)~                           | Searches for an element that matches the conditions defined by the specified predicate, and returns the first occurrence within the entire List<T>. [[#find][Example]]                                                                                                                    |
 | ~EnsureCapacity(Int32)~                        | Ensures that the capacity of this list is at least the specified capacity. If the current capacity is less than capacity, it is successively increased to twice the current capacity until it is at least the specified capacity.                                              |
@@ -2262,6 +2262,9 @@ Console.WriteLine(i);
 |                  0 |
 
 ***** ~CopyTo(T[])~ Example
+:PROPERTIES:
+:CUSTOM_ID: copyto
+:END:
 
 #+begin_src csharp
 var list = new List<int>() { 10, 20, 30 };
@@ -2291,6 +2294,9 @@ Console.WriteLine(array[2]);
 | 7 |
 
 ***** ~Exist(Predicate<T>)~ Example
+:PROPERTIES:
+:CUSTOM_ID: exist
+:END:
 #+begin_src csharp
 List<int> list = new List<int>();
 list.Add(7);
@@ -2311,6 +2317,9 @@ Console.WriteLine(exists);
 | False |
 
 ***** ~Find(Predicate<T>)~ Example
+:PROPERTIES:
+:CUSTOM_ID: find
+:END:
 #+begin_src csharp
 List<int> list = new List<int>(new int[] { 19, 23, 29 });
 int result = list.Find(item => item > 20);
@@ -2330,6 +2339,9 @@ Console.WriteLine(listOfNumers3.FindIndex(2, x=> x == 1));
 : 5
 
 ***** ~ForEach(Action<T>)~ Example
+:PROPERTIES:
+:CUSTOM_ID: foreach
+:END:
 #+begin_src csharp
 List<int> ListOfNumers_3 = new List<int> { 1, 2, 3, 4, 5, 6 };
 int[] MyNewList = new int[2];
@@ -2439,146 +2451,6 @@ structure consisting of a collection of nodes which together represent a sequenc
 *** TODO ~ConcurrentStack<T>~
 *** TODO ~ConcurrentDictionary<TKey,TValue>~
 
-* LINQ
-** Motivation
-*What is LINQ?*
-
-Suppose you are writing an application using .NET. Chances are high that at
-some point you’ll need to persist objects to a database, query the database, and load the
-results back into objects. The problem is that in most cases, at least with relational
-databases, there is a gap between your programming language and the database. Good attempts
-have been made to provide object-oriented databases, which would be closer to
-object-oriented platforms and imperative programming lan- guages such as C# and VB.NET.
-However, after all these years, relational databases are still pervasive, and you still have
-to struggle with data access and persistence in all of your programs.
-
-The original motivation behind LINQ was to address the conceptual and tech- nical
-difficulties encountered when using databases with .NET programming lan- guages. With LINQ,
-Microsoft’s intention was to provide a solution for the problem of object-relational
-mapping, as well as to simplify the interaction between objects and data sources. LINQ
-eventually evolved into a general-purpose language-integrated querying toolset. This toolset
-can be used to access data com- ing from in-memory objects (LINQ to Objects), databases
-(LINQ to SQL), XML documents (LINQ to XML), a file-system, or any other source.
-
-sions to these languages: LINQ means Language-INtegrated Query.
- Before LINQ, we had to juggle different languages like SQL, XML, or XPath
-along with various technologies and APIs like ADO.NET or System.Xml in every
-application written using general-purpose languages such as C# or VB.NET. It goes
-without saying that this approach had several drawbacks.1 LINQ glues several
-worlds together. It helps us avoid the bumps we would usually find on the road
-from one world to another: using XML with objects, objects with relational data,
-and relational data with XML are some of the tasks that LINQ will simplify.
-
- One of the key aspects of LINQ is that it was designed to be used against any
-type of object or data source and to provide a consistent programming model for
-doing so. The syntax and concepts are the same across all of its uses: Once you
-learn how to use LINQ against an array or a collection, you also know most of the
-concepts needed to take advantage of LINQ with a database or an XML file.
-
-*Why Do We Need LINQ?*
-
-We have just provided you with an overview of LINQ. The big questions at this point are: Why
-do we want a tool like LINQ? What makes the previous tools incon- venient? Was LINQ created
-only to make working with programming languages, relational data, and XML at the same time
-more convenient?
-
-
-At the origin of the LINQ project is a simple fact: The vast majority of applica- tions that
-are developed access data or talk to a relational database. Consequently, in order to
-program applications, learning a language such as C# is not enough. You also have to learn
-another language such as SQL, and the APIs that tie it together with C# to form your full
-application.
-
- We’ll start by taking a look at a piece of data-access code that uses the standard
-.NET APIs. This will allow us to point out the common problems that are encoun-
-tered in this kind of code. We will then extend our analysis by showing how these
-problems exist with other kinds of data such as XML. You’ll see that LINQ
-addresses a general impedance mismatch between data sources and programming
-languages. Finally, a short code sample will give you a glimpse at how LINQ is a
-solution to the problem.
-
-The frequent use of databases in applications requires that the .NET Framework
-address the need for APIs that can access the data stored within. Of course, this
-has been the case since the first appearance of .NET. The .NET Framework Class
-Library (FCL) includes ADO.NET, which provides an API to access relational data-
-bases and to represent relational data in memory. This API consists of classes such
-as SqlConnection, SqlCommand, SqlReader, DataSet, and DataTable, to name a
-few. The problem with these classes is that they force the developer to work explic-
-itly with tables, records, and columns, while modern languages such as C# and
-VB.NET use object-oriented paradigms.
-
-Now that the object-oriented paradigm is the prevailing model in software
-development, developers incur a large amount of overhead in mapping it to other
-abstractions, specifically relational databases and XML. The result is that a lot of
-time is spent on writing plumbing code.3 Removing this burden would increase
-productivity in data-intensive programming, which LINQ helps us do.
-
-But it’s not only about productivity! It also impacts quality. Writing tedious
-and fragile plumbing code can lead to insidious defects in software or degraded
-performance.
-
-** Hello LINQ to Object
-#+begin_src csharp
-string[] words = new string[] { "Hello", "Wonderful", "Linq", "Beatiful", "World" };
-var shortWords =
-    from word in words
-    where word.Length <= 5
-    select word;
-foreach (var word in shortWords) Console.WriteLine(word);
-#+end_src
-
-#+RESULTS:
-| Hello |
-| Linq  |
-| World |
-|       |
-As is evident from the results, we have filtered a list of words to select only the
-ones whose length is less than or equal to five characters.
-
-We could argue that the same result could be achieved without LINQ using the following code:
-#+begin_src csharp
-string[] words = new string[] {
-  "hello", "wonderful", "linq", "beautiful", "world" };
-foreach (string word in words)
-  if (word.Length <= 5)
-   Console.WriteLine(word);
-#+end_src
-
-** LINQ to SQL
-Also read: [[https://salehmu.github.io/notes/psql/][Introduction to PSQL]]
-
-The time has come to look at some code using LINQ to SQL. As you saw in our
-Hello LINQ example, we are able to write queries against a collection of objects.
-The following C# code snippet filters an in-memory collection of contacts based
-on their city:
-
-#+begin_src sql
-from contact in contacts
-where contact.City == "Paris"
-select contact;
-#+end_src
-
-The good news is that thanks to LINQ to SQL, doing the same on data from a relational
-database is direct:
-#+begin_src csharp
-from contact in db.GetTable<Contact>()
-where contact.City == "Paris"
-select contact;
-#+end_src
-
-This query works on a list of contacts from a database. Notice how subtle the dif-
-ference is between the two queries. Only the object on which we are working is
-different; the query syntax is exactly the same. This shows how we’ll be able to
-work the same way with multiple types of data.
-
-Let’s walk through a simple complete example. To begin with,
-you’re probably wondering what ~db.GetTable<Contact>()~ means in our LINQ to SQL.
-
-*** Entity Classes
-In our simple example, we’ll define a class named Contact and associate it
-with the Contacts table of the Northwind sample database provided by Microsoft
-with the LINQ code samples.11 To do this, we need only to apply a custom attribute to the
-class.
 * Assemblies, Namespaces, Packages, and Frameworks
 An *assembly* is where a type is stored in the filesystem. Assemblies are a mechanism
 for _deploying code_. For example, the ~System.Data.dll~ assembly contains types for
@@ -3020,6 +2892,14 @@ class MyClass
     }
 
 #+end_src
+
+* TODO LINQ
+See [[file:LINQ.org][LINQ]]
+* TODO Concurrency
+See [[file:Concurrency.org][asynchronous programming]]
+* TODO MVC/ASP
+See [[file:mvc.org][ASP]]
+
 
 * Take a Look
 - [[https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading#overloadable-operators][Overloadable operators]]

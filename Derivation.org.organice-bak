@@ -1,0 +1,55 @@
+#+TITLE: Derivation Cheat Sheet
+
+* Rules
+** Constant Rule $$ f(x) = c \implies f'(x) = 0 $$
+*** Example
++ $-5 \implies 0$
+  #+NOTE: مشتقة الثابت = صفر
+** Power Rule $f(x)=x^n \implies f'(x)=nx^{n-1}$
+*** Example
++ $x^2 \implies 2x$
+  #+NOTE: الأس ضرب المتغير مطروح من أُسه واحد
+** Constant Multiple Rule: $g(x)=c \cdot f(x) \implies g'(x)=c.f'(x)$
+*** Example
++ $3x^3 \implies 3\cdot 2x^1 = 6x$
+** Square Rule $f(x) \sqrt{x} \implies f'(x) \frac{1}{2\cdot \sqrt{x}}$
+*** Example
++ $\sqrt{x^3} \implies \frac{3x^2}{2\cdot \sqrt {x^3}}$
+
++ $\sqrt{6x^4} \implies \frac {24x^3}{2\cdot \sqrt{6x^4}} = \frac{12x^3}{\sqrt{6x^4}}$
+  #+NOTE: مشق ما بداخل الجزر مقسوم على _2_ ضرب الجزر
+** Logarithm Derivatives
+*** $f(x) = \ln(x) \implies f'(x) = \frac{1}{x}$
+**** Example
++ $\ln{(5x^2)} \implies \frac{10x}{5x^2} = \frac{2}{x^2}$
+
++ $\ln(\sqrt{x}) \implies \frac {\frac{1}{2\cdot \sqrt{x}}}{\sqrt{x}}$
+  #+NOTE: مشتقة ما بداخل اللن مقسومة على ما بداخلها
+*** $$\log_n(x) \implies \frac{1}{\ln(a)} \cdot \frac{1}{x}$$
+**** Example
++
+  $\log_6(6x^2) \implies \frac{1}{\ln(6)}\cdot \frac{2}{x}$
+
++ $\log_5(2x) \implies \frac{1}{\ln(5)} \cdot \frac{2}{2x}$
+#+NOTE: واحد مقسوم على لن الأساس مضروب في مشتقة ما بداخل اللوج مقسوم على ما بداخله
+** Exponential Derivatives $f(x)=e^x \implies f'(x)=e^x \cdot 1$
+**** Example
++ $e^{3x^2} \implies e^{3x^2} \cdot 6x$
++ $e^{9\sqrt{x}} \implies e^{9\sqrt{x}} \cdot (9 \cdot \frac{1}{2\cdot\sqrt{x}})$
+#+NOTE: الإي نفسها مضروبة في مشتقة الأس
+
+** Multiple Derivatives  $f(x).g(x) \implies (f(x)\cdot g'(x)) + (g(x)\cdot f'(x))$
+** Divided Derivatives $\frac{f(x)}{g(x)} \implies \frac{ (g(x) \cdot f'(x)) - (f(x) \cdot g'(x))} {{g(x)}^2}$
+** Differentiation of Trigonometric Functions
+|--------------------------+-----------------------------|
+| $f(x)$ Original Function | $f'(x)$ Prime Function      |
+|--------------------------+-----------------------------|
+| $\sin(x)$                | $\cos(x)$                   |
+| $\cos(x)$                | $-\sin(x)$                  |
+| $\tan(x)$                | $\sec^2(x)$                 |
+| $\cot(x)$                | $-\csc^2(x)$                |
+| $\sec(x)$                | $\sec(x)\cdot \tan(x)$      |
+| $csc(x)$                 | $-\csc(x) \cdot x \cot (x)$ |
+|--------------------------+-----------------------------|
+*** TODO Examples
+** TODO Chain Rule

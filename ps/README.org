@@ -18,6 +18,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/maximum-sum-circular-subarray/][918. Maximum Sum Circular Subarray]]                         | Array                | Medium     | LC    | [[file:lc/918.maximum-sum-circular-subarray.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                 | Array                | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]]            |
 | [[https://codeforces.com/contest/1634/problem/A][A. Reverse and Concatenate]]                                 | String               | Easy       | CF    | [[file:cf/1634A.cpp][Accepted]]            |
+| [[https://leetcode.com/contest/weekly-contest-276/problems/divide-a-string-into-groups-of-size-k/][2138. Divide a String Into Groups of Size k]]                | String               | Easy       | LC    | [[file:lc/2138.divide-a-string-into-groups-of-size-k.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/determine-if-two-strings-are-close/][1657. Determine if Two Strings Are Close]]                   | String               | Medium     | LC    | [[file:lc/1657.determine-if-two-strings-are-close.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/reverse-words-in-a-string/][151. Reverse Words in a String]]                             | String               | Medium     | LC    | [[file:lc/151-reverse-words-in-a-string.cs][Accepted]]            |
 | [[https://leetcode.com/problems/valid-sudoku/][36. Valid Sudoku]]                                           | Matrix               | Medium     | LC    | [[file:lc/36.valid-sudoku.cpp][Accepted]]            |
@@ -111,23 +112,36 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | BST                | -          | -                        | [[https://leetcode.com/tag/binary-search-tree/][LC]]  |
 | Orderd Set         | -          | -                        | [[https://leetcode.com/tag/ordered-set/][LC]]  |
 | Divide and Conquer | -          | -                        | [[https://leetcode.com/tag/divide-and-conquer/][LC]]  |
-| Queue              | -          | -                        | [[https://leetcode.com/tag/queue/][LC]]  |
 | Backtracking       | -          | -                        | [[https://leetcode.com/tag/backtracking/][LC]]  |
 |--------------------+------------+--------------------------+-----|
 * To Cover
-** TODO Binary Tree & Binary Search
-** TODO Stack
 ** TODO Math
 ** TODO Combination
 ** TODO combinatorial search
 ** TODO permutation
-** TODO Heap
 ** TODO Trie
 ** TODO Union Find
-** TODO Greedy
+** TODO Greedy [0/1]
+*** [ ] https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/
+
+** TODO Heap [0/3]
+*** [ ] https://leetcode.com/problems/max-value-of-equation/ :heap:
+*** [ ] https://leetcode.com/problems/find-median-from-data-stream/ :heap:
+*** [ ] https://leetcode.com/problems/daily-temperatures/ :stack:
+
+** TODO Sorting [0/6]
+*** [ ] [[https://leetcode.com/problems/sort-colors/][https://leetcode.com/problems/sort-colors/]]
+*** [ ] https://leetcode.com/problems/partition-list/
+*** [ ] [[https://leetcode.com/problems/maximum-performance-of-a-team/][https://leetcode.com/problems/maximum-performance-of-a-team/]]
+*** [ ] https://leetcode.com/problems/pancake-sorting/
+*** [ ] https://leetcode.com/problems/sort-list/
+*** [ ] https://leetcode.com/problems/partition-array-according-to-given-pivot
+
 * Coverd
 ** DONE Linked List
+** DONE Binary Tree & Binary Search
 ** DONE Graphs
 ** DONE Array
-** TODO Two Pointers
-** TODO Hash
+** DONE Two Pointers
+** DONE Hash
+** DONE Stack

@@ -1,0 +1,42 @@
+#+title: "Introduction Into ASP.NET Core"
+#+date: 2022-01-08T05:28:26+02:00
+ASP.NET Core is the latest evolution of Microsoft’s popular ASP.NET web framework,
+released in June 2016. Recent versions of ASP.NET have seen many incremental
+updates, focusing on high developer productivity and prioritizing backwards compati-
+bility. ASP.NET Core bucks that trend by making significant architectural changes that
+rethink the way the web framework is designed and built.
+
+ ASP.NET Core owes a lot to its ASP.NET heritage and many features have been car-
+ried forward from before, but ASP.NET Core is a new framework. The whole technol-
+ogy stack has been rewritten, including both the web framework and the underlying
+platform.
+
+
+*What is ASP.NET Core?*
+
+The development of ASP.NET Core was motivated by the desire to create a web frame-
+work with four main goals:
+- To be run and developed cross-platform
+- To have a modular architecture for easier maintenance
+- To be developed completely as open source software
+- To be applicable to current trends in web development, such as client-side applications and deploying to cloud environments
+
+  In order to achieve all these goals, Microsoft needed a platform that could provide
+underlying libraries for creating basic objects such as lists and dictionaries, and per-
+forming, for example, simple file operations. Up to this point, ASP.NET development
+had always been focused, and dependent, on the Windows-only .NET Framework. For
+ASP.NET Core, Microsoft created a lightweight platform that runs on Windows,
+Linux, and macOS called .NET Core, as shown in the following figure:
+
+#+DOWNLOADED: screenshot @ 2022-02-28 17:19:46
+[[file:2022-02-28_17-19-46_screenshot.png]]
+
+
+By adding an ASP.NET Core web server to your .NET Core app, your application can
+run as a web application. ASP.NET Core is composed of many small libraries that you
+can choose from to provide your application with different features. You’ll rarely need
+all the libraries available to you and you only add what you need. Some of the libraries
+are common and will appear in virtually every application you create, such as the ones
+for reading configuration files or performing logging. Other libraries build on top of
+these base capabilities to provide application-specific functionality, such as third-party
+logging-in via Facebook or Google.
