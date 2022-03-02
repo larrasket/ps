@@ -1,7 +1,0 @@
-* Visa password
-:PROPERTIES:
-:CREATED:  [2021-10-24 Sun 12:02]
-:END:
-
-6574
-
