@@ -1,4 +1,5 @@
 #+TITLE: Dynamic Programming
+#+hugo_tags: "Computer Science"
 #+AUTHOR: ghd
 * Introduction
 

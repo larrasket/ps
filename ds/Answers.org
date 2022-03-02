@@ -7,7 +7,7 @@
 ** TODO [3.13] Algorithm Analysis Exercises
 ** TODO [3.14] Algorithm Analysis Projects
 * Applied
-** TODO 4.6. Lists, Stacks, and Queues Exercises [6/19]
+** TODO 4.6. Lists, Stacks, and Queues Exercises [7/20]
 *** DONE 1.
          #+begin_src c++
          for (MyList.moveToStart(); MyList.currPos() < MyList.length();
@@ -74,7 +74,7 @@ ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
   return usage.next;
 }
 #+end_src
-*** 8.
+*** DONE 8.
 The solution is just to change the appending style, instead of the tail pointing to
 ~nullptr~ as next value, it will point to ~head~.
 #+begin_src c++
