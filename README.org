@@ -4,9 +4,9 @@
   + [[file:algo/geomtry][Computational Geometry]]
   + [[file:algo/dp][Dynamic Programming]]
   + [[file:algo/graphs/][Graphs]]
+  + [[file:algo/sorting/][Sorting]]
 + [[file:csharp/][C# Notes]]
 + [[file:STD/][C++ STD]]
 + [[file:ps/][Problem Solving]]
 + [[file:psql/][PostgreSQL]]
 
-  test..
