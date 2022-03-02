@@ -1,0 +1,28 @@
+#+TITLE: Sorting
+#+hugo_tags: "computer science"
+
+* Three $O(n^2)$ Sorting Algorithms
+This section presents three simple sorting algorithms. While easy to understand
+and implement, we will soon see that they are unacceptably slow when there are
+many records to sort. Nonetheless, there are situations where one of these simple
+algorithms is the best tool for the job.
+
+** Insertion Sort
+Imagine that you have a stack of phone bills from the past two years and that you
+wish to organize them by date. A fairly natural way to do this might be to look at
+the first two bills and put them in order. Then take the third bill and put it into the
+right order with respect to the first two, and so on. As you take each bill, you would
+add it to the sorted pile that you have already made. This naturally intuitive process
+is the inspiration for our first sorting algorithm, called Insertion Sort. Insertion
+Sort iterates through a list of records. Each record is inserted in turn at the correct
+position within a sorted list composed of those records already processed.
+
+[[file:Three_$O(n^2)$_Sorting_Algorithms/2022-03-02_15-33-40_screenshot.png]]
+
+#+begin_src c++
+template <typename E, typename Comp>
+void inssort(E A[], int n) {
+for (int i=1; i<n; i++)
+for (int j=i; (j>0) && (Comp::prior(A[j], A[j-1])); j--)
+swap(A, j, j-1);
+#+end_src
