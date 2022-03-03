@@ -57,7 +57,6 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/unique-paths/][62. Unique Paths]]                                           | Dynamic Programming  | Medium     | LC    | [[file:lc/62.unique-paths.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/deepest-leaves-sum/][1302. Deepest Leaves Sum]]                                   | Breadth-First Search | Medium     | LC    | [[file:lc/1302.deepest-leaves-sum.cpp][Accepted]]            |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/design-browser-history/][1472. Design Browser History]]                               | Design               | Medium     | LC    | [[file:lc/1472.design-browser-history.cpp][TBC]]                 |
 | [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]                          | Array                | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][Wrong Answer]]        |
 | [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                    | Array                | Hard       | LC    | [[https://leetcode.com/submissions/detail/638579456/][Wrong Answer]]        |
 | [[https://leetcode.com/problems/rotating-the-box/][1861. Rotating the Box]]                                     | Matrix               | Medium     | LC    | [[file:lc/1861.rotating-the-box.cpp][Wrong Answer]]        |
@@ -67,6 +66,9 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                             | Backtracking         | Medium     | LC    | [[file:built/99.subsets-ii.cpp][Unkown]]              |
 | [[https://leetcode.com/problems/restore-ip-addresses/][93. Restore IP Addresses]]                                   | Backtracking         | Medium     | LC    | [[https://leetcode.com/problems/restore-ip-addresses/][Time Limit Exceeded]] |
 | [[https://leetcode.com/problems/decode-ways/][91. Decode Ways]]                                            | Dynamic Programming  | Medium     | LC    | [[file:built/91.decode-ways.cpp][Time Limit Exceeded]] |
+|------------------------------------------------------------+----------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/design-browser-history/][1472. Design Browser History]]                               | Design               | Medium     | LC    | [[file:lc/1472.design-browser-history.cpp][TBC]]                 |
+| [[https://leetcode.com/problems/insertion-sort-list/][147. Insertion Sort List]]                                   | Sorting              | Median     | LC    | [[file:lc/147.insertion-sort-list.cpp][TBC]]                 |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 * What to Study
 | Topic              | Difficulty | R.I (For SW engineering) | Set |

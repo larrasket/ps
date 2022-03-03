@@ -1,6 +1,8 @@
 #+TITLE: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Answers Notebook
 #+Description: Data Structures and Algorithm Analysis by Clifford A. Shaffer, Answers Notebook
 #+hugo_tags: "Computer Science"
+#+draft: true
+* Not COMPLETED (yet?)
 * Introduction [0/4]
 ** TODO [1.6] Data Structures & Algorithms Exercises
 ** TODO [2.9] Mathematical Preliminaries Exercises
