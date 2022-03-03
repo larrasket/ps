@@ -32,11 +32,239 @@ Linux, and macOS called .NET Core, as shown in the following figure:
 [[file:2022-02-28_17-19-46_screenshot.png]]
 
 
-By adding an ASP.NET Core web server to your .NET Core app, your application can
-run as a web application. ASP.NET Core is composed of many small libraries that you
-can choose from to provide your application with different features. You’ll rarely need
-all the libraries available to you and you only add what you need. Some of the libraries
-are common and will appear in virtually every application you create, such as the ones
-for reading configuration files or performing logging. Other libraries build on top of
-these base capabilities to provide application-specific functionality, such as third-party
-logging-in via Facebook or Google.
+ .NET Core shares many of the same APIs as .NET Framework, but it’s smaller and
+currently only implements a subset of the features .NET Framework provides, with the
+goal of providing a simpler implementation and programming model. It’s a com-
+pletely new platform, rather than a fork of .NET Framework, though it uses similar
+code for many of its APIs.
+
+ With .NET Core alone, it’s possible to build console applications that run cross-
+platform. Microsoft created ASP.NET Core to be an additional layer on top of console
+applications, such that converting to a web application involves adding and composing
+libraries:
+
+[[file:2022-03-03_17-10-38_T3OfRz7.png]]
+
+
+*How does an HTTP web request work?* As you know, ASP.NET Core is a framework for building
+web applications that serve data from a server. One of the most common scenarios for web
+developers is building a web app that you can view in a web browser. The high-level process
+you can expect from any web server is shown in the following figure.
+
+#+DOWNLOADED: https://i.imgur.com/3wfltNj.png @ 2022-03-03 17:19:07
+[[file:2022-03-03_17-19-07_3wfltNj.png]]
+
+
+The process begins when a user navigates to a website or types a URL in their
+browser. The URL or web address consists of a hostname and a path to some resource on
+the web app. Navigating to the address in your browser sends a request from the user’s
+computer to the server on which the web app is hosted, using the HTTP protocol.
+
+The request passes through the internet, potentially to the other side of the world,
+until it finally makes its way to the server associated with the given hostname on which
+the web app is running. The request is potentially received and rebroadcast at multi-
+ple routers along the way, but it’s only when it reaches the server associated with the
+hostname that the request processed.
+
+Once the server receives the request, it will check that it makes sense, and if it does,
+will generate an HTTP response. Depending on the request, this response could be a
+web page, an image, a JavaScript file, or a simple acknowledgment. For this example,
+I’ll assume the user has reached the homepage of a web app, and so the server
+responds with some HTML. The HTML is added to the HTTP response, which is then
+sent back across the internet to the browser that made the request.
+
+ As soon as the user’s browser begins receiving the HTTP response, it can start dis-
+playing content on the screen, but the HTML page may also reference other pages
+and links on the server. To display the complete web page, instead of a static, colorless,
+raw HTML file, the browser must repeat the request process, fetching every refer-
+enced file. HTML, images, CSS for styling, and JavaScript files for extra behavior are
+all fetched using the exact same HTTP request process.
+
+When you build a web application with ASP.NET Core, browsers will still be using the
+same HTTP protocol as before to communicate with your application. ASP.NET Core
+itself encompasses everything that takes place on the server to handle a request,
+including verifying the request is valid, handling login details, and generating HTML.
+
+
+ Just as with the generic web page example, the request process starts when a user’s
+browser sends an HTTP request to the server, as shown in the following figure A reverse-proxy
+server captures the request, before passing it to your application. In Windows, the
+reverse-proxy server will typically be IIS, and on Linux or macOS it might be NGINX
+or Apache.
+
+
+#+DOWNLOADED: https://i.imgur.com/hR1mKIL.png @ 2022-03-03 17:30:57
+[[file:2022-03-03_17-30-57_hR1mKIL.png]]
+
+The request is forwarded from the reverse proxy to your ASP.NET Core application.
+Every ASP.NET Core application has a built-in web server, Kestrel by default, which is
+responsible for receiving raw requests and constructing an internal representation of
+the data, an HttpContext object, which can be used by the rest of the application.
+
+ Once the application has finished processing the request, it will return the
+response to the web server. The ASP.NET Core web server will convert the representa-
+tion into a raw HTTP response and send it back to the reverse proxy, which will forward
+it to the user's browser.
+
+ You may be thinking that having a reverse proxy and a web server is somewhat redundant. Why
+not have one or the other? Well, one of the benefits is the decoupling of your application
+from the underlying operating system. The same ASP.NET Core web server, Kestrel, can be
+cross-platform and used behind a variety of proxies without putting any constraints on a
+particular implementation. Alternatively, if you wrote a new ASP.NET Core web server, you
+could use that in place of Kestrel without needing to change anything else about your
+application.
+
+ Another benefit of a reverse proxy is that it can be hardened against potential threats
+from the public internet. They’re often responsible for additional aspects, such as
+restarting a process that has crashed. Kestrel can stay as a simple HTTP server without
+having to worry about these extra features when it’s used behind a reverse proxy. Think of
+it as a simple separation of concerns: Kestrel is concerned with gener- ating HTTP
+responses; a reverse proxy is concerned with handling the connection to the internet.
+
+* A First Project of ASP.NET Core
+Creating a project shouldn't be a controversial thing, there is already predefined
+templates in tools like ~dotnet~, or embedded in IDEs. I'm going to use the one that
+Jetbrains' Rider provides in this notebook, however, it's identical to the most of other
+templates.
+
+If you are Unix-like user, it's recommended not to use any symbolic links in the project/solution
+path, use the full path.
+
+When you’re new to a framework, creating an application from a template like this can
+be a mixed blessing. On the one hand, you can get an application up and running
+quickly, with little input required on your part. Conversely, the number of files can
+sometimes be overwhelming, leaving you scratching your head working out where to
+start. The basic web application template doesn’t contain a huge number of files and
+folders, as shown in the following figure, but I’ll run through the major ones to get you oriented.
+
+#+DOWNLOADED: screenshot @ 2022-03-03 07:05:06
+[[file:A_First_Project_of_ASP.NET_Core/2022-03-03_07-05-06_screenshot.png]]
+
+
+
+Inside the solution folder, you’ll find your project folder, which in turn contains five
+subfolders—Models, Controllers, Views, Properties, and wwwroot. Models, Control-
+lers, and Views (unsurprisingly) contain the MVC Model, Controller, and View files
+you’ll use to build your application. The Properties folder contains a single file,
+launchSettings.json, which controls how Visual Studio will run and debug the applica-
+tion. The wwwroot folder is special, in that it’s the only folder in your application that
+browsers are allowed to directly access when browsing your web app. You can store
+your CSS, JavaScript, images, or static HTML files in here and browsers will be able to
+access them. They won’t be able to access any file that lives outside of wwwroot.
+
+Although the wwwroot and Properties folders exist on disk, you can see that Solution
+Explorer shows them as special nodes, out of alphabetical order, near the top of
+your project. You’ve got two more special nodes in the project, Dependencies and
+Connected Services, but they don’t have a corresponding folder on disk. Instead, they
+show a collection of all the dependencies, such as NuGet packages, client-side dependencies,
+and remote services that the project relies on.
+
+In the root of your project folder, you’ll find several ~JSON~ files, such as appsettings
+~.json, bundleconfig.json~, and bower.json. These provide various configuration set-
+tings, some of which are used at runtime, and others which are used to build your app at
+compile time.
+** Overview
+
+The request and response, the reverse proxy, and the ASP.NET Core web server are all still
+there, but you’ll notice that I’ve expanded the ASP.NET Core application itself to show the
+middleware pipeline and the MVC middleware. This is the main custom part
+of your app that goes into generating the response from a request.
+
+[[file:A_First_Project_of_ASP.NET_Core/2022-03-03_19-28-59_uUqiA73.png]]
+
+ The first port of call after the reverse proxy forwards a request is the ASP.NET
+Core web server, which is the default cross-platform Kestrel server. Kestrel takes the
+raw incoming request and uses it to generate an HttpContext object the rest of the
+application to use.
+
+Kestrel is responsible for receiving the request data and constructing a C# representa-
+tion of the request, but it doesn’t attempt to handle the request directly. For that, Kes-
+trel hands the HttpContext to the middleware pipeline found in every ASP.NET Core
+application. This is a series of components that processes the incoming request to per-
+form common operations such as logging, handling exceptions, or serving static files.
+
+After the middleware pipeline comes the MVC block. This is responsible for generat-
+ing the HTML that makes up the pages of a typical ASP.NET Core web app. It’s also
+typically where you find most of the business logic of your app, by calling out to vari-
+ous services in response to the data contained in the original request. Not every app
+needs an MVC block, but it’s typically how you’ll build most apps that display HTML
+to a user.
+
+Most ASP.NET Core applications follow this basic architecture, and the example in
+this chapter is no different. First, you’ll see how to create and run your application,
+then we’ll look at how the code corresponds to the outline in figure 2.1. Without fur-
+ther ado, let’s create an application!
+
+** ~csproj~: Dependencies
+
+The csproj file is the project file for .NET applications and contains the details
+required for the .NET tooling to build your project. It defines the type of project
+being built (web app, console app, or library), which platform the project targets
+(.NET Core, .NET Framework 4.5, Mono, and so on), and which NuGet packages the
+project depends on.
+
+ The project file has been a mainstay of .NET applications, but in ASP.NET Core it
+has had a facelift to make it easier to read and edit. These changes include:
+
+- No GUIDs—Previously, Global Unique Identifiers (GUIDs) were used for many things, now they’re rarely used in the project file.
+- Implicit file includes—Previously, every file in the project had to be listed in the csproj file for it to be included in the build. Now, files are automatically com- piled.
+- No paths to NuGet package dlls—Previously, you had to include the path to the dll files contained in NuGet packages in the csproj, as well as listing the dependen- cies in a packages.xml file. Now, you can reference the NuGet package directly in your csproj, and don’t need to specify the path on disk.
+
+All of these changes combine to make the project file far more compact than you’ll be
+used to from previous .NET projects. The following listing shows the entire csproj file
+for your small app.
+
+For simple applications, you probably won’t need to change the project file much. The
+Sdk attribute on the Project element includes default settings that describe how to build
+your project, whereas the TargetFramework element describes the framework your appli-
+cation will run on. For .NET Core 2.0 projects, this will have the netcoreapp2.0 value; if
+you’re running on the full .NET Framework, 4.6.1, this would be net461.
+
+The most common changes you’ll make to the project file are to add additional
+NuGet packages using the PackageReference element. By default, your app refer-
+ences a single NuGet package,  Microsoft.AspNetCore.All. This is a metapackage that
+includes all of the packages associated with ASP.NET Core 2.0. It’s only available when
+you’re targeting .NET Core.
+** The Program Class
+
+All ASP.NET Core applications start in the same way as .NET Console applications—
+with a Program.cs file. This file contains a static void Main function, which is a stan-
+dard characteristic of console apps. This method must exist and is called whenever
+you start your web application. In ASP.NET Core applications, it’s used to build and
+run an IWebHost instance, as shown in the following listing, which shows the default
+Program.cs file. The IWebHost is the core of your ASP.NET Core application, contain-
+ing the application configuration and the Kestrel server that listens for requests and
+send response.
+
+The Main function contains all the basic initialization code required to create a web
+server and to start listening for requests. It uses a WebHostBuilder, created by the call
+to CreateDefaultBuilder, to define how the IWebHost is configured, before instantiating the
+~IWebHost~ with a call to ~Build()~.
+
+#+DOWNLOADED: https://i.imgur.com/4BtBon3.png @ 2022-03-03 19:43:42
+[[file:A_First_Project_of_ASP.NET_Core/2022-03-03_19-43-42_4BtBon3.png]]
+
+The Main function contains all the basic initialization code required to create a web
+server and to start listening for requests. It uses a WebHostBuilder, created by the call
+to CreateDefaultBuilder, to define how the IWebHost is configured, before instantiating the
+~IWebHost~ with a call to ~Build()~.
+
+ASP.NET Core uses small, modular components for each distinct feature. This allows
+individual features to evolve separately, with only a loose coupling to others, and is
+generally considered good design practice. The downside to this approach is that it
+places the burden on the consumer of a feature to correctly instantiate it. Within your
+application, these modular components are exposed as one or more services that are
+used by the application.
+
+For example, in an e-commerce app, you might have a TaxCalculator that calculates
+the tax due on a particular product, taking into account the user’s location in the
+world. Or you might have a ShippingCostService that calculates the cost of shipping
+to a user’s location. A third service, OrderTotalCalculatorService, might use both
+of these services to work out the total price the user must pay for an order. Each ser-
+vice provides a small piece of independent functionality, but you can combine them to
+create a complete application. This is known as the single responsibility principle.
+
+
+In an ASP.NET Core application, this registration is performed in the Configure-
+Services method. Whenever you use a new ASP.NET Core feature in your applica-
+tion, you’ll need to come back to this method and add in the necessary services.
