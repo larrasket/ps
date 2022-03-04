@@ -1,5 +1,6 @@
 #+title: "Introduction Into ASP.NET Core"
 #+date: 2022-01-08T05:28:26+02:00
+* TBC
 ASP.NET Core is the latest evolution of Microsoft’s popular ASP.NET web framework,
 released in June 2016. Recent versions of ASP.NET have seen many incremental
 updates, focusing on high developer productivity and prioritizing backwards compati-
