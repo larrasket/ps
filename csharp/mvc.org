@@ -1,5 +1,6 @@
 #+title: "Introduction Into ASP.NET Core"
 #+date: 2022-01-08T05:28:26+02:00
+#+hugo_tags: "Computer Science" ".NET"
 * TBC
 ASP.NET Core is the latest evolution of Microsoft’s popular ASP.NET web framework,
 released in June 2016. Recent versions of ASP.NET have seen many incremental
@@ -87,7 +88,7 @@ itself encompasses everything that takes place on the server to handle a request
 including verifying the request is valid, handling login details, and generating HTML.
 
 
- Just as with the generic web page example, the request process starts when a user’s
+Just as with the generic web page example, the request process starts when a user’s
 browser sends an HTTP request to the server, as shown in the following figure A reverse-proxy
 server captures the request, before passing it to your application. In Windows, the
 reverse-proxy server will typically be IIS, and on Linux or macOS it might be NGINX
