@@ -372,3 +372,6 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 
 #+DOWNLOADED: screenshot @ 2022-02-14 14:12:35
 [[file:Map/2022-02-14_14-12-35_screenshot.png]]
+
+* To Cover Later [0/1]
+** [ ] Sorting Algorithms
