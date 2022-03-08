@@ -2893,13 +2893,15 @@ class MyClass
 
 #+end_src
 
-* TODO LINQ
-See [[file:LINQ.org][LINQ]]
+* LINQ
+Linq (Language Integrated Query) is really nothing but a query language inside C#, I will
+not second learning it puley, instead, learn query language (any SQL flavor) and just learn
+the basic syntax to use it inside your code. It shouldn't be hard at all.
 * TODO Concurrency
 See [[file:Concurrency.org][asynchronous programming]]
+* TODO Entity Framework
 * TODO MVC/ASP
 See [[file:mvc.org][ASP]]
-
 
 * Take a Look
 - [[https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading#overloadable-operators][Overloadable operators]]
