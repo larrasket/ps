@@ -1,0 +1,393 @@
+#+TITLE: JSON in C# Using Json.NET
+#+hugo_tags: "Computer Science" ".NET"
+
+
+One of the most popular .NET libraries for working with the JSON serialization
+format is Newtonsoft.Json, known as Json.NET. It is mature and powerful.
+
+* Introduction
+
+Let's start by defining what JSON is. JSON stands for JavaScript Object Notation.  It is a
+data interchange format that is used to transmit and store serialized information.  One
+example can be from a web page to a server, or to store data in a large object repository.
+The beauty is that it's an open standard, and it is human readable text. JSON's design goals
+were for it to be minimal, portable, textual, and a subset of JavaScript.  And this is an
+example of JSON.  As you can see, you have a key value pairs, you can have arrays, dates, it
+supports Booleans, nulls, and nested objects.
+
+
+JSON, the JavaScript Object Notation, was created by Douglas Crockford in 2001.  The
+official site is json.org. Visit it for more details on this data interchange format.  It
+goes straight to the point in explaining JSON, and as you can see at the top, it mentions
+one of the standards that describes JSON, which in fact is described by two standards. One
+is RFC 8259, which covers the specification, semantics, and security considerations.  It was
+not the first one. You can also check RFC 7159, 7158, and 4627 for a bigger look at the
+history. And then, ECMA‑404, which is the minimal specification. It covers the allowed
+grammar syntax.  And now, let's talk about Json.NET.  It was started by James Newton‑King in
+2005 out of the need of working with JSON in projects that had JavaScript, AJAX, and .NET.
+It started as a couple of static methods for escaping strings, but it evolved and it was
+first released as Json.NET in 2006 with an unimaginable amount of hours of work. So a big
+thank you to him.  It is used by thousands of projects, so much so that it's the most
+downloaded library in NuGet's history.  In 2018, Json.NET joined the .NET Foundation.  It
+was originally hosted in CodePlex, but now, as most open source projects, it is in GitHub.
+James works for Microsoft by day, and he says he's not Batman.
+
+
+Why is JSON important?  Given that it was originally based on a subset of JavaScript, and
+considering how important JavaScript currently is, one of the best parts is that JSON is
+supported natively by JavaScript. However, and this is pretty good as well, it is language
+independent, but uses conventions that are familiar to programmers of the C family of
+languages, including C, C++, Java, Perl, Python, and many others.  This makes JSON a great
+option for other things like storing data, which is why it also has been adopted for all
+types of storage platforms, including NoSQL databases and search engines, to name a few.
+JSON also has the concept of types.  It is worth noting that it supports some un‑escaped
+characters that are not allowed in JavaScript.  But in general, JSON is supported by the
+major languages, like Ruby, Objective‑C, Java, C#, Python, and so on and so forth.
+Something else that's quite notable is that developers want out of the syntax business.
+With XML, you can represent the same data in multiple different ways.  There are some
+differences in the metadata. This can lead to confusion or errors.  XML can get tiring to
+read and understand.  I do agree that this complexity comes with some advantages in terms of
+flexibility; however, the question is how much flexibility?  It all depends.  But in
+general, JSON covers the wide majority of cases. And it goes so far that Douglas Crockford,
+the creator of JSON, as we recently found out, called it the fat‑free alternative to XML.
+And I think he's right.  Which takes me to my next point.  Many applications expose an API,
+which in many cases followed the REST architectural style.  And even though these APIs
+support different formats besides JSON, like XML, JSON's readability and the fact that it is
+quite lightweight make JSON very suitable and one of the preferred formats for data
+exchange, which is why JSON is used in a large number of APIs.
+** Json Specification
+
+JSON is a text format for the serialization of structured data as a collection of name‑value
+pairs.  JSON can represent four primitive types, which are strings, numbers, Booleans, and
+null.  Also, there are two structured types, objects and arrays.  Regarding duplicate keys,
+ECMA‑404 has no mention of unique keys.  You can have two authors with the same name.  But
+RFC 8259 states that names within an object should be unique, which helps for all
+implementations to agree on name‑value mappings. When no duplicates are present, Json.NET
+takes the last value.
+
+A number is a decimal number with a fractional part and may use an exponential annotation.
+JSON does not allow Not a Number, or NaN, nor does it make any distinction between integer
+and floating point. Even though JavaScript uses double‑precision floating point format for
+all of its numeric values, other languages implementing JSON may encode numbers
+differently.  String is a sequence of zero or more unicode characters.  Strings are
+delimited with double quotation marks and support a backslash escaping syntax. Boolean can
+be either the values true or false. Array is a list of zero or more values in which you use
+square bracket notation with elements being comma separated.  An object is an unordered
+collection of name‑value pairs where the names, also called keys, are strings.  Objects are
+delimited with curly brackets and use commas to separate each pair, while within each pair,
+a colon separates the key or name from its value.  ECMA 404 states that most program
+languages will have some feature for representing such collections, which can go by names
+like record, str, dict, map, hash, object, or class.  Null is an empty value using the word
+null. And whitespace is ignored outside of the values.  JSON generally ignores any
+whitespace around or between syntactic elements, values and punctuation, but not within a
+string.  However, JSON only recognizes four specific whitespace characters, the space, the
+center tab, line feed, and carriage return.  JSON does not provide or allow any sort of
+comment syntax.
+* Serialization
+** Basic Serialization
+Serialization and deserialization involve taking a data structure or object and converting
+it back and forth between JSON text and .NET objects. A .NET object, when serialized,can be
+stored as a stream of bytes, a file, or in‑memory,and later it can be used to recreate the
+original object. You have to be careful,though, in some cases there are private
+implementation details,so you need to review the recreated object to determine if there's
+any information that's missing.
+
+In the serialization and deserialization process, you map property names and copy their
+values using the main JsonSerializer class with the support of JsonReader and JsonWriter.
+
+The JsonSerializer class is a straightforward way of converting between JSON text and .NET
+objects. It provides a great deal of control and customization,being able to read and write
+directly to streams via JsonTextReader and JsonTextWriter. Simply use the serialize and
+deserialize methods. And it gets even better, Json.NET comes with a very easy‑to‑use wrapper
+over JsonSerializer called JsonConvert that makes the serialization process that easy for
+most scenarios. Simply use the SerializeObject and DeserializeObject methods. You control
+the serialization and deserialization process via settings and attributes, which will be
+covered in the next module. But first, let's see JsonConvert in action.
+
+After adding [[https://www.nuget.org/packages/Newtonsoft.Json][Newtonsoft.Json]] to your project, you are ready to use it directly:
+#+begin_src csharp
+using Newtonsoft.Json;
+#+end_src
+
+#+begin_src csharp
+string json = Generate.SingleJson();
+#+end_src
+
+The ~Generate.SingleJson()~ is a method inside the ~Generate~ static class, you can check it
+out in the source code of the repository, however, all it does that it returns the ~json~
+file needed for this demonstration:
+#+begin_src csharp
+public static string SingleJson()
+{
+    return File.ReadAllText("AuthorSingle.json");
+}
+#+end_src
+
+The ~AuthorSingle.json~ is so simple:
+#+begin_src json
+{
+  "name": "Xavier Morera",
+  "courses": [
+    "Solr",
+    "Spark",
+    "Python",
+    "T-SQL"
+  ],
+  "since": "2014-01-14T00:00:00",
+  "happy": true,
+  "issues": null,
+  "car": {
+    "model": "Land Rover Series III",
+    "year": 1976
+  },
+  "authorRelationship": 1
+}
+#+end_src
+A very vital mission in using ~JSON~ in ~C#~, is to write the corresponding class for it in
+~C#~, it's called ~POCO~ which stands for /Plain old CLR object/, in this case, I'm going to
+give it the ~JsonObject~ attribute.
+#+begin_src csharp
+    [JsonObject(IsReference = true)]
+    public class Author
+    {
+        public string name { get; set; }
+        public string[] courses { get; set; }
+        public DateTime since { get; set; }
+        public bool happy { get; set; }
+        public object issues { get; set; }
+        public Car car { get; set; }
+        public List<Author> favoriteAuthors { get; set; }
+        public AuthorRelationship authorRelationship { get; set; }
+    }
+#+end_src
+
+The ~Car~ and ~AuthorRelationship~ Classes doesn't contain any attribute:
+#+begin_src csharp
+    public enum AuthorRelationship
+    {
+        EmployeeAuthor,
+        IndependentAuthor
+    }
+    public class Car
+    {
+        public string model { get; set; }
+        public int year { get; set; }
+    }
+#+end_src
+
+Back to ~string json~, it should contain the Json text file, let's check it:
+#+begin_src csharp
+Console.WriteLine(json);
+#+end_src
+
+#+RESULTS:
+: {
+:   "name": "Xavier Morera",
+:   "courses": [
+:     "Solr",
+:     "Spark",
+:     "Python",
+:     "T-SQL"
+:   ],
+:   "since": "2014-01-14T00:00:00",
+:   "happy": true,
+:   "issues": null,
+:   "car": {
+:     "model": "Land Rover Series III",
+:     "year": 1976
+:   },
+:   "authorRelationship": 1
+: }
+
+Now let's try to run our first deserialize, the method ~DeserializeObject()~ is inside the
+~JsonConvert~ class, which is one of the most useful classes of Json.NET as it helps
+serialize and deserialize in a very easy way.
+
+#+begin_src csharp
+Author x = JsonConvert.DeserializeObject<Author>(json);
+Console.WriteLine(x.name);
+#+end_src
+#+RESULTS:
+:  Xavier Morera
+
+Reversing it is so much easier:
+#+begin_src csharp
+string y = JsonConvert.SerializeObject(x);
+Console.WriteLine(y);
+#+end_src
+#+RESULTS:
+: {"$id":"1","name":"Xavier Morera","courses":["Solr","Spark","Python","T-SQL"],"since":"2014-01-14T00:00:00","happy":true,"issues":null,"car":{"model":"Land Rover Series III","year":1976},"favoriteAuthors":null,"authorRelationship":1}
+
+You may notice that it isn't very well fromated, well, fix it! Just add the
+~Formatting.Indented~ parameter in calling:
+#+begin_src csharp
+string y = JsonConvert.SerializeObject(x, Formatting.Indented);
+Console.WriteLine(y);
+#+end_src
+#+RESULTS:
+: {
+:   "$id": "1",
+:   "name": "Xavier Morera",
+:   "courses": [
+:     "Solr",
+:     "Spark",
+:     "Python",
+:     "T-SQL"
+:   ],
+:   "since": "2014-01-14T00:00:00",
+:   "happy": true,
+:   "issues": null,
+:   "car": {
+:     "model": "Land Rover Series III",
+:     "year": 1976
+:   },
+:   "favoriteAuthors": null,
+:   "authorRelationship": 1
+: }
+Just like magic!
+
+** TODO  PreserveReferencesHandling
+https://stackoverflow.com/questions/23453977/what-is-the-difference-between-preservereferenceshandling-and-referenceloophandl
+
+A common problem with serialization & deserialization is the serialization by value vs
+serialization by object reference, assume that we have duplicates in our list, for example
+if x being referred twice, this is not a big problem in the deserialization process, but
+when it come to serialization, it may declare a duplicate field for the duplicate value in
+the POCO, for example assume that I've the following three authors:
+#+begin_src csharp
+Author Saleh = new Author()
+{
+    name = "Saleh",
+    courses = new string[] {"OS", "ARCH", "Whatever"}
+};
+
+Author Ali = new Author()
+{
+    name = "Ali",
+    courses = new string[] {"OS2", "ARCHiii", "Whatever"}
+};
+Author Salma = new Author()
+{
+    name = "Salma",
+    courses = new string[] {"Art", "ARCHiii"}
+};
+#+end_src
+
+
+Now, while adjusting the ~favoriteAuthors~ list, let's assume that Saleh is very
+narcissistic so he wish to add himself in his ~favoriteAuthors~ list, and I will delibrately
+duplicate Ali:
+
+#+begin_src csharp
+Saleh.favoriteAuthors = new List<Author>() {Ali, Saleh, Salma, Ali, Ali};
+Ali.favoriteAuthors = new List<Author>() {Saleh, Salma};
+Salma.favoriteAuthors = new List<Author>() {Saleh};
+#+end_src
+
+If we serialize the object right now, we will get the following output:
+
+#+begin_src csharp
+string salehjson = JsonConvert.SerializeObject(Saleh, Formatting.Indented);
+Console.WriteLine(salehjson);
+#+end_src
+
+#+begin_src json
+{
+  "$id": "1",
+  "name": "Saleh",
+  "courses": [
+    "OS",
+    "ARCH",
+    "Whatever"
+  ],
+  "since": "0001-01-01T00:00:00",
+  "happy": false,
+  "issues": null,
+  "car": null,
+  "favoriteAuthors": [
+    {
+      "$id": "2",
+      "name": "Ali",
+      "courses": [
+        "OS2", "ARCHiii",
+        "Whatever"
+      ],
+      "since": "0001-01-01T00:00:00",
+      "happy": false,
+      "issues": null,
+      "car": null,
+      "favoriteAuthors": [
+        {
+          "$ref": "1"
+        },
+        {
+          "$id": "3",
+          "name": "Salma",
+          "courses": [
+            "Art",
+            "ARCHiii"
+          ],
+          "since": "0001-01-01T00:00:00",
+          "happy": false,
+          "issues": null,
+          "car": null,
+          "favoriteAuthors": [
+            {
+              "$ref": "1"
+            }
+          ],
+          "authorRelationship": 0
+        }
+      ],
+      "authorRelationship": 0
+    },
+    {
+      "$ref": "1"
+    },
+    {
+      "$ref": "3"
+    },
+    {
+      "$ref": "2"
+    },
+    {
+      "$ref": "2"
+    }
+  ],
+  "authorRelationship": 0
+}
+
+#+end_src
+
+Works fine so far, but the problem like I said is with ~DeserializeObject~, observe:
+#+begin_src csharp
+Author SalehClone = JsonConvert.DeserializeObject<Author>(salehjson);
+SalehClone.favoriteAuthors.ForEach(x => Console.WriteLine(x.name));
+#+end_src
+
+#+RESULTS:
+: Ali
+: Saleh
+: Salma
+: Ali
+: Ali
+
+Now I call ~JsonConvert~.SerializeObject and pass saleh. But please notice that I'm also
+passing a new parameter, ~JsonSerializerSettings~ object. I will cover settings in depth in
+the next module.  For now, just focus on the ~PreserveReferencesHandling~ parameter, which I
+set to Objects:
+** Reading and Writing JSON
+
+I showed you how easy it is to convert between JSON text and .NET object using JsonConvert.
+I showed you a setting or two, but I didn't go into too many details. JsonConvert is very
+straightforward, but is it a one‑size‑fits‑all thing?  The answer is No. If you want
+control, you can take it up a notch using the JsonSerializer class, which has two classes
+that will be useful for us,the JsonReader and JsonWriter.  JsonReader is, as the name
+implies, used for reading JSON. It's non‑cache and forward only.  It's used for large object
+and files.  There are different types of readers,the JsonTextReader being the one that we
+will cover now.  On the other hand, you have JsonWriter, which is used for creating JSON.
+It's also non‑cached, forward only, and allows you to have a lot more control when
+generating JSON data. I will also cover now JsonTextWriter.
+
+***  TODO ~JsonSerializer~ Class
+*** TODO File Stream
