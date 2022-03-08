@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "restore": {
+    "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/JsonSamples/JsonSamples.csproj": {}
+  },
+  "projects": {
+    "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/JsonSamples/JsonSamples.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/JsonSamples/JsonSamples.csproj",
+        "projectName": "JsonSamples",
+        "projectPath": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/JsonSamples/JsonSamples.csproj",
+        "packagesPath": "/home/ghd/.nuget/packages/",
+        "outputPath": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/JsonSamples/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/home/ghd/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

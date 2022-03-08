@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nhFl/JUGbp2axwNtCe9ajmWmWMq4aN2fN3wOOSiJ9RP0tZyl6h7v7Yf+j31rrDdf1Bat7Hnp+pR+8AS/Ci7bkg==",
+  "success": true,
+  "projectFilePath": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/JsonSamples/JsonSamples.csproj",
+  "expectedPackageFiles": [
+    "/home/ghd/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "restore": {
+    "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/MFileStream/MFileStream.csproj": {}
+  },
+  "projects": {
+    "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/MFileStream/MFileStream.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/MFileStream/MFileStream.csproj",
+        "projectName": "MFileStream",
+        "projectPath": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/MFileStream/MFileStream.csproj",
+        "packagesPath": "/home/ghd/.nuget/packages/",
+        "outputPath": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/MFileStream/obj/",
+        "projectStyle": "PackageReference",
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.2, 6.0.2]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

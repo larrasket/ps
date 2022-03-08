@@ -1,0 +1,14 @@
+{
+  "name": "Xavier Morera",
+  "courses": [
+    "Solr",
+    "Spark"
+  ],
+  "dance": "Chicken dancer",
+  "since": "2014-01-14T00:00:00",
+  "issues": null,
+  "car": {
+    "model": "Land Rover Series III",
+    "year": 1976
+  }
+}
