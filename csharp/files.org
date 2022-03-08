@@ -1,0 +1,184 @@
+#+TITLE: Working With Files and Streams in C#
+#+hugo_tags: "Computer Science" ".NET"
+
+* Introduction
+I was thinking in the first place to make this file just a part of the major C# note file,
+but I believe that I might and will face a lot of filesystem topics, however I'm sure I will
+not ever solve such a problem using C# (don't shout, microsoft kid), but surely it will be
+useful to know. (Actually no, it probably will not but I Wall feel insecure if I didn't know
+it).
+* Managing Files and Directories
+** Check if a File Exist
+Sometimes when we're processing a file, we don't want to process a file that doesn't exist,
+so before we start processing anything, let's check if the user really knows the statue of
+the file he/she passed. This should be very straight forward using the ~file~ class:
+
+#+begin_src csharp
+public void Process()
+{
+    WriteLine($"Begin process of {InputFilePath}");
+    if (File.Exists(InputFilePath)) throw new FileNotFoundException("Couldn't find input file at", InputFilePath);
+    else WriteLine("File is found successfully.");
+}
+#+end_src
+
+You can also check if the path is qualified or not[fn:1] before passing it:
+
+#+begin_src csharp
+while (!Path.IsPathFullyQualified(filePath))
+{
+    WriteLine("The path" + filePath + "is not fully qualified, please enter a qualified path.");
+    args[1] = (filePath = ReadLine());
+}
+#+end_src
+
+** Getting the Parent Directory
+The application we're building is going to make use of a specific directory structure. We've
+already seen that we've got this in directory. This is a child directory in this case of the
+directory. So we can think of this directory as the root directory that the
+processing will take place
+As part of the processing of a file, it's going
+to be copied and moved around. To be able to do this, we want to get the root data
+directory.
+
+What we want to do is calculate the parent directory of this in directory. So
+let's start off by creating a new variable of type string called rootDirectoryPath:
+
+#+begin_src csharp
+string rootDirectoryPath = (info.Parent.Parent.Exists) ? info.Parent.Parent.FullName : info.Parent.FullName;
+#+end_src
+
+We're going to be able to use this rootDirectoryPath later in this module. What we're going
+to do is create an instance of this DirectoryInfo class. When we create an instance of a
+DirectoryInfo class, we specify the initial path. In our case, it's the InputFilePath
+property. So now we've got this DirectoryInfo instance, we can make use of its properties
+and methods, one of which is this Parent property. This Parent property also returns an
+instance of DirectoryInfo. So if we access this Parent property, it gives us a new
+DirectoryInfo instance, this time representing the parent of the InputFilePath. And then we
+can use the FullName property here to get the full path to this parent directory.
+
+** Checking if a Directory Exist and Creating New Ones
+As part of the processing of a file, this application is going to make a backup copy of the
+original file in case something goes wrong during processing. So here we are in the
+FileProcessor's Process method and we've got the rootDirectoryPath now. What we want to do
+is create the backup directory under the root directory if it doesn't already exist. So the
+first thing we're going to do is check if the backup directory already exists.
+
+While I'm here, I'm also going to create a constant representing an InProgressDirectoryName
+and a CompletedDirectoryName constant. We'll be making use of these other two constants
+shortly. Let's come back down here and we'll add a string variable called
+backupDirectoryPath. What we want to do now is use the rootDirectoryPath that we've already
+calculated and append to it the BackupDirectoryName held in the constant. So we could do
+something like:
+#+begin_src csharp
+BackupDirectoryName = rootDirectoryPath + "\+ + BackUpPath";
+#+end_src
+And use basic string manipulation, *do not do this*, your program will not compile in other
+platforms that uses relative pathing or other pathing methods. There's actually a better
+way, and that's to use the Path class. Instead reference the Path class that we've already
+used:
+
+#+begin_src csharp
+BackUpDirPath = Path.Combine(rootDirectoryPath, BackUpDirName);
+#+end_src
+
+If you have fragments representing a path that you want to join together, rather than
+using basic string manipulation in C#, you can instead call the Combine method of the Path
+class. We can provide the Combine method with a number of individual strings representing
+the path that we want to create. In our case here, we want to combine the ~rootDirectoryPath
+that we just calculated with the string held in the BackupDirectoryName constant.
+
+Now we have a path that represents where the backup directory should be, we can write an if
+statement to check if it exists or not. To check if a directory exists, we can make use of
+the Directory class and call its Exists method. As a parameter to this method, we can
+provide the path to the directory we want to check. In this case, it's the
+backupDirectoryPath that we just calculated using the Path.Combine method. If the directory
+doesn't already exist, we want to go and create it.
+
+We can make use of the Directory class and call the CreateDirectory method. As a parameter
+to the CreateDirectory method, we provide the path.
+
+#+begin_src csharp
+foreach (var dir in PathsToCreat)
+{
+    var newPath = Path.Combine(rootDirectoryPath, dir);
+    if (!Directory.Exists(newPath))
+    {
+        Directory.CreateDirectory(newPath);
+        WriteLine(dir + "directory is created");
+        continue;
+    }
+
+    WriteLine(dir + "directory already exists");
+}
+#+end_src
+** Copying a File
+So now we've got our backup directory created, we can go and copy the original input file to
+it. In this way, we're going to make sure we have a backup copy of the original file in case
+it gets corrupted during processing. The first thing we can do is actually get just the file
+name component of the original path.
+
+To do this, once again we're going to make use of the extremely helpful Path class, and
+we're going to call the GetFileName method. There's also a similar method called GetFileName
+without extension that just returns the file name without the extension such as .txt. But in
+this case, we actually want to keep the extension, so we'll just call GetFileName.
+
+#+begin_src csharp
+string inputFileName = Path.GetFileName(InputFilePath);
+#+end_src
+
+As a parameter to this method, we pass the path. In this case, it's the full path to the
+input file. So now we've just got the file name components of the InputFilePath.
+
+Now we can make use of the File class and call the Copy method. This overload of the Copy method
+requires the source file name and the destination file name. In our case, the source file
+name is the original input file specified at the command line, and the destination file name
+is this backupFilePath.
+
+#+begin_src csharp
+private void BackUpFile()
+{
+    var backUpFilePath = Path.Combine(UtilityPaths["Backup"], Path.GetFileName(InputFilePath));
+    if (File.Exists(backUpFilePath)) WriteLine("Updating existing path...");
+    WriteLine("Created a new backup at " + UtilityPaths["Backup"]);
+    File.Copy(InputFilePath, backUpFilePath,true);
+}
+#+end_src
+
+The ~true~ parameter is necessary to prevent the FileAlreadyExistsException exception from
+being thrown.
+
+** Moving a File
+Moving files is just like copying, the but you only need to change "copy" to "move".
+
+#+begin_src csharp
+if (!File.Exists(UtilityPaths[_processingDir]))
+    File.Move(InputFilePath, UtilityPaths[_processingDir]);
+else WriteLine("Processing file already exist.");
+#+end_src
+
+** Getting the File Extension from a File Name
+We may want to process files differently depending on their file extension. For example, we
+might want to process .txt files differently from .csv files. To do so, use the
+GetFileNameWithoutExtension method from the Path class, we're not going to do this, however,
+because what we're going to do instead is append a GUID to the file name. This is going to
+mean that if we process the same named input file twice, we'll have a unique file name
+output to the completed directory.
+
+#+begin_src csharp
+string completedFileName = $"{Path.GetFileNameWithoutExtension(InputFilePath)}-{Guid.NewGuid()}{extension}";
+#+end_src
+
+** Deleting a Directory
+The final thing we're going to do in this process method is to delete the
+inProgressDirectory once the processing of the file is complete.
+
+To delete a file you use the ~Delete~ method in the ~Directory~ class, add a boolean value,
+~true~ to prevent exception, since the ~Delete~ method requires the directory to be empty.
+#+begin_src csharp
+Directory.Delete(inProgressDirectoryPath, true);
+#+end_src
+
+* Footnotes
+[fn:1]   fully qualified name is an unambiguous name that specifies which object, function,
+or variable a call refers to without regard to the context of the call.
