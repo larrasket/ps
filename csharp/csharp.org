@@ -680,23 +680,7 @@ statements using ~checked~
 | ~int[][] jaggedArray = new int[6][];~                           | Declare a jagged array                                           |
 | ~jaggedArray[0] = new int[4] { 1, 2, 3, 4 };~                   | Set the values of the first array in the jagged array structure. |
 |-----------------------------------------------------------------+------------------------------------------------------------------|
-** Lambada
-*Check [[#delegates][delegates]] & [[#events][events]]*
-In C#, lambdas use special syntax. We pass lambda expressions to other methods to specify a behavior that the method uses.
-
-Remember that lambdas are just methods. They can always be replaced with class-level methods. We can use types like Action and Func to represent them.
-
-A common place to use lambdas is with List. Here we use FindIndex, which receives a Predicate method. We specify this as a lambda expression.
-
-#+begin_src csharp
-List<int> elements = new List<int>() { 10, 20, 31, 40 };
-int oddIndex = elements.FindIndex(x => x % 2 != 0);
-Console.WriteLine(elements[oddIndex]);
-#+end_src
-
-#+RESULTS:
-: 31
-
+** Lambada *Check [[#delegates][delegates]] & [[#events][events]]* In C#, lambdas use special syntax. We pass lambda expressions to other methods to specify a behavior that the method uses. Remember that lambdas are just methods. They can always be replaced with class-level methods. We can use types like Action and Func to represent them. A common place to use lambdas is with List. Here we use FindIndex, which receives a Predicate method. We specify this as a lambda expression. #+begin_src csharp List<int> elements = new List<int>() { 10, 20, 31, 40 }; int oddIndex = elements.FindIndex(x => x % 2 != 0); Console.WriteLine(elements[oddIndex]); #+end_src #+RESULTS: : 31
 * Building O.O.P
 An object in the real world is a thing, such as a car or a person, whereas an object in
 programming often represents something in the real world, such as a product or bank account,
@@ -704,7 +688,6 @@ but this can also be something more abstract.
 
 In C#, we use the ~class~ (mostly) or ~struct~ (sometimes) C# keywords to define a type of
 object.
-
 
 The following tables should give you a review for the concepts of object-oriented
 programming, in brief:
