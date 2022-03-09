@@ -131,7 +131,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 
 * Seanforfun's Problems
 *** Tree
-**** Traversal [15/32]
+**** Traversal [16/32]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/94.%20Binary%20Tree%20Inorder%20Traversal.md][94. Binary Tree Inorder Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/589.%20N-ary%20Tree%20Preorder%20Traversal.md][589. N-ary Tree Preorder Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/590.%20N-ary%20Tree%20Postorder%20Traversal.md][590. N-ary Tree Postorder Traversal]]
@@ -147,7 +147,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/429.%20N-ary%20Tree%20Level%20Order%20Traversal.md][429. N-ary Tree Level Order Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/987.%20Vertical%20Order%20Traversal%20of%20a%20Binary%20Tree.md][987. Vertical Order Traversal of a Binary Tree]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/814.%20Binary%20Tree%20Pruning.md][814. Binary Tree Pruning]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/669.%20Trim%20a%20Binary%20Search%20Tree.md][669. Trim a Binary Search Tree]]
+***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/669.%20Trim%20a%20Binary%20Search%20Tree.md][669. Trim a Binary Search Tree]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/112.%20Path%20Sum.md][112. Path Sum]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/113.%20Path%20Sum%20II.md][113. Path Sum II]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/437.%20Path%20Sum%20III.md][437. Path Sum III]]
