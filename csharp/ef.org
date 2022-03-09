@@ -1,0 +1,235 @@
+#+TITLE: Entity Framework
+#+hugo_tags: "Computer Science" ".NET"
+
+* Introduction
+Entity Framework Core, or EF Core, is a library that software developers can use to
+access databases. There are many ways to build such a library, but EF Core is
+designed as an object-relational mapper (O/RM). O/RMs work by mapping between
+two worlds: the relational database, with its own API, and the object-oriented soft-
+ware world of classes and software code. EF Core’s main strength is allowing software
+developers to write database access code quickly in a language that you may know
+better than SQL.
+
+As they say, EF can be just an portal of OOP into databases, here is the EF Core mapping
+between a database and .NET software:
+
+| Relational database                 | .NET Program                                             |
+|-------------------------------------+----------------------------------------------------------|
+| Table                               | .NET class                                               |
+| Table Columns                       | Class properties/fields                                  |
+| Rows                                | Elements in .NET collections, like ~List<T>~ for example |
+| Primary keys: unique row            | A unique class instance                                  |
+| Foreign Keys: define a relationship | Reference to another class                               |
+| SQL for instance, ~WHERE~           | .NET LINQ for instance, ~Where (p => ) ...~              |
+|-------------------------------------+----------------------------------------------------------|
+
+** Where the Database Will Come From?
+EF Core is about accessing databases, but where does that database come from? EF Core gives
+you two options: EF Core can create it for you, in what’s known as a code-first approach, or
+you can provide an existing database you built outside EF Core, in what’s known as a
+database-first approach.
+
+For the first application I'm going to use the simple relational database:
+
+#+DOWNLOADED: https://i.imgur.com/g0qh9Kr.png @ 2022-03-08 21:08:48
+[[file:Introduction/2022-03-08_21-08-48_g0qh9Kr.png]]
+
+Having created and set up a .NET console application, you can now start writing EF
+Core code. You need to write two fundamental parts before creating any database
+access code:
+
+- The classes that you want EF Core to map to the tables in your database.
+- The application’s DbContext.
+
+EF Core maps classes to database tables. Therefore, you need to create a class that will
+define the database table or match a database table if you already have a database.
+Lots of rules and configurations exist.
+
+#+DOWNLOADED: https://i.imgur.com/Zc8Hkbe.png @ 2022-03-08 21:11:07
+[[file:Introduction/2022-03-08_21-11-07_Zc8Hkbe.png]]
+
+The following are my implementation of those classes:
+
+*Author*
+#+begin_src csharp
+using System.ComponentModel.DataAnnotations;
+
+namespace Books;
+
+public class Author
+{
+    [Key] public int id { get; set; }
+    public string Name { get; set; }
+    public string Url { get; set; }
+}
+#+end_src
+
+*Book*
+
+#+begin_src csharp
+using System.ComponentModel.DataAnnotations;
+namespace Books;
+
+public class Book
+{
+    [Key]
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public DateTime PublishedOn { get; set; }
+    public Author AuthorId { get; set; }
+
+}
+#+end_src
+
+The other important part of the application is DbContext, a class you create that
+inherits from EF Core’s DbContext class. This class holds the information EF Core
+needs to configure that database mapping and is also the class you use in your code to
+access the database:
+
+#+DOWNLOADED: https://i.imgur.com/d3NxMwt.png @ 2022-03-09 00:37:01
+[[file:Introduction/2022-03-09_00-37-01_d3NxMwt.png]]
+
+#+begin_src csharp
+using Microsoft.EntityFrameworkCore;
+
+namespace Books;
+
+public class AppContext : DbContext
+{
+    public DbSet<Book> bookdp { get; set; }
+    public DbSet<Author> author { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        const string v = "Server=localhost; Port=5432; Database=books; Username=postgres;";
+        optionsBuilder.UseNpgsql(v);
+    }
+}
+#+end_src
+
+You can quickly check how your program affect your database:
+#+begin_src csharp
+namespace Books;
+
+public static class Program
+{
+    private static void Main()
+    {
+        var x = new AppContext();
+        Author kh = new Author()
+        {
+            Url = "WQW",
+            Name = "Khaled"
+        };
+        Book o = new Book
+        {
+            AuthorId = kh,
+            Title = "Book tt",
+            Description = "Sblanga",
+            PublishedOn = DateTime.UtcNow
+        };
+        x.Database.EnsureDeleted();
+        x.Database.EnsureCreated();
+
+        x.Add(o);
+        x.SaveChanges();
+    }
+}
+#+end_src
+
+It should be obvious; if the database already exist, delete it please, then create it again
+and add the new ~o~ object, and finally save the changes. Let's try to evaluate ~SELECT~
+from the database:
+
+#+begin_src sql
+SELECT * FROM books;
+#+end_src
+
+#+RESULTS:
+: | id | title   | description | publishedon                | author_id |
+: |----+---------+-------------+----------------------------+-----------|
+: | 1  | Book tt | Sblanga     | 2022-03-09 20:55:11.541898 | 1         |
+
+* Querying The Database
+
+Although we could have created a database with all the data about a book, its author(s),
+and its reviews in one table, that wouldn’t have worked well in a relational database,
+especially because the reviews are variable in length. The norm for relational data-
+bases is to split out any repeated data (such as the authors).
+
+ We could have arranged the various parts of the book data in the database in sev-
+eral ways, but for this example, the database has one of each of the main types of rela-
+tionships you can have in EF Core. These three types are
+
+- One-to-one relationship—PriceOffer to a Book
+
+    A book can have a promotional price applied to it with an optional row in the Price-
+    Offer, which is an example of a one-to-one relationship. (Technically, the relationship is
+    one-to-zero-or-one).
+    #+DOWNLOADED: https://i.imgur.com/Um99RBx.png @ 2022-03-09 21:32:59
+    file:Querying_The_Database/2022-03-09_21-32-59_Um99RBx.png]]
+- One-to-many relationship—Book with Reviews
+    Books can be written by one or more authors, and an author may write one or more
+    books. Therefore, you need a table called Books to hold the books data and another
+    table called Authors to hold the authors. The link between the Books and Authors
+    tables is called a many-to-many relationship, which in this case needs a linking table to
+    achieve this relationship..
+
+    #+DOWNLOADED: https://i.imgur.com/GkRjIC1.png @ 2022-03-09 21:37:18
+    [[file:Querying_The_Database/2022-03-09_21-37-18_GkRjIC1.png]]
+
+- Many-to-many relationship—Books linked to Authors and Books linked to Tags
+
+** The Classes the EF Core Maps to the Database
+
+I’ve created five .NET classes to map to the six tables in the database. These classes are
+called Book, PriceOffer, Review, Tag, Author, and BookAuthor for the many-to-many-
+linking table, and they are referred to as entity classes to show that they’re mapped by
+EF Core to the database. From the software point of view, there’s nothing special
+about entity classes. They’re normal .NET classes, sometimes referred to as plain old
+CLR objects (POCOs). The term entity class identifies the class as one that EF Core has
+mapped to the database.
+
+#+begin_src csharp
+using System.ComponentModel.DataAnnotations;
+
+namespace Books;
+
+public class Book
+{
+    [Key] public int Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public DateTime PublishedOn { get; set; }
+    public Decimal Price { get; set; }
+
+    public string ImageUrl { get; set; }
+
+    // relationships
+    public ICollection<Review> Reviews { get; set; }
+    public ICollection<Tag> Tags { get; set; }
+    public Author AuthorId { get; set; }
+}
+#+end_src
+
+Now you have to add those new relationships into your ~DBContext~:
+#+begin_src csharp
+using Microsoft.EntityFrameworkCore;
+
+namespace Books;
+
+public class AppContext : DbContext
+{
+    public DbSet<Book> Books { get; set; }
+    public DbSet<Author> Authors { get; set; }
+    public DbSet<Review> Reviews { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        const string v = "Server=localhost; Port=5432; Database=books; Username=postgres;";
+        optionsBuilder.UseNpgsql(v);
+    }
+}
+#+end_src
