@@ -4,6 +4,6 @@ namespace Books;
 
 public class Tag
 {
-    [Key] public string tag;
-    public ICollection<Book> books;
+    [Key] public string tag { get; set; }
+    public ICollection<Book> books { get; set; }
 }

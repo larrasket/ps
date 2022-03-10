@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Books;
 
 public class Review
 {
-    public int ReviewId;
-    public string WriterName;
-    public string ReviewText;
+    [Key] public int ReviewId { get; set; }
+    public string WriterName { get; set; }
+    public string ReviewText { get; set; }
 }

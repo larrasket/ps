@@ -16,4 +16,6 @@ public class Book
     public ICollection<Review> Reviews { get; set; }
     public ICollection<Tag> Tags { get; set; }
     public Author BookAuthor { get; set; }
+
+    public int? fo { get; set; }
 }

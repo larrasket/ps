@@ -178,9 +178,7 @@ tionships you can have in EF Core. These three types are
 
     #+DOWNLOADED: https://i.imgur.com/GkRjIC1.png @ 2022-03-09 21:37:18
     [[file:Querying_The_Database/2022-03-09_21-37-18_GkRjIC1.png]]
-
 - Many-to-many relationship—Books linked to Authors and Books linked to Tags
-
 ** The Classes the EF Core Maps to the Database
 
 I’ve created five .NET classes to map to the six tables in the database. These classes are
@@ -233,3 +231,111 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     }
 }
 #+end_src
+
+* Understanding Migrations
+
+Entity Framework needs to be able to comprehend how to build
+queries that work with your database schema, how to reshape data that's returned from the
+database in order to create your objects from them, and also, as you modify the data, how to
+get that data into the database. In order to do that, it has a comprehension about how the
+data model you've defined through ~DbContext~ maps to the schema of the database. And it
+performs that logic at runtime by reading the ~DbContext~ and using its own conventions,
+combined with any additional custom mapping information that you've provided to it to infer
+the schema of the database. And with that information, it's able to figure out how to do
+those interactions, how to build queries, how to construct commands to push data to the
+database, and how to transform database results into your objects.
+
+That also means if you evolve your data model and that could be because you've made changes
+to the structure of your classes or you've added more information to the ~DbContext~, then
+Entity Framework's comprehension of the database schema will also change. But that's just
+what Entity Framework thinks is in the database. So it's important to make sure that what it
+thinks the database looks like is actually what the database looks like. Along with the code
+first paradigm with Entity Framework and Entity Framework Core, we also have a full set of
+APIs referred to as migrations. With each change to your model, you can create a new
+migration that describes the change and then let the Migrations API create the proper SQL
+script. And if you'd like, the Migrations API can execute that script for you right on the
+database.
+
+** Trying Migrate
+It's time to create the first migration for the Samurai context. In order to create and
+execute migrations, we'll need access to the migrations commands and to the migrations
+logic. Not every developer working with the EF Core is going to create and execute
+migrations, so those are in separate packages. How you access the commands depends on if
+you're using Visual Studio or the command line. In Visual Studio, you can use the package
+manager console to executable commands. EF Core Migrations has a set of PowerShell commands,
+and you can just add those into each project using the NuGet package manager. But if you're
+working at the command line with the .NET CLI, you would instead use the EF Core Migrations
+command line tools.
+
+That's not a NuGet package for your project, but a .NET tool that you
+install on your development machine and is then available for all your projects. The APIs
+are in a different package called Microsoft.EntityFrameworkCore.Design. If you're
+referencing the tools package, that has a dependency on the design package and will just
+pull it in for you. But if you're using the CLI and therefore you're not adding the tools
+package, you do need to explicitly reference the design package in your project. I've
+already added the tools package to the project so remember that gives me the PowerShell
+commands, and that has a dependency on the design package. So the design package, with all
+the actual logic and APIs, is also pulled into my project. You'll run the commands in the
+package manager console, which is for executing PowerShell commands.
+
+The commands are Add‑Migration, Drop‑Database, Get‑DbContext,
+Get‑Migration, Remove‑Migration, Scaffold‑DbContext, Script‑DbContext, Script‑Migration, and
+Update‑Database. Add‑Migration and Update‑Database might be familiar to you if you've used
+EF Migrations in the past. Add‑Migration will look at the DbContext and determine the data
+model. Using that knowledge, it will create a new migration file with the information needed
+to create or migrate the database to match the model. Update‑Database applies the migration
+to the database. Since the task right now is to add a new migration, I won't delve further
+into the other commands, and we'll just focus on adding migration and updating the database.
+
+Add‑Migration has a number of parameters, but I'm only going to use the required parameter,
+the name of the migration file I'm creating, and I'll call it init. Note that I'm able to
+use migrations from a class library because I'm targeting .NET 5. If the app were targeting
+.NET Core 3.1, and this project was specifically targeting .NET Standard, then it's a little
+trickier because .NET Standard isn't enough for executing migrations because it doesn't have
+the capability to execute anything. Check the EF Core documentation for details about how to
+use migrations from a .NET Standard class library, .NET Core 3.1. But thanks to .NET 5,
+creating this migration file was no problem at all.
+
+*Creating the migrations*:
+#+begin_src shell
+dotnet-ef migrations add <migration name here>
+#+end_src
+*Updating to the last migrations*:
+#+begin_src shell
+dotnet-ef database update
+#+end_src
+
+With the migration in place, we now have everything we need in order to create a database.
+Not only do migrations give me the ability to have Entity Framework create the database for
+me directly, I can also have it generate a script, which is an important feature for working
+with a production database or sharing your development database changes with your team. With
+my development database, I'll typically let migrations go ahead and create and update the
+database for me on the fly. But with a production database, a more common scenario is to
+take advantage of the ability to generate the SQL and taking more control over how and when
+it's applied to the production database.
+
+EF Core's script‑migration command will build up the relevant SQL:
+#+begin_src shell
+dotnet -ef migrations script -o <filename.sql>
+#+end_src
+
+** Reverse Engineering an Existing Database
+You've seen me use migrations to create a database from a DbContext in classes. It's also
+possible to reverse engineer an existing database into a DbContext in classes. Typically,
+this is a one‑time procedure to get you a head start with your code if you're working within
+existing database. At some point, EF Core will support updating the model with database
+changes, but that's not possible with EF Core. Also, with the current version, it's not easy
+to begin by reverse engineering an existing database and then migrate the database with
+model changes.
+
+The PowerShell command to use for this task is Scaffold‑DbContext. And if
+you're using the EF CLI, it's ~dotnet ef dbcontext scaffold~. The provider and connection
+parameters are required though, which makes sense.
+
+Let's give it a try:
+#+begin_src shell
+dotnet-ef dbcontext scaffold "Server=localhost; Port=5432; Database=books; Username=postgres;" Npgsql.EntityFrameworkCore.PostgreSQL
+#+end_src
+
+
+* TODO Migrate Commands
