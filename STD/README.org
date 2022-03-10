@@ -297,3 +297,14 @@ vector<T>::const_iterator first = myVec.begin() + 100000;
 vector<T>::const_iterator last = myVec.begin() + 101000;
 vector<T> newVec(first, last);
 #+end_src
+
+* C# Notes
+** Get a Random Set of String
+#+begin_src csharp
+public static string RandomString(int length)
+{
+    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    return new string(Enumerable.Repeat(chars, length)
+        .Select(s => s[random.Next(s.Length)]).ToArray());
+}
+#+end_src
