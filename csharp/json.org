@@ -83,7 +83,7 @@ whitespace around or between syntactic elements, values and punctuation, but not
 string.  However, JSON only recognizes four specific whitespace characters, the space, the
 center tab, line feed, and carriage return.  JSON does not provide or allow any sort of
 comment syntax.
-* Serialization
+* Serialization & Deserialization
 ** Basic Serialization
 Serialization and deserialization involve taking a data structure or object and converting
 it back and forth between JSON text and .NET objects. A .NET object, when serialized,can be
@@ -246,136 +246,220 @@ Console.WriteLine(y);
 : }
 Just like magic!
 
-** TODO  PreserveReferencesHandling
-https://stackoverflow.com/questions/23453977/what-is-the-difference-between-preservereferenceshandling-and-referenceloophandl
+** ~PreserveReferencesHandling~
 
-A common problem with serialization & deserialization is the serialization by value vs
-serialization by object reference, assume that we have duplicates in our list, for example
-if x being referred twice, this is not a big problem in the deserialization process, but
-when it come to serialization, it may declare a duplicate field for the duplicate value in
-the POCO, for example assume that I've the following three authors:
+These settings can best be explained by example. Let's say that we want to represent a
+hierarchy of employees in a company. So we make a simple class like this:
+
+
 #+begin_src csharp
-Author Saleh = new Author()
+class Employee
 {
-    name = "Saleh",
-    courses = new string[] {"OS", "ARCH", "Whatever"}
+    public string Name { get; set; }
+    public List<Employee> Subordinates { get; set; }
+}
+#+end_src
+
+This is a small company with only three employees so far: Angela, Bob and Charles. Angela is
+the boss, while Bob and Charles are her subordinates. Let's set up the data to describe this
+relationship:
+
+#+begin_src csharp
+Employee angela = new Employee { Name = "Angela Anderson" };
+Employee bob = new Employee { Name = "Bob Brown" };
+Employee charles = new Employee { Name = "Charles Cooper" };
+angela.Subordinates = new List<Employee> { bob, charles };
+List<Employee> employees = new List<Employee> { angela, bob, charles };
+#+end_src
+
+If we serialize the list of employees to JSON:
+#+begin_src csharp
+string json = JsonConvert.SerializeObject(employees, Formatting.Indented);
+Console.WriteLine(json);
+#+end_src
+
+We get:
+#+begin_src csharp
+[
+  {
+    "Name": "Angela Anderson",
+    "Subordinates": [
+      {
+        "Name": "Bob Brown",
+        "Subordinates": null
+      },
+      {
+        "Name": "Charles Cooper",
+        "Subordinates": null
+      }
+    ]
+  },
+  {
+    "Name": "Bob Brown",
+    "Subordinates": null
+  },
+  {
+    "Name": "Charles Cooper",
+    "Subordinates": null
+  }
+]
+#+end_src
+
+So far so good. You'll notice, however, that the information for Bob and Charles is repeated
+in the JSON because the objects representing them are referenced both by the main list of
+employees and Angela's list of subordinates. Maybe that's OK for now.
+
+Now suppose we'd also like to have a way to keep track of each Employee's supervisor in
+addition to his or her subordinates. So we change our Employee model to add a Supervisor
+property...
+
+
+#+begin_src csharp
+class Employee
+{
+    public string Name { get; set; }
+    public Employee Supervisor { get; set; }
+    public List<Employee> Subordinates { get; set; }
+}
+#+end_src
+
+...and add a couple more lines to our setup code to indicate that Charles and Bob report to Angela:
+
+#+begin_src csharp
+Employee angela = new Employee { Name = "Angela Anderson" };
+Employee bob = new Employee { Name = "Bob Brown" };
+Employee charles = new Employee { Name = "Charles Cooper" };
+
+angela.Subordinates = new List<Employee> { bob, charles };
+bob.Supervisor = angela;       // added this line
+charles.Supervisor = angela;   // added this line
+
+List<Employee> employees = new List<Employee> { angela, bob, charles };
+#+end_src
+
+But now we have a bit of a problem. Because the object graph has reference loops in it (e.g.
+angela references bob while bob references angela), we will get a JsonSerializationException
+when we try to serialize the employees list. One way we can get around this issue is by
+setting ReferenceLoopHandling to Ignore like this:
+
+#+begin_src csharp
+JsonSerializerSettings settings = new JsonSerializerSettings
+{
+    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+    Formatting = Formatting.Indented
 };
 
-Author Ali = new Author()
-{
-    name = "Ali",
-    courses = new string[] {"OS2", "ARCHiii", "Whatever"}
-};
-Author Salma = new Author()
-{
-    name = "Salma",
-    courses = new string[] {"Art", "ARCHiii"}
-};
+string json = JsonConvert.SerializeObject(employees, settings);
 #+end_src
 
 
-Now, while adjusting the ~favoriteAuthors~ list, let's assume that Saleh is very
-narcissistic so he wish to add himself in his ~favoriteAuthors~ list, and I will delibrately
-duplicate Ali:
+With this setting in place, we get the following JSON:
 
-#+begin_src csharp
-Saleh.favoriteAuthors = new List<Author>() {Ali, Saleh, Salma, Ali, Ali};
-Ali.favoriteAuthors = new List<Author>() {Saleh, Salma};
-Salma.favoriteAuthors = new List<Author>() {Saleh};
-#+end_src
-
-If we serialize the object right now, we will get the following output:
-
-#+begin_src csharp
-string salehjson = JsonConvert.SerializeObject(Saleh, Formatting.Indented);
-Console.WriteLine(salehjson);
-#+end_src
 
 #+begin_src json
-{
-  "$id": "1",
-  "name": "Saleh",
-  "courses": [
-    "OS",
-    "ARCH",
-    "Whatever"
-  ],
-  "since": "0001-01-01T00:00:00",
-  "happy": false,
-  "issues": null,
-  "car": null,
-  "favoriteAuthors": [
-    {
-      "$id": "2",
-      "name": "Ali",
-      "courses": [
-        "OS2", "ARCHiii",
-        "Whatever"
-      ],
-      "since": "0001-01-01T00:00:00",
-      "happy": false,
-      "issues": null,
-      "car": null,
-      "favoriteAuthors": [
+[
+  {
+    "Name": "Angela Anderson",
+    "Supervisor": null,
+    "Subordinates": [
+      {
+        "Name": "Bob Brown",
+        "Subordinates": null
+      },
+      {
+        "Name": "Charles Cooper",
+        "Subordinates": null
+      }
+    ]
+  },
+  {
+    "Name": "Bob Brown",
+    "Supervisor": {
+      "Name": "Angela Anderson",
+      "Supervisor": null,
+      "Subordinates": [
         {
+          "Name": "Charles Cooper",
+          "Subordinates": null
+        }
+      ]
+    },
+    "Subordinates": null
+  },
+  {
+    "Name": "Charles Cooper",
+    "Supervisor": {
+      "Name": "Angela Anderson",
+      "Supervisor": null,
+      "Subordinates": [
+        {
+          "Name": "Bob Brown",
+          "Subordinates": null
+        }
+      ]
+    },
+    "Subordinates": null
+  }
+]
+#+end_src
+
+If you examine the JSON, it should be clear what this setting does: any time the serializer
+encounters a reference back to an object it is already in the process of serializing, it
+simply skips that member. (This prevents the serializer from getting into an infinite loop.)
+You can see that in Angela's list of subordinates in the top part of the JSON, neither Bob
+nor Charles show a supervisor. In the bottom part of the JSON, Bob and Charles both show
+Angela as their supervisor, but notice her subordinates list at that point does not include
+both Bob and Charles.
+
+While it is possible to work with this JSON and maybe even reconstruct the original object
+hierarchy from it with some work, it is clearly not optimal. We can eliminate the repeated
+information in the JSON while still preserving the object references by using the
+PreserveReferencesHandling setting instead:
+
+#+begin_src csharp
+JsonSerializerSettings settings = new JsonSerializerSettings
+{
+    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+    Formatting = Formatting.Indented
+};
+#+end_src
+
+We get:
+#+begin_src json
+[
+  {
+    "$id": "1",
+    "Name": "Angela Anderson",
+    "Supervisor": null,
+    "Subordinates": [
+      {
+        "$id": "2",
+        "Name": "Bob Brown",
+        "Supervisor": {
           "$ref": "1"
         },
-        {
-          "$id": "3",
-          "name": "Salma",
-          "courses": [
-            "Art",
-            "ARCHiii"
-          ],
-          "since": "0001-01-01T00:00:00",
-          "happy": false,
-          "issues": null,
-          "car": null,
-          "favoriteAuthors": [
-            {
-              "$ref": "1"
-            }
-          ],
-          "authorRelationship": 0
-        }
-      ],
-      "authorRelationship": 0
-    },
-    {
-      "$ref": "1"
-    },
-    {
-      "$ref": "3"
-    },
-    {
-      "$ref": "2"
-    },
-    {
-      "$ref": "2"
-    }
-  ],
-  "authorRelationship": 0
-}
+        "Subordinates": null
+      },
+      {
+        "$id": "3",
+        "Name": "Charles Cooper",
+        "Supervisor": {
+          "$ref": "1"
+        },
+        "Subordinates": null
+      }
+    ]
+  },
+  {
+    "$ref": "2"
+  },
+  {
+    "$ref": "3"
+  }
+]
 
 #+end_src
 
-Works fine so far, but the problem like I said is with ~DeserializeObject~, observe:
-#+begin_src csharp
-Author SalehClone = JsonConvert.DeserializeObject<Author>(salehjson);
-SalehClone.favoriteAuthors.ForEach(x => Console.WriteLine(x.name));
-#+end_src
-
-#+RESULTS:
-: Ali
-: Saleh
-: Salma
-: Ali
-: Ali
-
-Now I call ~JsonConvert~.SerializeObject and pass saleh. But please notice that I'm also
-passing a new parameter, ~JsonSerializerSettings~ object. I will cover settings in depth in
-the next module.  For now, just focus on the ~PreserveReferencesHandling~ parameter, which I
-set to Objects:
 ** Reading and Writing JSON
 
 I showed you how easy it is to convert between JSON text and .NET object using JsonConvert.
@@ -389,5 +473,225 @@ will cover now.  On the other hand, you have JsonWriter, which is used for creat
 It's also non‑cached, forward only, and allows you to have a lot more control when
 generating JSON data. I will also cover now JsonTextWriter.
 
-***  TODO ~JsonSerializer~ Class
-*** TODO File Stream
+*** ~JsonSerializer~ Class
+You can use JsonSerializer class with a StreamWriter. If you don't know what a StreamWriter
+is, it's a class that allows you to write to files.  Create a new StreamWriter and provide
+as parameter the name of the file where I intend to write the serialized JSON text. For this
+example, I will call it testingjsonfile.json. Next, I instantiate a new JsonSerializer
+class, and I call the Serialize function.
+
+
+#+begin_src csharp
+ public static void Main(string[] args)
+ {
+     using (StreamWriter sw = new StreamWriter("./testingjsonfile.json"))
+     {
+         string json = Generate.SingleJson();
+         JsonSerializer fsz = new JsonSerializer();
+         fsz.Serialize(sw, json);
+     }
+ }
+#+end_src
+
+You can use settings like serializer.NullValueHandling=NullValueHandling.Ignore; to ignore
+null value. You should be able to find the file in the running directory.
+
+*** ~JsonTextReader~ Class
+
+JsonConvert, and ultimately, the Json Serializer class
+used reflection to convert from JSON text to .NET classes. Even though Json.NET is very
+fast, by using reflection, it makes it a little bit slower that it can actually beat. And
+thus, we have the JsonTextReader, which does not use reflection and provides the fastest way
+of reading JSON text.
+
+#+begin_src csharp
+JsonTextReader j reader = new JsonTextReader(new StringReader (JsonSample));
+#+end_src
+
+I pass a new StringReader with the author JSON. Do you know why a string reader? There is a
+very important reason. In .NET, strings are immutable, so if you keep modifying a string
+without using a stringbuilder, you will be suffering from a deep performance hit. So always
+remember to use it. And then, I start reading data with a jsonReader:
+
+
+#+begin_src csharp
+public static void textreader()
+{
+    JsonTextReader rdr = new JsonTextReader(new StringReader(smpl));
+    while (rdr.Read())
+    {
+        if (rdr.Value != null)
+        {
+            Console.WriteLine("Token: " +  rdr.TokenType + " Value: ", rdr.Value);
+        } else
+            Console.WriteLine("Token: " + rdr.TokenType);
+    }
+}
+#+end_src
+
+A token is just one element of the JSON object. I can check jsonReader. TokenType
+to get further information. If I add a QuickWatch, I can see that the first token is the
+start object, which makes sense. I will keep reading further and the next token is a
+property name.
+*** ~JsonTextWriter~ Class
+With JsonConvert, you take one class, you make one
+call, and you get a JSON text. But what happens if you want to write your JSON text in a
+manual way? First of all, why do you want to write it manually? Performance and control.
+
+#+begin_src csharp
+StringBuilder sb = new StringBuilder();
+StringWriter sw = new StringWriter(sb);
+
+using (JsonWriter writer = new JsonTextWriter(sw))
+{
+    writer.Formatting = Formatting.Indented;
+
+    writer.WriteStartObject();
+    writer.WritePropertyName("CPU");
+    writer.WriteValue("Intel");
+    writer.WritePropertyName("PSU");
+    writer.WriteValue("500W");
+    writer.WritePropertyName("Drives");
+    writer.WriteStartArray();
+    writer.WriteValue("DVD read/writer");
+    writer.WriteComment("(broken)");
+    writer.WriteValue("500 gigabyte hard drive");
+    writer.WriteValue("200 gigabyte hard drive");
+    writer.WriteEnd();
+    writer.WriteEndObject();
+}
+
+Console.WriteLine(sb.ToString());
+// {
+//   "CPU": "Intel",
+//   "PSU": "500W",
+//   "Drives": [
+//     "DVD read/writer"
+//     /*(broken)*/,
+//     "500 gigabyte hard drive",
+//     "200 gigabyte hard drive"
+//   ]
+// }
+
+#+end_src
+
+*** Date with JSON
+
+Let's talk about a topic that confuses developers all the time when working with JSON dates.
+The thing is, that dates in JSON are tricky mainly because there is no date type, but it's
+not JSON's fault. The real reason is that JavaScript does not have a date literal. It's
+either represented by a string or a number. The string is just a written representation of
+the date, and a number represents milliseconds since January 1 1970, what's known as a Unix
+epoch. Json.NET uses the standard ISO 8601, although it used before the Microsoft format.
+Let's jump straight into the demo, Dates in JSON with Json.NET. I start by creating a list
+of dates. You probably already know this, but in .NET there are several ways of creating a
+date.
+
+
+The default format used by Json.NET is the ISO 8601 standard: ~"2012-03-19T07:22Z"~.
+
+Prior to Json.NET 4.5 dates were written using the Microsoft format:
+~"\/Date(1198908717056)\/".~ If you want to use this format, or you want to maintain
+compatibility with Microsoft JSON serializers or older versions of Json.NET, then change the
+DateFormatHandling setting to MicrosoftDateFormat.
+
+The DateTimeZoneHandling setting can be used to convert a DateTime's DateTimeKind when
+serializing. For example set DateTimeZoneHandling to Utc to serialize all DateTimes as UTC
+dates. Note that this setting does not effect DateTimeOffsets.
+
+If your dates don't follow the ISO 8601 standard, then the DateFormatString setting can be
+used to customize the format of date strings that are read and written using .NET's custom
+date and time format syntax.
+
+#+begin_src csharp
+public class LogEntry
+{
+    public string Details { get; set; }
+    public DateTime LogDate { get; set; }
+}
+
+[Test]
+public void WriteJsonDates()
+{
+    LogEntry entry = new LogEntry
+    {
+        LogDate = new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc),
+        Details = "Application started."
+    };
+
+    // default as of Json.NET 4.5
+    string isoJson = JsonConvert.SerializeObject(entry);
+    // {"Details":"Application started.","LogDate":"2009-02-15T00:00:00Z"}
+
+    JsonSerializerSettings microsoftDateFormatSettings = new JsonSerializerSettings
+    {
+        DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+    };
+    string microsoftJson = JsonConvert.SerializeObject(entry, microsoftDateFormatSettings);
+    // {"Details":"Application started.","LogDate":"\/Date(1234656000000)\/"}
+
+    string javascriptJson = JsonConvert.SerializeObject(entry, new JavaScriptDateTimeConverter());
+    // {"Details":"Application started.","LogDate":new Date(1234656000000)}
+}
+#+end_src
+*** Error Handling
+Errors happen all the time, especially with JSON generated by a third party or one that
+you're picking up on a log or an API or some storage location. What's really good is that in
+Json.NET, you can specify what you want to do with the errors. You can either handle them or
+throw them.
+
+First, I will generate this JSON array that contains,
+a few dates. But some of these values are not a date. If I ask JSON to
+deserialize them into a date, an exception will be raised:
+
+
+#+begin_src csharp
+List<string> errors = new List<string>();
+
+List<DateTime> c = JsonConvert.DeserializeObject<List<DateTime>>(@"[
+      '2009-09-09T00:00:00Z',
+      'I am not a date and will error!',
+      [
+        1
+      ],
+      '1977-02-20T00:00:00Z',
+      null,
+      '2000-12-01T00:00:00Z'
+    ]",
+    new JsonSerializerSettings
+    {
+        Error = delegate(object sender, ErrorEventArgs args)
+        {
+            errors.Add(args.ErrorContext.Error.Message);
+            args.ErrorContext.Handled = true;
+        },
+        Converters = { new IsoDateTimeConverter() }
+    });
+
+// 2009-09-09T00:00:00Z
+// 1977-02-20T00:00:00Z
+// 2000-12-01T00:00:00Z
+
+// The string was not recognized as a valid DateTime. There is a unknown word starting at index 0.
+// Unexpected token parsing date. Expected String, got StartArray.
+// Cannot convert null value to System.DateTime.
+#+end_src
+
+In this example we are deserializing a JSON array to a collection of DateTimes. On the
+JsonSerializerSettings a handler has been assigned to the Error event which will log the
+error message and mark the error as handled.
+
+The result of deserializing the JSON is three successfully deserialized dates and three
+error messages: one for the badly formatted string ("I am not a date and will error!"), one
+for the nested JSON array, and one for the null value since the list doesn't allow nullable
+DateTimes. The event handler has logged these messages and Json.NET has continued on
+deserializing the JSON because the errors were marked as handled.
+
+One thing to note with error handling in Json.NET is that an unhandled error will bubble up
+and raise the event on each of its parents. For example an unhandled error when serializing
+a collection of objects will be raised twice, once against the object and then again on the
+collection. This will let you handle an error either where it occurred or on one of its
+parents.
+
+
+* Settings & Attributes
