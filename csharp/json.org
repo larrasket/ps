@@ -692,9 +692,10 @@ collection. This will let you handle an error either where it occurred or on one
 parents.
 
 * Settings & Attributes
+** Serialization Settings
 JsonSerializer has a number of properties on it to customize how it serializes JSON. These
 can also be used with the methods on JsonConvert via the JsonSerializerSettings overloads.
-** ~MissingMemberHandling~
+*** ~MissingMemberHandling~
 MissingMemberHandling controls how missing members, e.g. JSON contains a property that isn't
 a member on the object, are handled during deserialization.
 
@@ -738,7 +739,7 @@ Author myar = JsonConvert.DeserializeObject<Author>(smpl, st);
 #+RESULTS:
 : Unhandled Exception:
 : Newtonsoft.Json.JsonSerializationException: Could not find member 'name' on object of type 'Author'. Path 'name', line 2, position 9.
-** ~ReferenceLoopHandling~
+*** ~ReferenceLoopHandling~
 
 NullValueHandling controls how null values on .NET objects are handled during serialization
 and how null values in JSON are handled during deserialization.
@@ -791,7 +792,7 @@ string ignored = JsonConvert.SerializeObject(movie,
 // }
  #+end_src
 
-** ~DefaultValueHandling~
+*** ~DefaultValueHandling~
 DefaultValueHandling controls how Json.NET uses default values set using the .NET
 DefaultValueAttribute when serializing and deserializing.
 
@@ -859,8 +860,8 @@ string ignored = JsonConvert.SerializeObject(invoice,
  #+end_src
 
 
-*** TODO Populate
-** ~ObjectCreationHandling~
+**** TODO Populate
+*** ~ObjectCreationHandling~
 Specifies how object creation is handled by the JsonSerializer. ObjectCreationHandling
 controls how objects are created and deserialized to during deserialization.
 
@@ -887,7 +888,7 @@ public static void CreationHandlier()
     }
 }
 #+end_src
-** ~TypeNameHandling~
+*** ~TypeNameHandling~
 *None:* By default Json.NET does not read or write type names during deserialization.
 
 *Objects:* Json.NET will write and use type names for objects but not collections.
@@ -912,3 +913,6 @@ public static void TypeNameHandl()
     Console.WriteLine(i);
 }
 #+end_src
+
+*** TODO ~SerializationBinder~
+** TODO Serialization Attributes
