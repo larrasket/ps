@@ -5,6 +5,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.IO;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using JsonSamples;
 
@@ -20,9 +21,39 @@ namespace mapping
 
         public static void Main()
         {
-            textreader();
+            TypeNameHandl();
         }
 
+        public static void MissingMemebers()
+        {
+            JsonSerializerSettings st = new JsonSerializerSettings();
+            st.Formatting = Formatting.Indented;
+            st.MissingMemberHandling = MissingMemberHandling.Error;
+            Author myar = JsonConvert.DeserializeObject<Author>(smpl, st);
+        }
+
+        public static void CreationHandlier()
+        {
+            JsonSerializerSettings st = new JsonSerializerSettings();
+            st.Formatting = Formatting.Indented;
+            st.ObjectCreationHandling = ObjectCreationHandling.Replace;
+            Author myar = JsonConvert.DeserializeObject<Author>(smpl, st);
+            myar = JsonConvert.DeserializeObject<Author>(smpl, st);
+            foreach (var myarCourse in myar.courses)
+            {
+                Console.WriteLine(myarCourse);
+            }
+        }
+        
+        public static void TypeNameHandl()
+        {
+            JsonSerializerSettings st = new JsonSerializerSettings();
+            st.Formatting = Formatting.Indented;
+            st.TypeNameHandling = TypeNameHandling.All;
+            Author k = JsonConvert.DeserializeObject<Author>(smpl);
+            string i = JsonConvert.SerializeObject(k,st);
+            Console.WriteLine(i);
+        }
         public static void textreader()
         {
             JsonTextReader rdr = new JsonTextReader(new StringReader(smpl));
@@ -30,8 +61,9 @@ namespace mapping
             {
                 if (rdr.Value != null)
                 {
-                    Console.WriteLine("Token: " +  rdr.TokenType + " Value: ", rdr.Value);
-                } else
+                    Console.WriteLine("Token: " + rdr.TokenType + " Value: ", rdr.Value);
+                }
+                else
                     Console.WriteLine("Token: " + rdr.TokenType);
             }
         }
@@ -61,18 +93,18 @@ namespace mapping
             Author Saleh = new Author()
             {
                 name = "Saleh",
-                courses = new[] {"OS", "ARCH", "Whatever"}
+                courses = new List<string>() {"OS", "ARCH", "Whatever"}
             };
 
             Author Ali = new Author()
             {
                 name = "Ali",
-                courses = new[] {"OS2", "ARCHiii", "Whatever"}
+                courses = new List<string>() {"OS2", "ARCHiii", "Whatever"}
             };
             Author Salma = new Author()
             {
                 name = "Salma",
-                courses = new[] {"Art", "ARCHiii"}
+                courses = new List<string>() {"Art", "ARCHiii"}
             };
 
             Saleh.favoriteAuthors = new List<Author>() {Ali, Saleh, Salma, Ali, Ali, Saleh};
