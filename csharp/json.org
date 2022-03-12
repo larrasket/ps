@@ -160,7 +160,6 @@ give it the ~JsonObject~ attribute.
         public AuthorRelationship authorRelationship { get; set; }
     }
 #+end_src
-
 The ~Car~ and ~AuthorRelationship~ Classes doesn't contain any attribute:
 #+begin_src csharp
     public enum AuthorRelationship
@@ -174,7 +173,6 @@ The ~Car~ and ~AuthorRelationship~ Classes doesn't contain any attribute:
         public int year { get; set; }
     }
 #+end_src
-
 Back to ~string json~, it should contain the Json text file, let's check it:
 #+begin_src csharp
 Console.WriteLine(json);
@@ -693,5 +691,224 @@ a collection of objects will be raised twice, once against the object and then a
 collection. This will let you handle an error either where it occurred or on one of its
 parents.
 
-
 * Settings & Attributes
+JsonSerializer has a number of properties on it to customize how it serializes JSON. These
+can also be used with the methods on JsonConvert via the JsonSerializerSettings overloads.
+** ~MissingMemberHandling~
+MissingMemberHandling controls how missing members, e.g. JSON contains a property that isn't
+a member on the object, are handled during deserialization.
+
+*Ignore:* By default Json.NET ignores JSON if there is no field or property for its value to be set to during deserialization.
+
+*Error*: Json.NET errors when there is a missing member during deserialization.
+
+For demonstration I will comment out a property from the ~author~ class, let it be ~name~:
+#+begin_src csharp
+public class Author
+{
+    // public string name { get; set; }
+    public string[] courses { get; set; }
+    public DateTime since { get; set; }
+    public bool happy { get; set; }
+    public object issues { get; set; }
+    public Car car { get; set; }
+    public List<Author> favoriteAuthors { get; set; }
+    public AuthorRelationship authorRelationship { get; set; }
+}
+#+end_src
+
+Now let's try to deserialize a random json file:
+#+begin_src csharp
+public static void MissingMemebers()
+{
+    JsonSerializerSettings st = new JsonSerializerSettings();
+    st.Formatting = Formatting.Indented;
+    Author myar = JsonConvert.DeserializeObject<Author>(smpl, st);
+}
+#+end_src
+
+This should work by default, to change this behavior, assign ~error~ to 1:
+#+begin_src csharp
+JsonSerializerSettings st = new JsonSerializerSettings();
+st.Formatting = Formatting.Indented;
+st.MissingMemberHandling = MissingMemberHandling.Error;
+Author myar = JsonConvert.DeserializeObject<Author>(smpl, st);
+#+end_src
+
+#+RESULTS:
+: Unhandled Exception:
+: Newtonsoft.Json.JsonSerializationException: Could not find member 'name' on object of type 'Author'. Path 'name', line 2, position 9.
+** ~ReferenceLoopHandling~
+
+NullValueHandling controls how null values on .NET objects are handled during serialization
+and how null values in JSON are handled during deserialization.
+
+
+*Include:* By default Json.NET writes null values to JSON when serializing and sets null
+values to fields/properties when deserializing.
+
+*Ignore:* Json.NET will skip writing JSON properties if the .NET value is null when
+ serializing and will skip setting fields/properties if the JSON property is null when
+ deserializing.
+
+ #+begin_src csharp
+public class Movie
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string Classification { get; set; }
+    public string Studio { get; set; }
+    public DateTime? ReleaseDate { get; set; }
+    public List<string> ReleaseCountries { get; set; }
+}
+ #+end_src
+
+ #+begin_src csharp
+Movie movie = new Movie();
+movie.Name = "Bad Boys III";
+movie.Description = "It's no Bad Boys";
+
+string included = JsonConvert.SerializeObject(movie,
+    Formatting.Indented,
+    new JsonSerializerSettings { });
+
+// {
+//   "Name": "Bad Boys III",
+//   "Description": "It's no Bad Boys",
+//   "Classification": null,
+//   "Studio": null,
+//   "ReleaseDate": null,
+//   "ReleaseCountries": null
+// }
+
+string ignored = JsonConvert.SerializeObject(movie,
+    Formatting.Indented,
+    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+// {
+//   "Name": "Bad Boys III",
+//   "Description": "It's no Bad Boys"
+// }
+ #+end_src
+
+** ~DefaultValueHandling~
+DefaultValueHandling controls how Json.NET uses default values set using the .NET
+DefaultValueAttribute when serializing and deserializing.
+
+*Include:* By default Json.NET will write a field/property value to JSON when serializing if
+the value is the same as the field/property's default value. The Json.NET deserializer will
+continue setting a field/property if the JSON value is the same as the default value.
+
+*Ignore:* Json.NET will skip writing a field/property value to JSON if the value is the same
+ as the field/property's default value, or the custom value specified in
+ DefaultValueAttribute if the attribute is present. The Json.NET deserializer will skip
+ setting a .NET object's field/property if the JSON value is the same as the default value.
+
+ #+begin_src csharp
+public class Invoice
+{
+    public string Company { get; set; }
+    public decimal Amount { get; set; }
+
+    // false is default value of bool
+    public bool Paid { get; set; }
+    // null is default value of nullable
+    public DateTime? PaidDate { get; set; }
+
+    // customize default values
+    [DefaultValue(30)]
+    public int FollowUpDays { get; set; }
+
+    [DefaultValue("")]
+    public string FollowUpEmailAddress { get; set; }
+}
+ #+end_src
+
+ #+begin_src csharp
+Invoice invoice = new Invoice
+{
+    Company = "Acme Ltd.",
+    Amount = 50.0m,
+    Paid = false,
+    FollowUpDays = 30,
+    FollowUpEmailAddress = string.Empty,
+    PaidDate = null
+};
+
+string included = JsonConvert.SerializeObject(invoice,
+    Formatting.Indented,
+    new JsonSerializerSettings { });
+
+// {
+//   "Company": "Acme Ltd.",
+//   "Amount": 50.0,
+//   "Paid": false,
+//   "PaidDate": null,
+//   "FollowUpDays": 30,
+//   "FollowUpEmailAddress": ""
+// }
+
+string ignored = JsonConvert.SerializeObject(invoice,
+    Formatting.Indented,
+    new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+
+// {
+//   "Company": "Acme Ltd.",
+//   "Amount": 50.0
+// }
+ #+end_src
+
+
+*** TODO Populate
+** ~ObjectCreationHandling~
+Specifies how object creation is handled by the JsonSerializer. ObjectCreationHandling
+controls how objects are created and deserialized to during deserialization.
+
+
+*Auto:* By default Json.NET will attempt to set JSON values onto existing objects and add
+JSON values to existing collections during deserialization.
+
+*Reuse:* Same behaviour as auto.
+
+*Replace:* Json.NET will always recreate objects and collections before setting values to
+them during deserialization.
+
+#+begin_src csharp
+public static void CreationHandlier()
+{
+    JsonSerializerSettings st = new JsonSerializerSettings();
+    st.Formatting = Formatting.Indented;
+    st.ObjectCreationHandling = ObjectCreationHandling.Replace;
+    Author myar = JsonConvert.DeserializeObject<Author>(smpl, st);
+    myar = JsonConvert.DeserializeObject<Author>(smpl, st);
+    foreach (var myarCourse in myar.courses)
+    {
+        Console.WriteLine(myarCourse);
+    }
+}
+#+end_src
+** ~TypeNameHandling~
+*None:* By default Json.NET does not read or write type names during deserialization.
+
+*Objects:* Json.NET will write and use type names for objects but not collections.
+
+*Arrays:* Json.NET will write and use type names for collections but not objects.
+
+*Auto:* Json.NET will check whether an object/collection matches its declared property and
+writes the type name if they do not match, e.g. a property with a type of Mammal has a
+derived instance of Dog assigned. Auto will ensure that type information isn't lost when
+serializing/deserializing automatically without having to write type names for every object.
+
+*All:* Json.NET will write and use type names for objects and collections.
+
+#+begin_src csharp
+public static void TypeNameHandl()
+{
+    JsonSerializerSettings st = new JsonSerializerSettings();
+    st.Formatting = Formatting.Indented;
+    st.TypeNameHandling = TypeNameHandling.All;
+    Author k = JsonConvert.DeserializeObject<Author>(smpl);
+    string i = JsonConvert.SerializeObject(k,st);
+    Console.WriteLine(i);
+}
+#+end_src
