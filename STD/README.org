@@ -308,3 +308,12 @@ public static string RandomString(int length)
         .Select(s => s[random.Next(s.Length)]).ToArray());
 }
 #+end_src
+** ~StringWriter~ vs ~StringBuilder~
+~StringWriter~ derives from ~TextWriter~, which allows various classes to write text without
+caring where it's going. In the case of ~StringWriter~, the output is just into memory. You
+would use this if you're calling an API which needs a ~TextWriter~ but you only want to build
+up results in memory.
+
+~StringBuilder~ is essentially a buffer which allows you to perform multiple operations
+(typically appends) to a "logical string" without creating a new string object each time.
+You would use this to construct a string in multiple operations.
