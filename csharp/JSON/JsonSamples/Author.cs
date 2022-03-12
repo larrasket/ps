@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-    // ReSharper disable InconsistentNaming
+
+// ReSharper disable InconsistentNaming
 
 namespace JsonSamples
 {
@@ -9,7 +10,7 @@ namespace JsonSamples
     public class Author
     {
         public string name { get; set; }
-        public string[] courses { get; set; }
+        public List<string> courses = new List<string> {"12", "315"};
         public DateTime since { get; set; }
         public bool happy { get; set; }
         public object issues { get; set; }

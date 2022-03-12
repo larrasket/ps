@@ -47,7 +47,9 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/][4. Find First and Last Position of Element in Sorted Array]] | Binary Search        | Medium     | LC    | [[file:lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/search-a-2d-matrix-ii/][240. Search a 2D Matrix II]]                                 | Binary Search        | Medium     | LC    | [[file:lc/240.search-a-2d-matrix-ii.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/search-a-2d-matrix/][74. Search a 2D Matrix]]                                     | Binary Search        | Medium     | LC    | [[file:lc/74.search-a-2d-matrix.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/diameter-of-binary-tree/][543. Diameter of Binary Tree]]                               | Binary Search        | Easy       | LC    | [[file:lc/543.diameter-of-binary-tree.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/path-sum/][112. Path Sum]]                                              | Depth-First Search   | Easy       | LC    | [[file:lc/112.path-sum.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/longest-univalue-path/][687. Longest Univalue Path]]                                 | Depth-First Search   | Medium     | LC    | [[file:lc/687.longest-univalue-path.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/path-sum-ii/][113. Path Sum II]]                                           | Depth-First Search   | Medium     | LC    | [[file:lc/113.path-sum-ii.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/path-sum-iii/][437. Path Sum III]]                                          | Depth-First Search   | Medium     | LC    | [[file:lc/437.path-sum-iii.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/number-of-provinces/][547. Number of Provinces]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/547.number-of-provinces.cpp][Accepted]]            |
@@ -134,7 +136,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 
 * Seanforfun's Problems
 *** Tree
-**** Traversal [19/32]
+**** Traversal [22/31]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/94.%20Binary%20Tree%20Inorder%20Traversal.md][94. Binary Tree Inorder Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/589.%20N-ary%20Tree%20Preorder%20Traversal.md][589. N-ary Tree Preorder Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/590.%20N-ary%20Tree%20Postorder%20Traversal.md][590. N-ary Tree Postorder Traversal]]
@@ -154,10 +156,9 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/112.%20Path%20Sum.md][112. Path Sum]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/113.%20Path%20Sum%20II.md][113. Path Sum II]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/437.%20Path%20Sum%20III.md][437. Path Sum III]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/124.%20Binary%20Tree%20Maximum%20Path%20Sum.md][124. Binary Tree Maximum Path Sum]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/543.%20Diameter%20of%20Binary%20Tree.md][543. Diameter of Binary Tree]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/687.%20Longest%20Univalue%20Path.md][687. Longest Univalue Path]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/129.%20Sum%20Root%20to%20Leaf%20Numbers.md][129. Sum Root to Leaf Numbers]]
+***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/543.%20Diameter%20of%20Binary%20Tree.md][543. Diameter of Binary Tree]]
+***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/687.%20Longest%20Univalue%20Path.md][687. Longest Univalue Path]]
+***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/129.%20Sum%20Root%20to%20Leaf%20Numbers.md][129. Sum Root to Leaf Numbers]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/257.%20Binary%20Tree%20Paths.md][257. Binary Tree Paths]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/235.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree.md][235. Lowest Common Ancestor of a Binary Search Tree]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.md][236. Lowest Common Ancestor of a Binary Tree]]
