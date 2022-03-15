@@ -2,15 +2,7 @@
 
 public static class Program
 {
-    public static string RandomString(int length)
-    {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var random = new Random();
-        return new string(Enumerable.Repeat(chars, length)
-            .Select(s => s[random.Next(s.Length)]).ToArray());
-    }
-
-    private static void Main()
+    private static void BookMain()
     {
         var x = new AppContext();
         Author kh = new Author()
@@ -49,5 +41,76 @@ public static class Program
         // x.Database.EnsureCreated();
         x.Add(o);
         x.SaveChanges();
+    }
+
+    private static void Main()
+    {
+        var studentsdb = new StudentsDbContext();
+        studentsdb.Database.EnsureDeleted();
+        studentsdb.Database.EnsureCreated();
+        List<Student> studentss = new List<Student>
+        {
+            new()
+            {
+                FirstName = "Steve",
+                LastName = "smith",
+                Gender = "Male",
+            },
+
+            new()
+            {
+                FirstName = "Ben",
+                LastName = "Stokes",
+                Gender = "Male",
+            },
+            new()
+            {
+                FirstName = "Sara",
+                LastName = "Pound",
+                Gender = "Female",
+            },
+            new()
+            {
+                FirstName = "Jos",
+                LastName = "Butler",
+                Gender = "Male",
+            },
+            new()
+            {
+                FirstName = "Pam",
+                LastName = "Semi",
+                Gender = "Female",
+            },
+        };
+        studentsdb.Students.AddRange(studentss);
+        studentsdb.SaveChanges();
+    }
+
+    private static int test()
+    {
+        int i = 0, k = 1, ans = 0;
+        try
+        {
+            ans = 1 / i;
+        }
+        catch (DivideByZeroException e)
+        {
+            return 5;
+        }
+        finally
+        {
+            return 10;
+        }
+
+        return 1;
+    }
+
+
+    public static string RandomString(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var random = new Random();
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 }
