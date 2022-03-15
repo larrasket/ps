@@ -4,7 +4,7 @@
 #+categories: ["Computer Science"]
 #+description: C# Notebook
 #+hugo_tags: "Computer Science" ".NET"
-* Resoruces
+* Resources
 + *Textbooks*:
   +  Andrew Lock - ASP.NET Core in Action-Manning (2018).
   +  Concurrency in C# Cookbook: Asynchronous, Parallel, and Multithreaded Programming.
@@ -680,7 +680,19 @@ statements using ~checked~
 | ~int[][] jaggedArray = new int[6][];~                           | Declare a jagged array                                           |
 | ~jaggedArray[0] = new int[4] { 1, 2, 3, 4 };~                   | Set the values of the first array in the jagged array structure. |
 |-----------------------------------------------------------------+------------------------------------------------------------------|
-** Lambada *Check [[#delegates][delegates]] & [[#events][events]]* In C#, lambdas use special syntax. We pass lambda expressions to other methods to specify a behavior that the method uses. Remember that lambdas are just methods. They can always be replaced with class-level methods. We can use types like Action and Func to represent them. A common place to use lambdas is with List. Here we use FindIndex, which receives a Predicate method. We specify this as a lambda expression. #+begin_src csharp List<int> elements = new List<int>() { 10, 20, 31, 40 }; int oddIndex = elements.FindIndex(x => x % 2 != 0); Console.WriteLine(elements[oddIndex]); #+end_src #+RESULTS: : 31
+** Lambada
+*Check [[#delegates][delegates]] & [[#events][events]]*
+
+In C#, lambdas use special syntax. We pass lambda expressions to other methods to specify a
+behavior that the method uses. Remember that lambdas are just methods. They can always be
+replaced with class-level methods. We can use types like Action and Func to represent them.
+A common place to use lambdas is with List. Here we use FindIndex, which receives a
+Predicate method. We specify this as a lambda expression.
+#+begin_src csharp
+List<int> elements = new List<int>() { 10, 20, 31, 40 };
+int oddIndex = elements.FindIndex(x => x % 2 != 0); Console.WriteLine(elements[oddIndex]);
+#+end_src
+#+RESULTS: : 31
 * Building O.O.P
 An object in the real world is a thing, such as a car or a person, whereas an object in
 programming often represents something in the real world, such as a product or bank account,
@@ -1664,7 +1676,7 @@ namespace InterfaceExample {
 :PROPERTIES:
 :CUSTOM_ID: delegates
 :END:
-Delegate is just about passing a function as a paramter, consider the following C++ code:
+Delegate is just about passing a function as a parameter, consider the following C++ code:
 #+begin_src cpp
 bool Myfunction() {
     return true;
@@ -1676,7 +1688,7 @@ bool FunctionThatRecievesAFunction(bool Checking_The_Situation()) {
 #+end_src
 Elegant, but we can't perform such a thing using C#, why? This is not so important but let's
 say that all languages that run on top of the CLR (Common Language Runtime), such as C#, F#,
-and Visual Basic, work under a VM that runs higher level code than machine code. It follows
+and Visual Basic, works under a VM that runs higher level code than machine code. It follows
 that methods aren't Assembly subroutines, nor are they values, unlike JavaScript and most
 functional languages; rather, they're symbols that CLR recognizes. Thus, you cannot think to
 pass a method as a parameter, because methods don't produce any values themselves, as
@@ -2876,10 +2888,114 @@ class MyClass
 
 #+end_src
 
+** Uses of Using
+- Declaring a namespace
+- Creating aliases
+- Calling IDisposable
+
+** Boxing and Unboxing
+Boxing is the process of converting a value type to the type object or to any interface type
+implemented by this value type. When the common language runtime (CLR) boxes a value type,
+it wraps the value inside a System.Object instance and stores it on the managed heap.
+Unboxing extracts the value type from the object. Boxing is implicit; unboxing is explicit.
+The concept of boxing and unboxing underlies the C# unified view of the type system in which
+a value of any type can be treated as an object.
+
+In the following example, the integer variable i is boxed and assigned to object o.
+
+#+begin_src csharp
+int i = 123;
+// The following line boxes i.
+object o = i;
+#+end_src
+
+The object o can then be unboxed and assigned to integer variable i:
+
+#+begin_src csharp
+o = 123;
+i = (int)o;  // unboxing
+#+end_src
+
+The following examples illustrate how boxing is used in C#.
+
+#+begin_src csharp
+Console.WriteLine(String.Concat("Answer", 42, true));
+List<object> mixedList = new List<object>();
+mixedList.Add("First Group:");
+for (int j = 1; j < 5; j++)
+{
+    mixedList.Add(j);
+}
+
+// Add another string and more integers.
+mixedList.Add("Second Group:");
+for (int j = 5; j < 10; j++)
+{
+    mixedList.Add(j);
+}
+
+// Display the elements in the list. Declare the loop variable by
+// using var, so that the compiler assigns its type.
+foreach (var item in mixedList)
+{
+    // Rest the mouse pointer over item to verify that the elements
+    // of mixedList are objects.
+    Console.WriteLine(item);
+}
+
+// The following loop sums the squares of the first group of boxed
+// integers in mixedList. The list elements are objects, and cannot
+// be multiplied or added to the sum until they are unboxed. The
+// unboxing must be done explicitly.
+var sum = 0;
+for (var j = 1; j < 5; j++)
+{
+    // The following statement causes a compiler error: Operator
+    // '*' cannot be applied to operands of type 'object' and
+    // 'object'.
+    //sum += mixedList[j] * mixedList[j]);
+
+    // After the list elements are unboxed, the computation does
+    // not cause a compiler error.
+    sum += (int)mixedList[j] * (int)mixedList[j];
+}
+
+// The sum displayed is 30, the sum of 1 + 4 + 9 + 16.
+Console.WriteLine("Sum: " + sum);
+
+// Output:
+// Answer42True
+// First Group:
+// 1
+// 2
+// 3
+// 4
+// Second Group:
+// 5
+// 6
+// 7
+// 8
+// 9
+// Sum: 30
+#+end_src
+
+Boxing is used to store value types in the garbage-collected heap. Boxing is an implicit
+conversion of a value type to the type object or to any interface type implemented by this
+value type. Boxing a value type allocates an object instance on the heap and copies the
+value into the new object.
+
+The result of this statement is creating an object reference o, on the stack, that
+references a value of the type int, on the heap. This value is a copy of the value-type
+value assigned to the variable i. The difference between the two variables, i and o, is
+illustrated in the following image of boxing conversion:
+
+
 * LINQ
 Linq (Language Integrated Query) is really nothing but a query language inside C#, I will
 not second learning it puley, instead, learn query language (any SQL flavor) and just learn
 the basic syntax to use it inside your code. It shouldn't be hard at all.
+
+# [[file:LINQ.org][Here]] you shall find some information that you might not have experienced with the regular SQL.
 * TODO Concurrency
 See [[file:Concurrency.org][asynchronous programming]]
 * TODO Entity Framework
@@ -2906,6 +3022,8 @@ See [[file:mvc.org][ASP]]
 ** TODO ~checked~ and ~unchecked~
 ** TODO ~Span~
 ** TODO LINQ
+** TODO Reflection
+
 * Thinking
 - How to end function of if statements? using return 0 or else with last value?
   #+begin_src csharp
