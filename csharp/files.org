@@ -179,6 +179,84 @@ To delete a file you use the ~Delete~ method in the ~Directory~ class, add a boo
 Directory.Delete(inProgressDirectoryPath, true);
 #+end_src
 
+* Monitoring the File System for Changes
+** The ~FileSystemWatcher~ Class
+The Microsoft documentation says that the FileSystemWatcher class listens to the file system
+change notifications and raises events when a directory or file in a directory changes. So
+for example, say we have a directory, say, for example the input directory for our console
+app, we can create a FileSystemWatcher instance and monitor this directory for changes. The
+FileSystemWatcher listens for low‑level operating system file operations. And then in our
+application code, we can respond to events raised by the FileSystemWatcher instance.
+
+There's a number of different events that we can subscribe to. There's the created event,
+which is raised when a file or directory is created. We have the changed event, which is
+raised when a file or directory is modified. The renamed event, which occurs when a file or
+directory is renamed. The deleted event, which allows us to respond to file or directory
+deletions. And also, the error event, which we can subscribe to get notified when the
+FileSystemWatcher is no longer able to continue monitoring changes or its internal buffer
+overflows. We'll talk about the buffer in just a moment. One crucial thing to remember about
+the FileSystemWatcher is that a single file operation may result in multiple events being
+raised. This has ramifications if we want to prevent single files being processed multiple
+times.
+
+** Buffer and ~BufferSize~
+Internally, the FileSystemWatcher makes use of a buffer. When file or directory operations
+are detected by the FileSystemWatcher instance, they go into this buffer, and then the
+FileSystemWatcher raises its events. The purpose of this buffer is to allow the
+FileSystemWatcher enough time to raise its events, even if we have a lot of operations
+happening on disk. We can configure the size of this buffer by setting the
+InternalBufferSize property. The InternalBufferSize property is of type int, and we can
+specify a buffer size from 4 KB all the way up to 64 KB. If we don't specify a value for the
+InternalBufferSize property, it defaults to 8 K. Each individual operation in the file
+system that's detected requires 16 bytes in the buffer plus an additional number of bytes
+depending on the file name.
+
+
+Microsoft also recommends that this InternalBufferSize property
+is set to a multiple of 4 K on Intel‑based systems. To quote from the Microsoft
+documentation, if there are many changes in a short time, the buffer can overflow. This
+causes the component to lose track of changes in the directory. Increasing the size of the
+buffer can prevent missing file system change events. Increasing buffer size is expensive
+because it comes from non‑paged memory that cannot be swapped out to disk, so keep the
+buffer as small as possible. Exactly what buffer size you'll need to set for your
+application will depend on the frequency of file operations that happen to the watched,
+directory or file. So for example, if you only have one or two files every day dropped into
+a watched directory, you probably won't need to modify the default buffer size property. At
+the other end of the spectrum, if you expect hundreds or thousands of operations to occur in
+a short space of time, you may want to increase the size of the buffer. One way to reduce
+the number of events that occur, and thus help prevent buffer overflows, is to configure
+notification filters.
+
+** Notification Filters
+We can configure the types of changes that we want to receive notifications for. To do this,
+we set the NotifyFilter property on the FileSystemWatcher object. This NotifyFilter property
+is an enum of type NotifyFilters. This enum contains a number of values, allowing us to
+specify that we want notifications for attribute changes,
+- Changes in the creation time.
+- Changes in the name of the director.
+- Changes in the name of the file.
+- Changes in the file or directory's last opened date.
+- Changes in the last write date.
+- Changes in the file or directory security settings.
+- Changes in the file or directory size.
+We can also combine multiple NotifyFilters together if we want to be notified of multiple
+change types.
+
+** Other Properties
+
+There's a number of additional properties that we can make use of on the FileSystemWatcher.
+The first is the Path property. This allows us to specify a path to a directory or file to
+be watched. The Filter property allows us to restrict the type of files that cause change
+notifications. So, for example, we could specify ~*.txt~, and we'd only get notifications for
+changes in text files.
+
+And we also have the EnableRaisingEvents property. By default, this
+is false, which means that the specified path is not being watched. When we're ready to
+start receiving events from the FileSystemWatcher, we simply set this property to true.
+
+
+** TODO Refactoring to Use a FileSystemWatcher
+
 * Footnotes
 [fn:1]   fully qualified name is an unambiguous name that specifies which object, function,
 or variable a call refers to without regard to the context of the call.
