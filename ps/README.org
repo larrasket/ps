@@ -138,7 +138,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 
 * Seanforfun's Problems
 *** Tree
-**** Traversal [24/31]
+**** Traversal [26/31]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/94.%20Binary%20Tree%20Inorder%20Traversal.md][94. Binary Tree Inorder Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/589.%20N-ary%20Tree%20Preorder%20Traversal.md][589. N-ary Tree Preorder Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/590.%20N-ary%20Tree%20Postorder%20Traversal.md][590. N-ary Tree Postorder Traversal]]
@@ -163,8 +163,8 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/129.%20Sum%20Root%20to%20Leaf%20Numbers.md][129. Sum Root to Leaf Numbers]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/257.%20Binary%20Tree%20Paths.md][257. Binary Tree Paths]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/235.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree.md][235. Lowest Common Ancestor of a Binary Search Tree]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.md][236. Lowest Common Ancestor of a Binary Tree]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/297.%20Serialize%20and%20Deserialize%20Binary%20Tree.md][297. Serialize and Deserialize Binary Tree]]
+***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.md][236. Lowest Common Ancestor of a Binary Tree]]
+***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/297.%20Serialize%20and%20Deserialize%20Binary%20Tree.md][297. Serialize and Deserialize Binary Tree]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/449.%20Serialize%20and%20Deserialize%20BST.md][449. Serialize and Deserialize BST]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/508.%20Most%20Frequent%20Subtree%20Sum.md][508. Most Frequent Subtree Sum]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/968.%20Binary%20Tree%20Cameras.md][968. Binary Tree Cameras]]
