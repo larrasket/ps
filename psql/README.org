@@ -1317,6 +1317,42 @@ WHERE condition
 RETURNING * | output_expression AS output_name;
 #+end_src
 ***** TODO Update Join
+
+** Logging
+PostgreSQL log_statement parameter is basically related to error and reporting to log error,
+warning and database queries, we can log_statement in PostgreSQL as per options we
+configured in configuration file. Default log_statement option in PostgreSQL configuration
+file is none means nothing log anything into the error file. There are four options of
+log_statement of error and SQL query reporting i.e. none, ddl, mod and all, DDL specifies
+that log all ddl query into error log. All options of log_statement is defined as log all
+queries of database server. Log_statement is important parameter in PostgreSQL.
+
+*Example. 1*
+#+begin_src sql
+show log_statement;
+select * from student;
+insert into student values (12, 'PQR', 1234567890);
+#+end_src
+
+#+DOWNLOADED: screenshot @ 2022-03-14 01:46:13
+
+#+DOWNLOADED: screenshot @ 2022-03-14 01:46:27
+[[file:Introduction_into_PostgreSQL/2022-03-14_01-46-27_screenshot.png]]
+
+
+
+*Example. 2*
+#+begin_src sql
+alter system set log_statement = 'DDL';
+show log_statement;
+insert into student values (14, 'PQR', 1234567890);id = 13;
+delete from student where stud_id = 13;
+select * from student;
+#+end_src
+
+
+[[file:Introduction_into_PostgreSQL/2022-03-14_01-47-23_screenshot.png]]
+
 ** Check
 + [[https://www.postgresql.org/docs/current/datatype.html][Data Types]]
 + [[https://www.postgresql.org/docs/9.5/sql-createsequence.html][Sequence]]
