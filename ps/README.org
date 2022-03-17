@@ -139,7 +139,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 
 * Seanforfun's Problems
 *** Tree
-**** Traversal [28/29]
+**** Traversal [29/29]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/94.%20Binary%20Tree%20Inorder%20Traversal.md][94. Binary Tree Inorder Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/589.%20N-ary%20Tree%20Preorder%20Traversal.md][589. N-ary Tree Preorder Traversal]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/590.%20N-ary%20Tree%20Postorder%20Traversal.md][590. N-ary Tree Postorder Traversal]]
@@ -168,7 +168,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/297.%20Serialize%20and%20Deserialize%20Binary%20Tree.md][297. Serialize and Deserialize Binary Tree]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/508.%20Most%20Frequent%20Subtree%20Sum.md][508. Most Frequent Subtree Sum]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/968.%20Binary%20Tree%20Cameras.md][968. Binary Tree Cameras]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/979.%20Distribute%20Coins%20in%20Binary%20Tree.md][979. Distribute Coins in Binary Tree]]
+***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/979.%20Distribute%20Coins%20in%20Binary%20Tree.md][979. Distribute Coins in Binary Tree]]
 
 **** Binary Search [0/20]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/34.%20Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array.md][34. Find First and Last Position of Element in Sorted Array]]
