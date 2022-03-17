@@ -1,0 +1,11 @@
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/bin/Debug/netcoreapp2.0/PlayingWithASP.deps.json
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/bin/Debug/netcoreapp2.0/PlayingWithASP.runtimeconfig.json
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/bin/Debug/netcoreapp2.0/PlayingWithASP.runtimeconfig.dev.json
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/bin/Debug/netcoreapp2.0/PlayingWithASP.dll
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/bin/Debug/netcoreapp2.0/PlayingWithASP.pdb
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/obj/Debug/netcoreapp2.0/PlayingWithASP.csprojAssemblyReference.cache
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/obj/Debug/netcoreapp2.0/PlayingWithASP.csproj.CoreCompileInputs.cache
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/obj/Debug/netcoreapp2.0/PlayingWithASP.AssemblyInfoInputs.cache
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/obj/Debug/netcoreapp2.0/PlayingWithASP.AssemblyInfo.cs
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/obj/Debug/netcoreapp2.0/PlayingWithASP.dll
+/mnt/0E08DBBF08DBA3CD/me/leet/csharp/PlayingWithASP/PlayingWithASP/obj/Debug/netcoreapp2.0/PlayingWithASP.pdb
