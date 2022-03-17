@@ -3024,27 +3024,3 @@ See [[file:mvc.org][ASP]]
 ** TODO LINQ
 ** TODO Reflection
 
-* Thinking
-- How to end function of if statements? using return 0 or else with last value?
-  #+begin_src csharp
-    public int Compare(Person x, Person y) {
-        if (x.id > y.id) {
-            // if Person X's id is bigger, then y should comes first, so return 1
-                return 1;
-        }
-        else if (x.id < y.id) {
-            // If person Y's id is bigger, then y should come after x, so returns -1
-            return -1;
-        }
-        return 0; // in this case, they are equal, no need to change any arrangement
-    }
-  #+end_src
-- Why we need to call like this?
-  #+begin_src csharp
-Array.Sort(people, new PersonCompare());
-  #+end_src
-  and not just
-  #+begin_src csharp
-Array.Sort(people, PersonCompare);
-  #+end_src
-
