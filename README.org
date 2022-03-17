@@ -9,4 +9,4 @@
 + [[file:STD/][C++ STD]]
 + [[file:ps/][Problem Solving]]
 + [[file:psql/][PostgreSQL]]
-
++ [[org:ptrns/README.org][Design Patterns]]
