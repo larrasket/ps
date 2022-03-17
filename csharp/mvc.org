@@ -1,7 +1,7 @@
 #+title: "Introduction Into ASP.NET Core"
 #+date: 2022-01-08T05:28:26+02:00
 #+hugo_tags: "Computer Science" ".NET"
-* TBC
+* Introduction
 ASP.NET Core is the latest evolution of Microsoft’s popular ASP.NET web framework,
 released in June 2016. Recent versions of ASP.NET have seen many incremental
 updates, focusing on high developer productivity and prioritizing backwards compati-
@@ -12,7 +12,6 @@ rethink the way the web framework is designed and built.
 ried forward from before, but ASP.NET Core is a new framework. The whole technol-
 ogy stack has been rewritten, including both the web framework and the underlying
 platform.
-
 
 *What is ASP.NET Core?*
 
