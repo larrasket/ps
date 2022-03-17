@@ -1,0 +1,323 @@
+#+TITLE: Design Patterns
+
+/Based on  Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph
+Johnson and John Vlissides/
+
+* Introduction & Basic Definition
+
+Christopher Alexander says, "Each pattern describes a problem which occurs over and over
+again in our environment, and then describes the core of the solution to that problem, in
+such a way that you can use this solution a million times over, without ever doing it the
+same way twice" [AIS+77, page x}. Even though Alexander was talking about patterns in
+buildings and towns, what he says is true about object-oriented design patterns. Our
+solutions are expressed in terms of objects and interfaces instead of walls and doors, but
+at the core of both kinds of patterns is a solution to a problem in a context.  In general,
+a pattern has four essential elements:
+
+1. The pattern name is a handle we can use to describe a design problem, its so lutions, and consequences in a word or two. Naming a pattern immediately increases our design vocabulary. It lets us design at a higher level of abstraction. Having a vocabulary for patterns lets us talk about them with our colleagues, in our documentation, and even to ourselves. It makes it easier to think about designs and to communicate them and their trade-offs to others. Finding good names has been one of the hardest parts of developing our catalog.
+2. The problem describes when to apply the pattern. It explains the problem and its context. It might describe specific design problems such as how to represent algo- rhythms as objects. It might describe class or object structures that are symptomatic of an inflexible design. Sometimes the problem will include a list of conditions that must be met before it makes sense to apply the pattern.
+3. The solution describes the elements that make up the design, their relationships, responsibilities, and collaborations. The solution doesn't describe a particular concrete design or implementation, because a pattern is like a template that can be applied in many different situations. Instead, the pattern provides an abstract description of a design problem and how a general arrangement of elements (classes and objects in our case) solves it.
+4. The consequences are the results and trade-offs of applying the pattern. Though consequences are often unvoiced when we describe design decisions, they are critical for evaluating design alternatives and for understanding the costs and benefits of applying the pattern.
+
+* Behavioral Patterns [0/18]
+** TODO Strategy
+*Intent:* Define a family of algorithms, encapsulate each one, and make them interchange-
+*** TODO Motivation
+Many algorithms exist for breaking a stream of text into lines. Hard-wiring all such
+algorithms into the classes that require them isn't desirable for several reasons:
+
+- Clients that need linebreaking get more complex if they include the line- breaking code. That makes clients bigger and harder to maintain, especially if they support multiple linebreaking algorithms.
+
+- Different algorithms will be appropriate at different times. We don't want to support multiple linebreaking algorithms if we don't use them all.
+
+- It's difficult to add new algorithms and vary existing ones when linebreaking is an integral part of a client.
+
+We can avoid these problems by defining classes that encapsulate different line-
+breaking algorithms. An algorithm that's encapsulated in this way is called a strategy
+
+#+DOWNLOADED: screenshot @ 2022-03-16 03:34:47
+[[file:Behavioral_Patterns_\[1/19\]/2022-03-16_03-34-47_screenshot.png]]
+
+** TODO [#A] Singleton
+** TODO Command
+** TODO Null Object
+** TODO Specification Pattern
+** TODO State
+** TODO Data Access Pattern
+** TODO Mediator
+** TODO Chain of Responsibility
+** TODO Template Method
+** TODO Visitor
+** TODO Memento
+** TODO Rules Engine Pattern
+** TODO Bridge
+** TODO Interpreter
+** TODO Iterator
+** TODO Observer
+** TODO Discussion of Behavioral Patterns
+* Creational Patterns [1/6]
+** TODO Builder
+** TODO Prototype
+** DONE Factory Design Pattern
+According to Gang of Four, the Factory Design Pattern states that “A factory is an object
+which is used for creating other objects”. In technical terms, we can say that a factory is
+a class with a method. That method will create and return different types of objects based
+on the input parameter, it received. In simple words, if we have a superclass and n number
+of subclasses, and based on the data provided, if we have to create and return the object of
+one of the subclasses, then we need to use the Factory Design.
+
+In the Factory Design pattern, we create an object without exposing the object creation
+logic to the client and the client will refer to the newly created object using a common
+interface. The basic principle behind the factory design pattern is that, at run time, we
+get an object of a similar type based on the parameter we pass.
+
+Please have a look at the following diagram. Here, as you can see we have three credit card
+classes i.e. ~MoneyBack~, ~Titanium~, and Platinum and these three classes are the subclasses of
+~CreditCard~ superclass or super interface. The ~CreditCard~ superclass or super interface has
+three methods i.e. ~GetCardType~, ~GetCreditLimit~, and ~GetAnnualCharge~. The subclasses i.e.
+~MoneyBack~, ~Titanium,~ and Platinum have implemented the above three methods.
+
+Our requirement is, we will ask the user to select the credit card. Once the user selects
+the credit card then we need to display the required information of that selected card. Let
+us first discuss how to achieve this without using the Factory Design Pattern in C#. Then we
+will discuss the problems and finally, we will create the same application using the Factory
+Design Pattern in C#.
+
+Here we need to create either an interface or an abstract class that will expose the
+operations a credit card should have. So, create a class file with the name ~CreditCard.cs~
+and then copy and paste the following code in it. As you can see, we created the interface
+with three methods.
+
+
+#+begin_src csharp
+namespace FactoryDesignPattern
+{
+    public interface CreditCard
+    {
+        string GetCardType();
+        int GetCreditLimit();
+        int GetAnnualCharge();
+    }
+}
+#+end_src
+
+#+begin_src csharp
+namespace FactoryDesignPattern
+{
+    class MoneyBack : CreditCard
+    {
+        public string GetCardType()
+        {
+            return "MoneyBack";
+        }
+
+        public int GetCreditLimit()
+        {
+            return 15000;
+        }
+
+        public int GetAnnualCharge()
+        {
+            return 500;
+        }
+    }
+}
+#+end_src
+
+#+begin_src csharp
+namespace FactoryDesignPattern
+{
+    public class Titanium : CreditCard
+    {
+        public string GetCardType()
+        {
+            return "Titanium Edge";
+        }
+        public int GetCreditLimit()
+        {
+            return 25000;
+        }
+        public int GetAnnualCharge()
+        {
+            return 1500;
+        }
+    }
+}
+#+end_src
+
+#+begin_src csharp
+namespace FactoryDesignPattern
+{
+    public class Platinum : CreditCard
+    {
+        public string GetCardType()
+        {
+            return "Platinum Plus";
+        }
+        public int GetCreditLimit()
+        {
+            return 35000;
+        }
+        public int GetAnnualCharge()
+        {
+            return 2000;
+        }
+    }
+}
+#+end_src
+
+
+Now in the client code, we will ask the user to select the Credit Card Type. And based on
+the Selected Credit card, we will create an instance of any one of the above three product
+implementation classes. So, modify the Main method as shown below.
+
+#+begin_src csharp
+using System;
+namespace FactoryDesignPattern
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Generally we will get the Card Type from UI.
+            //Here we are hardcoded the card type
+            string cardType = "MoneyBack";
+
+            CreditCard cardDetails = null;
+
+            //Based of the CreditCard Type we are creating the
+            //appropriate type instance using if else condition
+            if (cardType == "MoneyBack")
+            {
+                cardDetails = new MoneyBack();
+            }
+            else if (cardType == "Titanium")
+            {
+                cardDetails = new Titanium();
+            }
+            else if (cardType == "Platinum")
+            {
+                cardDetails = new Platinum();
+            }
+
+            if (cardDetails != null)
+            {
+                Console.WriteLine("CardType : " + cardDetails.GetCardType());
+                Console.WriteLine("CreditLimit : " + cardDetails.GetCreditLimit());
+                Console.WriteLine("AnnualCharge :" + cardDetails.GetAnnualCharge());
+            }
+            else
+            {
+                Console.Write("Invalid Card Type");
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+#+end_src
+
+
+The above code implementation is very straightforward. Once we get the ~CardType~ value, then
+by using the if-else condition we are creating the appropriate Credit Card instance. Then we
+are just calling the three methods to display the credit card information in the console
+window. So, *What is the Problem of the above code implementation?*
+
+
+The above code implementation introduces the following problems
+
+1. First, the tight coupling between the client class (Program) and Product Class (MoneyBack, Titanium, and Platinum).
+2. Secondly, if we add a new Credit Card, then also we need to modify the Main method by adding an extra if-else condition which not only overheads in the development but also in the testing process
+
+Let us see how to overcome the above problem by using the factory design pattern.
+
+As per the definition of Factory Design Pattern, the Factory Design Pattern create an object
+without exposing the object creation logic to the client and the client refers to the newly
+created object using a common interface.
+
+Please have a look at the following image. This is our factory class and this class takes
+the responsibility of creating and returning the appropriate product object. As you can see
+this class having one static method i.e. ~GetCreditcard~ and this method takes one input
+parameter and based on the parameter value it will create one of the credit card (i.e.
+~MoneyBack~, ~Platinum~, and ~Titanium~) objects and store that object in the superclass
+(~CrditCard~) reference variable and finally return that superclass reference variable to the
+caller of this method.
+
+#+DOWNLOADED: screenshot @ 2022-03-17 01:44:58
+[[file:Creational_Patterns_\[0/6\]/2022-03-17_01-44-58_screenshot.png]]
+
+Now the client needs to create the object through ~CreditCardFactory~. For example, if the
+client wants to create the instance of Platinum Credit then he/she needs to do something
+like the below. As you can see, he/she needs to pass the Credit card type to the
+~GetCreditcard~ method of the ~CreditCardFactory~ class. Now, the ~GetCreditcard()~ method will
+create a Platinum class instance and return that instance to the client.
+
+[[file:Creational_Patterns_\[0/6\]/2022-03-17_01-46-41_screenshot.png]]
+
+
+#+begin_src csharp
+namespace FactoryDesignPattern
+{
+    class CreditCardFactory
+    {
+        public static CreditCard GetCreditCard(string cardType)
+        {
+            CreditCard cardDetails = null;
+
+            if (cardType == "MoneyBack")
+            {
+                cardDetails = new MoneyBack();
+            }
+            else if (cardType == "Titanium")
+            {
+                cardDetails = new Titanium();
+            }
+            else if (cardType == "Platinum")
+            {
+                cardDetails = new Platinum();
+            }
+
+            return cardDetails;
+        }
+    }
+}
+#+end_src
+
+#+begin_src csharp
+using System;
+namespace FactoryDesignPattern
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CreditCard cardDetails = CreditCardFactory.GetCreditCard("Platinum");
+
+            if (cardDetails != null)
+            {
+                Console.WriteLine("CardType : " + cardDetails.GetCardType());
+                Console.WriteLine("CreditLimit : " + cardDetails.GetCreditLimit());
+                Console.WriteLine("AnnualCharge :" + cardDetails.GetAnnualCharge());
+            }
+            else
+            {
+                Console.Write("Invalid Card Type");
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+#+end_src
+
+** TODO [#A] Factory Method
+** TODO [#A] Abstract Factory
+** TODO Discussion of Creational Patterns
+* Structural Patterns [0/7]
+** TODO Facade
+** TODO Decorator
+** TODO Composite
+** TODO [#A] Adapter
+** TODO Flyweight
+** TODO [#A] Proxy
+** TODO Discussion of Structural Patterns
