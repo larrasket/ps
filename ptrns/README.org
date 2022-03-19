@@ -55,7 +55,7 @@ breaking algorithms. An algorithm that's encapsulated in this way is called a st
 ** TODO Iterator
 ** TODO Observer
 ** TODO Discussion of Behavioral Patterns
-* Creational Patterns [1/6]
+* Creational Patterns [2/6]
 ** TODO Builder
 ** TODO Prototype
 ** DONE Factory Design Pattern
@@ -71,7 +71,7 @@ logic to the client and the client will refer to the newly created object using 
 interface. The basic principle behind the factory design pattern is that, at run time, we
 get an object of a similar type based on the parameter we pass.
 
-Please have a look at the following diagram. Here, as you can see we have three credit card
+Suppose we have three credit card
 classes i.e. ~MoneyBack~, ~Titanium~, and Platinum and these three classes are the subclasses of
 ~CreditCard~ superclass or super interface. The ~CreditCard~ superclass or super interface has
 three methods i.e. ~GetCardType~, ~GetCreditLimit~, and ~GetAnnualCharge~. The subclasses i.e.
@@ -310,8 +310,104 @@ namespace FactoryDesignPattern
 }
 #+end_src
 
-** TODO [#A] Factory Method
-** TODO [#A] Abstract Factory
+** DONE Factory Method
+According to Gang of Four Definition “Define an interface for creating an object, but let
+the subclasses decide which class to instantiate. The Factory method lets a class defer
+instantiation it uses to subclasses”.
+
+Let us simplify the above definition. The Factory Method Design Pattern is used, when we
+need to create the object (i.e. instance of the Product class) without exposing the object
+creation logic to the client. To achieve this, in the factory method design pattern we will
+create an abstract class as the Factory class which will create and return the instance of
+the product, but it will let the subclasses decide which class to instantiate. If this is
+not clear at the moment then don’t worry, I will explain this with one real-time example.
+
+
+Please have a look at the following image. As you can see in the below diagram, we have
+three credit cards i.e. ~MoneyBack~, ~Titanium~, and ~Platinum~. These credit cards are nothing
+but our Product classes. Again these three Credit Card classes are the subclasses of the
+~CreditCard~ super interface. The ~CreditCard~ super interface defines the operations (i.e.
+~GetCardType~, ~GetCreditLimit~, and ~GetAnnualCharge~) which need to be implemented by the
+subclasses (i.e. ~MoneyBack~, ~Titanium~, and ~Platinum~).
+
+
+[[file:Creational_Patterns_\[1/6\]/2022-03-18_05-10-01_word-image-111.png]]
+
+As per the definition of the Factory Method Design Pattern, we need to create an abstract
+class or interface for creating the object. Please have a look at the following diagram.
+This is going to be our Creator class that declares the factory method, which will return an
+object of type Product (i.e. ~CreditCard~).
+
+#+DOWNLOADED: https://dotnettutorials.net/wp-content/uploads/2018/11/word-image-112.png @ 2022-03-18 05:12:33
+[[file:Creational_Patterns_\[1/6\]/2022-03-18_05-12-33_word-image-112.png]]
+
+As you can see, the above abstract class (i.e. ~CreditCardFactory~) contains two methods, one
+abstract method i.e. ~MakeProduct()~ and one concrete method i.e. ~CreateProduct()~. The
+~CreateProduct()~ method internally calls the ~MakeProduct()~ method of the subclass which will
+create the product instance and return that instance.
+
+Please have a look at the following diagram. As we have three credit cards (i.e. ~MoneyBack~,
+~Platinum~, and ~Titanium~), so here we created three subclasses (i.e. ~PlatinumFactory~,
+~TitaniumFactory~, and ~MoneyBackFactory~) of the Abstract ~CreditCradFactory~ class and implement
+the ~MakeProduct~ method. This method is going to return the actual product object i.e.
+(~MoneyBack, ~Platinum~ and ~Titanium~).
+
+
+
+[[file:Creational_Patterns_\[1/6\]/2022-03-18_05-23-12_word-image-113.png]]
+
+
+Now let see how the client is going to consume the above CreditCardFactory to create an
+object. Please have a look at the following diagram.
+
+
+[[file:Creational_Patterns_\[1/6\]/2022-03-18_05-25-35_c-users-pranaya-pictures-factory-method-design-pa-2.png]]
+
+
+
+** TODO Abstract Factory
+
+According to Gang of Four Definition: “The Abstract Factory Design Pattern provides a way to
+encapsulate a group of individual factories that have a common theme without specifying
+their concrete classes“.
+
+In simple words we can say, the Abstract Factory is a super factory that creates other
+factories. This Abstract Factory is also called the Factory of Factories.
+
+Suppose we want to create the objects of a group of land animals such as Cat, Lion, and Dog.
+
+Please have a look at the following diagram. Here, as you can see we have three classes i.e.
+Cat, Lion, and Dog. And these three classes are the subclasses of Animal superclass or super
+interface. The Animal superclass or super interface has one method i.e. Speak() method. The
+Cat class will implement that Speak method and return Meow. Similarly, the Lion class will
+implement the Speak() method and will return Roar and in the say the Dog class will
+implement the Speak() method and return Bark bark. The Cat, Lion, and Dog are living in the
+Land, so they belong to the Land Animal group.
+
+
+#+DOWNLOADED: https://dotnettutorials.net/wp-content/uploads/2018/11/word-image-102.png @ 2022-03-19 02:15:21
+[[file:Creational_Patterns_\[2/6\]/2022-03-19_02-15-21_word-image-102.png]]
+
+Using Factory Design Pattern we can implement the above easily. Please have a look at
+the following diagram. As per the factory design pattern, ~LandAnimalFactory~ is the factory
+class and that class has one method i.e. ~GetAnimal~. This method takes one parameter i.e. the
+animal type and then it will create and return the appropriate object. In this case, the
+animal object can be a dog, lion, or cat. This method will return the Superclass or super
+interface i.e. Animal. For example, if you pass the Animal Type as a cat, then it will
+create the Cat class object and assign that object to the Superclass reference variable i.e.
+Animal and return that Superclass reference variable to the caller.
+
+Let say, we have another group of sea animals such as Octopus and Shark. The way we
+implement the Land animals, in the same way, we need to implement the Sea animals. Please
+have a look at the following diagram for a better understanding.
+
+#+DOWNLOADED: https://dotnettutorials.net/wp-content/uploads/2018/11/word-image-104.png @ 2022-03-19 02:17:35
+[[file:Creational_Patterns_\[2/6\]/2022-03-19_02-17-35_word-image-104.png]]
+
+
+
+
+
 ** TODO Discussion of Creational Patterns
 * Structural Patterns [0/7]
 ** TODO Facade
