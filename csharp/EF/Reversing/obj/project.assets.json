@@ -740,24 +740,31 @@
     ]
   },
   "packageFolders": {
-    "/home/ghd/.nuget/packages/": {}
+    "C:\\Users\\ghd\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/EF/Reversing/Reversing.csproj",
+      "projectUniqueName": "D:\\me\\leet\\csharp\\EF\\Reversing\\Reversing.csproj",
       "projectName": "Reversing",
-      "projectPath": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/EF/Reversing/Reversing.csproj",
-      "packagesPath": "/home/ghd/.nuget/packages/",
-      "outputPath": "/mnt/0E08DBBF08DBA3CD/me/leet/csharp/EF/Reversing/obj/",
+      "projectPath": "D:\\me\\leet\\csharp\\EF\\Reversing\\Reversing.csproj",
+      "packagesPath": "C:\\Users\\ghd\\.nuget\\packages\\",
+      "outputPath": "D:\\me\\leet\\csharp\\EF\\Reversing\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/ghd/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ghd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -801,18 +808,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.2, 6.0.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

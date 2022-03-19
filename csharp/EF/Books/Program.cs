@@ -97,12 +97,7 @@ public static class Program
         {
             return 5;
         }
-        finally
-        {
-            return 10;
         }
-
-        return 1;
     }
 
 
