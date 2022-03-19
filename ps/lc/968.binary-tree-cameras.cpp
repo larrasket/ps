@@ -62,6 +62,7 @@ public:
   }
 };
 int main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
+  int x = 10, a = -3;
+  x = +a;
+  cout << x << endl;
 }
