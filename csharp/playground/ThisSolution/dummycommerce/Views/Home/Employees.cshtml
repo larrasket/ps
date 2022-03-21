@@ -1,0 +1,45 @@
+@model Employee
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Employee Form</title>
+</head>
+<body>
+<form asp-action="Employees" method="post">
+
+    <h1>Empoyees Form</h1>
+    <div>
+        <label asp-for="Name">Employee Name</label>
+        <input asp-for="Name"/>
+    </div>
+
+
+    <div>
+        <label asp-for="Id">Employee Id</label>
+        <input asp-for="Id"/>
+    </div>
+
+
+    <div>
+        <label asp-for="Active">Activity Status </label>
+        <input type="checkbox" asp-for="Active"/>
+    </div>
+
+
+    <div>
+        <label asp-for="Job">Employee job</label>
+        <select asp-for="Job">
+            @foreach (var job in Jobs.JobsList)
+            {
+                <option>@job</option>
+            }
+
+        </select>
+    </div>
+
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

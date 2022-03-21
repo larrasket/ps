@@ -257,15 +257,73 @@ places the burden on the consumer of a feature to correctly instantiate it. With
 application, these modular components are exposed as one or more services that are
 used by the application.
 
-For example, in an e-commerce app, you might have a TaxCalculator that calculates
+For example, in an e-commerce app, you might have a ~TaxCalculator~ that calculates
 the tax due on a particular product, taking into account the user’s location in the
-world. Or you might have a ShippingCostService that calculates the cost of shipping
-to a user’s location. A third service, OrderTotalCalculatorService, might use both
-of these services to work out the total price the user must pay for an order. Each ser-
+world. Or you might have a ~ShippingCostService~ that calculates the cost of shipping
+to a user’s location. A third service, ~OrderTotalCalculatorService~, might use both
+of these services to work out the total price the user must pay for an order. Each ser
 vice provides a small piece of independent functionality, but you can combine them to
 create a complete application. This is known as the single responsibility principle.
 
+In an ASP.NET Core application, this registration is performed in the Configure-
+Services method. Whenever you use a new ASP.NET Core feature in your application,
+you’ll need to come back to this method and add in the necessary services.
+
+
+The OrderTotalCalculatorService needs access to an instance of ShippingCost-
+Service and TaxCalculator. A naïve approach to this problem is to use the new key-
+word and create an instance of a service whenever you need it. Unfortunately, this
+tightly couples your code to the specific implementation you’re using and can com-
+pletely undo all the good work achieved by modularizing the features in the first
+place. In some cases, it may break the SRP by making you perform initialization code
+as well as using the service you created.
+
+
+ One solution to this problem is to make it somebody else’s problem. When writing
+a service, you can declare your dependencies and let another class fill those depen-
+dencies for you. Your service can then focus on the functionality for which it was
+designed, instead of trying to work out
+how to build its dependencies.
+
+
+Typically, you’ll register the dependencies of your application into a “container,”
+which can then be used to create any service. This is true for both your own custom
+application services and the framework services used by ASP.NET Core. You must register
+each service with the container before it can be used in your application.
 
 In an ASP.NET Core application, this registration is performed in the Configure-
 Services method. Whenever you use a new ASP.NET Core feature in your applica-
-tion, you’ll need to come back to this method and add in the necessary services.
+tion, you’ll need to come back to this method and add in the necessary services. This
+is not arduous as it sounds, as shown in the next example:
+
+#+begin_src csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllersWithViews();
+}
+#+end_src
+
+You may be surprised that a complete MVC application only includes a single call to
+add the necessary services, but the ~AddMvc()~ method is an extension method that
+encapsulates all the code required to set up the MVC services. Behind the scenes, it
+adds various Razor services for rendering HTML, formatter services, routing services,
+and many more!
+
+
+ As well as registering framework-related services, this method is where you’d register
+any custom services you have in your application, such as the example TaxCalculator
+discussed previously. The ~IServiceCollection~ is a list of every known service that your
+application will need to use. By adding a new service to it, you ensure that whenever a
+class declares a dependency on your service, the IoC container knows how to provide it.
+
+Defining how requests are handled with middleware
+So far, in the ~WebHostBuilder~ and Startup class, you’ve defined the infrastructure of
+the application and registered your services with the IoC container. In the final config-
+uration method of Startup, Configure, you define the middleware pipeline for the
+application, which is what defines the app’s behavior.
+
+
+In development, DeveloperExceptionPageMiddleware (added by the ~UseDeveloperExceptionPage()~
+call) ensures that, if your application throws an exception that isn’t caught, you’ll be
+presented with as much information as possible in the browser to diagnose the problem, as
+shown in figure 2.10. It’s akin to the “yellow screen of death”

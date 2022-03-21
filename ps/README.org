@@ -170,8 +170,8 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/968.%20Binary%20Tree%20Cameras.md][968. Binary Tree Cameras]]
 ***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/979.%20Distribute%20Coins%20in%20Binary%20Tree.md][979. Distribute Coins in Binary Tree]]
 
-**** Binary Search [0/20]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/34.%20Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array.md][34. Find First and Last Position of Element in Sorted Array]]
+**** Binary Search [1/20]
+***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/34.%20Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array.md][34. Find First and Last Position of Element in Sorted Array]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/35.%20Search%20Insert%20Position.md][35. Search Insert Position]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/704.%20Binary%20Search.md][704. Binary Search]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/981.%20Time%20Based%20Key-Value%20Store.md][981. Time Based Key-Value Store]]
