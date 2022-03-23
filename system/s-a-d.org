@@ -1,0 +1,238 @@
+#+TITLE: System Analysis & Design
+
+* Introduction
+
+The systems development life cycle (SDLC), contains the fundamental four- phase model
+(planning, analysis, design, and implementation) common to all information  systems
+development projects. It describes the evolution of system development method- ologies and
+discusses the roles and skills required of a systems analyst. Th e chapter then  overviews
+the basic characteristics of object-oriented systems and the fundamentals of object-oriented
+systems analysis and design and closes with a description of the Unified Process and its
+extentions and Unified Modeling Language
+
+** A Cries
+Let's take a look at how the software engineering cries has been formed:
+
+- A 1996 survey by the Standish Group found that *42 percent of all corporate IS projects were abandoned before completion*.
+- A similar study conducted in 1996 by the General Accounting Office found *53 percent of all U.S. government IS projects were abandoned*.
+
+Many of the systems that are not abandoned are delivered to the users:
+
++ Significantly late.
++ Cost far more than planned.
++ Have fewer features than originally planned.
+
+IAG Consulting reports that _80 percent of the projects were over time_, _72 percent were
+over budget_, and _55 percent contained less than the full functionality_; Panorama
+Consulting Solutions reports that _54 percent of the ERP projects were over time,_ _56
+percent were over budget,_ and _48 percent delivered less than 50 percent of the initial
+benefits;_ and an IBM study reports that 59 percent of the projects missed one or more of on
+time, within budget, and quality constraints.
+** System Development Life Cycle
+In many ways, building an information system is similar to building a house. First, the house
+(or the information system) starts with a basic idea. Second, this idea is transformed into a
+simple drawing that is shown to the customer and refined (often through several drawings,
+each improving on the last) until the customer agrees that the picture depicts what he or she
+wants. Third, a set of blueprints is designed that presents much more detailed information about
+the house (e.g., the type of water faucets or where the telephone jacks will be placed). Finally,
+the house is built following the blueprints, often with some changes directed by the customer
+as the house is erected.
+
+The SDLC has a similar set of four fundamental phases: planning, analysis, design, and
+implementation. Different projects might emphasize different parts of the SDLC or approach the
+SDLC phases in different ways, but all projects have elements of these four phases. Each phase is
+itself composed of a series of steps, which rely upon techniques that produce deliverables (specific
+documents and files that provide understanding about the project).
+
+*** Planing
+The planning phase is the fundamental process of understanding /why/ an information system
+should be built and determining /how/ the project team will go about building it. It has two
+steps:
+
+1. During project initiation, the system’s business value to the organization is identified.
+    How will it _lower costs_ or _increase revenues_[fn:1]? Most ideas for new systems *come
+   from outside the IS area* (e.g., /from the marketing department, accounting department/) in
+   the form of a /system request/. A system request presents a brief summary of a /business
+   need/, and it explains how a system that supports the need will create business value. The
+   IS department works together with the person or department that generated the request
+   (called the project sponsor) to conduct a feasibility analysis.
+2. Once the project is approved, it enters project management.
+    During project management, the project manager creates a workplan, staffs the project,
+    and puts techniques in place to help the project team control and direct the project
+    through the entire SDLC. The deliverable for project management is a project plan, which
+    describes how the project team will go about developing the system.
+
+*** Analysis
+The analysis phase answers the questions of /who/ will use the system, what the system will
+/do/, and /where and when/ it will be used. During this phase, the project team /investigates any
+current system(s),/ /identifies opportunities for improvement/, /and develops a concept for the
+new system/.
+
+It has 3 steps:
+
+1. An analysis strategy is developed to guide the project team’s efforts.
+    Such a strategy usually includes an analysis of the current system (called the /as-is
+    system/) and its problems and then ways to design a new system (called the /to-be system/).
+2. The next step is requirements gathering (e.g., through interviews or questionnaires).
+    The analysis of this information—in conjunction with input from the project sponsor and
+   many other people—leads to the development of a concept for a new system.
+3. The analyses, system concept, and models are combined into a document called the system proposal.
+    which is presented to the project sponsor and other key decision makers (e.g., members
+    of the approval committee) who decide whether the project should continue to move
+   forward. (of course, before it even starts)
+
+*** Design
+The design phase decides how the system will operate, in terms of the hardware, software,
+and network infrastructure; the user interface, forms, and reports; and the specific programs,
+databases, and files that will be needed. Although most of the strategic decisions about the
+system were made in the development of the system concept during the analysis phase, the
+steps in the design phase determine exactly how the system will operate. The design phase
+has four steps:
+
+1. The design strategy is first developed.
+   It clarifies whether the system will be developed by the company’s own programmers,
+   whether the system will be outsourced to another firm (usually a consulting firm), or
+   whether the company will buy an existing software package.
+2. This leads to the development of the basic architecture design for the system.
+    which describes the hardware, software, and network infrastructure to be used. In most
+    cases, the system will add or change the infrastructure that already exists in the
+    organization. The interface design specifies how the users will move through the sys- tem
+    (e.g., navigation methods such as menus and on-screen buttons) and the forms and reports
+    that the system will use.
+3. The database and file specifications are developed.
+   These define exactly what data will be stored and where they will be stored.
+4. The analyst team develops the program design, which defines the programs that need to be written and exactly what each program will do.
+
+*** Implementation
+The final phase in the SDLC is the implementation phase, during which the system is actually
+built (or purchased, in the case of a packaged software design). This is the phase that usually
+gets the most attention, because for most systems it is the longest and most expensive single
+part of the development process. This phase has three steps:
+
+1. System construction is the first step.
+    The system is built and tested to ensure that it performs as designed. Because the cost
+    of bugs can be immense, testing is one of the most critical steps in implementation. Most
+    organizations give more time and attention to testing than to writing the programs in the
+    first place.
+2. The system is installed.
+    Installation is the process by which the old system is turned off and the new one is
+    turned on. One of the most important aspects of conversion is the development of a _training
+    plan to teach users how to use the new system_ and help manage the changes caused by the new
+    system.
+3. The analyst team establishes a support plan for the system.
+    This plan usually includes a formal or informal post-implementation review as well as a
+    systematic way for identifying major and minor changes needed for the system.
+
+
+** Methodologies
+A methodology is a formalized approach to implementing the SDLC (i.e., it is a list of steps
+and deliverables). There are many different systems development methodologies, and each
+one is unique, based on the order and focus it places on each SDLC phase. Some methodolo-
+gies are formal standards used by government agencies, whereas others have been developed
+by consulting firms to sell to clients. Many organizations have internal methodologies that
+have been honed over the years, and they explain exactly how each phase of the SDLC is to
+be performed in that company.
+
+There are many ways to categorize methodologies. One way is by looking at whether
+they focus on business processes or the data that support the business. A process-centered
+methodology emphasizes process models as the core of the system concept.
+
+Another important factor in categorizing methodologies is the sequencing of the SDLC phases
+and the amount of time and effort devoted to each. In the early days of computing,
+programmers did not understand the need for formal and well-planned life-cycle
+methodologies. They tended to move directly from a very simple planning phase right into the
+construction step of the implementation phase—in other words, from a very fuzzy, not-well-
+thought-out system request into writing code. This is the same approach that you sometimes
+use when writing programs for a programming class. It can work for small programs that
+require only one programmer, but if the requirements are complex or unclear, you might
+miss important aspects of the problem and have to start all over again, throwing away part of
+the program (and the time and effort spent writing it). This approach also makes teamwork
+difficult because members have little idea about what needs to be accomplished and how to
+work together to produce a final product. In this section, we describe three different classes of
+system development methodologies: structured design, rapid application development, and
+agile development.
+
+*** Structured Design
+The first category of systems development methodologies is called structured design.
+These methodologies became dominant in the 1980s, replacing the previous ad hoc and
+undisciplined approach. Structured design methodologies adopt a formal step-by-step
+approach to the SDLC that moves logically from one phase to the next. Numerous pro-
+cess-centered and data-centered methodologies follow the basic approach of the two struc-
+tured design categories outlined next.
+
+Waterfall Development The original structured design methodology (still used today) is
+waterfall development. With waterfall development-based methodologies, the analysts and
+users proceed in sequence from one phase to the next. The key deliverables
+for each phase are typically very long (often hundreds of pages in length) and are presented to
+the project sponsor for approval as the project moves from phase to phase. Once the sponsor
+approves the work that was conducted for a phase, the phase ends and the next one begins.
+This methodology is referred to as waterfall development because it moves forward from
+phase to phase in the same manner as a waterfall. Although it is possible to go backward in
+the SDLC (e.g., from design back to analysis), it is extremely difficult.
+
+[[file:Introduction/2022-03-23_02-40-57_llmjv4x.png]]
+
+Structured design also introduced the use of formal modeling or diagramming tech-
+niques to describe the basic business processes and the data that support them. Traditional
+structured design uses one set of diagrams to represent the processes and a separate set of
+diagrams to represent data. Because two sets of diagrams are used, the systems analyst must
+decide which set to develop first and use as the core of the system: process-model diagrams
+or data-model diagrams.
+
+The two key advantages of the structured design waterfall approach are that it identi-
+fies system requirements long before programming begins and it minimizes changes to the
+requirements as the project proceeds.
+
+The two key disadvantages are that the design must be completely specified before
+programming begins and that a long time elapses between the completion of the system
+proposal in the analysis phase and the delivery of the system (usu- ally many months or
+years). If the project team misses important requirements, expensive post-implementation
+programming may be needed (imagine yourself trying to design a car on paper; how likely
+would you be to remember interior lights that come on when the doors open or to specify the
+right number of valves on the engine?). A system can also require significant rework because
+the business environment has changed from the time when the analysis phase occurred.
+
+
+Parallel development methodology attempts to address the problem of long delays between the
+analysis phase and the delivery of the system. Instead of doing design and implementation in
+sequence, it performs a general design for the whole system and then divides the project
+into a series of distinct subprojects that can be designed and implemented in parallel. Once
+all subprojects are complete, the separate pieces are integrated and the system is delivered.
+
+[[file:Introduction/2022-03-23_02-50-52_3IEc8LB.png]]
+
+The primary advantage of this methodology is that it can reduce the time to deliver a
+system; thus, there is less chance of changes in the business environment causing rework.
+However, sometimes the subprojects are not completely independent; design decisions made in
+one subproject can affect another, and the end of the project can require significant
+integration efforts.
+
+*** Rapid Application Development
+A second category of methodologies includes rapid application development (RAD)-based
+methodologies. These are a newer class of systems development methodologies that emerged in
+the 1990s. RAD-based methodologies attempt to address both weaknesses of structured design
+methodologies by adjusting the SDLC phases to get some part of the system devel- oped
+quickly and into the hands of the users. In this way, the users can better understand the
+system and suggest revisions that bring the system closer to what is needed.
+
+[[file:Introduction/2022-03-23_02-52-20_VBaI9Lj.png]]
+
+Most RAD-based methodologies recommend that analysts use special techniques
+and computer tools to speed up the analysis, design, and implementation phases, such as
+computer-aided software engineering (CASE) tools, joint application design (JAD) sessions,
+fourth-generation or visual programming languages that simplify and speed up programming,
+and code generators that automatically produce programs from design specifications. The
+combination of the changed SDLC phases and the use of these tools and techniques improves
+the speed and quality of systems development. However, there is one possible subtle problem
+with RAD-based methodologies: managing user expectations. Owing to the use of the tools and
+techniques that can improve the speed and quality of systems development, user expectations
+of what is possible can change dramatically. As a user better understands the information tech-
+nology (IT), the systems requirements tend to expand. This was less of a problem when using
+methodologies that spent a lot of time thoroughly documenting requirements.
+
+* Footnotes
+
+[fn:1] the primary objective of a systems analyst is not to create a wonderful sys
+tem; instead, it is to create value for the organization, which for most companies means
+increasing profits (government agencies and not-for-profit organizations measure value
+differently).
