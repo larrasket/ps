@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Reversing
+﻿namespace Reversing
 {
     public partial class Review
     {

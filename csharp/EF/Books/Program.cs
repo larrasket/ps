@@ -32,11 +32,11 @@ public static class Program
             PublishedOn = DateTime.UtcNow,
             Price = rnd.Next(1, 3),
             ImageUrl = RandomString(13),
-            Reviews = new List<Review> {r},
-            Tags = new List<Tag> {thistag},
+            Reviews = new List<Review> { r },
+            Tags = new List<Tag> { thistag },
             BookAuthor = kh,
         };
-        thistag.books = new List<Book> {o};
+        thistag.books = new List<Book> { o };
         // x.Database.EnsureDeleted();
         // x.Database.EnsureCreated();
         x.Add(o);
@@ -97,15 +97,15 @@ public static class Program
         {
             return 5;
         }
-        }
     }
+}
 
 
-    public static string RandomString(int length)
-    {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var random = new Random();
-        return new string(Enumerable.Repeat(chars, length)
-            .Select(s => s[random.Next(s.Length)]).ToArray());
-    }
+public static string RandomString(int length)
+{
+    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    var random = new Random();
+    return new string(Enumerable.Repeat(chars, length)
+        .Select(s => s[random.Next(s.Length)]).ToArray());
+}
 }

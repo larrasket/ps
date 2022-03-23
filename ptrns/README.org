@@ -55,8 +55,46 @@ breaking algorithms. An algorithm that's encapsulated in this way is called a st
 ** TODO Iterator
 ** TODO Observer
 ** TODO Discussion of Behavioral Patterns
-* Creational Patterns [2/6]
-** TODO Builder
+* Creational Patterns [2/5]
+** Builder
+The Builder Design Pattern builds a complex object using many simple objects and using a
+step-by-step approach. The Process of constructing a complex object should be generic so
+that the same construction process can be used to create different representations of the
+same complex object.
+
+So, the Builder Design Pattern is all about separating the construction process from its
+representation. When the construction process of your object is very complex then only you
+need to use to Builder Design Pattern. If this is not clear at the moment then don’t worry
+we will try to understand this with an example.
+
+Suppose we want to develop an application for displaying the reports. The reports we need to
+display either in Excel or in PDF format. That means, we have two types of representation of
+my reports. In order to understand this better, please have a look at the following diagram.
+
+
+[[file:Creational_Patterns_\[2/5\]/2022-03-21_08-47-57_c-users-pranaya-pictures-understanding-the-builde.png]]
+
+
+As you can see, in the above image, we are generating the report either in Excel and PDF.
+Here, the construction process involves several steps such as Create a new report, setting
+report type, header, content, and footer. If you look at the final output we have one PDF
+representation and one Excel representation. Please have a look at the following diagram to
+understand the construction process and its representation.
+
+
+
+[[file:Creational_Patterns_\[2/5\]/2022-03-21_08-49-34_c-users-pranaya-pictures-bilder-design-pattern-re.png]]
+
+In order to separate the construction process from its representation, the builder design
+pattern Involve four components. They are as follows.
+
+- Builder: The Builder is an interface that defines all the steps which are used to make the concrete product.
+- Concrete Builder: The ~ConcreteBuilder~ class implements the Builder interface and provides implementation to all the abstract methods. The Concrete Builder is responsible for constructs and assembles the individual parts of the product by implementing the Builder interface. It also defines and tracks the representation it creates.
+- Director: The Director takes those individual processes from the Builder and defines the sequence to build the product.
+- Product: The Product is a class and we want to create this product object using the builder design pattern. This class defines different parts that will make the product.
+
+
+
 ** TODO Prototype
 ** DONE Factory Design Pattern
 According to Gang of Four, the Factory Design Pattern states that “A factory is an object
