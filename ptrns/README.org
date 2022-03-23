@@ -94,8 +94,25 @@ pattern Involve four components. They are as follows.
 - Product: The Product is a class and we want to create this product object using the builder design pattern. This class defines different parts that will make the product.
 
 
-
 ** TODO Prototype
+As per the GoF Definition, “Prototype Design Pattern specifies the kind of objects to create
+using a prototypical instance, and create new objects by copying this prototype”.
+
+To simplify the above definition, we can say that, the Prototype Design Pattern gives us a
+way to create new objects from the existing instance of the object. That means it clone the
+existing object with its data into a new object. If we do any changes to the cloned object
+(i.e. new object) then it does not affect the original object.
+
+Note: The Prototype Design Pattern is unique among the other creational design patterns as
+it doesn’t require a class instead it requires an end object.
+
+In C#, when we try to copy one object to another object using the assignment ~=~ operator,
+then both the objects will share the same memory address. And the reason is the assignment
+operator ~=~ copies the reference, not the object except when there is a value type field.
+This operator will always copy the reference, not the actual object.
+
+
+
 ** DONE Factory Design Pattern
 According to Gang of Four, the Factory Design Pattern states that “A factory is an object
 which is used for creating other objects”. In technical terms, we can say that a factory is
@@ -402,7 +419,6 @@ object. Please have a look at the following diagram.
 [[file:Creational_Patterns_\[1/6\]/2022-03-18_05-25-35_c-users-pranaya-pictures-factory-method-design-pa-2.png]]
 
 
-
 ** TODO Abstract Factory
 
 According to Gang of Four Definition: “The Abstract Factory Design Pattern provides a way to
@@ -441,7 +457,6 @@ have a look at the following diagram for a better understanding.
 
 #+DOWNLOADED: https://dotnettutorials.net/wp-content/uploads/2018/11/word-image-104.png @ 2022-03-19 02:17:35
 [[file:Creational_Patterns_\[2/6\]/2022-03-19_02-17-35_word-image-104.png]]
-
 
 
 
