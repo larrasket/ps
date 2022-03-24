@@ -354,7 +354,7 @@ This statements illustrate the usage of ~group by~ clause:
 #+end_src
 
 This statement divide the rows by its ~count~ values and then group it by calculating the sum
-of the total occurance for each country, the result should be like:
+of the total occurrence for each country, the result should be like:
 
 #+RESULTS:
 #+begin_example
