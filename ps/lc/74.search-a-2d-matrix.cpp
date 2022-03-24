@@ -26,18 +26,31 @@
 #define sz(v) ((int)((v).size()))
 using namespace std;
 
-class Solution {
-public:
-  bool searchMatrix(vector<vector<int>> &matrix, int target) {
-    int z = matrix.size();
-    for (int i = 0; i < z; i++) {
-      if (binary_search(begend(matrix[i]), target))
-        return true;
-    }
-    return false;
+int searching(vector<vector<int>> matrix, int x) {
+  int l = 0, r = matrix.size() - 1, mid;
+  while (l <= r) {
+    mid = l + (r - l) / 2;
+    if (matrix[mid][0] == x)
+      return mid;
+    if (matrix[mid][0] < x)
+      l = mid + 1;
+    else
+      r = mid - 1;
   }
-};
+  if (matrix[mid][0] > x)
+    return mid - 1;
+  return mid;
+}
+
+bool searchMatrix(vector<vector<int>> &matrix, int target) {
+  int m = matrix.size(), n = matrix[0].size();
+  // find column to search
+  auto i = searching(matrix, target);
+  if (i < 0)
+    return 0;
+  return binary_search(begend(matrix[i]), target);
+}
 int main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
+  vector<vector<int>> k{{1}};
+  cout << searchMatrix(k, 2);
 }
