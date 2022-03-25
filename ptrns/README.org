@@ -21,24 +21,72 @@ a pattern has four essential elements:
 
 * Behavioral Patterns [0/18]
 ** TODO Strategy
-*Intent:* Define a family of algorithms, encapsulate each one, and make them interchange-
-*** TODO Motivation
-Many algorithms exist for breaking a stream of text into lines. Hard-wiring all such
-algorithms into the classes that require them isn't desirable for several reasons:
+** TODO Singleton
+We need to use the Singleton Design Pattern in C# when we need to ensures that only one
+instance of a particular class is going to be created and then provide simple global access
+to that instance for the entire application.
 
-- Clients that need linebreaking get more complex if they include the line- breaking code. That makes clients bigger and harder to maintain, especially if they support multiple linebreaking algorithms.
+[[file:Behavioral_Patterns_\[0/18\]/2022-03-24_03-28-46_screenshot.png]]
 
-- Different algorithms will be appropriate at different times. We don't want to support multiple linebreaking algorithms if we don't use them all.
+As you can see in the above diagram, different clients (~NewObject~ a, ~NewObject~ b and
+~NewObject~ n) trying to get the singleton instance. Once the client gets the singleton
+instance then they can invoke the methods (Method 1, Method 2, and Method n) using the same
+instance.
 
-- It's difficult to add new algorithms and vary existing ones when linebreaking is an integral part of a client.
 
-We can avoid these problems by defining classes that encapsulate different line-
-breaking algorithms. An algorithm that's encapsulated in this way is called a strategy
+1. The first and most important advantage of using the singleton design pattern in C# is that it takes care of concurrent access to the shared resource. That means if we are sharing a resource with multiple clients simultaneously, then concurrent access to that resource is well managed by the singleton design pattern.
+2. It can be lazy-loaded and also has Static Initialization.
+3. To share common data i.e. master data and configuration data which is not changed that frequently in an application. In that case, we need to cache the objects in memory.
+4. As it provides a single global point of access to a particular instance, so it is easy to maintain.
+5. To reduce the overhead of instantiating a heavy object again and again.
 
-#+DOWNLOADED: screenshot @ 2022-03-16 03:34:47
-[[file:Behavioral_Patterns_\[1/19\]/2022-03-16_03-34-47_screenshot.png]]
+The following are the implementation guidelines for using the singleton design pattern in
+C#.
 
-** TODO [#A] Singleton
+1. You need to declare a constructor that should be private and parameterless. This is required because it is not allowed the class to be instantiated from outside the class. It only instantiates from within the class.
+2. The class should be declared as sealed which will ensure that it cannot be inherited. This is going to be useful when you are dealing with the nested class. We will discuss this scenario with an example in our upcoming article.
+3. You need to create a private static variable that is going to hold a reference to the single created instance of the class if any.
+4. You also need to create a public static property/method which will return the single-created instance of the singleton class. This method or property first check if an instance of the singleton class is available or not. If the singleton instance is available, then it returns that singleton instance otherwise it will create an instance and then return that instance.
+#+begin_src csharp
+namespace SingletonDemo
+{
+    public sealed class Singleton
+    {
+        private static int counter = 0;
+        private static Singleton instance = null;
+        public static Singleton GetInstance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new Singleton();
+                return instance;
+            }
+        }
+
+        private Singleton()
+        {
+            counter++;
+            Console.WriteLine("Counter Value " + counter.ToString());
+        }
+
+        public void PrintDetails(string message)
+        {
+            Console.WriteLine(message);
+        }
+    }
+}
+#+end_src
+
+We created the Singleton class as sealed which ensures that the class cannot be inherited
+and object instantiation is restricted in the derived class. The class is created with a
+private constructor which will ensure that the class is not going to be instantiated from
+outside the class. Again we declared the instance variable as private and also initialized
+it with the null value which ensures that only one instance of the class is created based on
+the null condition. The public property GetInstance is used to return only one instance of
+the class by checking the value of the private variable instance. The public method
+PrintDetails can be invoked from outside the class through the singleton instance.
+
 ** TODO Command
 ** TODO Null Object
 ** TODO Specification Pattern
@@ -55,8 +103,8 @@ breaking algorithms. An algorithm that's encapsulated in this way is called a st
 ** TODO Iterator
 ** TODO Observer
 ** TODO Discussion of Behavioral Patterns
-* Creational Patterns [2/5]
-** Builder
+* Creational Patterns [5/5]
+** DONE Builder
 The Builder Design Pattern builds a complex object using many simple objects and using a
 step-by-step approach. The Process of constructing a complex object should be generic so
 that the same construction process can be used to create different representations of the
@@ -93,8 +141,7 @@ pattern Involve four components. They are as follows.
 - Director: The Director takes those individual processes from the Builder and defines the sequence to build the product.
 - Product: The Product is a class and we want to create this product object using the builder design pattern. This class defines different parts that will make the product.
 
-
-** TODO Prototype
+** DONE Prototype
 As per the GoF Definition, “Prototype Design Pattern specifies the kind of objects to create
 using a prototypical instance, and create new objects by copying this prototype”.
 
@@ -110,8 +157,6 @@ In C#, when we try to copy one object to another object using the assignment ~=~
 then both the objects will share the same memory address. And the reason is the assignment
 operator ~=~ copies the reference, not the object except when there is a value type field.
 This operator will always copy the reference, not the actual object.
-
-
 
 ** DONE Factory Design Pattern
 According to Gang of Four, the Factory Design Pattern states that “A factory is an object
@@ -418,8 +463,7 @@ object. Please have a look at the following diagram.
 
 [[file:Creational_Patterns_\[1/6\]/2022-03-18_05-25-35_c-users-pranaya-pictures-factory-method-design-pa-2.png]]
 
-
-** TODO Abstract Factory
+** DONE Abstract Factory
 
 According to Gang of Four Definition: “The Abstract Factory Design Pattern provides a way to
 encapsulate a group of individual factories that have a common theme without specifying
@@ -458,15 +502,203 @@ have a look at the following diagram for a better understanding.
 #+DOWNLOADED: https://dotnettutorials.net/wp-content/uploads/2018/11/word-image-104.png @ 2022-03-19 02:17:35
 [[file:Creational_Patterns_\[2/6\]/2022-03-19_02-17-35_word-image-104.png]]
 
-
-
-
-** TODO Discussion of Creational Patterns
-* Structural Patterns [0/7]
+* Structural Patterns [1/7]
 ** TODO Facade
 ** TODO Decorator
 ** TODO Composite
-** TODO [#A] Adapter
+** DONE Adapter
+The Adapter Design Pattern in C# works as a bridge between two incompatible interfaces. This
+design pattern involves a single class called adapter which is responsible for communication
+between two independent or incompatible interfaces. So, in simple words, we can say that the
+Adapter Design Pattern helps two incompatible interfaces to work together. If this is not
+clear at the moment then don’t worry we will understand this with an example.
+
+On the right-hand side, you can see the Third Party Billing System and on the left side, you
+can see the Client i.e. the Existing HR System. Now, we will see how these two systems are
+incompatible and we will also see how we will make them compatible using Adapter Design
+Patterns in C#.
+
+[[file:Structural_Patterns_\[0/7\]/2022-03-25_01-03-51_word-image-15-768x266.png]]
+
+As you can see, the Third Party Billing System provides one functionality called
+~ProcessSalary~. What this ~ProcessSalary~ method will do is, it will take the employee list
+(i.e. ~List<Employee>~) as an input parameter and then loop through each employee and
+calculate the salary and deposit the salary into the employee’s bank account.
+
+On the left-hand side i.e. in the Existing HR System, the employee information is in the
+form of the string array. The HR System wants to process the salary of employees. Then what
+the HR System has to do is, it has to call the ~ProcessSalary~ method of the Third Party
+Billing System. But if you look at the HR system, the employee information is in the form of
+a string array and the ~ProcessSalary~ method of the Third Party Billing System wants to data
+in ~List<Employee>~. So, the HR System cannot call directly to the Third Party Billing System
+because ~List<Employee>~ and string array are not compatible. So, these two systems are
+incompatible.
+
+We can use the Adapter Design Pattern in C# to make these two systems or interfaces work
+together. Now, we need to introduce an Adapter between the HR System and the Third Party
+Billing System as shown in the below image.
+
+
+[[file:Structural_Patterns_\[0/7\]/2022-03-25_01-07-41_word-image-16.png]]
+
+
+Now the HR System will send the employee information in the form of a String Array to the
+Adapter. Then what this Adapter will do is, it will read the employee information from the
+string array and populate the employee object and put each employee object into the
+~List<Employee>~ and then the Adapter will send the ~List<Employee>~ to the ~ProcessSalary~ method
+of Third Party Billing System. Then the ~ProcessSalary~ method calculates the Salary of each
+employee and deposits the salary into the Employee’s bank account.
+
+So, in this way, we can make two incompatible interfaces work together with the help of the
+Adapter Design Pattern in C#. Again the Adapter Design Pattern can be implemented in two
+ways. They are as follows.
+
+*** Object Adapter Pattern
+An Object Adapter delegates to an adaptee object. Let us understand the class diagram first.
+In order to understand the class diagram and the different components involved in the
+Adapter Design Pattern please have a look at the following diagram.
+
+#+DOWNLOADED: https://dotnettutorials.net/wp-content/uploads/2019/10/word-image-17.png @ 2022-03-25 01:10:27
+[[file:Structural_Patterns_\[0/7\]/2022-03-25_01-10-27_word-image-17.png]]
+
+
+*Employee class:*
+
+#+begin_src csharp
+namespace AdapterDesignPattern
+{
+    public class Employee
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Designation { get; set; }
+        public decimal Salary { get; set; }
+
+        public Employee(int id, string name, string designation, decimal salary)
+        {
+            ID = id;
+            Name = name;
+            Designation = designation;
+            Salary = salary;
+        }
+    }
+}
+#+end_src
+
+
+*Adaptee:*
+
+#+begin_src csharp
+using System;
+using System.Collections.Generic;
+namespace AdapterDesignPattern
+{
+    public class ThirdPartyBillingSystem
+    {
+        //ThirdPartyBillingSystem accepts employees information as a List to process each employee salary
+        public void ProcessSalary(List<Employee> listEmployee)
+        {
+            foreach (Employee employee in listEmployee)
+            {
+                Console.WriteLine("Rs." +employee.Salary + " Salary Credited to " + employee.Name + " Account");
+            }
+        }
+    }
+}
+#+end_src
+
+*Target:*
+
+#+begin_src csharp
+namespace AdapterDesignPattern
+{
+    public interface ITarget
+    {
+        void ProcessCompanySalary(string[,] employeesArray);
+    }
+}
+#+end_src
+
+
+*Adapter:*
+
+#+begin_src csharp
+using System;
+using System.Collections.Generic;
+namespace AdapterDesignPattern
+{
+    public class EmployeeAdapter : ITarget
+    {
+        ThirdPartyBillingSystem thirdPartyBillingSystem = new ThirdPartyBillingSystem();
+
+        public void ProcessCompanySalary(string[,] employeesArray)
+        {
+            string Id = null;
+            string Name = null;
+            string Designation = null;
+            string Salary = null;
+
+            List<Employee> listEmployee = new List<Employee>();
+
+            for (int i = 0; i < employeesArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < employeesArray.GetLength(1); j++)
+                {
+                    if (j == 0)
+                    {
+                        Id = employeesArray[i, j];
+                    }
+                    else if (j == 1)
+                    {
+                        Name = employeesArray[i, j];
+                    }
+                    else if (j == 2)
+                    {
+                        Designation = employeesArray[i, j];
+                    }
+                    else
+                    {
+                        Salary = employeesArray[i, j];
+                    }
+                }
+
+                listEmployee.Add(new Employee(Convert.ToInt32(Id), Name, Designation, Convert.ToDecimal(Salary)));
+            }
+
+            Console.WriteLine("Adapter converted Array of Employee to List of Employee");
+            Console.WriteLine("Then delegate to the ThirdPartyBillingSystem for processing the employee salary\n");
+            thirdPartyBillingSystem.ProcessSalary(listEmployee);
+        }
+    }
+}
+#+end_src
+
+*Client:*
+#+begin_src csharp
+namespace AdapterDesignPattern
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[,] employeesArray = new string[5, 4]
+            {
+                {"101","John","SE","10000"},
+                {"102","Smith","SE","20000"},
+                {"103","Dev","SSE","30000"},
+                {"104","Pam","SE","40000"},
+                {"105","Sara","SSE","50000"}
+            };
+
+            ITarget target = new EmployeeAdapter();
+            Console.WriteLine("HR system passes employee string array to Adapter\n");
+            target.ProcessCompanySalary(employeesArray);
+
+            Console.Read();
+        }
+    }
+}
+#+end_src
 ** TODO Flyweight
-** TODO [#A] Proxy
+** TODO Proxy
 ** TODO Discussion of Structural Patterns
