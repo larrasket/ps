@@ -133,7 +133,7 @@ work the same way with multiple types of data.
 Let’s walk through a simple complete example. To begin with,
 you’re probably wondering what ~db.GetTable<Contact>()~ means in our LINQ to SQL.
 
-* LINQ in Depth [21/50]
+* LINQ in Depth [22/50]
 After being familiar with LINQ basic syntax, you should be able to write queries using old
 knowledge in querying any quaring language (i.e SQL) and use it with LINQ intuitively,
 therefore I will not include the banal basic querying methods.
@@ -1183,7 +1183,7 @@ namespace LINQDemo
 }
 #+end_src
 
-** TODO ~ToLookup~
+** DONE ~ToLookup~
 The Linq ~ToLookup~ Method in C# exactly does the same thing as the ~GroupBy~ Operator does in
 Linq. The only difference between these two methods is the GroupBy method uses deferred
 execution whereas the execution of the ~ToLookup~ method is immediate.
