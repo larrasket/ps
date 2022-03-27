@@ -3,5 +3,5 @@
   + [[file:geomtry/][Computational Geometry]]
   + [[file:dp/][Dynamic Programming]]
   + [[file:graphs/][Graphs]]
-  + [[file:sorting/sorting.org][Sorting]]
+  + [[file:other.org][other&randoms]]
 -----
