@@ -1,5 +1,6 @@
 #+title: "Introduction Into ASP.NET Core"
 #+date: 2022-01-08T05:28:26+02:00
+#+draft: true
 #+hugo_tags: "Computer Science" ".NET"
 * Introduction
 ASP.NET Core is the latest evolution of Microsoft’s popular ASP.NET web framework,
