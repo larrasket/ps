@@ -337,5 +337,4 @@ Let's give it a try:
 dotnet-ef dbcontext scaffold "Server=localhost; Port=5432; Database=books; Username=postgres;" Npgsql.EntityFrameworkCore.PostgreSQL
 #+end_src
 
-
 * TODO Migrate Commands
