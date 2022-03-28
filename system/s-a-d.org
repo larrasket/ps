@@ -226,9 +226,27 @@ combination of the changed SDLC phases and the use of these tools and techniques
 the speed and quality of systems development. However, there is one possible subtle problem
 with RAD-based methodologies: managing user expectations. Owing to the use of the tools and
 techniques that can improve the speed and quality of systems development, user expectations
-of what is possible can change dramatically. As a user better understands the information tech-
-nology (IT), the systems requirements tend to expand. This was less of a problem when using
-methodologies that spent a lot of time thoroughly documenting requirements.
+of what is possible can change dramatically. As a user better understands the information
+technology (IT), the systems requirements tend to expand. This was less of a problem when
+using methodologies that spent a lot of time thoroughly documenting requirements.
+
+**** Pashed Development
+A phased development-based methodology breaks an overall system into a series of versions
+that are developed sequentially. The analysis phase identifies the overall system concept,
+and the project team, users, and system sponsor then categorize the requirements into a
+series of versions. The most important and fundamental requirements are bundled into the
+first version of the system. The analysis phase then leads into design and
+implementation—but only with the set of requirements identified for version 1:
+
+#+DOWNLOADED: https://i.imgur.com/trV3Bk4.png @ 2022-03-28 09:34:45
+[[file:Introduction/2022-03-28_09-34-45_trV3Bk4.png]]
+
+Once version 1 is implemented, work begins on version 2. Additional analysis is per-
+formed based on the previously identified requirements and combined with new ideas and
+issues that arose from the users’ experience with version 1. Version 2 then is designed and
+implemented, and work immediately begins on the next version. This process continues until
+the system is complete or is no longer in use.
+
 
 * Footnotes
 
