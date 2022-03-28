@@ -329,6 +329,165 @@ You would use this to construct a string in multiple operations.
         });
 #+end_src
 
+** Middleware Definition
+
+ASP.NET Core introduced a new concept called Middleware. A middleware is nothing but a
+component (class) which is executed on every request in ASP.NET Core application. In the
+classic ASP.NET, ~HttpHandlers~ and ~HttpModules~ were part of request pipeline. Middleware is
+similar to ~HttpHandlers~ and ~HttpModules~ where both needs to be configured and executed in
+each request.
+
+Typically, there will be multiple middleware in ASP.NET Core web application. It can be
+either framework provided middleware, added via NuGet or your own custom middleware. We can
+set the order of middleware execution in the request pipeline. Each middleware adds or
+modifies http request and optionally passes control to the next middleware component. The
+following figure illustrates the execution of middleware components.
+
+** Adding User Without Register
+You could do this easily by creating a CreateRoles method in your startup class. This helps
+check if the roles are created, and creates the roles if they aren't; on application
+startup. Like so.
+#+begin_src csharp
+private async Task CreateRoles(IServiceProvider serviceProvider)
+    {
+        //initializing custom roles
+        var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        string[] roleNames = { "Admin", "Store-Manager", "Member" };
+        IdentityResult roleResult;
+
+        foreach (var roleName in roleNames)
+        {
+            var roleExist = await RoleManager.RoleExistsAsync(roleName);
+            // ensure that the role does not exist
+            if (!roleExist)
+            {
+                //create the roles and seed them to the database:
+                roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+            }
+        }
+
+        // find the user with the admin email
+        var _user = await UserManager.FindByEmailAsync("admin@email.com");
+
+       // check if the user exists
+       if(_user == null)
+       {
+            //Here you could create the super admin who will maintain the web app
+            var poweruser = new ApplicationUser
+            {
+                UserName = "Admin",
+                Email = "admin@email.com",
+            };
+            string adminPassword = "p@$$w0rd";
+
+            var createPowerUser = await UserManager.CreateAsync(poweruser, adminPassword);
+            if (createPowerUser.Succeeded)
+            {
+                //here we tie the new user to the role
+                await UserManager.AddToRoleAsync(poweruser, "Admin");
+
+            }
+       }
+    }
+#+end_src
+** Handling Errors
+There are several ways in which you can improve on this generic error page. A simple
+solution is to check for the HTTP status code 404 in the response. If found, you can
+redirect the control to a page that exists. The following code snippet illustrates how you
+can write the necessary code in the Configure method of the Startup class to redirect to the
+home page if a 404 error has occurred.
+*** Check ~Response.StatueCode~
+
+#+begin_src csharp
+ app.Use(async (context, next) =>
+    {
+        await next();
+        if (context.Response.StatusCode == 404)
+        {
+            context.Request.Path = "/Home";
+            await next();
+        }
+    });
+#+end_src
+*** Using ~UseStatuesCodePages~ Middleware in ASP.NET MVC
+#+begin_src csharp
+app.UseStatusCodePages();
+#+end_src
+
+*** ~UseStatusCodePagesWithReExecute~
+~HomeController~ has this action method:
+
+#+begin_src csharp
+public IActionResult Error(int statusCode)
+{
+    if (statusCode == 404)
+    {
+        var statusFeature = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+        if (statusFeature != null)
+        {
+            log.LogWarning("handled 404 for url: {OriginalPath}", statusFeature.OriginalPath);
+        }
+    }
+    return View(statusCode);
+}
+
+#+end_src
+
+#+begin_src csharp
+[Route("/Home/HandleError/{code:int}")]
+public IActionResult HandleError(int code)
+{
+   ViewData["ErrorMessage"] = $"Error occurred. The ErrorCode is: {code}";
+   return View("~/Views/Shared/HandleError.cshtml");
+}
+#+end_src
+
+And this view:
+#+begin_src csharp
+@model int
+@{
+    switch (Model)
+    {
+        case 400:
+            ViewData["Icon"] = "fa fa-ban text-danger";
+            ViewData["Title"] = "Bad Request";
+            ViewData["Description"] = "Your browser sent a request that this server could not understand.";
+            break;
+        case 401:
+            ViewData["Icon"] = "fa fa-ban text-danger";
+            ViewData["Title"] = "Unauthorized";
+            ViewData["Description"] = "Sorry, but the page requires authentication.";
+        break;
+        case 403:
+            ViewData["Icon"] = "fa fa-exclamation-circle text-danger";
+            ViewData["Title"] = "Forbidden";
+            ViewData["Description"] = "Sorry, but you don't have permission to access this page.";
+        break;
+        case 404:
+            ViewData["Icon"] = "fa fa-exclamation-circle text-danger";
+            ViewData["Title"] = "Page Not Found";
+            ViewData["Description"] = "Sorry, but the page you were looking for can't be found.";
+            break;
+        case 500:
+        default:
+            ViewData["Icon"] = "fa fa-exclamation-circle text-danger";
+            ViewData["Title"] = "Unexpected Error";
+            ViewData["Description"] = "Well, this is embarrassing. An error occurred while processing your request. Rest assured, this problem has been logged and hamsters have been released to fix the problem.";
+            break;
+    }
+}
+
+<div class="jumbotron text-center">
+    <header>
+        <h1><span aria-hidden="true" class="@ViewData["Icon"]"></span> @ViewData["Title"]</h1>
+    </header>
+    <p>@ViewData["Description"]</p>
+    <a class="btn btn-primary btn-lg" href="@Url.RouteUrl("/")"><span aria-hidden="true" class="fa fa-home"></span> Site Home</a>
+</div>
+
+#+end_src
+
 * Regex
 Match everything except for specified strings
 #+begin_src regex
