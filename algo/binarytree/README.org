@@ -85,7 +85,7 @@ access to the BinNode class.
 #+begin_src c++
 while (q.empty() == false) {
    Node *node = q.front();
-   cout << node->data << " ";
+   cout << node->data << " "; //whatever operation
    q.pop();
    if (node->left != NULL)
       q.push(node->left);
