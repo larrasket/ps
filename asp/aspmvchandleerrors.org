@@ -1,0 +1,50 @@
+#+TITLE: Handle 404 errors in ASP.NET Core MVc
+
+
+There are several ways in which you can improve on this generic error page. A simple
+solution is to check for the HTTP status code 404 in the response. If found, you can
+redirect the control to a page that exists. The following code snippet illustrates how you
+can write the necessary code in the Configure method of the Startup class to redirect to the
+home page if a 404 error has occurred.
+
+* Check ~Response.StatueCode~
+
+#+begin_src csharp
+ app.Use(async (context, next) =>
+    {
+        await next();
+        if (context.Response.StatusCode == 404)
+        {
+            context.Request.Path = "/Home";
+            await next();
+        }
+    });
+#+end_src
+* Using ~UseStatuesCodePages~ Middleware in ASP.NET MVC
+#+begin_src csharp
+app.UseStatusCodePages();
+#+end_src
+* The Ultimate Way, using ~UseStatusCodePagesWithReExecute~
+You can take advantage of the ~UseStatusCodePagesWithReExecute~ middleware to handle
+non-success status codes in cases where the process of generating the response has not been
+started. Hence this middleware will not handle HTTP 404 status code errors — rather, when a
+404 error occurs the control will be passed to another controller action to handle the
+error.
+
+#+begin_src csharp
+app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
+#+end_src
+
+The following code snippet illustrates how you can use this middleware to redirect to
+another action method.
+
+Here’s what the action method would look like.
+
+#+begin_src csharp
+[Route("/Home/HandleError/{code:int}")]
+public IActionResult HandleError(int code)
+{
+   ViewData["ErrorMessage"] = $"Error occurred. The ErrorCode is: {code}";
+   return View("~/Views/Shared/HandleError.cshtml");
+}
+#+end_src
