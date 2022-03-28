@@ -318,3 +318,19 @@ up results in memory.
 ~StringBuilder~ is essentially a buffer which allows you to perform multiple operations
 (typically appends) to a "logical string" without creating a new string object each time.
 You would use this to construct a string in multiple operations.
+
+* ASP.NET Notes
+** Redirect Manage to Login
+#+begin_src csharp
+    app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/Identity/Account/Register", context => Task.Factory.StartNew(() => context.Response.Redirect("/Identity/Account/Login", true, true)));
+            endpoints.MapPost("/Identity/Account/Register", context => Task.Factory.StartNew(() => context.Response.Redirect("/Identity/Account/Login", true, true)));
+        });
+#+end_src
+
+* Regex
+Match everything except for specified strings
+#+begin_src regex
+^(?!.*(red|green|blue))
+#+end_src
