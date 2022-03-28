@@ -133,7 +133,7 @@ work the same way with multiple types of data.
 Let’s walk through a simple complete example. To begin with,
 you’re probably wondering what ~db.GetTable<Contact>()~ means in our LINQ to SQL.
 
-* LINQ in Depth [22/50]
+* LINQ in Depth [22/49]
 After being familiar with LINQ basic syntax, you should be able to write queries using old
 knowledge in querying any quaring language (i.e SQL) and use it with LINQ intuitively,
 therefore I will not include the banal basic querying methods.
@@ -859,7 +859,6 @@ namespace LINQDemo
 }
 #+end_src
 
-
 ** DONE ~Aggregate~
 The Linq Aggregate extension method performs an accumulative operation.
 #+begin_src csharp
@@ -1226,7 +1225,6 @@ namespace GroupByDemo
 ** TODO Group Join
 ** TODO Left Join
 ** TODO Cross Join
-** TODO Element Operators
 ** TODO ~ElementAt~ and ~ElementAtOrDefault~
 ** TODO ~First~ and ~FirstOrDefault~
 ** TODO ~Last~ and ~LastOrDefault~
