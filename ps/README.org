@@ -21,6 +21,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/kth-largest-element-in-an-array/][215. Kth Largest Element in an Array]]                       | Array                | Medium     | LC    | [[file:lc/215.kth-largest-element-in-an-array.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/maximum-sum-circular-subarray/][918. Maximum Sum Circular Subarray]]                         | Array                | Medium     | LC    | [[file:lc/918.maximum-sum-circular-subarray.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                 | Array                | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/number-of-islands/][200. Number of Islands]]                                     | Array                | Medium     | LC    | [[file:lc/200.number-of-islands.cpp][Accepted]]            |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://codeforces.com/contest/1634/problem/A][A. Reverse and Concatenate]]                                 | String               | Easy       | CF    | [[file:cf/1634A.cpp][Accepted]]            |
 | [[https://leetcode.com/contest/weekly-contest-276/problems/divide-a-string-into-groups-of-size-k/][2138. Divide a String Into Groups of Size k]]                | String               | Easy       | LC    | [[file:lc/2138.divide-a-string-into-groups-of-size-k.cpp][Accepted]]            |
@@ -33,6 +34,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/maximum-gap/][164. Maximum Gap]]                                           | Sorting              | Hard       | LC    | [[file:lc/164.maximum-gap.cpp][Accepted]]            |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/contest/weekly-contest-280/problems/count-operations-to-obtain-zero][2167. Count Operations to Obtain Zero]]                      | Numbers              | Easy       | LC    | [[file:lc/2169.count-operations-to-obtain-zero.cpp][Accepted]]            |
+|------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/problems/k-closest-points-to-origin/][973. K Closest Points to Origin]]                            | Geometry             | Medium     | LC    | [[file:lc/973.k-closest-points-to-origin.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/max-points-on-a-line/][149. Max Points on a Line]]                                  | Geometry             | Hard       | LC    | [[file:lc/149.max-points-on-a-line.cpp][Accepted]]            |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
@@ -73,7 +75,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/all-paths-from-source-to-target/][797. All Paths From Source to Target]]                       | Depth-First Search   | Medium     | LC    | [[file:lc/797.all-paths-from-source-to-target.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/keys-and-rooms/][841. Keys and Rooms]]                                        | Depth-First Search   | Medium     | LC    | [[file:lc/841.keys-and-rooms.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/][1557. Minimum Number of Vertices to Reach All Nodes]]        | Depth-First Search   | Medium     | LC    | [[file:lc/1557.minimum-number-of-vertices-to-reach-all-nodes.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/binary-tree-pruning/][814. Binary Tree Pruning]]                                   | Depth-First Search   | Median     | LC    | [[file:lc/814.binary-tree-pruning.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/binary-tree-pruning/][814. Binary Tree Pruning]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/814.binary-tree-pruning.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/binary-tree-cameras/][968. Binary Tree Cameras]]                                   | Depth-First Search   | Hard       | LC    | [[file:lc/968.binary-tree-cameras.cpp][Accepted]]            |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]                       | Dynamic Programming  | Easy       | LC    | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][Accepted]]            |
@@ -83,7 +85,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/deepest-leaves-sum/][1302. Deepest Leaves Sum]]                                   | Breadth-First Search | Medium     | LC    | [[file:lc/1302.deepest-leaves-sum.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/binary-tree-level-order-traversal/][102. Binary Tree Level Order Traversal]]                     | Breadth-First Search | Medium     | LC    | [[file:lc/102.binary-tree-level-order-traversal.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/binary-tree-level-order-traversal-ii/][107. Binary Tree Level Order Traversal II]]                  | Breadth-First Search | Medium     | LC    | [[file:lc/107.binary-tree-level-order-traversal-ii.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/n-ary-tree-level-order-traversal/][429. N-ary Tree Level Order Traversal]]                      | Breadth-First Search | Median     | LC    | [[file:lc/429.n-ary-tree-level-order-traversal.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/n-ary-tree-level-order-traversal/][429. N-ary Tree Level Order Traversal]]                      | Breadth-First Search | Medium     | LC    | [[file:lc/429.n-ary-tree-level-order-traversal.cpp][Accepted]]            |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]                          | Array                | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][Wrong Answer]]        |
 | [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                    | Array                | Hard       | LC    | [[https://leetcode.com/submissions/detail/638579456/][Wrong Answer]]        |
@@ -105,7 +107,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/problems/design-browser-history/][1472. Design Browser History]]                               | Design               | Medium     | LC    | [[file:lc/1472.design-browser-history.cpp][TBC]]                 |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/insertion-sort-list/][147. Insertion Sort List]]                                   | Sorting              | Median     | LC    | [[file:lc/147.insertion-sort-list.cpp][TBC]]                 |
+| [[https://leetcode.com/problems/insertion-sort-list/][147. Insertion Sort List]]                                   | Sorting              | Medium     | LC    | [[file:lc/147.insertion-sort-list.cpp][TBC]]                 |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/][236. Lowest Common Ancestor of a Binary Tree]]               | Tree                 | Medium     | LC    | TBC                 |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
@@ -213,7 +215,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/778.%20Swim%20in%20Rising%20Water.md][778. Swim in Rising Water]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/174.%20Dungeon%20Game.md][174. Dungeon Game]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/875.%20Koko%20Eating%20Bananas.md][875. Koko Eating Bananas]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/4.%20Median%20of%20Two%20Sorted%20Arrays.md][4.Median of Two Sorted Arrays]]
+***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/4.%20Median%20of%20Two%20Sorted%20Arrays.md][4.of Two Sorted Arrays]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/719.%20Find%20K-th%20Smallest%20Pair%20Distance.md][719. Find K-th Smallest Pair Distance]]
 ***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/786.%20K-th%20Smallest%20Prime%20Fraction.md][786. K-th Smallest Prime Fraction]]
 *** Graph
