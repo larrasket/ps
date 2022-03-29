@@ -87,6 +87,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/binary-tree-level-order-traversal-ii/][107. Binary Tree Level Order Traversal II]]                  | Breadth-First Search | Medium     | LC    | [[file:lc/107.binary-tree-level-order-traversal-ii.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/n-ary-tree-level-order-traversal/][429. N-ary Tree Level Order Traversal]]                      | Breadth-First Search | Medium     | LC    | [[file:lc/429.n-ary-tree-level-order-traversal.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]           | Breadth-First Search | Medium     | LC    | [[file:lc/166.populating-next-right-pointers-in-each-node.cpp][Accepted]]            |
+| [[https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/][103. Binary Tree Zigzag Level Order Traversal]]              | Breadth-First Search | Medium     | LC    | [[file:lc/103.binary-tree-zigzag-level-order-traversal.cpp][Accepted]]            |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]                          | Array                | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][Wrong Answer]]        |
 | [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                    | Array                | Hard       | LC    | [[https://leetcode.com/submissions/detail/638579456/][Wrong Answer]]        |
@@ -111,6 +112,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/insertion-sort-list/][147. Insertion Sort List]]                                   | Sorting              | Medium     | LC    | [[file:lc/147.insertion-sort-list.cpp][TBC]]                 |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/][236. Lowest Common Ancestor of a Binary Tree]]               | Tree                 | Medium     | LC    | TBC                 |
+|                                                            |                      |            |       |                     |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 * What to Study
 | Topic              | Difficulty | R.I (For SW engineering) | Set |
