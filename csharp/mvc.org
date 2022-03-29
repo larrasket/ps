@@ -142,8 +142,6 @@ folders, as shown in the following figure, but I’ll run through the major ones
 #+DOWNLOADED: screenshot @ 2022-03-03 07:05:06
 [[file:A_First_Project_of_ASP.NET_Core/2022-03-03_07-05-06_screenshot.png]]
 
-
-
 Inside the solution folder, you’ll find your project folder, which in turn contains five
 subfolders—Models, Controllers, Views, Properties, and wwwroot. Models, Control-
 lers, and Views (unsurprisingly) contain the MVC Model, Controller, and View files
