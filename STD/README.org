@@ -31,6 +31,9 @@ vec.push_back(MyStruct(1, "this"));
 std::sort(vec.begin(), vec.end(), less_than_key());
 
 #+end_src
+
+#+RESULTS:
+
 Also, since C++14 you can write an embedded functions inside the sort function:
 #+begin_src cpp
 #include <vector>
@@ -319,6 +322,387 @@ up results in memory.
 (typically appends) to a "logical string" without creating a new string object each time.
 You would use this to construct a string in multiple operations.
 
+** Deferred Execution vs Immediate Execution
+The LINQ queries are executed in two different ways as follows.
+
+- Deferred execution
+- Immediate execution
+
+Based on the above two types of execution, the LINQ operators are divided into 2 categories.
+They are as follows:
+
+1. Deferred or Lazy Operators:  These query operators are used for deferred execution. For example – ~select~, ~SelectMany~, ~where~, ~Take~, ~Skip~, etc. are belongs to Deferred or Lazy Operators category.
+2. Immediate or Greedy Operators: These query operators are used for immediate execution. For Example – ~count~, ~average~, ~min~, ~max~, ~First~, ~Last~, ~ToArray~, ~ToList~, etc. are belongs to the Immediate or Greedy Operators category.
+
+
+*** Deferred Execution
+
+In this case, the LINQ Query is not executed at the point of its declaration. That means,
+when we write a LINQ query, it doesn’t execute by itself. It executes only when we access
+the query results. So, here the execution of the query is deferred until the query variable
+is iterated over using for each loop.
+
+#+begin_src csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQDemo
+{
+    public class Employee
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int Salary { get; set; }
+    }
+
+    class Program
+    {
+        public static void Main()
+        {
+            List<Employee> listEmployees = new List<Employee>
+            {
+                new Employee { ID= 1001, Name = "Priyanka", Salary = 80000 },
+                new Employee { ID= 1002, Name = "Anurag", Salary = 90000 },
+                new Employee { ID= 1003, Name = "Preety", Salary = 80000 }
+            };
+
+            // In the below statement the LINQ Query is only defined and not executed
+            // If the query is executed here, then the result should not display Santosh
+            IEnumerable<Employee> result = from emp in listEmployees
+                                           where emp.Salary == 80000
+                                           select emp;
+
+            // Adding a new employee with Salary = 80000 to the collection listEmployees
+            listEmployees.Add(new Employee { ID = 1004, Name = "Santosh", Salary = 80000 });
+
+            // The LINQ query is actually executed when we iterate thru using a for each loop
+            // This is proved because Santosh is also included in the result
+            foreach (Employee emp in result)
+            {
+                Console.WriteLine($" {emp.ID} {emp.Name} {emp.Salary}");
+            }
+            Console.ReadKey();
+        }
+    }
+}
+#+end_src
+
+We will get the following advantages
+
+1. It avoids unnecessary query execution which improves the performance of the application.
+2. The Query creation and the Query execution are decoupled which provide us the flexibility to create the query in several steps.
+3. A Linq deferred execution query is always re-evaluated when we re-enumerate. As a result, we always get the updated data.
+
+In the case of Immediate Execution, the LINQ query is executed at the point of its
+declaration. So, it forces the query to execute and gets the result immediately. Let us
+see an example for a better understanding. The following example is self-explained. So,
+please go through the comment lines.
+
+*** Immediate Execution
+In the case of Immediate Execution, the LINQ query is executed at the point of its
+declaration. So, it forces the query to execute and gets the result immediately. Let us see
+an example for a better understanding. The following example is self-explained. So, please
+go through the comment lines.
+
+#+begin_src csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQDemo
+{
+    public class Employee
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int Salary { get; set; }
+    }
+
+    class Program
+    {
+        public static void Main()
+        {
+            List<Employee> listEmployees = new List<Employee>
+            {
+                new Employee { ID= 1001, Name = "Priyanka", Salary = 80000 },
+                new Employee { ID= 1002, Name = "Anurag", Salary = 90000 },
+                new Employee { ID= 1003, Name = "Preety", Salary = 80000 }
+            };
+
+            // In the following statement, the LINQ Query is executed immediately as we are
+            // Using the ToList() method which is a greedy operator which forces the query
+            // to be executed immediately
+            IEnumerable<Employee> result = (from emp in listEmployees
+                                           where emp.Salary == 80000
+                                           select emp).ToList();
+
+            // Adding a new employee with Salary = 80000 to the collection listEmployees
+            // will not have any effect on the result as the query is already executed
+            listEmployees.Add(new Employee { ID = 1004, Name = "Santosh", Salary = 80000 });
+
+            // The above LINQ query is executed at the time of its creation.
+            // This is proved because Santosh is not included in the result
+            foreach (Employee emp in result)
+            {
+                Console.WriteLine($" {emp.ID} {emp.Name} {emp.Salary}");
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
+#+end_src
+
+*** Differences between ~IEnumerable~ and ~IQueryable~
+The ~IEnumerable~ and ~IQueryable~ are used to hold a collection of data and also used to
+perform data manipulation operations such as filtering, Ordering, Grouping, etc.
+
+
+Here in this demo, we will create a console application that will retrieve the data from the
+SQL Server database using Entity Framework database first approach. We are going to fetch
+the following Student information from the Student table.
+
+Here is my scheme:
+#+begin_src sql
+-- Create the required Student table
+CREATE TABLE Student
+(
+     ID INT PRIMARY KEY,
+     FirstName VARCHAR(50),
+     LastName VARCHAR(50),
+     Gender VARCHAR(50)
+)
+GO
+
+-- Insert the required test data
+INSERT INTO Student VALUES (101, 'Steve', 'Smith', 'Male')
+INSERT INTO Student VALUES (102, 'Sara', 'Pound', 'Female')
+INSERT INTO Student VALUES (103, 'Ben', 'Stokes', 'Male')
+INSERT INTO Student VALUES (104, 'Jos', 'Butler', 'Male')
+INSERT INTO Student VALUES (105, 'Pam', 'Semi', 'Female')
+GO
+#+end_src
+
+Let us modify the Program class as shown below.
+
+#+begin_src csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LINQDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StudentDBContext dBContext = new StudentDBContext();
+            IEnumerable<Student> listStudents = dBContext.Students.Where(x => x.Gender == "Male");
+            listStudents = listStudents.Take(2);
+
+            foreach(var std in listStudents)
+            {
+                Console.WriteLine(std.FirstName + " " + std.LastName);
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
+#+end_src
+
+Here we create the LINQ Query using ~IEnumerable~. Please use SQL Profiler to log the SQL
+Script. Now run the application and you will see the following SQL Script is generated and
+executed.
+
+#+begin_src sql
+SELECT
+    [Extent1].[ID] AS [ID],
+    [Extent1].[FirstName] AS [FirstName],
+    [Extent1].[LastName] AS [LastName],
+    [Extent1].[Gender] AS [Gender]
+    FROM [dbo].[Student] AS [Extent1]
+    WHERE 'Male' = [Extent1].[Gender]
+#+end_src
+
+As shown in the above SQL Script, it will not use the TOP clause. So here it will fetch the
+data from SQL Server to in-memory and then it will filter the data.
+
+Let's check it again using ~IQuerable~:
+
+#+begin_src csharp
+using System;
+using System.Linq;
+
+namespace LINQDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StudentDBContext dBContext = new StudentDBContext();
+            IQueryable<Student> listStudents = dBContext.Students
+                                .AsQueryable()
+                                .Where(x => x.Gender == "Male");
+            listStudents = listStudents.Take(2);
+
+            foreach(var std in listStudents)
+            {
+                Console.WriteLine(std.FirstName + " " + std.LastName);
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
+#+end_src
+
+Check the SQL Script:
+#+begin_src sql
+SELECT TOP (2)
+    [Extent1].[ID] AS [ID],
+    [Extent1].[FirstName] AS [FirstName],
+    [Extent1].[LastName] AS [LastName],
+    [Extent1].[Gender] AS [Gender]
+    FROM [dbo].[Student] AS [Extent1]
+    WHERE 'Male' = [Extent1].[Gender]
+#+end_src
+
+As you can see it includes the TOP clause in the SQL Script and then fetches the data from
+the database.
+
+*Main differences:*
+
+| ~IEnumerable~                                                                                                                                                                                                                                 | ~IQuerable~                                                                                                                                                                     |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *While querying the data from the database, the ~IEnumerable~ executes the “select statement” on the server-side (i.e. on the database), loads data into memory on the client-side, and then only applied the filters on the retrieved data.* | While querying the data from a database, the ~IQueryable~ executes the “select query” with the applied filter on the server-side i.e. on the database, and then retrieves data. |
+| So you need to use the ~IEnumerable~ when you need to query the data from in-memory collections like List, Array, and so on.                                                                                                                  | So you need to use the ~IQueryable~ when you want to query the data from out-memory such as remote database, service, etc.                                                      |
+| The ~IEnumerable~ is mostly used for LINQ to Object and LINQ to XML queries.                                                                                                                                                                  | ~IQueryable~ is mostly used for LINQ to SQL and LINQ to Entities queries.                                                                                                       |
+| The ~IEnumerable~ collection is of type forward only. That means it can only move in forward, it can’t move backward and between the items.                                                                                                   | The collection of type IQueryable can move only forward, it can’t move backward and between the items.                                                                          |
+| ~IEnumerable~ supports deferred execution.                                                                                                                                                                                                    | ~IQueryable~ supports deferred execution.                                                                                                                                       |
+| It doesn’t support custom queries.                                                                                                                                                                                                            | It also supports custom queries using ~CreateQuery~ and Executes methods.                                                                                                       |
+| The ~IEnumerable~ doesn’t support lazy loading. Hence, it is not suitable for paging like scenarios.                                                                                                                                          | ~IQueryable~ supports lazy loading and hence it is suitable for paging like scenarios.                                                                                          |
+
+** ~IEnumerable~, ~ICollection~, ~IList~ and ~List~
+*** ~IEnumerable~
+First of all, it is important to understand, that there are two different interfaces defined
+in the .NET base class library. There is a non-generic ~IEnumerable~ interface and there is a
+generic type-safe IEnumerable<T> interface.
+
+The ~IEnumerable~ interface is located in the ~System.Collections~ namespace and contains only a
+single method definition. The interface definition looks like this:
+
+#+begin_src csharp
+public interface IEnumerable
+{
+  IEnumerator GetEnumerator();
+}
+#+end_src
+
+The ~GetEnumerator~ method must return an instance of an object of a class which implements
+the ~IEnumerator~ interface.
+
+It is important to know that the C# language foreach keyword works with all types that
+implement the IEnumerable interface. Only in C# it also works with things that don’t
+explicitly implement IEnumerable or ~IEnumerable<T>~. I believe you have been using the
+foreach keyword many times and without worrying about the reason why and how it worked with
+that type.
+
+*** ~IEnumerable<T>~
+Let’s now take a look at the definition of the generic and type-safe version called
+~IEnumerable<T>~ which is located in the ~System.Collections.Generic~ namespace:
+
+#+begin_src csharp
+public interface IEnumerable<out T> : IEnumerable
+{
+  IEnumerator<T> GetEnumerator();
+}
+#+end_src
+
+As you can see the ~IEnumerable<T>~ interface inherits from the IEnumerable interface.
+Therefore a type which implements ~IEnumerable<T>~ has also to implement the members of
+~IEnumerable~.
+
+~IEnumerable<T>~ defines a single method ~GetEnumerator~ which returns an instance of an object
+that implements the ~IEnumerator<T>~ interface.
+
+
+*** ~ICollection~
+As you can imagine, there are also two versions of ICollection which are
+~System.Collections.ICollection~ and the generic version
+~System.Collections.Generic.ICollection<T>~.
+
+#+begin_src csharp
+public interface ICollection : IEnumerable
+{
+  int Count { get; }
+  bool IsSynchronized { get; }
+  Object SyncRoot { get; }
+
+  void CopyTo(Array array, int index);
+}
+#+end_src
+
+~ICollection~ inherits from ~IEnumerable~. You therefore have all members from the ~IEnumerable~
+interface implemented in all classes that implement the ~ICollection~ interface.
+
+
+*** ~ICollection<T>~
+When we look at the generic version of ICollection, you’ll recognize that it does not look
+exactly the same as the non-generic equivalent:
+
+#+begin_src csharp
+public interface ICollection<T> : IEnumerable<T>, IEnumerable
+{
+  int Count { get; }
+  bool IsReadOnly { get; }
+  void Add(T item);
+  void Clear();
+  bool Contains(T item);
+  void CopyTo(T[] array, int arrayIndex);
+  bool Remove(T item);
+}
+#+end_src
+
+*** ~IList~
+The ~IList~ interface has of course a non-generic and a generic version. We start with looking
+at the non-generic ~IList~ interface:
+
+#+begin_src csharp
+public interface IList : ICollection, IEnumerable
+{
+  bool IsFixedSize { get; }
+  bool IsReadOnly { get; }
+  Object this[int index] { get; set; }
+
+  int Add(Object value);
+  void Clear();
+  bool Contains(Object value);
+  int IndexOf(Object value);
+  void Insert(int index, Object value);
+  void Remove(Object value);
+  void RemoveAt(int index);
+}
+#+end_src
+
+*** Which to Use?
+If you use a narrower interface type such as ~IEnumerable~ instead of IList, you protect your
+code against breaking changes. If you use IEnumerable, the caller of your method can provide
+any object which implements the IEnumerable interface. These are nearly all collection types
+of the base class library and in addition many custom defined types. The caller code can be
+changed in the future and your code won’t break that easily as it would if you had used
+ICollection or even worse IList.
+
+
+If you use a wider interface type such as IList, you are more in danger of breaking code
+changes. If someone wants to call your method with a custom defined object which only
+implements IEnumerable, it simply won’t work and will result in a compilation error.
+
+The following table gives you an overview of how you can decide which type you should depend
+on.
+
+
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp
@@ -344,7 +728,7 @@ modifies http request and optionally passes control to the next middleware compo
 following figure illustrates the execution of middleware components.
 
 ** Adding User Without Register
-You could do this easily by creating a CreateRoles method in your startup class. This helps
+You could do this easily by creating a ~CreateRoles~ method in your startup class. This helps
 check if the roles are created, and creates the roles if they aren't; on application
 startup. Like so.
 #+begin_src csharp
@@ -366,7 +750,6 @@ private async Task CreateRoles(IServiceProvider serviceProvider)
                 roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
             }
         }
-
         // find the user with the admin email
         var _user = await UserManager.FindByEmailAsync("admin@email.com");
 
@@ -620,7 +1003,6 @@ namespace MySite.Filters
                 throw new ArgumentNullException(nameof(context));
 
             context.Result = new RedirectResult("/"); //Redirect to you desired page
-
         }
     }
 
@@ -648,6 +1030,37 @@ namespace MySite.Filters
     {
       ....
 #+end_src
+** Disable Page By Routing
+#+begin_src csharp
+    app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/Identity/Account/Register", context => Task.Factory.StartNew(() => context.Response.Redirect("/Identity/Account/Login", true, true)));
+            endpoints.MapPost("/Identity/Account/Register", context => Task.Factory.StartNew(() => context.Response.Redirect("/Identity/Account/Login", true, true)));
+        });
+#+end_src
+
+** EF Add Unique Key
+#+begin_src csharp
+class MyContext : DbContext
+{
+    public DbSet<Person> People { get; set; }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Person>()
+            .HasIndex(p => new { p.FirstName, p.LastName })
+            .IsUnique(true);
+    }
+}
+
+public class Person
+{
+    public int PersonId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+
+#+end_src
+
 * Regex
 Match everything except for specified strings
 #+begin_src regex
