@@ -254,7 +254,6 @@ And we also have the EnableRaisingEvents property. By default, this
 is false, which means that the specified path is not being watched. When we're ready to
 start receiving events from the FileSystemWatcher, we simply set this property to true.
 
-
 ** TODO Refactoring to Use a FileSystemWatcher
 
 * Footnotes

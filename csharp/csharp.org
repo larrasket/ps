@@ -2996,12 +2996,6 @@ not second learning it puley, instead, learn query language (any SQL flavor) and
 the basic syntax to use it inside your code. It shouldn't be hard at all.
 
 # [[file:LINQ.org][Here]] you shall find some information that you might not have experienced with the regular SQL.
-* TODO Concurrency
-See [[file:Concurrency.org][asynchronous programming]]
-* TODO Entity Framework
-* TODO MVC/ASP
-See [[file:mvc.org][ASP]]
-
 * Take a Look
 - [[https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading#overloadable-operators][Overloadable operators]]
 - [[https://docs.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions][Best practices for exceptions]]
@@ -3016,11 +3010,10 @@ See [[file:mvc.org][ASP]]
 - [[https://docs.microsoft.com/en-us/archive/blogs/csharpfaq/][C# Frequently Asked Questions]]
 - [[https://docs.microsoft.com/en-us/dotnet/api/system.string.isnormalized?view=net-6.0][Is Normalized]]
 
-* TODOs Topics..
+* TODOs
 ** TODO Implement ~IDisposable~
 ** PROJ GetHash
 ** TODO ~checked~ and ~unchecked~
 ** TODO ~Span~
 ** TODO LINQ
 ** TODO Reflection
-
