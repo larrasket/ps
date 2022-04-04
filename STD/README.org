@@ -702,7 +702,6 @@ implements IEnumerable, it simply won’t work and will result in a compilation 
 The following table gives you an overview of how you can decide which type you should depend
 on.
 
-
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp
@@ -1061,6 +1060,72 @@ public class Person
 
 #+end_src
 
+** Multicheck boxes
+*Controller:*
+#+begin_src csharp
+    public class StudentsController : Controller
+            {
+                private readonly CheckBoxListDbConetxt _dbConetxt = new CheckBoxListDbConetxt();
+
+
+        [HttpGet]
+        public IActionResult CreateStudent()
+                {
+
+                    ViewBag.AllCourses = _dbConetxt.Courses.ToList();
+                    return View();
+                }
+
+                // POST: Students/Create
+                [HttpPost]
+                [ValidateAntiForgeryToken]
+                public IActionResult CreateStudent(Student student, List<int> selectedCourses)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        if (selectedCourses != null)
+                        {
+                            foreach (var item in selectedCourses)
+                            {
+                                Course course = _dbConetxt.Courses.Find(item);
+                                student.Courses.Add(course);
+                            }
+                        }
+
+                        _dbConetxt.Students.Add(student);
+                        _dbConetxt.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    ViewBag.AllCourses = _dbConetxt.Courses.ToList();
+                    return View(student);
+                }
+}
+#+end_src
+*View:*
+#+begin_src html
+<div class="form-group">
+            <div class="col-md-2 input-label">
+                <label class="control-label">Course</label>
+            </div>
+
+            <div class="col-md-10 input-box">
+                <div class="form-control">
+                    @{
+                        var count = Enumerable.Count(ViewBag.AllCourses);
+                        foreach (var item in ViewBag.AllCourses)
+                        {
+                            <input type="checkbox" name="selectedCourses" value="@item.Id" />
+                            @item.Name
+                            if (--count > 0)
+                            {
+                                @:|
+                        }
+                        }
+                    }
+
+</div>
+#+end_src
 * Regex
 Match everything except for specified strings
 #+begin_src regex
