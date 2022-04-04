@@ -4,7 +4,7 @@
 Problem in ~built~ directory are either not completed or wrong answers. The Main OJ is
 ~leetcode~, all CF problems from the previous repository are removed.
 
-| Prblem                                                     | Tags                 | Difficulty | Judge | Statue              |
+| Problem                                                    | Tags                 | Difficulty | Judge | Statue              |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://leetcode.com/problems/binary-tree-paths/][257. Binary Tree Paths]]                                     | Tree                 | Easy       | LC    | [[file:lc/257.binary-tree-paths.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]           | Tree                 | Medium     | LC    | [[file:116.populating-next-right-pointers-in-each-node.cpp][Accepted]]            |
