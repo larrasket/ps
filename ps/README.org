@@ -26,6 +26,8 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://www.lintcode.com/problem/860/?_from=collection&fromId=185][860 · Number of Distinct Islands]]                           | Array                | Medium     | LC    | [[file:nt/860.cpp][Accepted]]            |
 | [[https://leetcode.com/problems/product-of-array-except-self/][238. Product of Array Except Self]]                          | Array                | Medium     | LC    | [[file:lc/238.product-of-array-except-self.cpp][Accepted]]            |
 |------------------------------------------------------------+----------------------+------------+-------+---------------------|
+| [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                        | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]]            |
+|------------------------------------------------------------+----------------------+------------+-------+---------------------|
 | [[https://codeforces.com/contest/1634/problem/A][A. Reverse and Concatenate]]                                 | String               | Easy       | CF    | [[file:cf/1634A.cpp][Accepted]]            |
 | [[https://leetcode.com/contest/weekly-contest-276/problems/divide-a-string-into-groups-of-size-k/][2138. Divide a String Into Groups of Size k]]                | String               | Easy       | LC    | [[file:lc/2138.divide-a-string-into-groups-of-size-k.cpp][Accepted]]            |
 | [[https://www.lintcode.com/problem/213/?_from=collection&fromId=185][213 · String Compression]]                                   | String               | Easy       | NT    | [[file:nt/213.cpp][Accepted]]            |
