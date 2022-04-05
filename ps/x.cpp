@@ -14,8 +14,9 @@
 #include <stack>
 #include <string>
 #include <tuple>
-#include <unordered_map>
+#include <type_traits>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 #define begend(v) ((v).begin()), ((v).end())
 #define sz(v) ((int)((v).size()))
@@ -38,6 +39,24 @@ int searching(vector<int> arr, int x) {
 }
 
 int main() {
-  std::vector<int> mv{1, 10, 19, 20, 23};
-  cout << mv[searching(mv, 20)];
+  typedef pair<pair<int, int>, pair<int, int>> struch;
+  struch mypari;
+  mypari.first.first = 2;
+  mypari.first.second = 2;
+  mypari.second.first = 2;
+  mypari.second.second = 2;
+  pair<pair<int, int>, pair<int, int>> lol;
+  lol.first.first = 2;
+  lol.first.second = 2;
+  lol.second.first = 2;
+  lol.second.second = 1;
+
+  map<int, int> orji, oo;
+  orji[2] = 52;
+  orji[1] = 52;
+  oo[2] = 52;
+  oo[1] = 53;
+  set<map<int, int>> qr;
+  qr.emplace(oo);
+  cout << (oo == orji);
 }
