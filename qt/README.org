@@ -1,0 +1,7 @@
+#+TITLE: Introduction to QT5
+
+Qt 5 allows us to easily design our program's user interface through a method most people
+are familiar with. Qt not only provides us with a powerful user interface toolkit,
+called Qt Designer, which enables us to design our user interface without writing a single
+line of code, but it also allows advanced users to customize their user interface components
+through a simple scripting language called Qt Style Sheets.
