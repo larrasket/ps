@@ -4,122 +4,128 @@
 Problem in ~built~ directory are either not completed or wrong answers. The Main OJ is
 ~leetcode~, all CF problems from the previous repository are removed.
 
-| Problem                                                    | Tags                 | Difficulty | Judge | Statue              |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/binary-tree-paths/][257. Binary Tree Paths]]                                     | Tree                 | Easy       | LC    | [[file:lc/257.binary-tree-paths.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]           | Tree                 | Medium     | LC    | [[file:116.populating-next-right-pointers-in-each-node.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/maximum-product-of-three-numbers/][628. Maximum Product of Three Numbers]]                      | Math                 | Easy       | LC    | [[file:lc/628.maximum-product-of-three-numbers.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/missing-number/][268. Missing Number]]                                        | Math                 | Easy       | LC    | [[file:lc/268.missing-number.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/valid-parentheses/][20. Valid Parentheses]]                                      | Stack                | Easy       | LC    | [[file:lc/20.valid-parentheses.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/next-greater-node-in-linked-list/][1019. Next Greater Node In Linked List]]                     | Stack                | Medium     | LC    | [[file:lc/1019.next-greater-node-in-linked-list.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/maximum-subarray/][53. Maximum Subarray]]                                       | Array                | Easy       | LC    | [[file:lc/53.maximum-subarray.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/contains-duplicate/][217. Contains Duplicate]]                                    | Array                | Easy       | LC    | [[file:lc/217.contains-duplicate.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/two-sum/][1. Two Sum]]                                                 | Array                | Easy       | LC    | [[file:lc/1.two-sum.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/intersection-of-two-arrays-ii/][350. Intersection of Two Arrays II]]                         | Array                | Easy       | LC    | [[file:lc/350.intersection-of-two-arrays-ii.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/kth-largest-element-in-an-array/][215. Kth Largest Element in an Array]]                       | Array                | Medium     | LC    | [[file:lc/215.kth-largest-element-in-an-array.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/maximum-sum-circular-subarray/][918. Maximum Sum Circular Subarray]]                         | Array                | Medium     | LC    | [[file:lc/918.maximum-sum-circular-subarray.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                 | Array                | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/number-of-islands/][200. Number of Islands]]                                     | Array                | Medium     | LC    | [[file:lc/200.number-of-islands.cpp][Accepted]]            |
-| [[https://www.lintcode.com/problem/860/?_from=collection&fromId=185][860 · Number of Distinct Islands]]                           | Array                | Medium     | LC    | [[file:nt/860.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/product-of-array-except-self/][238. Product of Array Except Self]]                          | Array                | Medium     | LC    | [[file:lc/238.product-of-array-except-self.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                        | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://codeforces.com/contest/1634/problem/A][A. Reverse and Concatenate]]                                 | String               | Easy       | CF    | [[file:cf/1634A.cpp][Accepted]]            |
-| [[https://leetcode.com/contest/weekly-contest-276/problems/divide-a-string-into-groups-of-size-k/][2138. Divide a String Into Groups of Size k]]                | String               | Easy       | LC    | [[file:lc/2138.divide-a-string-into-groups-of-size-k.cpp][Accepted]]            |
-| [[https://www.lintcode.com/problem/213/?_from=collection&fromId=185][213 · String Compression]]                                   | String               | Easy       | NT    | [[file:nt/213.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/determine-if-two-strings-are-close/][1657. Determine if Two Strings Are Close]]                   | String               | Medium     | LC    | [[file:lc/1657.determine-if-two-strings-are-close.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/reverse-words-in-a-string/][151. Reverse Words in a String]]                             | String               | Medium     | LC    | [[file:lc/151-reverse-words-in-a-string.cs][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/valid-sudoku/][36. Valid Sudoku]]                                           | Matrix               | Medium     | LC    | [[file:lc/36.valid-sudoku.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/search-a-2d-matrix/][74. Search a 2D Matrix]]                                     | Sorting              | Medium     | LC    | [[file:lc/74.search-a-2d-matrix.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/maximum-gap/][164. Maximum Gap]]                                           | Sorting              | Hard       | LC    | [[file:lc/164.maximum-gap.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/contest/weekly-contest-280/problems/count-operations-to-obtain-zero][2167. Count Operations to Obtain Zero]]                      | Numbers              | Easy       | LC    | [[file:lc/2169.count-operations-to-obtain-zero.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/k-closest-points-to-origin/][973. K Closest Points to Origin]]                            | Geometry             | Medium     | LC    | [[file:lc/973.k-closest-points-to-origin.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/max-points-on-a-line/][149. Max Points on a Line]]                                  | Geometry             | Hard       | LC    | [[file:lc/149.max-points-on-a-line.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/find-the-duplicate-number/][287. Find the Duplicate Number]]                             | Hashtable            | Medium     | LC    | [[file:lc/287.find-the-duplicate-number.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/][1282. Group the People Given the Group Size They Belong To]] | Hashtable            | Medium     | LC    | [[file:lc/1282.group-the-people-given-the-group-size-they-belong-to.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/palindrome-linked-list/][234. Palindrome Linked List]]                                | Linked List          | Easy       | LC    | [[file:lc/234.palindrome-linked-list.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/merge-two-sorted-lists/][21. Merge Two Sorted Lists]]                                 | Linked List          | Easy       | LC    | [[file:lc/21.merge-two-sorted-lists.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/remove-nth-node-from-end-of-list/][19. Remove Nth Node From End of List]]                       | Linked List          | Medium     | LC    | [[file:lc/19.remove-nth-node-from-end-of-list.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/swap-nodes-in-pairs/][24. Swap Nodes in Pairs]]                                    | Linked List          | Medium     | LC    | [[file:lc/24.swap-nodes-in-pairs.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/][2130. Maximum Twin Sum of a Linked List]]                    | Linked List          | Medium     | LC    | [[file:lc/2130.maximum-twin-sum-of-a-linked-list.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/][2095. Delete the Middle Node of a Linked List]]              | Linked List          | Medium     | LC    | [[file:lc/2095.delete-the-middle-node-of-a-linked-list.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/merge-in-between-linked-lists/][1669. Merge In Between Linked Lists]]                        | Linked List          | Medium     | LC    | [[file:lc/1669.merge-in-between-linked-lists.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/flatten-binary-tree-to-linked-list/][114. Flatten Binary Tree to Linked List]]                    | Linked List          | Medium     | LC    | [[file:lc/144.flatten-binary-tree-to-linked-list.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/][430. Flatten a Multilevel Doubly Linked List]]               | Linked List          | Medium     | LC    | [[file:lc/430.flatten-a-multilevel-doubly-linked-list.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/longest-mountain-in-array/][845. Longest Mountain in Array]]                             | Enumeration          | Medium     | LC    | [[file:lc/845.longest-mountain-in-array.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/combination-sum/][39. Combination Sum]]                                        | Backtracking         | Medium     | LC    | [[file:lc/39.combination-sum.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/][80. Remove Duplicates from Sorted Array II]]                 | Two Pointers         | Medium     | LC    | [[file:lc/80.remove-duplicates-from-sorted-array-ii.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/rotate-array/][189. Rotate Array]]                                          | Two Pointers         | Medium     | LC    | [[file:lc/189.rotate-array.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/swapping-nodes-in-a-linked-list/][1721. Swapping Nodes in a Linked List]]                      | Two Pointers         | Medium     | LC    | [[file:lc/1721.swapping-nodes-in-a-linked-list.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/partition-list/][86. Partition List]]                                         | Two Pointers         | Medium     | LC    | [[file:lc/86.partition-list.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/interval-list-intersections/][986. Interval List Intersections]]                           | Two Pointers         | Medium     | LC    | [[file:lc/986.interval-list-intersections.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/rearrange-array-elements-by-sign/][2149. Rearrange Array Elements by Sign]]                     | Two Pointers         | Medium     | LC    | [[file:lc/2149.rearrange-array-elements-by-sign.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/][4. Find First and Last Position of Element in Sorted Array]] | Binary Search        | Medium     | LC    | [[file:lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/search-a-2d-matrix-ii/][240. Search a 2D Matrix II]]                                 | Binary Search        | Medium     | LC    | [[file:lc/240.search-a-2d-matrix-ii.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/diameter-of-binary-tree/][543. Diameter of Binary Tree]]                               | Binary Search        | Easy       | LC    | [[file:lc/543.diameter-of-binary-tree.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/path-sum/][112. Path Sum]]                                              | Depth-First Search   | Easy       | LC    | [[file:lc/112.path-sum.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/longest-univalue-path/][687. Longest Univalue Path]]                                 | Depth-First Search   | Medium     | LC    | [[file:lc/687.longest-univalue-path.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/path-sum-ii/][113. Path Sum II]]                                           | Depth-First Search   | Medium     | LC    | [[file:lc/113.path-sum-ii.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/path-sum-iii/][437. Path Sum III]]                                          | Depth-First Search   | Medium     | LC    | [[file:lc/437.path-sum-iii.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/number-of-provinces/][547. Number of Provinces]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/547.number-of-provinces.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/accounts-merge/][721. Accounts Merge]]                                        | Depth-Frist Search   | Medium     | LC    | [[file:lc/721.accounts-merge.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/all-paths-from-source-to-target/][797. All Paths From Source to Target]]                       | Depth-First Search   | Medium     | LC    | [[file:lc/797.all-paths-from-source-to-target.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/keys-and-rooms/][841. Keys and Rooms]]                                        | Depth-First Search   | Medium     | LC    | [[file:lc/841.keys-and-rooms.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/][1557. Minimum Number of Vertices to Reach All Nodes]]        | Depth-First Search   | Medium     | LC    | [[file:lc/1557.minimum-number-of-vertices-to-reach-all-nodes.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/binary-tree-pruning/][814. Binary Tree Pruning]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/814.binary-tree-pruning.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/binary-tree-cameras/][968. Binary Tree Cameras]]                                   | Depth-First Search   | Hard       | LC    | [[file:lc/968.binary-tree-cameras.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]                       | Dynamic Programming  | Easy       | LC    | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/integer-replacement/][397. Integer Replacement]]                                   | Dynamic Programming  | Medium     | LC    | [[file:lc/397.integer-replacement.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/unique-paths/][62. Unique Paths]]                                           | Dynamic Programming  | Medium     | LC    | [[file:lc/62.unique-paths.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/deepest-leaves-sum/][1302. Deepest Leaves Sum]]                                   | Breadth-First Search | Medium     | LC    | [[file:lc/1302.deepest-leaves-sum.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/binary-tree-level-order-traversal/][102. Binary Tree Level Order Traversal]]                     | Breadth-First Search | Medium     | LC    | [[file:lc/102.binary-tree-level-order-traversal.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/binary-tree-level-order-traversal-ii/][107. Binary Tree Level Order Traversal II]]                  | Breadth-First Search | Medium     | LC    | [[file:lc/107.binary-tree-level-order-traversal-ii.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/n-ary-tree-level-order-traversal/][429. N-ary Tree Level Order Traversal]]                      | Breadth-First Search | Medium     | LC    | [[file:lc/429.n-ary-tree-level-order-traversal.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]           | Breadth-First Search | Medium     | LC    | [[file:lc/166.populating-next-right-pointers-in-each-node.cpp][Accepted]]            |
-| [[https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/][103. Binary Tree Zigzag Level Order Traversal]]              | Breadth-First Search | Medium     | LC    | [[file:lc/103.binary-tree-zigzag-level-order-traversal.cpp][Accepted]]            |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]                          | Array                | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][Wrong Answer]]        |
-| [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                                          | Array                | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][Wrong Answer]]        |
-| [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                    | Array                | Hard       | LC    | [[https://leetcode.com/submissions/detail/638579456/][Wrong Answer]]        |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/rotating-the-box/][1861. Rotating the Box]]                                     | Matrix               | Medium     | LC    | [[file:lc/1861.rotating-the-box.cpp][Wrong Answer]]        |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/valid-parenthesis-string/][678. Valid Parenthesis String]]                              | Stack                | Medium     | LC    | [[file:lc/678.valid-parenthesis-string.cpp][Time Limit Exceeded]] |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/find-all-anagrams-in-a-string/][438. Find All Anagrams in a String]]                         | String               | Medium     | LC    | [[file:built/438.find-all-anagrams-in-a-string.cpp][Time Limit Exceeded]] |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/3sum/][15. 3Sums]]                                                  | Two Pointers         | Medium     | LC    | [[file:built/15.3sums.cpp][Time Limit Exceeded]] |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                             | Backtracking         | Medium     | LC    | [[file:built/99.subsets-ii.cpp][Unkown]]              |
-| [[https://leetcode.com/problems/restore-ip-addresses/][93. Restore IP Addresses]]                                   | Backtracking         | Medium     | LC    | [[https://leetcode.com/problems/restore-ip-addresses/][Time Limit Exceeded]] |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/decode-ways/][91. Decode Ways]]                                            | Dynamic Programming  | Medium     | LC    | [[file:built/91.decode-ways.cpp][Time Limit Exceeded]] |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/#:~:text=The%20vertical%20order%20traversal%20of%20a%20binary%20tree%20is%20a,these%20nodes%20by%20their%20values.][987. Vertical Order Traversal of a Binary Tree]]             | Depth-First Search   | Hard       | LC    | [[file:987.vertical-order-traversal-of-a-binary-tree.cpp][Wrong Answer]]        |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/design-browser-history/][1472. Design Browser History]]                               | Design               | Medium     | LC    | [[file:lc/1472.design-browser-history.cpp][TBC]]                 |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/insertion-sort-list/][147. Insertion Sort List]]                                   | Sorting              | Medium     | LC    | [[file:lc/147.insertion-sort-list.cpp][TBC]]                 |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/][236. Lowest Common Ancestor of a Binary Tree]]               | Tree                 | Medium     | LC    | TBC                 |
-|------------------------------------------------------------+----------------------+------------+-------+---------------------|
+| Problem                                                    | Tags                 | Difficulty | Judge | Statue   |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/binary-tree-paths/][257. Binary Tree Paths]]                                     | Tree                 | Easy       | LC    | [[file:lc/257.binary-tree-paths.cpp][Accepted]] |
+| [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]           | Tree                 | Medium     | LC    | [[file:116.populating-next-right-pointers-in-each-node.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/maximum-product-of-three-numbers/][628. Maximum Product of Three Numbers]]                      | Math                 | Easy       | LC    | [[file:lc/628.maximum-product-of-three-numbers.cpp][Accepted]] |
+| [[https://leetcode.com/problems/missing-number/][268. Missing Number]]                                        | Math                 | Easy       | LC    | [[file:lc/268.missing-number.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/valid-parentheses/][20. Valid Parentheses]]                                      | Stack                | Easy       | LC    | [[file:lc/20.valid-parentheses.cpp][Accepted]] |
+| [[https://leetcode.com/problems/next-greater-node-in-linked-list/][1019. Next Greater Node In Linked List]]                     | Stack                | Medium     | LC    | [[file:lc/1019.next-greater-node-in-linked-list.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/maximum-subarray/][53. Maximum Subarray]]                                       | Array                | Easy       | LC    | [[file:lc/53.maximum-subarray.cpp][Accepted]] |
+| [[https://leetcode.com/problems/contains-duplicate/][217. Contains Duplicate]]                                    | Array                | Easy       | LC    | [[file:lc/217.contains-duplicate.cpp][Accepted]] |
+| [[https://leetcode.com/problems/two-sum/][1. Two Sum]]                                                 | Array                | Easy       | LC    | [[file:lc/1.two-sum.cpp][Accepted]] |
+| [[https://leetcode.com/problems/intersection-of-two-arrays-ii/][350. Intersection of Two Arrays II]]                         | Array                | Easy       | LC    | [[file:lc/350.intersection-of-two-arrays-ii.cpp][Accepted]] |
+| [[https://leetcode.com/problems/single-number/][136. Single Number]]                                         | Array                | Easy       | LC    | [[file:lc/136.single-number.cpp][Accepted]] |
+| [[https://leetcode.com/problems/kth-largest-element-in-an-array/][215. Kth Largest Element in an Array]]                       | Array                | Medium     | LC    | [[file:lc/215.kth-largest-element-in-an-array.cpp][Accepted]] |
+| [[https://leetcode.com/problems/maximum-sum-circular-subarray/][918. Maximum Sum Circular Subarray]]                         | Array                | Medium     | LC    | [[file:lc/918.maximum-sum-circular-subarray.cpp][Accepted]] |
+| [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                 | Array                | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]] |
+| [[https://leetcode.com/problems/number-of-islands/][200. Number of Islands]]                                     | Array                | Medium     | LC    | [[file:lc/200.number-of-islands.cpp][Accepted]] |
+| [[https://www.lintcode.com/problem/860/?_from=collection&fromId=185][860 · Number of Distinct Islands]]                           | Array                | Medium     | LC    | [[file:nt/860.cpp][Accepted]] |
+| [[https://leetcode.com/problems/product-of-array-except-self/][238. Product of Array Except Self]]                          | Array                | Medium     | LC    | [[file:lc/238.product-of-array-except-self.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                        | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]] |
+| [[https://www.lintcode.com/problem/919/?_from=collection&fromId=185][919 · Meeting Rooms II]]                                     | Greedy               | Medium     | NT    | [[file:nt/919.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://codeforces.com/contest/1634/problem/A][A. Reverse and Concatenate]]                                 | String               | Easy       | CF    | [[file:cf/1634A.cpp][Accepted]] |
+| [[https://leetcode.com/contest/weekly-contest-276/problems/divide-a-string-into-groups-of-size-k/][2138. Divide a String Into Groups of Size k]]                | String               | Easy       | LC    | [[file:lc/2138.divide-a-string-into-groups-of-size-k.cpp][Accepted]] |
+| [[https://www.lintcode.com/problem/213/?_from=collection&fromId=185][213 · String Compression]]                                   | String               | Easy       | NT    | [[file:nt/213.cpp][Accepted]] |
+| [[https://leetcode.com/problems/determine-if-two-strings-are-close/][1657. Determine if Two Strings Are Close]]                   | String               | Medium     | LC    | [[file:lc/1657.determine-if-two-strings-are-close.cpp][Accepted]] |
+| [[https://leetcode.com/problems/reverse-words-in-a-string/][151. Reverse Words in a String]]                             | String               | Medium     | LC    | [[file:lc/151-reverse-words-in-a-string.cs][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/valid-sudoku/][36. Valid Sudoku]]                                           | Matrix               | Medium     | LC    | [[file:lc/36.valid-sudoku.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/search-a-2d-matrix/][74. Search a 2D Matrix]]                                     | Sorting              | Medium     | LC    | [[file:lc/74.search-a-2d-matrix.cpp][Accepted]] |
+| [[https://leetcode.com/problems/maximum-gap/][164. Maximum Gap]]                                           | Sorting              | Hard       | LC    | [[file:lc/164.maximum-gap.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/contest/weekly-contest-280/problems/count-operations-to-obtain-zero][2167. Count Operations to Obtain Zero]]                      | Numbers              | Easy       | LC    | [[file:lc/2169.count-operations-to-obtain-zero.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/k-closest-points-to-origin/][973. K Closest Points to Origin]]                            | Geometry             | Medium     | LC    | [[file:lc/973.k-closest-points-to-origin.cpp][Accepted]] |
+| [[https://leetcode.com/problems/max-points-on-a-line/][149. Max Points on a Line]]                                  | Geometry             | Hard       | LC    | [[file:lc/149.max-points-on-a-line.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/find-the-duplicate-number/][287. Find the Duplicate Number]]                             | Hashtable            | Medium     | LC    | [[file:lc/287.find-the-duplicate-number.cpp][Accepted]] |
+| [[https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/][1282. Group the People Given the Group Size They Belong To]] | Hashtable            | Medium     | LC    | [[file:lc/1282.group-the-people-given-the-group-size-they-belong-to.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/palindrome-linked-list/][234. Palindrome Linked List]]                                | Linked List          | Easy       | LC    | [[file:lc/234.palindrome-linked-list.cpp][Accepted]] |
+| [[https://leetcode.com/problems/merge-two-sorted-lists/][21. Merge Two Sorted Lists]]                                 | Linked List          | Easy       | LC    | [[file:lc/21.merge-two-sorted-lists.cpp][Accepted]] |
+| [[https://leetcode.com/problems/remove-nth-node-from-end-of-list/][19. Remove Nth Node From End of List]]                       | Linked List          | Medium     | LC    | [[file:lc/19.remove-nth-node-from-end-of-list.cpp][Accepted]] |
+| [[https://leetcode.com/problems/swap-nodes-in-pairs/][24. Swap Nodes in Pairs]]                                    | Linked List          | Medium     | LC    | [[file:lc/24.swap-nodes-in-pairs.cpp][Accepted]] |
+| [[https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/][2130. Maximum Twin Sum of a Linked List]]                    | Linked List          | Medium     | LC    | [[file:lc/2130.maximum-twin-sum-of-a-linked-list.cpp][Accepted]] |
+| [[https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/][2095. Delete the Middle Node of a Linked List]]              | Linked List          | Medium     | LC    | [[file:lc/2095.delete-the-middle-node-of-a-linked-list.cpp][Accepted]] |
+| [[https://leetcode.com/problems/merge-in-between-linked-lists/][1669. Merge In Between Linked Lists]]                        | Linked List          | Medium     | LC    | [[file:lc/1669.merge-in-between-linked-lists.cpp][Accepted]] |
+| [[https://leetcode.com/problems/flatten-binary-tree-to-linked-list/][114. Flatten Binary Tree to Linked List]]                    | Linked List          | Medium     | LC    | [[file:lc/144.flatten-binary-tree-to-linked-list.cpp][Accepted]] |
+| [[https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/][430. Flatten a Multilevel Doubly Linked List]]               | Linked List          | Medium     | LC    | [[file:lc/430.flatten-a-multilevel-doubly-linked-list.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/longest-mountain-in-array/][845. Longest Mountain in Array]]                             | Enumeration          | Medium     | LC    | [[file:lc/845.longest-mountain-in-array.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/combination-sum/][39. Combination Sum]]                                        | Backtracking         | Medium     | LC    | [[file:lc/39.combination-sum.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/][80. Remove Duplicates from Sorted Array II]]                 | Two Pointers         | Medium     | LC    | [[file:lc/80.remove-duplicates-from-sorted-array-ii.cpp][Accepted]] |
+| [[https://leetcode.com/problems/rotate-array/][189. Rotate Array]]                                          | Two Pointers         | Medium     | LC    | [[file:lc/189.rotate-array.cpp][Accepted]] |
+| [[https://leetcode.com/problems/swapping-nodes-in-a-linked-list/][1721. Swapping Nodes in a Linked List]]                      | Two Pointers         | Medium     | LC    | [[file:lc/1721.swapping-nodes-in-a-linked-list.cpp][Accepted]] |
+| [[https://leetcode.com/problems/partition-list/][86. Partition List]]                                         | Two Pointers         | Medium     | LC    | [[file:lc/86.partition-list.cpp][Accepted]] |
+| [[https://leetcode.com/problems/interval-list-intersections/][986. Interval List Intersections]]                           | Two Pointers         | Medium     | LC    | [[file:lc/986.interval-list-intersections.cpp][Accepted]] |
+| [[https://leetcode.com/problems/rearrange-array-elements-by-sign/][2149. Rearrange Array Elements by Sign]]                     | Two Pointers         | Medium     | LC    | [[file:lc/2149.rearrange-array-elements-by-sign.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/diameter-of-binary-tree/][543. Diameter of Binary Tree]]                               | Binary Search        | Easy       | LC    | [[file:lc/543.diameter-of-binary-tree.cpp][Accepted]] |
+| [[https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/][4. Find First and Last Position of Element in Sorted Array]] | Binary Search        | Medium     | LC    | [[file:lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]] |
+| [[https://leetcode.com/problems/search-a-2d-matrix-ii/][240. Search a 2D Matrix II]]                                 | Binary Search        | Medium     | LC    | [[file:lc/240.search-a-2d-matrix-ii.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/path-sum/][112. Path Sum]]                                              | Depth-First Search   | Easy       | LC    | [[file:lc/112.path-sum.cpp][Accepted]] |
+| [[https://leetcode.com/problems/longest-univalue-path/][687. Longest Univalue Path]]                                 | Depth-First Search   | Medium     | LC    | [[file:lc/687.longest-univalue-path.cpp][Accepted]] |
+| [[https://leetcode.com/problems/path-sum-ii/][113. Path Sum II]]                                           | Depth-First Search   | Medium     | LC    | [[file:lc/113.path-sum-ii.cpp][Accepted]] |
+| [[https://leetcode.com/problems/path-sum-iii/][437. Path Sum III]]                                          | Depth-First Search   | Medium     | LC    | [[file:lc/437.path-sum-iii.cpp][Accepted]] |
+| [[https://leetcode.com/problems/number-of-provinces/][547. Number of Provinces]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/547.number-of-provinces.cpp][Accepted]] |
+| [[https://leetcode.com/problems/accounts-merge/][721. Accounts Merge]]                                        | Depth-Frist Search   | Medium     | LC    | [[file:lc/721.accounts-merge.cpp][Accepted]] |
+| [[https://leetcode.com/problems/all-paths-from-source-to-target/][797. All Paths From Source to Target]]                       | Depth-First Search   | Medium     | LC    | [[file:lc/797.all-paths-from-source-to-target.cpp][Accepted]] |
+| [[https://leetcode.com/problems/keys-and-rooms/][841. Keys and Rooms]]                                        | Depth-First Search   | Medium     | LC    | [[file:lc/841.keys-and-rooms.cpp][Accepted]] |
+| [[https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/][1557. Minimum Number of Vertices to Reach All Nodes]]        | Depth-First Search   | Medium     | LC    | [[file:lc/1557.minimum-number-of-vertices-to-reach-all-nodes.cpp][Accepted]] |
+| [[https://leetcode.com/problems/binary-tree-pruning/][814. Binary Tree Pruning]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/814.binary-tree-pruning.cpp][Accepted]] |
+| [[https://leetcode.com/problems/binary-tree-cameras/][968. Binary Tree Cameras]]                                   | Depth-First Search   | Hard       | LC    | [[file:lc/968.binary-tree-cameras.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]                       | Dynamic Programming  | Easy       | LC    | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][Accepted]] |
+| [[https://leetcode.com/problems/integer-replacement/][397. Integer Replacement]]                                   | Dynamic Programming  | Medium     | LC    | [[file:lc/397.integer-replacement.cpp][Accepted]] |
+| [[https://leetcode.com/problems/unique-paths/][62. Unique Paths]]                                           | Dynamic Programming  | Medium     | LC    | [[file:lc/62.unique-paths.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/deepest-leaves-sum/][1302. Deepest Leaves Sum]]                                   | Breadth-First Search | Medium     | LC    | [[file:lc/1302.deepest-leaves-sum.cpp][Accepted]] |
+| [[https://leetcode.com/problems/binary-tree-level-order-traversal/][102. Binary Tree Level Order Traversal]]                     | Breadth-First Search | Medium     | LC    | [[file:lc/102.binary-tree-level-order-traversal.cpp][Accepted]] |
+| [[https://leetcode.com/problems/binary-tree-level-order-traversal-ii/][107. Binary Tree Level Order Traversal II]]                  | Breadth-First Search | Medium     | LC    | [[file:lc/107.binary-tree-level-order-traversal-ii.cpp][Accepted]] |
+| [[https://leetcode.com/problems/n-ary-tree-level-order-traversal/][429. N-ary Tree Level Order Traversal]]                      | Breadth-First Search | Medium     | LC    | [[file:lc/429.n-ary-tree-level-order-traversal.cpp][Accepted]] |
+| [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]           | Breadth-First Search | Medium     | LC    | [[file:lc/166.populating-next-right-pointers-in-each-node.cpp][Accepted]] |
+| [[https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/][103. Binary Tree Zigzag Level Order Traversal]]              | Breadth-First Search | Medium     | LC    | [[file:lc/103.binary-tree-zigzag-level-order-traversal.cpp][Accepted]] |
+|------------------------------------------------------------+----------------------+------------+-------+----------|
+* To Be Solved
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| Problem                                        | Tags                | Difficulty | Judge | Statue              |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]              | Array               | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][Wrong Answer]]        |
+| [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                              | Array               | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][Wrong Answer]]        |
+| [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                        | Array               | Hard       | LC    | [[https://leetcode.com/submissions/detail/638579456/][Wrong Answer]]        |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/rotating-the-box/][1861. Rotating the Box]]                         | Matrix              | Medium     | LC    | [[file:lc/1861.rotating-the-box.cpp][Wrong Answer]]        |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/valid-parenthesis-string/][678. Valid Parenthesis String]]                  | Stack               | Medium     | LC    | [[file:lc/678.valid-parenthesis-string.cpp][Time Limit Exceeded]] |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/find-all-anagrams-in-a-string/][438. Find All Anagrams in a String]]             | String              | Medium     | LC    | [[file:built/438.find-all-anagrams-in-a-string.cpp][Time Limit Exceeded]] |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/3sum/][15. 3Sums]]                                      | Two Pointers        | Medium     | LC    | [[file:built/15.3sums.cpp][Time Limit Exceeded]] |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                 | Backtracking        | Medium     | LC    | [[file:built/99.subsets-ii.cpp][Unkown]]              |
+| [[https://leetcode.com/problems/restore-ip-addresses/][93. Restore IP Addresses]]                       | Backtracking        | Medium     | LC    | [[https://leetcode.com/problems/restore-ip-addresses/][Time Limit Exceeded]] |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/decode-ways/][91. Decode Ways]]                                | Dynamic Programming | Medium     | LC    | [[file:built/91.decode-ways.cpp][Time Limit Exceeded]] |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/#:~:text=The%20vertical%20order%20traversal%20of%20a%20binary%20tree%20is%20a,these%20nodes%20by%20their%20values.][987. Vertical Order Traversal of a Binary Tree]] | Depth-First Search  | Hard       | LC    | [[file:987.vertical-order-traversal-of-a-binary-tree.cpp][Wrong Answer]]        |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/design-browser-history/][1472. Design Browser History]]                   | Design              | Medium     | LC    | [[file:lc/1472.design-browser-history.cpp][TBC]]                 |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/insertion-sort-list/][147. Insertion Sort List]]                       | Sorting             | Medium     | LC    | [[file:lc/147.insertion-sort-list.cpp][TBC]]                 |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
+| [[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/][236. Lowest Common Ancestor of a Binary Tree]]   | Tree                | Medium     | LC    | TBC                 |
+|------------------------------------------------+---------------------+------------+-------+---------------------|
 * What to Study
 | Topic              | Difficulty | R.I (For SW engineering) | Set |
 |--------------------+------------+--------------------------+-----|
@@ -164,230 +170,6 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 *** [ ] https://leetcode.com/problems/pancake-sorting/
 *** [ ] https://leetcode.com/problems/sort-list/
 *** [ ] https://leetcode.com/problems/partition-array-according-to-given-pivot
-
-* Covered
-** DONE Linked List
-** DONE Binary Tree & Binary Search
-** DONE Graphs
-** DONE Array
-** DONE Two Pointers
-** DONE Hash
-** DONE Stack
-
-* Seanforfun's Problems
-*** Tree
-**** Traversal [29/29]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/94.%20Binary%20Tree%20Inorder%20Traversal.md][94. Binary Tree Inorder Traversal]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/589.%20N-ary%20Tree%20Preorder%20Traversal.md][589. N-ary Tree Preorder Traversal]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/590.%20N-ary%20Tree%20Postorder%20Traversal.md][590. N-ary Tree Postorder Traversal]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/100.%20Same%20Tree.md][100. Same Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/101.%20Symmetric%20Tree.md][101. Symmetric Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/104.%20Maximum%20Depth%20of%20Binary%20Tree.md][104. Maximum Depth of Binary Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/110.%20Balanced%20Binary%20Tree.md][110. Balanced Binary Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/111.%20Minimum%20Depth%20of%20Binary%20Tree.md][111. Minimum Depth of Binary Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/572.%20Subtree%20of%20Another%20Tree.md][572. Subtree of Another Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/965.%20Univalued%20Binary%20Tree.md][965. Univalued Binary Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/102.%20Binary%20Tree%20Level%20Order%20Traversal.md][102. Binary Tree Level Order Traversal]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/107.%20Binary%20Tree%20Level%20Order%20Traversal%20II.md][107. Binary Tree Level Order Traversal II]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/429.%20N-ary%20Tree%20Level%20Order%20Traversal.md][429. N-ary Tree Level Order Traversal]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/987.%20Vertical%20Order%20Traversal%20of%20a%20Binary%20Tree.md][987. Vertical Order Traversal of a Binary Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/814.%20Binary%20Tree%20Pruning.md][814. Binary Tree Pruning]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/669.%20Trim%20a%20Binary%20Search%20Tree.md][669. Trim a Binary Search Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/112.%20Path%20Sum.md][112. Path Sum]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/113.%20Path%20Sum%20II.md][113. Path Sum II]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/437.%20Path%20Sum%20III.md][437. Path Sum III]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/543.%20Diameter%20of%20Binary%20Tree.md][543. Diameter of Binary Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/687.%20Longest%20Univalue%20Path.md][687. Longest Univalue Path]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/129.%20Sum%20Root%20to%20Leaf%20Numbers.md][129. Sum Root to Leaf Numbers]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/257.%20Binary%20Tree%20Paths.md][257. Binary Tree Paths]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/235.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree.md][235. Lowest Common Ancestor of a Binary Search Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.md][236. Lowest Common Ancestor of a Binary Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/297.%20Serialize%20and%20Deserialize%20Binary%20Tree.md][297. Serialize and Deserialize Binary Tree]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/508.%20Most%20Frequent%20Subtree%20Sum.md][508. Most Frequent Subtree Sum]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/968.%20Binary%20Tree%20Cameras.md][968. Binary Tree Cameras]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/979.%20Distribute%20Coins%20in%20Binary%20Tree.md][979. Distribute Coins in Binary Tree]]
-
-**** Binary Search [3/19]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/34.%20Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array.md][34. Find First and Last Position of Element in Sorted Array]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/35.%20Search%20Insert%20Position.md][35. Search Insert Position]]
-***** [X] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/704.%20Binary%20Search.md][704. Binary Search]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/33.%20Search%20in%20Rotated%20Sorted%20Array.md][33. Search in Rotated Sorted Array]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/81.%20Search%20in%20Rotated%20Sorted%20Array%20II.md][81. Search in Rotated Sorted Array II]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/153.%20Find%20Minimum%20in%20Rotated%20Sorted%20Array.md][153. Find Minimum in Rotated Sorted Array]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/154.%20Find%20Minimum%20in%20Rotated%20Sorted%20Array%20II.md][154. Find Minimum in Rotated Sorted Array II]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/162.%20Find%20Peak%20Element.md][162. Find Peak Element]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/852.%20Peak%20Index%20in%20a%20Mountain%20Array.md][852. Peak Index in a Mountain Array]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/69.%20Sqrt(x).md][69. Sqrt(x)]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/74.%20Search%20a%202D%20Matrix.md][74. Search a 2D Matrix]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/378.%20Kth%20Smallest%20Element%20in%20a%20Sorted%20Matrix.md][378. Kth Smallest Element in a Sorted Matrix]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/668.%20Kth%20Smallest%20Number%20in%20Multiplication%20Table.md][668. Kth Smallest Number in Multiplication Table]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/778.%20Swim%20in%20Rising%20Water.md][778. Swim in Rising Water]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/174.%20Dungeon%20Game.md][174. Dungeon Game]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/875.%20Koko%20Eating%20Bananas.md][875. Koko Eating Bananas]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/4.%20Median%20of%20Two%20Sorted%20Arrays.md][4.of Two Sorted Arrays]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/719.%20Find%20K-th%20Smallest%20Pair%20Distance.md][719. Find K-th Smallest Pair Distance]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/786.%20K-th%20Smallest%20Prime%20Fraction.md][786. K-th Smallest Prime Fraction]]
-*** Graph
-***** Clone graph: hashtable + dfs [0/2]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/133.%20Clone%20Graph.md][133. Clone Graph]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/138.%20Copy%20List%20with%20Random%20Pointer.md][138. Copy List with Random Pointer]]
-***** Grid + Connected Component [0/6]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/200.%20Number%20of%20Islands.md][200. Number of Islands]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/547.%20Friend%20Circles.md][547. Friend Circles]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/695.%20Max%20Area%20of%20Island.md][695. Max Area of Island]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/733.%20Flood%20Fill.md][733. Flood Fill]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/827.%20Making%20A%20Large%20Island.md][827. Making A Large Island]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/841.%20Keys%20and%20Rooms.md][841. Keys and Rooms]]
-***** Topological Sort  [0/3]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/207.%20Course%20Schedule.md][207. Course Schedule]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/210.%20Course%20Schedule%20II.md][210. Course Schedule II]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/802.%20Find%20Eventual%20Safe%20States.md][802. Find Eventual Safe States]]
-***** Union Find Set / Disjoint Set [0/5]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/399.%20Evaluate%20Division.md][399. Evaluate Division]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/839.%20Similar%20String%20Groups.md][839. Similar String Groups]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/952.%20Largest%20Component%20Size%20by%20Common%20Factor.md][952. Largest Component Size by Common Factor]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/990.%20Satisfiability%20of%20Equality%20Equations.md][990. Satisfiability of Equality Equations]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/721.%20Accounts%20Merge.md][721. Accounts Merge]]
-***** Bipartite [0/2]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/785.%20Is%20Graph%20Bipartite?.md][785. Is Graph Bipartite?]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/886.%20Possible%20Bipartition.md][886. Possible Bipartition]]
-***** Cycle+Union-find [0/4]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/684.%20Redundant%20Connection.md][684. Redundant Connection]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/685.%20Redundant%20Connection%20II.md][685. Redundant Connection II]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/787.%20Cheapest%20Flights%20Within%20K%20Stops.md][787. Cheapest Flights Within K Stops]]
-***** Shortest Path [0/2]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/743.%20Network%20Delay%20Time.md][743. Network Delay Time]]
-***** BFS [0/4]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/847.%20Shortest%20Path%20Visiting%20All%20Nodes.md][847. Shortest Path Visiting All Nodes]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/815.%20Bus%20Routes.md][815. Bus Routes]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/864.%20Shortest%20Path%20to%20Get%20All%20Keys.md][864. Shortest Path to Get All Keys]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/924.%20Minimize%20Malware%20Spread.md][924. Minimize Malware Spread]]
-***** Hamilton Path / DP [0/3]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/943.%20Find%20the%20Shortest%20Superstring.md][943. Find the Shortest Superstring]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/980.%20Unique%20Paths%20III.md][980. Unique Paths III]]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/996.%20Number%20of%20Squareful%20Arrays.md][996. Number of Squareful Arrays]]
-***** Union-find + connected component [0/1]
-****** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/959.%20Regions%20Cut%20By%20Slashes.md][959. Regions Cut By Slashes]]
-
-*** Search
-    :PROPERTIES:
-    :CUSTOM_ID: search
-    :END:
-**** Combination [0/7]
-     :PROPERTIES:
-     :CUSTOM_ID: combination
-     :END:
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/17.%20Letter%20Combinations%20of%20a%20Phone%20Number.md][17. Letter Combinations of a Phone Number]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/39.%20Combination%20Sum.md][39. Combination Sum]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/40.%20Combination%20Sum%20II.md][40. Combination Sum II]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/77.%20Combinations.md][77. Combinations]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/79.%20Word%20Search.md][79. Word Search]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/90.%20Subsets%20II.md][90. Subsets II]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/216.%20Combination%20Sum%20III.md][216. Combination Sum III]]
-- Conclusion: We can speed up the recursion using an index and if we
-  want all elements used once, we need to sort first and in the for
-  loop, we need to remove duplicate values.
-
-**** Permutation [0/5]
-     :PROPERTIES:
-     :CUSTOM_ID: permutation
-     :END:
-
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/46.%20Permutations.md][46. Permutations]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/47.%20Permutations%20II.md][47. Permutations II]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/784.%20Letter%20Case%20Permutation.md][784. Letter Case Permutation]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/943.%20Find%20the%20Shortest%20Superstring.md][943. Find the Shortest Superstring]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/996.%20Number%20of%20Squareful%20Arrays.md][996. Number of Squareful Arrays]]
-
-**** DFS [0/7]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/22.%20Generate%20Parentheses.md][22. Generate Parentheses]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/301.%20Remove%20Invalid%20Parentheses.md][301. Remove Invalid Parentheses]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/37.%20Sudoku%20Solver.md][37. Sudoku Solver]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/51.%20N-Queens.md][51. N-Queens]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/52.%20N-Queens%20II.md][52. N-Queens II]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/79.%20Word%20Search.md][79. Word Search]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/212.%20Word%20Search%20II.md][212. Word Search II]]
-
-**** BFS [0/6]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/127.%20Word%20Ladder.md][127. Word Ladder]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/126.%20Word%20Ladder%20II.md][126. Word Ladder II]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/752.%20Open%20the%20Lock.md][752. Open the Lock]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/542.%200120Matrix.md][542. 01 Matrix]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/695.%20Max%20Area%20of%20Island.md][695. Max Area of Island]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/934.%20Shortest%20Bridge.md][934. Shortest Bridge]]
-
-**** Partition [0/6]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/698.%20Partition%20to%20K%20Equal%20Sum%20Subsets.md][698. Partition to K Equal Sum Subsets]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/93.%20Restore%20IP%20Addresses.md][93. Restore IP Addresses]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/131.%20Palindrome%20Partitioning.md][131. Palindrome Partitioning]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/241.%20Different%20Ways%20to%20Add%20Parentheses.md][241. Different Ways to Add Parentheses]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/282.%20Expression%20Add%20Operators.md][282. Expression Add Operators]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/842.%20Split%20Array%20into%20Fibonacci%20Sequence.md][842. Split Array into Fibonacci Sequence]]
-
-**** Dynamic Programming [0/47]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/70.%20Climbing%20Stairs.md][70. Climbing Stairs]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/746.%20Min%20Cost%20Climbing%20Stairs.md][746. Min Cost Climbing Stairs]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/303.%20Range%20Sum%20Query%20-%20Immutable.md][303. Range Sum Query - Immutable]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/53.%20Maximum%20Subarray.md][53. Maximum Subarray]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock.md][121. Best Time to Buy and Sell Stock]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/198.%20House%20Robber.md][198. House Robber]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/213.%20House%20Robber%20II.md][213. House Robber II]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/309.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown.md][309. Best Time to Buy and Sell Stock with Cooldown]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/740.%20Delete%20and%20Earn.md][740. Delete and Earn]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/790.%20Domino%20and%20Tromino%20Tiling.md][790. Domino and Tromino Tiling]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/801.%20Minimum%20Swaps%20To%20Make%20Sequences%20Increasing.md][801. Minimum Swaps To Make Sequences Increasing]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/139.%20Word%20Break.md][139. Word Break]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/140.%20Word%20Break%20II.md][140. Word Break II]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/818.%20Race%20Car.md][818. Race Car]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/300.%20Longest%20Increasing%20Subsequence.md][300. Longest Increasing Subsequence]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/673.%20Number%20of%20Longest%20Increasing%20Subsequence.md][673. Number of Longest Increasing Subsequence]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/72.%20Edit%20Distance.md][72. Edit Distance]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/10.%20Regular%20Expression%20Matching.md][10. Regular Expression Matching]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/44.%20Wildcard%20Matching.md][44. Wildcard Matching]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/97.%20Interleaving%20String.md][97. Interleaving String]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/115.%20Distinct%20Subsequences.md][115. Distinct Subsequences]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/583.%20Delete%20Operation%20for%20Two%20Strings.md][583. Delete Operation for Two Strings]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/712.%20Minimum%20ASCII%20Delete%20Sum%20for%20Two%20Strings.md][712. Minimum ASCII Delete Sum for Two Strings]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/322.%20Coin%20Change.md][322. Coin Change]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/377.%20Combination%20Sum%20IV.md][377. Combination Sum IV]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/416.%20Partition%20Equal%20Subset%20Sum.md][416. Partition Equal Subset Sum]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/494.%20Target%20Sum.md][494. Target Sum]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/813.%20Largest%20Sum%20of%20Averages.md][813. Largest Sum of Averages]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/312.%20Burst%20Balloons.md][312. Burst Balloons]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/664.%20Strange%20Printer.md][664. Strange Printer]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/741.%20Cherry%20Pickup.md][741. Cherry Pickup]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/546.%20Remove%20Boxes.md][546. Remove Boxes]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/943.%20Find%20the%20Shortest%20Superstring.md][943. Find the Shortest Superstring]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/980.%20Unique%20Paths%20III.md][980. Unique Paths III]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/996.%20Number%20of%20Squareful%20Arrays.md][996. Number of Squareful Arrays]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/62.%20Unique%20Paths.md][62. Unique Paths]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/63.%20Unique%20Paths%20II.md][63. Unique Paths II]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/64.%20Minimum%20Path%20Sum.md][64. Minimum Path Sum]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/120.%20Triangle.md][120. Triangle]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/174.%20Dungeon20Game.md][174. Dungeon Game]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/931.%20Minimum%20Falling%20Path%20Sum.md][931. Minimum Falling Path Sum]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/85.%20Maximal%20Rectangle.md][85. Maximal Rectangle]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/221.%20Maximal%20Square.md][221. Maximal Square]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/304.%20Range%20Sum%20Query%202D%20-%20Immutable.md][304. Range Sum Query 2D - Immutable]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/688.%20Knight%20Probability%20in%20Chessboard.md][688. Knight Probability in Chessboard]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/576.%20Out%20of%20Boundary%20Paths.md][576. Out of Boundary Paths]]
-***** [ ]  [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/935.%20Knight%20Dialer.md][935. Knight Dialer]]
-*** Advance
-**** BIT / Segment tree [0/1]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/307.%20Range%20Sum%20Query%20-%20Mutable.md][307. Range Sum Query - Mutable]]
-**** Monotic stack [0/4]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/84.%20Largest%20Rectangle%20in%20Histogram.md][84. Largest Rectangle in Histogram]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/85.%20Maximal%20Rectangle.md][85. Maximal Rectangle]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/901.%20Online%20Stock%20Span.md][901. Online Stock Span]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/907.%20Sum%20of%20Subarray%20Minimums.md][907. Sum of Subarray Minimums]]
-
-**** Trie Tree [0/6]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/208.%20Implement%20Trie%20(Prefix%20Tree).md][208. Implement Trie (Prefix Tree)]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/648.%20Replace%20Words.md][648. Replace Words]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/676.%20Implement%20Magic%20Dictionary.md][676. Implement Magic Dictionary]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/677.%20Map%20Sum%20Pairs.md][677. Map Sum Pairs]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/720.%20Longest%20Word%20in%20Dictionary.md][720. Longest Word in Dictionary]]
-***** [ ] [[https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/745.%20Prefix%20and%20Suffix%20Search.md][745. Prefix and Suffix Search]]
 
 * Objectives
 
