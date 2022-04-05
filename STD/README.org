@@ -301,6 +301,11 @@ vector<T>::const_iterator last = myVec.begin() + 101000;
 vector<T> newVec(first, last);
 #+end_src
 
+** Check if all values are true
+#+begin_src cpp
+std::all_of(vec.begin(), vec.end(), [](bool v) { return v; });
+#+end_src
+
 * C# Notes
 ** Get a Random Set of String
 #+begin_src csharp
