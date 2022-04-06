@@ -65,6 +65,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/merge-in-between-linked-lists/][1669. Merge In Between Linked Lists]]                        | Linked List          | Medium     | LC    | [[file:lc/1669.merge-in-between-linked-lists.cpp][Accepted]] |
 | [[https://leetcode.com/problems/flatten-binary-tree-to-linked-list/][114. Flatten Binary Tree to Linked List]]                    | Linked List          | Medium     | LC    | [[file:lc/144.flatten-binary-tree-to-linked-list.cpp][Accepted]] |
 | [[https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/][430. Flatten a Multilevel Doubly Linked List]]               | Linked List          | Medium     | LC    | [[file:lc/430.flatten-a-multilevel-doubly-linked-list.cpp][Accepted]] |
+| [[https://www.lintcode.com/problem/380/][380. Intersection of Two Linked Lists]]                      | Linked List          | Medium     | NT    | [[file:nt/380.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/longest-mountain-in-array/][845. Longest Mountain in Array]]                             | Enumeration          | Medium     | LC    | [[file:lc/845.longest-mountain-in-array.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
@@ -181,7 +182,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 *** [ ] https://leetcode.com/problems/find-median-from-data-stream/ :heap:
 *** [ ] https://leetcode.com/problems/daily-temperatures/ :stack:
 
-** TODO Sorting [0/6]
+** TODO Sorting [0/7]
 *** [ ] [[https://leetcode.com/problems/sort-colors/][https://leetcode.com/problems/sort-colors/]]
 *** [ ] https://leetcode.com/problems/partition-list/
 *** [ ] [[https://leetcode.com/problems/maximum-performance-of-a-team/][https://leetcode.com/problems/maximum-performance-of-a-team/]]
@@ -189,6 +190,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 *** [ ] https://leetcode.com/problems/sort-list/
 *** [ ] https://leetcode.com/problems/partition-array-according-to-given-pivot
 
+** TODO [[https://leetcode.com/problems/longest-palindromic-substring/][Dynamic Programming]]
 * Objectives
 
 #+DOWNLOADED: screenshot @ 2022-02-14 14:11:50
