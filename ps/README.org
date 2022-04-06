@@ -42,6 +42,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/first-unique-character-in-a-string/][387. First Unique Character in a String]]                    | String               | Easy       | LC    | [[file:lc/387.first-unique-character-in-a-string.cpp][Accepted]] |
 | [[https://leetcode.com/problems/determine-if-two-strings-are-close/][1657. Determine if Two Strings Are Close]]                   | String               | Medium     | LC    | [[file:lc/1657.determine-if-two-strings-are-close.cpp][Accepted]] |
 | [[https://leetcode.com/problems/reverse-words-in-a-string/][151. Reverse Words in a String]]                             | String               | Medium     | LC    | [[file:lc/151-reverse-words-in-a-string.cs][Accepted]] |
+| [[https://www.lintcode.com/problem/415/][415. Valid Palindrome]]                                      | String               | Medium     | NT    | [[file:nt/415.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/valid-sudoku/][36. Valid Sudoku]]                                           | Matrix               | Medium     | LC    | [[file:lc/36.valid-sudoku.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
