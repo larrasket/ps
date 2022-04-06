@@ -108,39 +108,35 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/][103. Binary Tree Zigzag Level Order Traversal]]              | Breadth-First Search | Medium     | LC    | [[file:lc/103.binary-tree-zigzag-level-order-traversal.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 * To Be Solved
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| Problem                                        | Tags                | Difficulty | Judge | Statue              |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]              | Array               | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][Wrong Answer]]        |
-| [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                              | Array               | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][Wrong Answer]]        |
-| [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                        | Array               | Hard       | LC    | [[https://leetcode.com/submissions/detail/638579456/][Wrong Answer]]        |
-| [[https://leetcode.com/problems/next-permutation/][31. Next Permutation]]                           | Array               | Medium     | LC    | TBS                 |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/rotating-the-box/][1861. Rotating the Box]]                         | Matrix              | Medium     | LC    | [[file:lc/1861.rotating-the-box.cpp][Wrong Answer]]        |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/valid-parenthesis-string/][678. Valid Parenthesis String]]                  | Stack               | Medium     | LC    | [[file:lc/678.valid-parenthesis-string.cpp][Time Limit Exceeded]] |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/find-all-anagrams-in-a-string/][438. Find All Anagrams in a String]]             | String              | Medium     | LC    | [[file:built/438.find-all-anagrams-in-a-string.cpp][Time Limit Exceeded]] |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/3sum/][15. 3Sums]]                                      | Two Pointers        | Medium     | LC    | [[file:built/15.3sums.cpp][Time Limit Exceeded]] |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                 | Backtracking        | Medium     | LC    | [[file:built/99.subsets-ii.cpp][Unkown]]              |
-| [[https://leetcode.com/problems/restore-ip-addresses/][93. Restore IP Addresses]]                       | Backtracking        | Medium     | LC    | [[https://leetcode.com/problems/restore-ip-addresses/][Time Limit Exceeded]] |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/decode-ways/][91. Decode Ways]]                                | Dynamic Programming | Medium     | LC    | [[file:built/91.decode-ways.cpp][Time Limit Exceeded]] |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/#:~:text=The%20vertical%20order%20traversal%20of%20a%20binary%20tree%20is%20a,these%20nodes%20by%20their%20values.][987. Vertical Order Traversal of a Binary Tree]] | Depth-First Search  | Hard       | LC    | [[file:987.vertical-order-traversal-of-a-binary-tree.cpp][Wrong Answer]]        |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/design-browser-history/][1472. Design Browser History]]                   | Design              | Medium     | LC    | [[file:lc/1472.design-browser-history.cpp][TBS]]                 |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/insertion-sort-list/][147. Insertion Sort List]]                       | Sorting             | Medium     | LC    | [[file:lc/147.insertion-sort-list.cpp][TBS]]                 |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/][236. Lowest Common Ancestor of a Binary Tree]]   | Tree                | Medium     | LC    | TBC                 |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://www.lintcode.com/problem/919/?_from=collection&fromId=185][919 · Meeting Rooms II]]                         | Greedy              | Medium     | NT    | [[file:nt/919.cpp][Wrong Answer]]        |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
-| [[https://leetcode.com/problems/number-of-provinces/][547. Number of Provinces]]                       | Depth-First Search  | Medium     | LC    | [[file:lc/547.number-of-provinces.cpp][TBS]]                 |
-|------------------------------------------------+---------------------+------------+-------+---------------------|
+|------------------------------------------------+---------------------+------------+-------+--------|
+| Problem                                        | Tags                | Difficulty | Judge | Statue |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]              | Array               | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][TBS]]    |
+| [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                              | Array               | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/rotating-the-box/][1861. Rotating the Box]]                         | Matrix              | Medium     | LC    | [[file:lc/1861.rotating-the-box.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/valid-parenthesis-string/][678. Valid Parenthesis String]]                  | Stack               | Medium     | LC    | [[file:lc/678.valid-parenthesis-string.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/find-all-anagrams-in-a-string/][438. Find All Anagrams in a String]]             | String              | Medium     | LC    | [[file:built/438.find-all-anagrams-in-a-string.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/3sum/][15. 3Sums]]                                      | Two Pointers        | Medium     | LC    | [[file:built/15.3sums.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                 | Backtracking        | Medium     | LC    | [[file:built/99.subsets-ii.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/decode-ways/][91. Decode Ways]]                                | Dynamic Programming | Medium     | LC    | [[file:built/91.decode-ways.cpp][TBS]]    |
+| [[https://leetcode.com/problems/ways-to-make-a-fair-array][1664. Ways to Make a Fair Array]]                | Dynamic Programming | Medium     | LC    | [[file:lc/1664.ways-to-make-a-fair-array.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/#:~:text=The%20vertical%20order%20traversal%20of%20a%20binary%20tree%20is%20a,these%20nodes%20by%20their%20values.][987. Vertical Order Traversal of a Binary Tree]] | Depth-First Search  | Hard       | LC    | [[file:987.vertical-order-traversal-of-a-binary-tree.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/design-browser-history/][1472. Design Browser History]]                   | Design              | Medium     | LC    | [[file:lc/1472.design-browser-history.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/insertion-sort-list/][147. Insertion Sort List]]                       | Sorting             | Medium     | LC    | [[file:lc/147.insertion-sort-list.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://www.lintcode.com/problem/919/?_from=collection&fromId=185][919 · Meeting Rooms II]]                         | Greedy              | Medium     | NT    | [[file:nt/919.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/number-of-provinces/][547. Number of Provinces]]                       | Depth-First Search  | Medium     | LC    | [[file:lc/547.number-of-provinces.cpp][TBS]]    |
+|------------------------------------------------+---------------------+------------+-------+--------|
 * Solve Again
 |----------------------------------------------+---------------+------------+-------+----------|
 | Problem                                      | Tags          | Difficulty | Judge | Statue   |
