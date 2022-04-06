@@ -306,6 +306,35 @@ vector<T> newVec(first, last);
 std::all_of(vec.begin(), vec.end(), [](bool v) { return v; });
 #+end_src
 
+** Remove Spaces From String
+#+begin_src cpp
+#include <iostream>
+#include <string>
+
+using std::cout; using std::cin;
+using std::endl; using std::string;
+
+int main(){
+    string str = "  Arbitrary   str ing with lots of spaces to be removed   .";
+
+    cout << str << endl;
+
+    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+
+    cout << str << endl;
+
+    return EXIT_SUCCESS;
+}
+#+end_src
+** Remove Every non alpha from string
+#+begin_src c++
+s.erase(std::remove_if(s.begin(), s.end(), (int(*)(int))std::isalnum), s.end());
+#+end_src
+
+** String To Upper
+#+begin_src cpp
+std::transform(str.begin(), str.end(),str.begin(), ::toupper);
+#+end_src
 * C# Notes
 ** Get a Random Set of String
 #+begin_src csharp
