@@ -35,6 +35,8 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                 | Array                | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                        | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]] |
+| [[https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/][2216. Minimum Deletions to Make Array Beautiful]]            | Greedy               | Medium     | LC    | [[file:lc/2216.minimum-deletions-to-make-array-beautiful.cpp][Accepted]] |
+| [[https://leetcode.com/problems/minimum-operations-to-halve-array-sum/][2208. Minimum Operations to Halve Array Sum]]                | Greedy               | Medium     | LC    | [[file:lc/2208.minimum-operations-to-halve-array-sum.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://codeforces.com/contest/1634/problem/A][A. Reverse and Concatenate]]                                 | String               | Easy       | CF    | [[file:cf/1634A.cpp][Accepted]] |
 | [[https://leetcode.com/contest/weekly-contest-276/problems/divide-a-string-into-groups-of-size-k/][2138. Divide a String Into Groups of Size k]]                | String               | Easy       | LC    | [[file:lc/2138.divide-a-string-into-groups-of-size-k.cpp][Accepted]] |
