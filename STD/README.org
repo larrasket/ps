@@ -764,6 +764,7 @@ following figure illustrates the execution of middleware components.
 You could do this easily by creating a ~CreateRoles~ method in your startup class. This helps
 check if the roles are created, and creates the roles if they aren't; on application
 startup. Like so.
+
 #+begin_src csharp
 private async Task CreateRoles(IServiceProvider serviceProvider)
     {
@@ -772,7 +773,6 @@ private async Task CreateRoles(IServiceProvider serviceProvider)
         var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         string[] roleNames = { "Admin", "Store-Manager", "Member" };
         IdentityResult roleResult;
-
         foreach (var roleName in roleNames)
         {
             var roleExist = await RoleManager.RoleExistsAsync(roleName);
