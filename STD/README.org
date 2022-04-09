@@ -736,6 +736,27 @@ implements IEnumerable, it simply won’t work and will result in a compilation 
 The following table gives you an overview of how you can decide which type you should depend
 on.
 
+** Add Configuration to Console Application
+Create a console application using dotnet command line or visual studio. Once the
+application is created, add a reference to ~Microsoft.Extensions.Hosting nuget~ package. This
+package will provide all the necessary stuff.
+
+Add a json file, ~appsettings.json~, to the console application project. Notice that we have
+not made any code changes, so the file is not being read yet.
+
+After adding the file, right click on ~appsettings.json~ and select properties. Then set “Copy
+to Ouptut Directory” option to Copy Always.
+
+#+begin_src csharp
+    private static IConfiguration _configuration;
+    static InitConfig()
+    {
+        // init configuration
+        var builder = new ConfigurationBuilder().AddJsonFile("settings.json", true, true);
+        _configuration = builder.Build();
+    }
+#+end_src
+
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp
