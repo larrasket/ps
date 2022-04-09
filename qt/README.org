@@ -1,7 +1,150 @@
 #+TITLE: Introduction to QT5
 
 Qt 5 allows us to easily design our program's user interface through a method most people
-are familiar with. Qt not only provides us with a powerful user interface toolkit,
-called Qt Designer, which enables us to design our user interface without writing a single
-line of code, but it also allows advanced users to customize their user interface components
-through a simple scripting language called Qt Style Sheets.
+are familiar with. Qt not only provides us with a powerful user interface toolkit, called Qt
+Designer, which enables us to design our user interface without writing a single line of
+code, but it also allows advanced users to customize their user interface components through
+a simple scripting language called Qt Style Sheets.
+* ~styleSheet~
+First create your first project/app. Go to *File* from the menu bar, click next multiple
+times until you find a new window with the ~mainwindow.cpp~ file to edit. Obviously this is
+the file for the main window program, to begin with design you can double click at the
+~mainwindow.ui~ file. This file, just as its name implies, contain instruction (which can be
+put visually) about the main window in your application.
+
+If you're doing that, then you should be seeing the design section popped up with the editor
+gone. Try to add something to the window by dragging and putting it into the window. For my
+case I will try with a *Push Button*, you should see something like this:
+
+[[file:First_Style_Sheet/2022-04-06_10-29-16_screenshot.png]]
+
+Now you will see all the properties of this button inside the Property Editor on the right
+side of your window. Scroll down to the middle and look for a property called styleSheet.
+This is where you apply styles to your widget, which may or may not inherit to its children
+or grandchildren recursively, depending on how you set your style sheet. Alternatively, you
+can right-click on any widget in your UI at the form editor and select Change styleSheet
+from the pop-up menu.
+
+You can click on the input field of the styleSheet property to directly write the
+style sheet code, or click on the … button beside the input field to open up the
+Edit Style Sheet window, which has a bigger space for writing longer code for
+style sheets. At the top of the window, you can find several buttons, such as Add
+Resource, Add Gradient, Add Color, and Add Font, that can help you to
+kickstart your coding if you can't remember the properties' names. Let's try to do
+some simple styling with the Edit Style Sheet window.
+
+For exploring purpose, click add color and pick a random color, then click ok. this should
+generate code like this one:
+
+[[file:First_Style_Sheet/2022-04-06_10-34-45_screenshot.png]]
+
+
+Although these methods works really well, most of the time, the person who is in
+charge of designing the program's UI is not the programmer, but rather a UI designer who
+specializes in designing user-friendly UI. In this case, it's better to let the UI designer design
+the program's layout and style sheet with a different tool and not mess around with the
+code. Qt provides an all-in-one editor called Qt Creator.
+
+Qt Creator consists of several different tools, such as script editor, compiler, debugger,
+profiler, and UI editor. The UI editor, which is also called Qt Designer, is the perfect tool
+for designers to design their program's UI without writing any code. This is because Qt
+Designer adopted the what you see is what you get approach by providing an accurate visual
+representation of the final result, which means whatever you design with Qt Designer will
+turn out exactly the same visually when the program is compiled and run
+
+
+Qt Style Sheets also supports all the different types of selectors defined in the CSS2
+standard, including the universal selector, type selector, class selector, and ID selector,
+which allows us to apply styling to a very specific individual widget or group of widgets.
+For instance, if we want to change the background color of a specific line-edit widget with
+the ~usernameEdit~ object name, we can do this by using an ID selector to refer to it:
+
+#+begin_src css
+QLineEdit#usernameEdit { background-color: blue }
+#+end_src
+
+To learn about all the selectors available in CSS2 (which are also
+supported by Qt Style Sheets), please refer to this document: [[http:/​/​www.w3.​org/​TR/​REC-​CSS2/​selector.​html]].
+** Basic Style Sheet
+Let's build a very basic style sheet to be used in this application:
+
+1. Remove the style sheet from ~PushButton~ by selecting it and clicking the small arrow button beside the styleSheet property. This button will revert the property to the default value, which in this case is the empty style sheet.
+2. Add a few more widgets to the UI by dragging them one by one from the Widget Box to the form editor. I've added a *line edit, combo box, radio button, and a check box.*
+   [[file:~styleSheet~/2022-04-06_11-03-34_screenshot.png]]
+
+3. For the sake of simplicity, delete the ~menuBar, mainToolBar~, and the ~statusBar~ from your UI by selecting them from the Object Inspector, right-click, and choose Remove.
+
+4.  Select the main window from either the form editor or the Object Inspector, then right-click and choose Change ~styleSheet~ to open up the Edit Style Sheet window. Insert the following into the style sheet:
+   #+begin_src css
+border: 2px solid gray;
+border-radius: 10px;
+padding: 0 8px;
+background: yellow;
+  #+end_src
+
+5. You will see a bizarre-looking UI with everything covered in yellow with a thick border.
+   This is because the preceding style sheet does not have a selector, which means the style
+   will apply to the children widgets of the main window all the way down the hierarchy. To
+   change that, let's try something different:
+   #+begin_src css
+QPushButton {
+border: 2px solid gray;
+border-radius: 10px;
+padding: 0 8px;
+background: yellow;
+}
+   #+end_src
+
+6. This time, only PushButton will get the style described in the preceding code, and all other widgets will return to the default styling. You can try to add a few more push buttons to your UI and they will all look the same:
+
+7. This happens because we specifically tell the selector to apply the style to all the widgets with the QPushButton class. We can also apply the style to just one of the push buttons by mentioning its name in the style sheet, as in the following code:
+   #+begin_src css
+QPushButton#pushButton_3 {
+border: 2px solid gray;
+border-radius: 10px;
+padding: 0 8px;
+background: yellow;
+   #+end_src
+
+8. Once you understand this method, we can add the following code to the style sheet:
+   #+begin_src css
+QPushButton {
+color: red;
+border: 0px;
+padding: 0 8px;
+background: white;
+}
+
+QPushButton#pushButton_2 {
+border: 1px solid red;
+border-radius: 10px;
+}
+   #+end_src
+
+9. This code basically changes the style of all the push buttons, as well as some properties of the pushButton_2 button. We keep the style sheet of pushButton_3 as it is. Now the buttons will look like this:
+
+10. The first set of style sheets will change all widgets of the QPushButton type to a white rectangular button with no border and red text. The second set of style sheets changes only the border of a specific QPushButton widget called pushButton_2. Notice that the background color and text color of pushButton_2 remain white and red, respectively, because we didn't override them in the second set of style sheets, hence it will return to the style described in the first set of style sheets since it's applicable to all the QPushButton widgets. The text of the third button has also changed to red because we didn't describe the Color property in the third set of style sheets.
+
+11. Create another set of style sheets that use the universal selector, using the following code:
+    #+begin_src css
+ *{
+background: qradialgradient(cx: 0.3, cy: -0.4, fx: 0.3, fy:
+-0.4, radius: 1.35, stop: 0 #fff, stop: 1 #888);
+color: rgb(255, 255, 255);
+border: 1px solid #ffffff;
+}
+    #+end_src
+
+If you are ever involved in web development using HTML and CSS, Qt's style sheet works
+exactly the same way as CSS. Style sheets provide the definitions to describe the
+presentation of the widgets – what the colors are for each element in the widget group, how
+thick the border should be, and so on and so forth. If you specify the name of the widget to
+the style sheet, it will change the style of the particular PushButton widget with the name
+you provide. None of the other widgets will be affected and will remain as the default
+style.
+
+To change the name of a widget, select the widget from either the form editor or the Object
+Inspector and change the property called ~objectName~ in the property window. If you have used
+the ID selector previously to change the style of the widget, changing its object name will
+break the style sheet and lose the style. To fix this problem, simply change the object name
+in the style sheet as well.
