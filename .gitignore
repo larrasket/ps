@@ -1,5 +1,5 @@
 saved/nsg.org
-saved/*
+/saved/
 Derviation.org
 Morsi.org
 Noted.org
@@ -11,3 +11,6 @@ list.org
 poetry.org
 problems.org
 todo.org
+/papers/
+/journal/
+/saved/
