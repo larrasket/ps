@@ -33,6 +33,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/kth-largest-element-in-an-array/][215. Kth Largest Element in an Array]]                       | Array                | Medium     | LC    | [[file:lc/215.kth-largest-element-in-an-array.cpp][Accepted]] |
 | [[https://leetcode.com/problems/maximum-sum-circular-subarray/][918. Maximum Sum Circular Subarray]]                         | Array                | Medium     | LC    | [[file:lc/918.maximum-sum-circular-subarray.cpp][Accepted]] |
 | [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                 | Array                | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]] |
+| [[https://www.lintcode.com/problem/1882/][1882. Fair Indexes]]                                         | Array                | Medium     | NT    | [[file:nt/1882.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                        | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]] |
 | [[https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/][2216. Minimum Deletions to Make Array Beautiful]]            | Greedy               | Medium     | LC    | [[file:lc/2216.minimum-deletions-to-make-array-beautiful.cpp][Accepted]] |
