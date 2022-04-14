@@ -8,8 +8,6 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 *Y: Yes* \\
 *R: Regular*
 
-
-
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | Problem                                                    | Tags                 | Difficulty | Judge | Statue   |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
@@ -97,6 +95,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/keys-and-rooms/][841. Keys and Rooms]]                                        | Depth-First Search   | Medium     | LC    | [[file:lc/841.keys-and-rooms.cpp][Accepted]] |
 | [[https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/][1557. Minimum Number of Vertices to Reach All Nodes]]        | Depth-First Search   | Medium     | LC    | [[file:lc/1557.minimum-number-of-vertices-to-reach-all-nodes.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-tree-pruning/][814. Binary Tree Pruning]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/814.binary-tree-pruning.cpp][Accepted]] |
+| [[https://www.lintcode.com/problem/1704/][1704. Range Sum of BST]]                                     | Depth-First Search   | Medium     | NT    | [[file:nt/1704.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-tree-cameras/][968. Binary Tree Cameras]]                                   | Depth-First Search   | Hard       | LC    | [[file:lc/968.binary-tree-cameras.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]                       | Dynamic Programming  | Easy       | LC    | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][Accepted]] |
