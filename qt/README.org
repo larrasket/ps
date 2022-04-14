@@ -1,4 +1,4 @@
-#+TITLE: Introduction to QT5
+#+TITLE: Introduction to Qt5
 
 Qt 5 allows us to easily design our program's user interface through a method most people
 are familiar with. Qt not only provides us with a powerful user interface toolkit, called Qt
@@ -148,3 +148,172 @@ Inspector and change the property called ~objectName~ in the property window. If
 the ID selector previously to change the style of the widget, changing its object name will
 break the style sheet and lose the style. To fix this problem, simply change the object name
 in the style sheet as well.
+* Event Handling
+The signals and slots mechanism in Qt 5 is one of its most important features. It's a method
+that allows communication between objects, which is a crucial part of a program's graphical
+user interface. A signal can be emitted from any ~QObject~ objects or its ~subclasses~, which
+will then trigger any slot functions of any objects that are connected to the signal.
+
+Compared to callbacks (which Qt 5 also support), the signals and slots mechanism is
+comparably more fluid and flexible for the programmer to use. The signals and slots
+mechanism is both type safe and not strongly coupled to the processing function, which
+makes it better than the callback's implementation.
+
+By right-clicking on a widget box, and choosing *Go to slot*, you should be seeing a list
+like this:
+
+#+DOWNLOADED: screenshot @ 2022-04-14 01:32:44
+[[file:Event_Handling/2022-04-14_01-32-44_screenshot.png]]
+
+You will see a list of built-in slot functions available for the push button. Let's
+select the ~clicked()~ option and press OK. A slot function
+called ~on_pushButton_clicked()~ will now appear in both ~mainwindow.h~ and
+~mainwindow.cpp~. Qt Creator automatically added the slot function to your
+source code after you pressed the OK button on the Go to slot window. If you
+check out your ~mainwindow.h~ now, you should be able to see an extra function
+under the private slots keyword:
+
+#+begin_src cpp
+class MainWindow : public QMainWindow {
+    Q_OBJECT
+public:
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+private slots:
+    void on_pushButton_clicked();
+private:
+    Ui::MainWindow *ui;
+};
+#+end_src
+
+The same goes for ~mainwindow.cpp~, where the ~on_pushButton_clicked()~
+function has been added for you:
+
+#+begin_src cpp
+void MainWindow::on_pushButton_clicked() {
+}
+#+end_src
+
+Now, let's add a ~QMessageBox~ header to the top of your source file:
+
+#+begin_src cpp
+#include <QMessageBox>
+#+end_src
+
+Then, add the following code within the on_pushButton_clicked() function:
+
+#+begin_src cpp
+void MainWindow::on_pushButton_clicked()
+{
+    QMessageBox::information(this, "Hello", "clicked?");
+}
+#+end_src
+
+Now build:
+
+[[file:Event_Handling/2022-04-14_05-14-01_screenshot.png]]
+** Signals & Slots
+Signals and slots are used for communication between objects. The signals and slots
+mechanism is a central feature of Qt and probably the part that differs most from the
+features provided by other frameworks. Signals and slots are made possible by Qt's
+meta-object system.
+
+In GUI programming, when we change one widget, we often want another widget to be notified.
+More generally, we want objects of any kind to be able to communicate with one another. For
+example, if a user clicks a Close button, we probably want the window's ~close()~ function to
+be called.
+
+Other toolkits achieve this kind of communication using callbacks. A callback is a pointer
+to a function, so if you want a processing function to notify you about some event you pass
+a pointer to another function (the callback) to the processing function. The processing
+function then calls the callback when appropriate. While successful frameworks using this
+method do exist, callbacks can be unintuitive and may suffer from problems in ensuring the
+type-correctness of callback arguments.
+
+In Qt, we have an alternative to the callback technique: We use signals and slots. A signal
+is emitted when a particular event occurs. Qt's widgets have many predefined signals, but we
+can always subclass widgets to add our own signals to them. A slot is a function that is
+called in response to a particular signal. Qt's widgets have many pre-defined slots, but it
+is common practice to subclass widgets and add your own slots so that you can handle the
+signals that you are interested in.
+
+
+[[file:Event_Handling/2022-04-14_06-22-04_screenshot.png]]
+
+The signals and slots mechanism is type safe: The signature of a signal must match the
+signature of the receiving slot. (In fact a slot may have a shorter signature than the
+signal it receives because it can ignore extra arguments.) Since the signatures are
+compatible, the compiler can help us detect type mismatches when using the function
+pointer-based syntax. The string-based SIGNAL and SLOT syntax will detect type mismatches at
+runtime. Signals and slots are loosely coupled: A class which emits a signal neither knows
+nor cares which slots receive the signal. Qt's signals and slots mechanism ensures that if
+you connect a signal to a slot, the slot will be called with the signal's parameters at the
+right time. Signals and slots can take any number of arguments of any type. They are
+completely type safe.
+
+All classes that inherit from QObject or one of its subclasses (e.g., QWidget) can contain
+signals and slots. Signals are emitted by objects when they change their state in a way that
+may be interesting to other objects. This is all the object does to communicate. It does not
+know or care whether anything is receiving the signals it emits. This is true information
+encapsulation, and ensures that the object can be used as a software component.
+
+*Example:*
+
+#+begin_src cpp
+#include <QObject>
+
+class Counter : public QObject
+{
+    Q_OBJECT
+
+public:
+    Counter() { m_value = 0; }
+
+    int value() const { return m_value; }
+
+public slots:
+    void setValue(int value);
+
+signals:
+    void valueChanged(int newValue);
+
+private:
+    int m_value;
+};
+#+end_src
+
+The ~QObject-based~ version has the same internal state, and provides public methods to access
+the state, but in addition it has support for component programming using signals and slots.
+This class can tell the outside world that its state has changed by emitting a signal,
+~valueChanged()~, and it has a slot which other objects can send signals to.
+
+All classes that contain signals or slots must mention ~Q_OBJECT~ at the top of their
+declaration. They must also derive (directly or indirectly) from ~QObject~.
+
+Slots are implemented by the application programmer. Here is a possible implementation of
+the ~Counter::setValue() slot~:
+
+#+begin_src cpp
+void Counter::setValue(int value)
+{
+    if (value != m_value) {
+        m_value = value;
+        emit valueChanged(value);
+    }
+}
+#+end_src
+
+The emit line emits the signal ~valueChanged()~ from the object, with the new value as
+argument.
+
+In the following code snippet, we create two Counter objects and connect the first object's
+~valueChanged()~ signal to the second object's ~setValue()~ slot using ~QObject::connect()~:
+
+#+begin_src cpp
+    Counter a, b;
+    QObject::connect(&a, &Counter::valueChanged,
+                     &b, &Counter::setValue);
+
+    a.setValue(12);     // a.value() == 12, b.value() == 12
+    b.setValue(48);     // a.value() == 12, b.value() == 48
+#+end_src
