@@ -1,6 +1,6 @@
 #+TITLE: Problem Solving Tracking Map
 #+hugo_tags: "Computer Science"
-* Map
+* COMMENT Map
 Problem in ~built~ directory are either not completed or wrong answers. The Main OJ is
 ~leetcode~, all CF problems from the previous repository are removed.
 
@@ -16,6 +16,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/maximum-product-of-three-numbers/][628. Maximum Product of Three Numbers]]                      | Math                 | Easy       | LC    | [[file:lc/628.maximum-product-of-three-numbers.cpp][Accepted]] |
 | [[https://leetcode.com/problems/missing-number/][268. Missing Number]]                                        | Math                 | Easy       | LC    | [[file:lc/268.missing-number.cpp][Accepted]] |
+| [[https://leetcode.com/problems/power-of-three/][326. Power of Three]]                                        | Math                 | Easy       | LC    | [[file:lc/326.power-of-three.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/valid-parentheses/][20. Valid Parentheses]]                                      | Stack                | Easy       | LC    | [[file:lc/20.valid-parentheses.cpp][Accepted]] |
 | [[https://leetcode.com/problems/next-greater-node-in-linked-list/][1019. Next Greater Node In Linked List]]                     | Stack                | Medium     | LC    | [[file:lc/1019.next-greater-node-in-linked-list.cpp][Accepted]] |
@@ -96,7 +97,6 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/][1557. Minimum Number of Vertices to Reach All Nodes]]        | Depth-First Search   | Medium     | LC    | [[file:lc/1557.minimum-number-of-vertices-to-reach-all-nodes.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-tree-pruning/][814. Binary Tree Pruning]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/814.binary-tree-pruning.cpp][Accepted]] |
 | [[https://www.lintcode.com/problem/1704/][1704. Range Sum of BST]]                                     | Depth-First Search   | Medium     | NT    | [[file:nt/1704.cpp][Accepted]] |
-|                                                            |                      |            |       |          |
 | [[https://leetcode.com/problems/binary-tree-cameras/][968. Binary Tree Cameras]]                                   | Depth-First Search   | Hard       | LC    | [[file:lc/968.binary-tree-cameras.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]                       | Dynamic Programming  | Easy       | LC    | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][Accepted]] |

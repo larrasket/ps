@@ -1,6 +1,6 @@
 #+TITLE: STD Notes
 #+hugo_tags: "Computer Science" "C++"
-* C/STD Notes
+* C/C++ STD Notes
 ** Sorting
 *** Sorting Custom Objects
 You can sort array of custom objects using the ~std::sort~ like this:
@@ -336,6 +336,7 @@ s.erase(std::remove_if(s.begin(), s.end(), (int(*)(int))std::isalnum), s.end());
 std::transform(str.begin(), str.end(),str.begin(), ::toupper);
 #+end_src
 ** Sum of vector
+
 
 * C# Notes
 ** Get a Random Set of String
