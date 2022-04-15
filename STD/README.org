@@ -337,7 +337,11 @@ std::transform(str.begin(), str.end(),str.begin(), ::toupper);
 #+end_src
 ** Sum of vector
 
-
+* Qt Notes
+** Convert a Widget into a Central Widget
+#+begin_src cpp
+this->setCentralWidget(ui->whateverWidget);
+#+end_src
 * C# Notes
 ** Get a Random Set of String
 #+begin_src csharp
