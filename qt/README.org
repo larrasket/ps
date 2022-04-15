@@ -317,3 +317,125 @@ In the following code snippet, we create two Counter objects and connect the fir
     a.setValue(12);     // a.value() == 12, b.value() == 12
     b.setValue(48);     // a.value() == 12, b.value() == 48
 #+end_src
+** Working with Signals and Slots
+
+GUI toolkits usually provide a means to react to things that occur within an application.
+Nothing is left to chance. Every tick that happens within the application is registered and
+taken note of. For example, when you move a window or resize it, the action gets
+registered, and provided ample code has been written, it will be executed as a reaction to
+the moving or resizing of the window. For every action that occurs, a number of outcomes
+may happen. Essentially, the questions we want to answer are as follows: what do we do
+when a particular action or event has occurred? How do we handle it?
+
+One way to implement the ability to react to an action that has occurred is by using the
+design pattern called the *Observer Pattern*.
+
+In the Observer Pattern design, an observable object communicates its state change to other
+objects that are observing it. For instance, any time an object (A) wants to be notified of a
+state change of some other object (B), it first has to identify that object (B) and register itself
+as one of the objects that should receive such notification of the state change. Sometime in
+the future, when the state of an object (B) occurs, object (B) will go through a list of objects it
+keeps that want to be informed regarding the state change. This will, at this point, include
+object (A):
+
+[[file:Event_Handling/2022-04-15_08-12-39_screenshot.png]]
+
+From the preceding diagram, the Subject circle is termed the observable object, while the
+circles in the bounded box are the observers. They are being notified of the state change of
+the Subject as its count variable is increased from 1 to 5.
+
+Some events or actions that may occur within our application that we will be interested in
+and would want to react to include the following:
+
+- A window being resized
+- A button clicked
+- Pressing the return key
+- A widget being dragged
+- A mouse hovering over the widget
+
+
+*A signal is a message that is passed to communicate that the state of an object has changed.*
+This signal may carry information about the change that has occurred. For instance, when a
+window has been resized, the signal will usually carry the coordinates of the new state (or
+size) of the window. Sometimes, a signal may carry no extra information, such as that of a
+button click.
+
+
+A slot is a specific function of an object that is called whenever a certain signal has been
+emitted. Since slots are functions, they will embody lines of code that perform an action,
+such as closing a window, disabling a button, and sending an email, to mention but a few.
+
+Signals and slots have to be connected (in code). Without writing code to connect a signal
+and a slot, they will exist as independent entities.
+
+Most of the widgets in Qt come with a number of signals and slots. However, it is possible
+to write your own signals and slots too. So what do a signal and a slot look like? Consider
+the following code listing:
+
+#+begin_src cpp
+#include <QApplication>
+#include <QPushButton>
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    QPushButton *quitButton = new QPushButton("Quit");
+    QObject::connect(quitButton, SIGNAL(clicked()), &app, SLOT(quit()));
+    quitButton->show();
+    return app.exec();
+}
+#+end_src
+
+
+Compile and run the application.
+
+An instance of ~QPushButton~ is created, ~quitButton~. The ~quitButton~ instance here is the
+observable object. Anytime this button is clicked, the ~clicked()~ signal will be emitted.
+The ~clicked()~ signal here is a method belonging to the ~QPushButton~ class that has only
+been earmarked as a signal.
+
+The ~quit()~ method of the app object is called, which terminates the event loop.
+To specify what should happen when ~quitButton~ has been clicked, we pass app and say
+that the ~quit()~ method on the app object should be called. These four parameters are
+connected by the static function, ~connect()~, of the ~QObject~ class.
+The general format is ~(objectA, signals (methodOnObjectA()), objectB, slots (methodOnObjectB()))~.
+
+The second and final parameters are the signatures of the methods representing the signals
+and the slots. The first and third parameters are pointers and should contain the address to
+objects. Since ~quitButton~ is already a pointer, we simply pass it as it is. On the other
+hand, &app would return the address of app.
+
+
+The example we have just illustrated is quite primitive. Let's write an application where a
+change in the state of one widget is passed to another widget. Not only will the signal be
+connected to a slot, but data will be carried along:
+
+#+begin_src cpp
+#include <QApplication>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QDial>
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    QWidget *window = new QWidget;
+    QVBoxLayout *layout = new QVBoxLayout;
+    QLabel *volumeLabel = new QLabel("0");
+    QDial *volumeDial= new QDial;
+    layout->addWidget(volumeDial);
+    layout->addWidget(volumeLabel);
+    QObject::connect(volumeDial, SIGNAL(valueChanged(int)), volumeLabel,
+                     SLOT(setNum(int)));
+    window->setLayout(layout);
+    window->show();
+    return app.exec();
+}
+#+end_src
+
+
+This is yet another simple program that illustrates how data is passed between the signal
+and slot. An instance of ~QVBoxLayout~ is created, layout. A ~QLabel~ instance, ~volumeLabel~, is
+created and will be used to display changes that occur. It is initialized with the string 0.
+Next, an instance of QDial is created with ~QDial *volumeDial = new QDial.~ The QDial widget
+is a knob-like looking widget that is graduated with a minimum and maximum range of numbers.
+With the aid of a mouse, the knob can be turned, just like you would turn up the volume on a
+speaker or radio.
