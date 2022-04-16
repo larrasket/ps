@@ -8,7 +8,10 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 *Y: Yes* \\
 *R: Regular*
 
-|------------------------------------------------------------+----------------------+------------+-------+----------|
+
+
+List:
+
 | Problem                                                    | Tags                 | Difficulty | Judge | Statue   |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/binary-tree-paths/][257. Binary Tree Paths]]                                     | Tree                 | Easy       | LC    | [[file:lc/257.binary-tree-paths.cpp][Accepted]] |
@@ -110,6 +113,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 | [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]           | Breadth-First Search | Medium     | LC    | [[file:lc/166.populating-next-right-pointers-in-each-node.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/][103. Binary Tree Zigzag Level Order Traversal]]              | Breadth-First Search | Medium     | LC    | [[file:lc/103.binary-tree-zigzag-level-order-traversal.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
+
 * To Be Solved
 |------------------------------------------------+---------------------+------------+-------+--------|
 | Problem                                        | Tags                | Difficulty | Judge | Statue |
