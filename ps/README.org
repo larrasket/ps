@@ -10,7 +10,7 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 
 List:
 
-| Problem                                                    | Tags                 | Difficulty | Judge | Statue   |
+| Problem                                                    | Tags                 | Difficulty | Judge | Status   |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/binary-tree-paths/][257. Binary Tree Paths]]                                     | Tree                 | Easy       | LC    | [[file:lc/257.binary-tree-paths.cpp][Accepted]] |
 | [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]           | Tree                 | Medium     | LC    | [[file:116.populating-next-right-pointers-in-each-node.cpp][Accepted]] |
