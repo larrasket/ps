@@ -12,6 +12,7 @@
   + [[file:csharp/mvc.org][ASP.NET (Model-View Controller)]]
 + [[file:STD/][STDs]]
 + [[file:ps/][Problem Solving]]
+  + [[file:ps/perparation/README.org][Preparations]]
 + [[file:psql/][PostgreSQL]]
 + [[file:ptrns/README.org][Design Patterns]]
 + [[file:qt/README.org][Qt]]
