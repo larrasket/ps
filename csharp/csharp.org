@@ -3012,7 +3012,7 @@ the basic syntax to use it inside your code. It shouldn't be hard at all.
 
 * TODOs
 ** TODO Implement ~IDisposable~
-** PROJ GetHash
+** TODO GetHash
 ** TODO ~checked~ and ~unchecked~
 ** TODO ~Span~
 ** TODO LINQ
