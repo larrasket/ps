@@ -59,6 +59,7 @@ List:
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/find-the-duplicate-number/][287. Find the Duplicate Number]]                             | Hashtable            | Medium     | LC    | [[file:lc/287.find-the-duplicate-number.cpp][Accepted]] |
 | [[https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/][1282. Group the People Given the Group Size They Belong To]] | Hashtable            | Medium     | LC    | [[file:lc/1282.group-the-people-given-the-group-size-they-belong-to.cpp][Accepted]] |
+| [[https://leetcode.com/problems/group-anagrams/][49. Group Anagrams]]                                         | Hashtable            | Medium     | LC    | [[file:lc/49.group-anagrams.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/palindrome-linked-list/][234. Palindrome Linked List]]                                | Linked List          | Easy       | LC    | [[file:lc/234.palindrome-linked-list.cpp][Accepted]] |
 | [[https://leetcode.com/problems/merge-two-sorted-lists/][21. Merge Two Sorted Lists]]                                 | Linked List          | Easy       | LC    | [[file:lc/21.merge-two-sorted-lists.cpp][Accepted]] |
