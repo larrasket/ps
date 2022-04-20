@@ -99,6 +99,7 @@ List:
 | [[https://leetcode.com/problems/binary-tree-pruning/][814. Binary Tree Pruning]]                                   | Depth-First Search   | Medium     | LC    | [[file:lc/814.binary-tree-pruning.cpp][Accepted]] |
 | [[https://www.lintcode.com/problem/1704/][1704. Range Sum of BST]]                                     | Depth-First Search   | Medium     | NT    | [[file:nt/1704.cpp][Accepted]] |
 | [[https://leetcode.com/problems/create-binary-tree-from-descriptions/][2196. Create Binary Tree From Descriptions]]                 | Depth-First Search   | Medium     | LC    | [[file:lc/2196.create-binary-tree-from-descriptions.cpp][Accepted]] |
+| [[https://www.lintcode.com/problem/1862/?_from=problem_tag&fromId=undefined][1862. Time to Flower Tree]]                                  | Depth-First Search   | Medium     | NT    | [[file:nt/1862.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-tree-cameras/][968. Binary Tree Cameras]]                                   | Depth-First Search   | Hard       | LC    | [[file:lc/968.binary-tree-cameras.cpp][Accepted]] |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]                       | Dynamic Programming  | Easy       | LC    | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][Accepted]] |
@@ -142,6 +143,7 @@ List:
 | [[https://www.lintcode.com/problem/919/?_from=collection&fromId=185][919 · Meeting Rooms II]]                         | Greedy              | Medium     | NT    | [[file:nt/919.cpp][TBS]]    |
 |------------------------------------------------+---------------------+------------+-------+--------|
 | [[https://leetcode.com/problems/number-of-provinces/][547. Number of Provinces]]                       | Depth-First Search  | Medium     | LC    | [[file:lc/547.number-of-provinces.cpp][TBS]]    |
+| [[https://leetcode.com/problems/shortest-bridge/][934. Shortest Bridge]]                           | Depth-First Search  | Medium     | LC    | TBS    |
 |------------------------------------------------+---------------------+------------+-------+--------|
 * Solve Again
 |----------------------------------------------+---------------+------------+-------+----------|
