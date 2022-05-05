@@ -14,3 +14,5 @@ We organized this list so you can get well-prepared for your Uber interview.
 | [[https://leetcode.com/problems/two-sum/][1. Two Sum]]                                                  | Array         | Easy       | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/1.two-sum.cpp][Accepted]] |
 | [[file:/mnt/0E08DBBF08DBA3CD/me/leet/ps/lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][34. Find First and Last Position of Element in Sorted Array]] | Binary Search | Medium     | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]] |
 | [[https://leetcode.com/problems/group-anagrams/][49. Group Anagrams]]                                          | Hashtable     | Medium     | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/49.group-anagrams.cpp][Accepted]] |
+|                                                             |               |            |       |          |
+*** TODO [[https://leetcode.com/problems/text-justification/][68. Text Justification]]

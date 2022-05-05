@@ -1,0 +1,309 @@
+#+TITLE: Designing RESTful APIs
+
+
+** Introduction and History
+I'm not going to talk about how to implement these web APIs, but talk about the design
+aspects of how to design them so that they're easier to use and easier to maintain. The goal
+here is for you to understand REST's role in creation of this API, not to simply adhere to
+the dogma that surrounds REST. I want to introduce you to a way of designing APIs that's
+pragmatic and simple.
+
+When you consider creating a web API, I want you to realize that this is a problem that has
+a long history. We've been trying to connect different systems together for a long time.  In
+the early days, we were just getting started with distributed computing, and so the first
+ideas of RPC, or remote procedure call, were being invented as early as the early 1970s. We
+get into an early version of messaging and then even looking at things like queuing. And
+both messaging and queuing, even though they've evolved over the years, still exist today.
+Later in the 1980s and 1990s, we started building object oriented APIs as our programming
+started to be more and more object oriented. And so you see COM and DCOM come out of
+Microsoft, CORBA come out of the Java community, and Java and RMI come out of Java central
+as well.
+
+And these were ways to try to create distributed computing around the concepts of object
+orientation. During the .com boom of the late 1990s, we started to think about the web as
+being the way we're going to build APIs, much in the way that you're considering creating a
+web API to be able to communicate with remote servers yourself. This started with XMLHTTP,
+which was an early component inside of browsers, and that people started using to do
+communication between browsers and servers.
+
+Soon after REST was introduced, but it really didn't get large adoption until a few years
+after its introduction. In the meantime, something called SOAP came out of the Microsoft
+camp as a solution to this. And it tried to solve a lot of solutions and generally has
+fallen out of favor lately, but you still see it used a lot in enterprises. But it tries to
+solve some of the same problems that REST is.
+
+
+More recently, we've seen some new approaches to how to solve some of these problems, like
+GraphQL and gRPC. For creating distributed APIs that are going to work with communication
+between apps and servers or websites and servers or even business to business servers, REST
+still represents a great percentage of the kind of work that's being done, and has reached a
+level of maturity that's really useful. That doesn't mean you shouldn't be looking at
+GraphQL and gRPC as other ways to solve those problems, but they are segmented for very
+specific use cases.
+
+** Oversimplified HTTP
+
+In many ways, we take the web for granted. When we open up a browser, go to a webpage, we
+expect it to open up and work. What's going on under the covers is a ballet of simplicity.
+There's a lot of things happening, but the type of calls that are being made are actually
+really simple and have stood the test of time from their very early creation points. So
+let's talk about what happens when we make those sort of requests. So when a client of some
+sort, you on your laptop going to google.com or any web page, it's going to make a request
+to some remote server. We're not going to talk about how that address gets converted into a
+server address, that's not really necessary for this talk, but we have this idea of a
+request, which is just actually a text document. This document contains three pieces, a verb
+for what action to take, headers, which is information about the request, and then content
+that is optionally asked for.
+
+So for example, if we wanted to create a new thing on that server, we might post, which is
+one of the verbs, and we'll talk about all of those in a minute. We have some metadata that
+says, hey the length of this request is 11 bytes in this case, and then we're sending Hello
+World as the content we want it to post.
+
+
+The server gets this request and can either recognize it as something it can do or it might
+go ahead and reject it, but then it sends back a response. And notice that these are two
+individual calls essentially. You do not have a connection from client to server that lasts
+very long. The only way to scale up these sort of situations is that each network request is
+short lived.  You make a request, you get a response, you make another request, you get a
+response, and so there's a lot of these happening, sometimes even in parallel from your
+browser. This response is, again, just a typical piece of data. It's just, you can think
+about it as a textual document that contains a status code, and that status code says, did
+it succeed? Did it fail? Why did it fail? Any headers that might be useful to you, and then
+any content that the server wants to send back as part of that response.
+
+So in this case, it might do a 201, and we'll get to what those status codes all mean, but
+that essentially says, oh I'd created that thing you asked me to, and then I'm going to
+return you some data, so I'm going to tell you that the body is of some content type, in
+this case it's just text, and then I'm going to send you back Hello World to confirm that I
+got what you sent. One of the important ideas here is that the server itself is typically
+stateless. So that you're not going to care between these requests that you're stuck onto
+the same server. A request is coming in, the server is going to try to fulfill it, and then
+it's going to forget about you as soon as it sends the response. And in this way, it can
+handle lots and lots of requests, instead of having all this state that's filling up the
+memory and disk, waiting for you to make another call. Because unlike having a strong
+connection to the server, which you might be used to in database programming or game
+programming, the idea here is that it doesn't know if you're going to make another call
+because every connection to the server is very short lived.
+
+Let's take that idea of the request document and let's deconstruct it a little. The verb is
+this action that you want to have performed on the server. So this is a short verb that says
+please do something for me. And the most common of these is GET. When you want a web page,
+it goes and says, hey server go get me the home page of google.com. You can also say POST,
+which is please create that new thing I'm asking you to create on your server, maybe that's
+storing it in the server, maybe it's starting some process like creating an invoice or
+making a payment. PUT asked to update a resource that already exists on that server.
+There's also sometimes used PATCH, which is to say please update this part of the data of
+this resource. A common example of PATCH is please update the address of the customer. I
+don't need you to send me the entire customer just to update the address, so PATCH is going
+to allow me to do these updates within a resource. Then there's DELETE, which should be
+pretty obvious. Get rid of some resource that exists on your server, it may be deleting an
+object that I didn't mean to create or it may mean that I'm going to unregister with your
+website, whatever it is, it says delete some resource. And then there's actually a bunch
+more verbs, but these are the five that are used 99.5 % of the time. We'll actually see some
+other verbs like OPTION being used a couple times in our discussions, but these are the five
+that I would focus on.
+
+
+The headers are a set of name value pairs that are metadata about the request. So some of
+the common ones are what type of content is the content section holding?  It is binary data?
+It is a JSON file? Is it an XML file? Is it plain text? This is to tell the server how to
+deal with this request. The content length is there to hint at the server how much content
+there is. So it doesn't go ahead and not know how the end of the content is as it's pulling
+data across the wire. Authorization headers are there to says who's making the call. Accept
+headers are there to say when you send me a response, what kind of data can I accept?
+Cookies, this is data that's being sent with the request that expects the server to also
+pass back as a way to have state through the entire process. And more, there's literally
+hundreds of headers, and you can define your own headers, if those are useful to you, but
+for the most part, these are the ones you're going to want to think about.
+
+And finally, content, this could be anything. So if we look at a simple web page that you're
+going to request, you're normally going to request and it's going to return an HTML page,
+and then that HTML page might have CSS and JavaScript or JSON requests in it that are then
+also requested in the same way, and that's why each of these requests are discrete. So a
+simple HTML page may have dozens or hundreds of requests. The content for a request isn't
+valid on some verbs. The most of these is GET. GET never has a content body because GET is
+just requesting that you return something that it wants. So as per the spec, you can't
+really send any information about what you want, as content has to be in the URI or in the
+headers.
+
+
+Let's do the same thing with the response, just so we can really understand this.  The
+status code is simply a number that represents what kind of success, and it does this in a
+series of ranges, 100 to 199 are informational, you'll rarely see 100 status codes, but they
+do exist. The most common you're going to see is 200 to 299, and these are status codes that
+say, hey what you asked for, here it is, and I was able to do it successfully, 200 being the
+most common of these. Three hundred to 399 are return when what you requested for needs to
+be gotten some place else. So this is how you can say hey you need to go to this new place
+for your web page or this is data is already cached for one reason or another. So these are
+about redirection to different sites. So when you think about redirection, it isn't saying
+it succeeded in getting you the data, but it's not saying you failed in requesting it, just
+that you asked for it in the wrong place. Then 400 to 499 are errors.  These are typically
+errors in the way you made the request. You may have not included a query string or some
+part of the URI that makes sense, or simply the URI doesn't exist. The famous 404, of
+course, is in this range. And then 500 to 599 are errors that the server has, something went
+wrong on the server, it's not your fault, it's our fault. Same idea here with headers,
+they're very much similar to what we're going to see in the requests, except we're going to
+tell it this is the kind of data it is that we're sending back to you, this is the length of
+that data, this is how long that data should be cached. So the idea of expires is that the
+browser or some other thing might cache it for 10 minutes, 30 seconds, 2 years, because it's
+not apt to change. And then cookies are being sent back normally from the cookies that are
+being included in the request. Though there may be more cookies included on the server that
+are then expected to be passed in subsequent calls. And finally, the content is very much
+like it is on the request, it might be HTML, CSS, might have images like blobs, or APIs can
+often have their own types as well. So this is just the guts of whatever is being sent back
+over the wire.
+
+** What is REST
+The term RESTful really means they are a pragmatic approach to using REST. We may not be
+100% REST-based in what we're doing, but we're going to lean on the benefits of REST as much
+as possible. So what does the term REST mean? It is actually a pseudo acronym for
+REpresentational State Transfer. The idea here is to have transfer of data or state be
+representational of the kinds of messages that you want to use. And so these concepts
+include:
+
+- Separation of client and server
+- All the server requests should continue to be stateless,
+- All the request you make should support cacheability
+- That they're all going to use a uniform interface or a URI.
+
+And all this comes directly from the source of REST, Roy Fielding's doctoral dissertation.
+So from that dissertation, the fundamentals of what it really means to be RESTful are
+brought forward. But we're going to talk about, again, the pieces of REST that are going to
+benefit you to create great software that's going to live for a long time.
+
+The reason we're not going to go deep into making it perfectly or dogmatically REST is that
+REST itself has some problems. Sometimes it's too difficult to make sure your application is
+completely RESTful. There's some concepts that can get in the way of making sure that your
+API is completely qualified as REST. This sort of dips a toe into the idea of the dogma of
+REST versus the pragmatism. I'm very much on the pragmatic side.
+
+** Designing REST
+I think it's important when you're building an API to design it first. That should be the
+first step in the creation of a new API, instead of just starting to write code and getting
+on with it. I understand the temptation certainly, but by designing it, you've going to gain
+some real benefits.
+
+
+The biggest problem is you can't fix an API after publishing it. You're going to have
+clients that are reliant on what your API looks like. So if you make mistakes in the way the
+API is designed, you're going to have to live with that, unless, of course, you can talk
+your clients into allowing you to break them. It's also just too easy to try to solve
+individual use cases by adding ad-hoc endpoints. I really want you to understand the
+requirements of an API before you build it, and not just take the boilerplate of what you've
+seen in other organizations. Not all APIs are just simply data access. Often you're trying
+to do something more interesting to match the requirements of an API.
+
+Remember that as you build an API, that is the starting point for that API to live. As it
+matures, you want an API to be able to not have to be changed in large ways, that it can
+evolve over time. But enough speeches, let's start to look at the real problem.
+
+When we think about REST APIs, I want you to think about the different pieces of it before
+we decide what to put in each of those parts. What's important to note is you're designing
+each part of a REST API, not just the URL. So, of course, the starting point is that URI,
+what that path is on some web server. But we've also got the verb. This is the indicator of
+what your intention to do at that URI is, and then as we've talked about with HTTP, part of
+that REST API is whether you're going to use headers, whether your clients are going to need
+to use headers or need to be able to read headers, and then the request body if any.
+
+When we look at the response you're sending back, you also have that similar set of parts of
+the API. You have the status code, what sort of response is going to be sent back to say
+that it succeeded or failed or how it's going to fail. You have headers that may be sent
+back to the client to indicate things, and then the response body, the thing they asked for.
+
+Let's start the discussion with URIs. In REST, URIs are just paths to resources. So when you
+have your server, there is an API, it's whatever path follows your server name to indicate
+how to get to some object on that server.
+
+Part of that URI that we don't think about when we're designing the APIs is often the query
+strings. So the things that can be added to the end of the URIs to indicate things. Now
+query strings should always be optional, when you think about them logically.  And so
+they're often used for things like formatting and sorting and searching.
+
+So as you design your API, I want you to think about the nouns. Nouns are good, verbs are
+bad. And here are some examples:
+
+#+begin_src txt
+/getCustomers /getCustomersByName /getCustomersByPhone /getNewCustomer /verifyCredit
+/saveCustomer /updateCustomer ...  #+end_src
+
+Early on when I was building APIs, it was very easy for me to think of these as just
+endpoints to some remote procedure call. So get customers, verify credit, update customer,
+all of that made sense. But in REST APIs, what we're going to actually look at is that we
+prefer nouns:
+
+#+begin_src txt
+/customer /invoices /products /employees ...  #+end_src
+
+So these are going to be customers, invoices, products, sites in our case. They're going to
+be the indicator that this is some container that holds resources that the user may or may
+not want. These are going to hold resources that the developer is going to want access to.
+For the most part, they're always going to be pluralized, unless you're only giving someone
+access to a single item. The difference there is you may look at customers as the complete
+list of customers or you might think of it like we saw in the GitHub where it might be user/
+and then the name because you're always dictating that they're going to get a single object
+back. But most of the time, you're going to be dealing in plurals.
+
+
+I've used the word resources a couple of times. What do I really mean by this? Now on the
+face of it, we can think about it as just a collection of those nouns, right? People in an
+organization, invoices that exist in an accounting system, payments that were made, let's
+say through the web, products that can be sold, these are what I think of as, you know, the
+canonical resources. These are nouns that you want to expose through the API, but it can be
+more complicated than that because it's easy to think of resources as just the entities that
+some data store holds. And so I want you to think about resources as being inside of
+something like a context. So it may be that individual people are a type of resource. But
+you could also imagine a resource being an invoice and that invoice is more complicated. It
+might have, you know, the invoice itself and then all the items that are contained in the
+invoice. So this complex object that we're thinking about is still considered a single
+resource. You wouldn't necessarily need an API that exposes each line item individually.
+You're really going to want to think of these as an entire resource. And this could be a
+very complex object. You can imagine in like a book depository that the header information
+about a book, who wrote it, how many pages, and such, may be a resource in itself, even
+though the contents of the book might be something you could look at individually. So don't
+get your head too much around that just because we have an entity that's stored as an
+individual item somewhere in a data store, that that's what we're talking about as a
+resource. We're talking about the complex objects, and sometimes single objects, that you're
+exposing through the API.
+
+
+In our case, we're dealing with really three objects in our API that we're going to be
+building. We're going to be building an API that exposes some data about UNESCO Heritage
+Sites. And so we have this object that is a site that tells some information about it, that
+has a description, has an id and a name, and then has these relationships. And in our case,
+the idea of a site and its location, its location being what country it's in, what latitude
+and longitude it's in, that is a discrete resource. You can't really have a site without the
+location. The location is, you know, in some ways thought of as a sub-object of there, but
+contextually in the API, that's going to be one sort of object. Whereas then categories and
+regions could be thought about as their own resources as well. When we're talking about
+identifiers in URIs, we're talking about being able to access individual items in a resource
+collection. So these need to be unique identifiers because in URIs we want to have each
+individual URI point at a specific resource. You're not always going to be searching, you're
+usually going to have some URI that uniquely identifies one resource somewhere in your
+system. These don't have to be the primary keys, so they don't have to be GUIDs, if that's
+how you're storing it, or integers or whatever it can be.
+
+
+And so while the URI for stone-henge itself should be unique, what you design for the unique
+identifier to uniquely identify it is really up to you. The further you can get away from
+needing to have primary keys or other sort of keys in your system that do that, the better
+design your REST API normally is. Again, if we look back to the way GitHub did it, it uses a
+unique identifier throughout its system to represent individual people, individual
+repositories, etc. It never is just giving you a number or a perfectly unique number for
+that object. It makes it easier for it to know that those identifiers are unique, as well as
+making it easier for the developer to be able to see just from the URI what they're actually
+looking at. Because ultimately URIs, even though they're just addresses to some resource, at
+some point developers are looking and working with these. So you don't want them necessarily
+to error on readability, but if you can get both, you can have the benefits of readability,
+as well as functionally unique.
+
+
+While designing your URI, you also want to think about how you're going to use query
+strings. So these are typically used for non-resource properties.  So it could be in the way
+you want to use query strings to sort, to page, to specify format, etc. This really comes
+down to not requiring any of these, but allowing developers to have more control over how
+you're going to get this information in the way of, you know, getting page results versus
+sorted results, etc., so that you can allow them to do things that aren't about necessarily
+specifying how the resource is going to be constituted, but how the resource is returned.
+Now that we've talked about URIs, let's talk a little bit about the next piece and that is
+the nouns that are part of our API.
