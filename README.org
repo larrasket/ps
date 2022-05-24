@@ -17,3 +17,4 @@
 + [[file:ptrns/README.org][Design Patterns]]
 + [[file:qt/README.org][Qt]]
 + [[file:system/s-a-d.org][System Analysis and Design]]
++ [[https://github.com/salehmu/leet/blob/main/API/Designing%20RESTful%20API.org][RESTful API]]

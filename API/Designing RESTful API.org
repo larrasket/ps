@@ -1,4 +1,6 @@
 #+TITLE: Designing RESTful APIs
+#+hugo_tags: "Computer Science"
+#+hugo_categories: "Computer Science"
 
 
 * Representational State Transfer APIs: Basics to Design
