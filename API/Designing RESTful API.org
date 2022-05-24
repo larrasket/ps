@@ -600,3 +600,140 @@ doesn't match it, so we didn't actually have success in executing the PUT or DEL
 say precondition failed in this case. Now because it's in 412, it's in the failure part of
 the status codes, so whether you look for 412 specifically or you just show failure, you're
 still doing the right thing.
+** Functional APIs
+Ultimately when I'm building a RESTful API, again, I want to be
+pragmatic about it. Ultimately the goal of a REST-based API is to fulfill some set of
+requirements, some needs, some customer requests. And so functional APIs are not terribly
+RESTful. But occasionally, you know, once or twice in any large project, you're going to
+need some call to the server that needs to do something that is functional. Restart a
+machine, recalculate totals, whatever the case may be. There are these one-off operational
+APIs that you're going to want to support, but aren't truly necessarily RESTful. Now what I
+find some people doing to make sure that they stay perfectly RESTful is they'll build a
+whole new sort of system to handle these operational things, but most projects only need a
+small handful of them. So why not bake them into your RESTful API?
+
+Because of their very
+nature, you're going to want to make sure these are well documented so people can understand
+the side effects because almost always these APIs will have some side effects. Make sure
+they're completely functional and that you're not starting to build an RPC layer over REST
+just because you don't understand what you're trying to accomplish with REST.
+
+So typically
+functional APIs should be the exception rather than the rule. If you find yourself designing
+dozens of these or even as little as 10 of these, you're probably trying to get around the
+limitations of REST and you need to go back and look at your design. So here's an example of
+calculateTax, I'm going to send you the state and I'm going to send you the total and you
+would return me back because you have implicit knowledge on the server about what those
+state requirements about a tax would be. Or in this case, restart the server. Start a cold
+boot because you're going to allow some server to be restarted because you have found some
+functional issue. Of course, one of these might be very useful to your users and one of
+these might be very useful to your IT team.
+* Versioning REST
+So the first question you're going to want to ask yourself is whether you should version
+your API at all. It's a good thing to think about because once you publish an API, it is set
+in stone. Once clients have written against the API, you're going to have to maintain that
+version of your API. And once you have users that rely on the API, you're not going to want
+to change it willy-nilly. You're going to want to make decisions about how to handle changes
+in your API without breaking the clients.
+
+Now if you have an API that's only being used by
+your own team, maybe versioning is overkill. But as soon that API has internal or external
+customers, if it has users that are actually writing code that may not be just your small
+team, versioning in an API is super important, and it's easier to handle during the first
+version of your API than trying to shoehorn it in later. ultimately your API will have
+changes in requirements no matter what you do, no matter how well you've designed it, and so
+your API is apt to change. The goal here is to evolve your API without breaking existing
+clients. Now we don't mean that every time you release a product version that you're going
+to change the version of your API. They can be decoupled. Tying them together is just
+confusing, especially if the API doesn't have actual changes to it.
+
+API versioning is harder
+than product versioning. The reason for this is you need to support for old and new versions
+and to have a story about deprecation over time. In theory, you can have side-by-side
+deployment of multiple versions, but it usually isn't feasible. You usually want some
+indication from the users about what versions they want to use. And allow older code to not
+have to make changes to continue to use an API unless you truly do want to sunset those
+APIs. Ultimately the decision is up to you, but planning for and designing versioning up
+front will make maintenance of your API easier longer term. So let's look at some of these
+strategies for versioning so you can decide which ones, if any, are ones you want to choose.
+** Designing Versioning
+
+There are a lot of ways to version an API. Not all of them are ones I would recommend.
+You're going to want to find the mechanism or the way of doing versioning that makes the
+most sense to your organization. And this is going to depend a bit on the requirements.
+Ultimately you're serving your clients, not yourselves. Making versioning easy to use for
+your clients is way more important than making it easier on your development staff.
+*** Versioning with The URI Path
+The first option for versioning that I will talk about is one that I see pretty commonly
+used, and that is versioning in the URI path. We can see in this example:
+~foo.org/api/v2/Customers/~ that the v2 inside the path to our customers API is indicating
+what version of the API. While it's very clear to clients which version they're using and
+how it can be handled, it tends to be brittle. Every time you have a version change, you're
+going to need to have clients change all the URIs.  And so usually I don't recommend this
+path.
+
+
+*** Versioning with Query String
+
+Another versioning strategy is query string versioning. In this case, we can simply add a
+query string that asks for a specific version of our API. The benefit here is that we can
+have a default version that will always be used by our API when the version query string
+isn't supplied and then simply add it to other versions. This often means that newer
+versions of the API may need to include this every time, depending on where you want to do
+your versioning. The big con here is it's too easy for clients to miss needing a version. So
+helping those developers that want to use your API to remember what version to go for tends
+to be problematic.
+
+
+*** Versioning with Headers
+
+The next type of versioning is
+something called versioning with headers. You can see the X-Version here is a header that
+specifies what version of an API to go after. And what's interesting about this approach is
+that it has some of the benefits of query strings, but it does separate versioning from the
+rest of your API so that the API writers don't necessarily have to change it, only an
+interceptor in writing that API needs to put this version in the header. So it becomes a
+little decoupled with the actual API calls. The issue with using headers is it often
+requires a more sophisticated developer (lmao), one that knows how to add headers or how to
+intercept those calls so that those headers can be added to their client code.
+
+
+You can also
+version with an accept header.This is beneficial because you're not creating your own
+custom header, but instead you're using the accept header itself to ask for a specific
+version of your API. In this example, we've seen that even though we're accepting
+application/json, we're specifying the version in that accept header. And the benefit here
+is the accept header also will keep the version that the client uses so that when the
+content type is sent back to the server, it can include that version. You're having the
+separation of versioning with both the content they're dealing with and the API calls. But
+it is less discoverable than query strings and also has the same problems that simple
+headers do, and that is, requires a little bit more sophistication to use.
+
+
+*** Versioning with Content Type
+
+
+The last one I'll talk about is versioning with content type. And this is the most complex
+of them all to implement. But if you need it, it's really useful. The idea here is that you
+would include a custom content type. The spec calls in content type to allow you to do vnd.
+and then your application name as a special type of content. In this case, you could use the
+accept header as well as the content type with a version embedded in it in order to specify
+the kind of data you're looking for. This gives you much more granularity to dealing with
+versions because then part of your application could be in one version, another part could
+be in another version, and this is especially useful for long-lived applications.What I
+mean by long-lived is if I go ahead and get a list of customers on a Tuesday and then 2
+weeks later I want to update one of those customers, this will tell me that the version of
+the API hasn't changed because the content and accept header, which usually are married with
+the content that I'm storing, should tell me what version of the content that I received
+from an API, not just the version of the API I'm using. It does require a lot more
+development maturity to create and maintain the sort of code, but it is very powerful.
+
+
+
+
+All of these different versioning types, you have to marry with the correct requirements.
+Doing something as simple as query string for simple APIs that you want to maintain over a
+lifespan is the perfectly correct choice for those sorts of APIs. If you're building a very
+publicly used API, like our GitHub example earlier, going to the more complex situation,
+like using custom content types and accept headers, may be the right choice because it gives
+your developers the most flexibility to use your API.
