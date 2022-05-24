@@ -25,7 +25,6 @@
 #define begend(v) ((v).begin()), ((v).end())
 #define sz(v) ((int)((v).size()))
 using namespace std;
-
 #define begend(v) ((v).begin()), ((v).end())
 #define sz(v) ((int)((v).size()))
 
@@ -43,7 +42,7 @@ int countDistinct(string s) {
 class Solution {
 public:
   bool closeStrings(string word1, string word2) {
-    if (word1.length() != word2.length())
+    if (word1.length() == word2.length())
       return false;
     sort(begend(word1));
     sort(begend(word2));
@@ -79,4 +78,6 @@ public:
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
+  Solution l;
+  l.closeStrings("wqrwqr", "qrqwtq");
 }
