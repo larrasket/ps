@@ -7,13 +7,26 @@ have one non-technical discussion with a hiring manager on aspects such as cultu
 during the interview.
 
 # https://github.com/salehmu/leet/blob/main/ps/lc
-We organized this list so you can get well-prepared for your Uber interview.
+
+TODO: Solve me.
+/TODO/: You should solve me.
+*TODO*: Please, solve me.
+(obviously they ain't solved problems, yet).
+
 ** Array and Strings
 |-------------------------------------------------------------+---------------+------------+-------+----------|
 | Problem                                                     | Tags          | Difficulty | Judge | Status   |
 |-------------------------------------------------------------+---------------+------------+-------+----------|
 | [[https://leetcode.com/problems/two-sum/][1. Two Sum]]                                                  | Array         | Easy       | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/1.two-sum.cpp][Accepted]] |
-| [[file:/mnt/0E08DBBF08DBA3CD/me/leet/ps/lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][34. Find First and Last Position of Element in Sorted Array]] | Binary Search | Medium     | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]] |
+| [[https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/][34. Find First and Last Position of Element in Sorted Array]] | Binary Search | Medium     | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]] |
 | [[https://leetcode.com/problems/group-anagrams/][49. Group Anagrams]]                                          | Hashtable     | Medium     | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/49.group-anagrams.cpp][Accepted]] |
 | [[https://leetcode.com/problems/validate-ip-address/][468. Validate IP Address]]                                    | String        | Medium     | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/468.validate-ip-address.cs][Accepted]] |
 | [[https://leetcode.com/problems/text-justification/][68. Text Justification]]                                      | Array         | Medium     | LC    | TODO     |
+| [[https://leetcode.com/problems/minimum-window-substring/][76. Minimum Window Substring]]                                | String        | Medium     | LC    | /TODO/   |
+|-------------------------------------------------------------+---------------+------------+-------+----------|
+
+** Linked Lists
+|----------------------------+-------------+------------+-------+----------|
+| Problem                    | Tags        | Difficulty | Judge | Status   |
+| [[https://leetcode.com/problems/merge-two-sorted-lists/][21. Merge Two Sorted Lists]] | Linked List | Easy       | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/21.merge-two-sorted-lists.cpp][Accepted]] |
+|                            |             |            |       |          |

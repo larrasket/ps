@@ -764,6 +764,88 @@ to Ouptut Directory” option to Copy Always.
     }
 #+end_src
 
+** Add Font & Wrine On a Picture
+
+To draw multiple strings, call ~graphics.DrawString~ multiple times. You can specify the
+location of the drawn string. This example we will draw two strings ~"Hello"~, ~"Word"~ (~"Hello"~
+in blue color upfront ~"Word"~ in red color):
+
+#+begin_src csharp
+string firstText = "Hello";
+string secondText = "World";
+
+PointF firstLocation = new PointF(10f, 10f);
+PointF secondLocation = new PointF(10f, 50f);
+
+string imageFilePath = @"path\picture.bmp"
+Bitmap bitmap = (Bitmap)Image.FromFile(imageFilePath);//load the image file
+
+using(Graphics graphics = Graphics.FromImage(bitmap))
+{
+    using (Font arialFont =  new Font("Arial", 10))
+    {
+        graphics.DrawString(firstText, arialFont, Brushes.Blue, firstLocation);
+        graphics.DrawString(secondText, arialFont, Brushes.Red, secondLocation);
+    }
+}
+bitmap.Save(imageFilePath);//save the image file#+end_src
+#+end_src csharp
+
+** Load Font From a File
+#+begin_src csharp
+PrivateFontCollection collection = new PrivateFontCollection();
+collection.AddFontFile(@"C:\Projects\MyProj\free3of9.ttf");
+FontFamily fontFamily = new FontFamily("Free 3 of 9", collection);
+Font font = new Font(fontFamily, height);
+#+end_src
+** Check If an Object is Number
+#+begin_src csharp
+public static bool IsNumber(this object value)
+{
+    return value is sbyte
+            || value is byte
+            || value is short
+            || value is ushort
+            || value is int
+            || value is uint
+            || value is long
+            || value is ulong
+            || value is float
+            || value is double
+            || value is decimal;
+}
+#+end_src
+
+** Check If a Char is Digit
+#+begin_src csharp
+using System;
+
+public class IsDigitSample {
+    public static void Main() {
+        char ch = '8';
+
+        Console.WriteLine(Char.IsDigit(ch));					// Output: "True"
+        Console.WriteLine(Char.IsDigit("sample string", 7));	// Output: "False"
+    }
+}
+#+end_src
+
+** Merge Two Images
+#+begin_src csharp
+ Image image1 = GetFirstImage();
+
+        Image image2 = GetSecondImage();
+
+        var bitmapImage = new Bitmap(Math.Max(image1.Width, image2.Width), (image1.Height + image2.Height));
+#+end_src
+#+begin_src csharp
+        using (Graphics g = Graphics.FromImage(bitmapImage))
+        {
+            g.DrawImage(image1, 0, 0);
+            g.DrawImage(image2, 0, image1.Height);
+        }
+
+#+end_src
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp

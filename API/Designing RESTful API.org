@@ -2,7 +2,6 @@
 #+hugo_tags: "Computer Science"
 #+hugo_categories: "Computer Science"
 
-
 * Representational State Transfer APIs: Basics to Design
 *** Introduction and History
 I'm not going to talk about how to implement these web APIs, but talk about the design
