@@ -1,3 +1,214 @@
 #+title: Building a RESTful API with ASP.NET Core
+Check: [[https://github.com/salehmu/leet/blob/main/API/Designing%20RESTful%20API.org][Designing RESTful APIs]]
+* Introduction, The Richardson Maturity Model
+The Richardson Maturity Model is a model developed by Leonard Richardson. It grades, if you
+will, APIs by the their RESTful maturity. So it's interesting to look at it, as it shows us
+how we can go from a simple API that doesn't really care about protocol, nor standards. To
+an API, that can be considered RESTful.
 
-Check:
+The first level is level 0, the Swamp of POX, or Plain Old XML. This level states that the
+implementing protocol, HTTP, is used for remote interaction, but we just use it as that, and
+we don't use anything else from the protocol correctly. So, for example, to get some author
+data, you send over a POST request to some basic entry point URI, like ~host/myapi~. In the
+body, you send some XML that contains info on the data you want. You then get back the data
+you asked for in the response. To create an author, you create another POST request with
+some data in the body to that same entry point URI, and so on. In other words, you use HTTP,
+*but only as a transport protocol*. An example of this is SOAP[fn:1] , or other typical remote
+procedure call implementations. It's not a completely correct statement, but you see a lot
+of these RPC-style implementations when building services with Windows Communication
+Foundation.
+
+Then we have a level 1, Resources.  From this moment on, you use multiple URIs,
+and each URI is mapped to a specific resource.  So it extends on level 0, where there was
+only 1 URI. For example, we now have URI host/api/authors to get a list of authors,
+api/authors/id for an author with a specific id, and so on. However, only one method, like
+POST, is still used for all interactions. So, HTTP methods aren't used as they should be,
+according to the standard. This is already a little part of the uniform interface constraint
+we see here, by the way. From a software design point of view, this means reducing
+complexity by working with different end points instead of one large service end point.
+
+Then
+we have level 2, Verbs. To reach a level 2 API, the correct HTTP verbs like GETS, POST, PUT,
+PATCH, and DELETE are used as they are intended by the protocol. In the example, we see a
+GET request to get a list of authors, and a POST request containing a resource for
+presentation in the body for creating an author. The correct status codes are also included
+in this level. For example, use a 200 OK after a successful GET, a 201 Created after a
+successful POST, and so on.
+
+This again adds to
+that uniform interface constraint. And from a software design point of view, we have just
+removed unnecessary variation. We are using the same verbs to handle the same types of
+situations. Level 3, or Hypermedia controls. This means that the API supports HATEOAS,
+another part of that uniform interface constraint. A sample GET request to the authors
+resource would then return not only the list of authors, but also links, hypermedia, that
+drive application state. From a software design point of view, this means we've introduced
+discoverability and self documentation. What is important to know is that according to Roy
+Fielding, a level 3 API is a precondition to be able to talk about the RESTful API. So, this
+maturity model does not mean there's such a thing as a level 1 RESTful API, a level 2
+RESTful API, and a level 3 RESTful API. It means that there are APIs of 3 different levels,
+and only when you reach level 3, you can start talking about the RESTful API.
+
+* Structuring Outer Facing Contract
+It consists of three big concept consumer of an API uses to interact with that API. First,
+resource identifiers, ie. the URIs where the resources can be found. That's combined with
+HTTP methods like get to get resources, post to create them, and all the ones we'll look
+into. These methods are part of the HTTP standard. Third, an optional payload. When creating
+a resource, the HTTP request will have to contain representation of the resource you want to
+create. When getting a resource, the http response will contain a resource representation in
+its body. The format of those representations is what media types are used for like
+application Json.
+
+The uniform interface constraint does cover the fact that resources are identified by URIs.
+Each resource has its own URI, but as far as naming of resources is concerned, there isn't a
+standard that describes that. There are, however, best practices for this.
+
+*Resource naming in the URI should always be a noun*. In other words, a RESTful URI should
+refer to a resource that is a thing, instead of referring to an action. The action, that's
+the HTTP method. So we shouldn't create a /getauthors/ resource. That's an action, getting
+the authors. We should create an author for resource. That's a thing conveyed by a noun and
+use the Get method to get it to get one specific author with a dependent with a forward
+slash and the authorId. Using these nouns conveys meaning, it describes the resource so we
+shouldn't call resource authors when it's, in fact, about authors. This principle should be
+followed throughout the API for predictability. It helps a consumer understand the API
+structure. If you have another non-hierarchical resource, say employees, we shouldn't name
+it api/something/somethingelse/employees. We should name it api/employees. A single employee
+shouldn't be named id/employees, it should be named employees/employeeId. This helps keep
+the API contract predictable and consistent.
+
+There is quite a bit of debate going on on whether or not we should pluralize these nouns. I
+prefer to pluralize them as it helps to convey meaning again. When I see an authors
+resource, that tells us it's a collection of authors and not one author, but good APIs that
+don't pluralize nouns exists as well. If you prefer that, you can, but do make sure you stay
+consistent. Either all resources should be pluralized nouns or all should be singular nouns
+and not a mix.
+
+Another important thing you'd want represented in an API contract is hierarchy. Our data or
+models have structure, for example, in all the REST courses. That should be represented in
+the API contract. So if we want to define an authors courses where the course is in the
+model hierarchy or children of an author, we should represent them as
+~api/authors/authorId/courses~. A single course by an author should then be defined as
+API/authors/authorId/courses/courseID. APIs often expose additional capabilities like
+allowing filtering resources or ordering them. Those parameters should be passed through via
+the credit string. So we shouldn't write something along the lines of
+api/authors/orderby/name. There is a few contract smiles in that your URI. A plural noun
+should always be followed by an id and not by another noun or word. Orderby isn't a noun and
+a URI like that would mean we'd have defined three different resources, authors,
+authors/orderby, and authors/orderby/name. That's not what we wanted to do. We don't want to
+define new resources, we want to order our already-existing authors resource. So
+api/authors?orderby=name is a better fit.
+
+
+There always has to be an exception. Life would be too easy without it. Sometimes there is
+these RPC-style calls like calculate total that don't easily map to resources. Most
+RPC-style calls do map to resources as we've just proven. We don't have a get authors by
+name procedure, we have api/orders? orderby=name, but what if we need to calculate, say, the
+total amount of pages in order wrote in these courses? And let's assume for the sake of the
+example that it's a very productive author, calculating this would take quite a bit of time
+and we don't want to send it over together with every author by default.  It's not that easy
+to create resource from that using pluralized nouns. We'd end up with something like you see
+on screen now, but then what? A resource like this means we'd expect it to return a
+collection and not a number. We can go for something like api pagetotals/id where the
+backend would then have to map that id to an authorId or it could even be the same Id and
+that would work, but it does feel a bit out of place. So this is one of those exceptional
+cases where I'd suggest to take a bit of a pragmatic approach. Api/authors/ the
+authorId/totalamountofpages isn't according to the best practices we've just looked into,
+but as long as it's an exceptional case, it doesn't mean you've suddenly got a bad API
+contract. Remember, there is no standard for this. These are just guidelines. There are
+other approaches possible as well, by the way, for example, implementing a system where you
+can choose which author fields are returned in a resource.
+** Status Codes
+We know by now that REST isn't a standard, but it does use standards. Status codes and when
+to use them are part of the HTTP standard. It's really important to get this right because
+these status codes are the only thing a consumer of an API, like a client-side web app, can
+inspect to know if a request worked out as expected or if something went wrong and, if
+something went wrong, whether it's the fault of the consumer or of the API itself. We're
+currently returning JSON result in our code, which sends back a 200 status code by default.
+But if we keep on sending back 200 OK status codes for each and every request, the consumer
+of the API would assume the request worked out as expected even if it went wrong. Remember
+that consumers of the API are typically non-human. All they can inspect is that status code,
+and they can't read out and interpret error messages.
+
+From time to time, problems arise.  Something goes wrong. If we only send back a 500
+Internal Server Error in all those cases, the consumer would never know if it's his fault
+that something went wrong. In the example in the code we just wrote, we're trying to get an
+author that doesn't exist. That's a client mistake. It also means that the client can
+correct it and try the request again. Other times, it's the server's responsibility, for
+example the database is unavailable. The consumer of the API cannot correct this because the
+mistake isn't his. There's a lot of status codes, and an API doesn't necessarily have to
+support all of them. But let's have a look at a few common ones.
+
+There's five levels of status codes. Level 100 status codes are informational and weren't
+part of the HTTP1 standard. These are currently not used by APIs.  The level 200 status
+codes mean the request went well. The most common ones are 200 for a successful request, 201
+for a successful request that resulted in the creation of new resource, and 204 for a
+successful request that shouldn't return anything, like when you delete something.
+
+Level 300 status codes are used for redirection, for example to tell a search engine a page
+that's permanently moved. Most APIs don't have a need for these.
+
+Then there's the status codes that tell the consumer he did something wrong. Level 400,
+Client Mistakes. 400 means a bad request. The request you, as a consumer of the API sent to
+the server is wrong. For example, the JSON the consumer provided can't be parsed. 401
+Unauthorized means that no or invalid authentication details were provided. 403 Forbidden
+means that authentication succeeded, but the authenticated user doesn't have access to the
+requested resource. 404 Not Found means that the requested resource doesn't exist.
+
+And there's more. 405 means method not allowed. This happens when we try to send a request
+to a resource with an HTTP method that isn't allowed. For example, we try to send a POST
+request to api/authors when only GET is implemented on that resource. Another interesting
+one is 406 Not Acceptable. Now we're diving into the presentation media types. This status
+code means that the consumer of the API requested representation in a format that isn't
+supported by the API. And the API doesn't supply a default representation. For example, a
+consumer might request the application/xml media type, while the API only supports
+application/json and doesn't provide that as default representation.
+
+Another interesting one is 409 Conflict.  That means that there's a conflict with the
+request versus the current state of the resource the request is sent to. It's often used
+when you're trying to edit version of the resource that hasn't been renewed since you
+started editing it. But it's also used when trying to create a resource that already exists.
+This is one of the status codes used for concurrency issues. 415 means unsupported media
+type. That's the other way around from the 406 status code. Sometimes we have to provide
+data to our API in the request body, when creating a resource for example. That data also
+has a specific media type. If the API doesn't support this, a 415 status code is returned.
+And then the last one we'll cover is 422. That stands for Unprocessable Entity. It's part of
+the WebDAV HTTP extension standard, so it wasn't in the basic standard. It's an interesting
+one though because this one means that the server understands the content type of the
+request entity, which means 415 is inappropriate. Next to that, the syntax of the request
+entity is correct.  So a 400 is inappropriate. But still, the server was unable to process
+the contained instructions. So it's typically used for semantic mistakes. And semantic
+mistakes, that's what we get when working with validation. So if a validation rule fails, a
+422 is what should be returned. And lastly, there's level 500 server mistakes. Often, only a
+500 Internal Server Error is supported. This means that the server made a mistake, and the
+client can't do anything about it other than trying again later. That's a lot of status
+codes, but there's no reason to learn them by heart. We'll look into them when we encounter
+them.
+*** Level 200
+| Status Code | Meaning                                                              |
+|-------------+----------------------------------------------------------------------|
+|         200 | A suceessful request                                                 |
+|         201 | A successful creation of a resource                                  |
+|         204 | A successful request that shouldn't return anything (such as delete) |
+*** Level 400
+| Status Code | Meaning                                                                                                                                                                                                                                                   |
+|         400 | A bad request                                                                                                                                                                                                                                             |
+|         401 | Unauthorized request                                                                                                                                                                                                                                      |
+|         403 | Forbidden                                                                                                                                                                                                                                                 |
+|         404 | Not Found Resource                                                                                                                                                                                                                                        |
+|         405 | Method not allowed. This happens when we try to send a request to a resource with an HTTP method that isn't allowed. For example, we try to send a POST request to api/authors when only GET is implemented on that resource                              |
+|         406 | Consumer of the API requested representation in a format that isn't supported by the API                                                                                                                                                                  |
+|         409 | Conflict.   That means that there's a conflict with the request versus the current state of the resource the request is sent to. It's often used when you're trying to edit version of the resource that hasn't been renewed since you started editing it |
+** Errors vs. Faults
+So, mistakes happen. These mistakes are then categorized in two categories, errors and
+faults. Errors are defined as a consumer of an API, like a web application, passing invalid
+data to the API, and the API correctly rejecting that data. Examples include invalid
+credentials, incorrect parameters, unknown version IDs, or similar. In other words, these
+are level 400 status codes, and they are the result of a client passing incorrect or invalid
+data to the API. Errors do not contribute to overall API availability. Faults are defined as
+the API failing to correctly return a response to a valid request by a consumer. In other
+words, the API made a mistake. These are level 500 status codes, and they do contribute to
+the overall API availability.
+
+
+
+* Footnotes
+[fn:1] SOAP is a standard communication protocol system that permits processes using different operating systems like Linux and Windows to communicate via HTTP and its XML. SOAP based APIs are designed to create, recover, update and delete records like accounts, passwords, leads, and custom objects

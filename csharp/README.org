@@ -12,4 +12,3 @@
 ** STRT [[file:Concurrency.org][Concurrency in C#]]
 ** STRT [[file:mvc.org][ASP.NET/MVC]]
 ** STRT [[file:buildingAPi.org][Bulding a RESTful API with ASP.NET Core]]
-test maggit
