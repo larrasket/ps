@@ -26,6 +26,7 @@
 #define begend(v) ((v).begin()), ((v).end())
 #define sz(v) ((int)((v).size()))
 using namespace std;
+
 int maximumproduct(vector<int> &nums) {
   sort(begend(nums), greater<>());
   int n = nums.size();
@@ -37,6 +38,5 @@ int main() {
   ios_base::sync_with_stdio(false);
   vector<int> i{-100, -98, -1, 2, 3, 4};
   cout << maximumproduct(i);
-
   cin.tie(NULL);
 }
