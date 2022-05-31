@@ -107,6 +107,7 @@ List:
 | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]                       | Dynamic Programming  | Easy       | LC    | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][Accepted]] |
 | [[https://leetcode.com/problems/integer-replacement/][397. Integer Replacement]]                                   | Dynamic Programming  | Medium     | LC    | [[file:lc/397.integer-replacement.cpp][Accepted]] |
 | [[https://leetcode.com/problems/unique-paths/][62. Unique Paths]]                                           | Dynamic Programming  | Medium     | LC    | [[file:lc/62.unique-paths.cpp][Accepted]] |
+| [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]                          | Dynamic Programming  | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][TBS]]      |
 |------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/deepest-leaves-sum/][1302. Deepest Leaves Sum]]                                   | Breadth-First Search | Medium     | LC    | [[file:lc/1302.deepest-leaves-sum.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-tree-level-order-traversal/][102. Binary Tree Level Order Traversal]]                     | Breadth-First Search | Medium     | LC    | [[file:lc/102.binary-tree-level-order-traversal.cpp][Accepted]] |
@@ -122,7 +123,6 @@ List:
 |------------------------------------------------+---------------------+------------+-------+--------|
 | [[https://leetcode.com/problems/merge-k-sorted-lists/solution/][23. Merge k Sorted Lists]]                       | Linked List         | Hard       | LC    | TBS    |
 |------------------------------------------------+---------------------+------------+-------+--------|
-| [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]              | Array               | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][TBS]]    |
 | [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                              | Array               | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][TBS]]    |
 | [[https://leetcode.com/problems/text-justification/][68. Text Justification]]                         | Array               | Medium     | LC    | TBS    |
 |------------------------------------------------+---------------------+------------+-------+--------|
