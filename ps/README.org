@@ -120,6 +120,8 @@ List:
 |------------------------------------------------+---------------------+------------+-------+--------|
 | Problem                                        | Tags                | Difficulty | Judge | Statue |
 |------------------------------------------------+---------------------+------------+-------+--------|
+| [[https://leetcode.com/problems/merge-k-sorted-lists/solution/][23. Merge k Sorted Lists]]                       | Linked List         | Hard       | LC    | TBS    |
+|------------------------------------------------+---------------------+------------+-------+--------|
 | [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]              | Array               | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][TBS]]    |
 | [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                              | Array               | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][TBS]]    |
 | [[https://leetcode.com/problems/text-justification/][68. Text Justification]]                         | Array               | Medium     | LC    | TBS    |

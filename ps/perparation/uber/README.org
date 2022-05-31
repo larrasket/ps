@@ -26,7 +26,7 @@ TODO: Solve me.
 |-------------------------------------------------------------+---------------+------------+-------+----------|
 
 ** Linked Lists
-|----------------------------+-------------+------------+-------+----------|
-| Problem                    | Tags        | Difficulty | Judge | Status   |
-| [[https://leetcode.com/problems/merge-two-sorted-lists/][21. Merge Two Sorted Lists]] | Linked List | Easy       | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/21.merge-two-sorted-lists.cpp][Accepted]] |
-|                            |             |            |       |          |
+|----------------------------+-------------+------------+-------+------------|
+| Problem                    | Tags        | Difficulty | Judge | Status     |
+| [[https://leetcode.com/problems/merge-two-sorted-lists/][21. Merge Two Sorted Lists]] | Linked List | Easy       | LC    | [[https://github.com/salehmu/leet/blob/main/ps/lc/21.merge-two-sorted-lists.cpp][Accepted]]   |
+| [[https://leetcode.com/problems/merge-k-sorted-lists/solution/][23. Merge k Sorted Lists]]   | Linked List | Hard       | LC    | *Solve Me* |
