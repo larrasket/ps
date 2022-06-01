@@ -846,6 +846,57 @@ public class IsDigitSample {
         }
 
 #+end_src
+** Init-Only Property
+The following code:
+#+begin_src csharp
+public class Member {
+    public int Id {
+        get;
+        init;
+    } // set is replaced with init
+    public string Name {
+        get;
+        set;
+    }
+    public string Address {
+        get;
+        set;
+    }
+}
+
+using System;
+namespace C_9._0 {
+    class Program {
+        static void Main(string[] args) {
+            Member memberObj = new Member {
+                Id = 1
+            };
+}
+#+end_src
+Is equive to:
+
+#+begin_src
+public class Member
+{
+    public Member(int memberId)
+    {
+        Id = memberId;
+    }
+    public int Id { get; }
+    public string Name { get; set; }
+    public string Address { get; set; }
+}
+using System;
+namespace C_9._0 {
+    class Program {
+        static void Main(string[] args) {
+            Member memberObj = new Member(1);
+
+}
+#+end_src
+
+In other words, the Id propery is immutable in both cases.
+
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp
