@@ -846,6 +846,45 @@ public class IsDigitSample {
         }
 
 #+end_src
+** Add Image To Pdf
+#+begin_src csharp
+using System.IO;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+
+public sealed class PdfHelper
+{
+    private PdfHelper()
+    {
+    }
+
+    public static PdfHelper Instance { get; } = new PdfHelper();
+
+    public void SaveImageAsPdf(string imageFileName, PdfDocument x, int width = 1117)
+    {
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+        using (var document = x )
+        {
+            PdfPage page = document.AddPage();
+            using (XImage img = XImage.FromFile(imageFileName))
+            {
+                // Calculate new height to keep image ratio
+                var height = (int) (((double) width / (double) img.PixelWidth) * img.PixelHeight);
+
+                // Change PDF Page size to match image
+                page.Width = width;
+                page.Height = height;
+
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+                gfx.DrawImage(img, 0, 0, width, height);
+            }
+
+            // document.Save("file.pdf");
+        }
+    }
+}
+#+end_src
 ** Init-Only Property
 The following code:
 #+begin_src csharp
@@ -873,9 +912,10 @@ namespace C_9._0 {
             };
 }
 #+end_src
+
 Is equive to:
 
-#+begin_src
+#+begin_src csharp
 public class Member
 {
     public Member(int memberId)
@@ -896,7 +936,116 @@ namespace C_9._0 {
 #+end_src
 
 In other words, the Id propery is immutable in both cases.
+** Records
+Let's discuss the below code snippet:
+#+begin_src
+public class Member
+{
+    public int ID { get; init; }
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+    public string Address { get; init; }
+}
 
+#+end_src
+
+Init properties are immutable properties which means member class properties cannot change.
+What will you do if you want to add a new property in the Member class (like the middle
+name) or change the value of the address property? The only way is you have to create new
+objects and then assign a new value, right?
+
+Here I am going to create a new Membar class object and assign values to it.
+
+#+begin_src csharp
+var member = new Member
+{
+    Id=1,
+    FirstName="Kirtesh",
+    LastName="Shah",
+    Address="Vadodara"
+};
+#+end_src
+
+Assume that you want to change the address from "Vadodara "" to "Mumbai":
+#+begin_src csharp
+var new member = new Member
+{
+    Id = member.Id,
+    FirstName = member.FirstName,
+    LastName = member.LastName,
+    Address = "Mumbai"
+};
+#+end_src
+
+Now suppose we want to add new property, Middle Name, in Member class.
+
+#+begin_src csharp
+public class Member
+{
+    public int ID { get; init; }
+    public string FirstName { get; init; }
+    public string MiddleName { get; init; }
+    public string LastName { get; init; }
+    public string Address { get; init; }
+}
+
+var member = new Member
+{
+    Id=1,
+    FirstName="Kirtesh",
+    MiddleName = "D",
+    LastName="Shah",
+    Address = "Vadodara"
+};
+
+var newMember = new Member
+{
+    Id = member.Id,
+    FirstName = member.FirstName,
+    MiddleName = member.MiddleName,
+    LastName = member.LastName,
+    Address = "Mumbai"
+};
+#+end_src
+
+What you will do if you have hundreds of properties? It will become so difficult, right?
+Hence C# 9.0 introduced Record type to work with immutable data and solve the above issue.
+
+#+begin_src csharp
+public record Member
+{
+    public int ID { get; init; }
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+    public string Address { get; init; }
+}
+#+end_src
+
+What's the difference between the earlier Member class and the new Member record type? The
+only change is, we have replaced, Class,  keyword with, Recor, . Now Member
+record type is treated as an immutable data value.
+*** ~with~
+C# 9.0 introduces the 'With' expression with RecordType. It is mainly used to create new
+objects more effectively.
+
+Before we understand the 'With' expression let's discuss the below code,
+
+#+begin_src csharp
+var member = new Member
+{
+    Id=1,
+    FirstName="Kirtesh",
+    LastName="Shah",
+    Address = "Vadodara"
+};
+
+var newMember = member with { Address = "Mumbai" };
+#+end_src
+
+Another feature of the records, is that you can grap properties using the syntax sugar:
+#+begin_src csharp
+var (name, dateOfBirth) = x;
+#+end_src
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp

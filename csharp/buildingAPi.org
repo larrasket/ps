@@ -207,6 +207,29 @@ data to the API. Errors do not contribute to overall API availability. Faults ar
 the API failing to correctly return a response to a valid request by a consumer. In other
 words, the API made a mistake. These are level 500 status codes, and they do contribute to
 the overall API availability.
+* Getting Resources
+When we design the outer-facing contract, we already learned that REST stops at that level.
+What lies underneath that outer-facing contract is of no importance to REST. From that, we
+already know that the entity model, in our case used by Entity Framework Core as a means to
+represent database rows as object, should be different from the outer-facing model. Those
+model classes represent what's sent over the wire. Sometimes you see these models referred
+to as your DTOs (Data-Transfer Object) or even ViewModels. But that also leads to
+possibilities. Take an author, for example. We can see some pseudocode for that.
+An author is stored in our database with a DateOfBirth. But that DateOfBirth, well, that
+might not be what we want to offer up to the consumers of the API. They might be better off
+with the Age. Another example might be concatenation, concatenating FirstName and LastName
+from an entity into one name field in the resource representation. And sometimes data might
+come from different places.  An author could have a field, say Royalties, that comes from
+another API our API must interact with. That alone leads to issues when using entity classes
+for the outer-facing contract as they don't contain that field. Keeping these models
+separate leads to more robust reliably evolvable code.
+
+Imagine having to change a database table. That would lead to a change of the entity class.
+If we're using that same entity class to directly expose data via the API, our clients might
+run into problems because they're not expecting an additional renamed or removed field.
+We're essentially making versioning very hard because by reusing those entity classes, the
+database can't evolve separately from the API. So when developing, it's very important to
+keep these separate.
 
 
 
