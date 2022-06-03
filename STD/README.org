@@ -1046,6 +1046,39 @@ Another feature of the records, is that you can grap properties using the syntax
 #+begin_src csharp
 var (name, dateOfBirth) = x;
 #+end_src
+** Unique Identifier Example
+#+begin_src csharp
+public class project
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid id { get; set; }
+
+    [Required]
+    public string aliasName { get; set; }
+
+    [ForeignKey("Features")]
+    public virtual List<int> featureIds { get; set; }
+}
+#+end_src
+#+begin_src csharp
+public class feature
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int id { get; set; }
+
+    [Required]
+    public string name { get; set; }
+
+    [DataType(DataType.MultilineText)]
+    public string description { get; set; }
+}
+#+end_src
+#+begin_src csharp
+public DbSet<project> Projects { get; set; }
+public DbSet<feature> Features { get; set; }
+#+end_src
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp
