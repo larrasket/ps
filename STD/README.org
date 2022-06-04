@@ -1079,6 +1079,75 @@ public class feature
 public DbSet<project> Projects { get; set; }
 public DbSet<feature> Features { get; set; }
 #+end_src
+** RestSharp Notes
+Before making a request using ~RestClient~, you need to create a request instance:
+#+begin_src csharp
+var request = new RestRequest(resource); // resource is the sub-path of the client base path
+#+end_src
+The default request type is GET and you can override it by setting the Method property. You
+can also set the method using the constructor overload:
+#+begin_src csharp
+var request = new RestRequest(resource, Method.Post);
+#+end_src
+After you've created a ~RestRequest~, you can add parameters to it. Below, you can find all
+the parameter types supported by RestSharp. Client is instanciated like:
+#+begin_src csharp
+var client = new RestClient("https://api.twitter.com/1.1")
+#+end_src
+*** TODO Authentication
+*** Adding Parameters
+#+begin_src csharp
+request.AddParameter("status", 1);
+request.AddParameter("priority", "high");
+request.AddParameter("ids", "123,456");
+#+end_src
+or:
+#+begin_src csharp
+var params = new {
+    status = 1,
+    priority = "high",
+    ids = new [] { "123", "456" }
+};
+request.AddObject(params);
+#+end_src
+*** Url Segments
+Unlike GetOrPost, this ParameterType replaces placeholder values in the RequestUrl:
+#+begin_src csharp
+var request = new RestRequest("health/{entity}/status")
+    .AddUrlSegment("entity", "s2");
+#+end_src
+When the request executes, RestSharp will try to match any {placeholder} with a parameter of
+that name (without the {}) and replace it with the value. So the above code results in
+health/s2/status being the url.
+*** Add Json Body
+When you call AddJsonBody, it does the following for you:
+
+- Instructs the RestClient to serialize the object parameter as JSON when making a request
+- Sets the content type to application/json
+- Sets the internal data type of the request body to DataType.Json
+#+begin_src csharp
+var param = new MyClass { IntData = 1, StringData = "test123" };
+request.AddJsonBody(param);
+#+end_src
+*** TODO Query Strings
+*** Calling
+To make a simple GET call and get a deserialized JSON response with a pre-formed resource string, use this:
+#+begin_src csharp
+var client = new RestClient("https://example.org");
+var args = new {
+    id = "123",
+    foo = "bar"
+};
+// Will make a call to https://example.org/endpoint/123?foo=bar
+var response = await client.GetJsonAsync<TResponse>("endpoint/{id}", args, cancellationToken);
+#+end_src
+*** TODO Files
+** Deserialize ~data~ from a RESTful Response
+#+begin_src csharp
+var client = new RestClient("http://api.alquran.cloud/v1/edition");
+var f = new RestRequest("");
+var data = JObject.Parse(client.ExecuteAsync(f).Result.Content)["data"].ToObject<IEnumerable<Edition>>();
+#+end_src
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp
