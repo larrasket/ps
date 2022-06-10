@@ -1118,7 +1118,7 @@ var request = new RestRequest("health/{entity}/status")
 #+end_src
 When the request executes, RestSharp will try to match any {placeholder} with a parameter of
 that name (without the {}) and replace it with the value. So the above code results in
-health/s2/status being the url.
+~health/s2/status~ being the url.
 *** Add Json Body
 When you call AddJsonBody, it does the following for you:
 
@@ -1142,12 +1142,20 @@ var args = new {
 var response = await client.GetJsonAsync<TResponse>("endpoint/{id}", args, cancellationToken);
 #+end_src
 *** TODO Files
-
 ** Deserialize ~data~ from a RESTful Response
 #+begin_src csharp
 var client = new RestClient("http://api.alquran.cloud/v1/edition");
 var f = new RestRequest("");
 var data = JObject.Parse(client.ExecuteAsync(f).Result.Content)["data"].ToObject<IEnumerable<Edition>>();
+#+end_src
+
+Or, as an extention method:
+
+#+begin_src csharp
+static T? GetData<T>(this RestClient t, RestRequest request)
+{
+    return JObject.Parse(t.ExecuteAsync(request).Result.Content)["data"].ToObject<T>();
+}
 #+end_src
 * ASP.NET Notes
 ** Redirect Manage to Login
