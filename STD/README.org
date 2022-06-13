@@ -1157,6 +1157,11 @@ static T? GetData<T>(this RestClient t, RestRequest request)
     return JObject.Parse(t.ExecuteAsync(request).Result.Content)["data"].ToObject<T>();
 }
 #+end_src
+** Round Float
+#+begin_src csharp
+float value = 92.197354542F;
+value = (float)System.Math.Round(value,2);
+#+end_src
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp
