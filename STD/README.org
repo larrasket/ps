@@ -1591,3 +1591,4 @@ Match everything except for specified strings
 #+begin_src regex
 ^(?!.*(red|green|blue))
 #+end_src
+j
