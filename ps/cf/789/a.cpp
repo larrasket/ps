@@ -36,11 +36,12 @@ int solve(vector<int> &arr, bool &zero, bool &dplct) {
 }
 
 int main() {
+  cout << "FUCK";
   int t, tmp;
   cin >> t;
   bool dplct = false, zero = 0;
   while (t) {
-    vector<int> arr;
+      vector<int> arr;
     map<int, int> m;
     int ln;
     cin >> ln;
