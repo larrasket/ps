@@ -1,0 +1,824 @@
+#+title: GO Notes
+
+* Introduction
+
+GO programming language notes. Reading Adam Freeman's Pro Go.
+
+* get-go
+
+Open a command prompt, navigate to a convenient location, and create a folder named
+partyinvites.  Navigate to the partyinvites folder and run the command shown in Listing 1-2
+to start a new Go project.
+
+#+begin_src txt
+go mod init partyinvites
+#+end_src
+
+The go command is used for almost every development task. This command creates a file named
+~go.mod~, which is used to keep track of the packages a project depends on and can also be
+used to publish the project, if required.
+
+Go code files have a .go extension. Use your chosen editor to create a file named main.go in
+the partyinvites folder with the contents shown in Listing 1-3. If you are using Visual
+Studio Code and this is your first time editing a Go file, then you will be prompted to
+install the extensions that support the Go language.
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    fmt.Println("TODO: add some features")
+}
+#+end_src
+
+The syntax of Go will be familiar if you have used any C or C-like language, such as C# or
+Java. I describe the Go language in depth in this book, but you can discern a lot just by
+looking at the keywords and structure of the code.
+
+
+Features are grouped into packages, which is why there is a package statement in the
+previous block.  Dependencies on packages are made using an import statement, which
+allows the features they use to be accessed in a code file. Statements are grouped in
+functions, which are defined with the func keyword. There is one function in the block
+which is named main.  This is the entry point for the application, meaning that this is the
+point at which execution will begin when the application is compiled and run.
+
+
+Even though the details may not be familiar, the purpose of the code in the block is easy
+to figure out: when the application is executed, it will write out a simple message. Run the
+command shown in the partyinvites folder to compile and execute the project.
+(Notice that there is a period after the word run in this command.)
+
+#+begin_src txt
+go run .
+#+end_src
+
+The go run command is useful during development because it performs the compilation and execution
+tasks in one step. The application produces the following output:
+
+#+begin_src txt
+TODO: add some features
+#+end_src
+
+** Define a Data Type
+
+The next step is to create a custom data type that will represent the RSVP responses, as
+shown:
+
+
+#+begin_src go
+type Rsvp struct {
+    Name, Email, Phone string
+    WillAttend bool
+}
+#+end_src
+
+Go allows custom types to be defined and given a name using the type keyword.
+creates a struct data type named Rsvp. Structs allow a set of related values to be grouped
+together. The Rsvp struct defines four fields, each of which has a name and a data type. The
+data types used by the Rsvp fields are string and bool, which are the built-in types for
+representing a string of characters and Boolean values.
+
+Next, I need to collect Rsvp values together. Later, I explain how to use a
+database in a Go application, but for this chapter, it will be enough to store the responses
+in memory, which means that responses will be lost when the application is stopped.
+
+Go has built-in support for fixed-length arrays, variable-length arrays (known as slices),
+and maps that contain key-value pairs. the following block creates a slice, which is a good choice
+when the number of values that will be stored isn’t known in advance.
+
+#+begin_src go
+package main
+import "fmt"
+type Rsvp struct {
+    Name, Email, Phone string
+    WillAttend bool
+}
+var responses = make([]*Rsvp, 0, 10)
+func main() {
+    fmt.Println("TODO: add some features");
+}
+#+end_src
+
+
+This new statement relies on several Go features, which are most readily understood by
+starting at the end of the statement and working backwards.  Go provides built-in functions
+for performing common operations on arrays, slices, and maps. One of those functions is
+make, which is used in to initialize a new slice. The last two arguments to the
+make function are the initial size and the initial capacity.
+
+
+I specified zero for the size argument create an empty slice. Slices are resized
+automatically as new items are added, and the initial capacity determines how many items can
+be added before the slice has to be resized. In this case, ten items can be added to the
+slice before it has to be resized.
+
+The square brackets, ~[]~, denote a slice. The asterisk, *, denotes a pointer. The Rsvp part
+of the type denotes the struct type defined in Listing 1-6. Put together, []*Rsvp denotes a
+slice of pointers to instances of the Rsvp struct.
+
+
+You may have flinched at the term pointer if you have arrived at Go from C# or Java, which
+do not allow pointers to be used directly. But you can relax because Go doesn’t allow the
+types of operations on pointers that can get a developer into trouble.
+The use of pointers in Go determines only whether a value is copied when it is
+used. *By specifying that my slice will contain pointers, I am telling Go not to create
+copies of my Rsvp values when I add them to the slice.*
+
+
+
+The var keyword indicates that I am defining a new variable, which is given the name
+responses. The equal sign, =, is the Go assignment operator and sets the value of the
+responses variable to the newly created slice. I don’t have to specify the type of the
+responses variable because the Go compiler will infer it from the value that is assigned to
+it.
+
+* Using The Go Tools
+
+The go command provides access to all the features needed to compile and execute Go code and
+is used throughout this book. The argument used with the go command specifies the operation
+that will be performed, such as the run argument  which compiles and executes Go source
+code. The Go command supports a large number of arguments; the following table describes the
+most useful ones
+
+
+| Argument  | Description                                                                                                                                                                                                                     |
+|-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ~build~   | The go build command compiles the source code in the current directory and generates an executable file, as described in the “Compiling and Running Source Code” section.                                                       |
+| ~clean~   | The go clean command removes the output produced by the go build command, including the executable and any temporary files that were created during the build, as described in the “Compiling and Running Source Code” section. |
+| ~doc~     | The go doc command generates documentation from source code. See the “Linting Go Code” section for a simple example.                                                                                                            |
+| ~fmt~     | The go fmt command ensures consistent indentation and alignment in source code files, as described in the “Formatting Go Code” section.                                                                                         |
+| ~get~     | The go get command downloads and installs external packages                                                                                                                                                                     |
+| ~install~ | The go install command downloads packages and is usually used to install tool packages                                                                                                                                          |
+| ~help~    | The go help command displays help information for other Go features                                                                                                                                                             |
+| ~test~    | The go test command executes unit tests                                                                                                                                                                                         |
+| ~version~ | The go version command writes out the Go version number.                                                                                                                                                                        |
+| ~vet~     | The go vet command detects common problems in Go code                                                                                                                                                                           |
+|-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+** Creating a Go Project
+
+Go projects don’t have an elaborate structure and are quick to set up. Open a new command
+prompt and create a folder named tools in a convenient location. Add a file named main.go to
+the tools folder with the content shown:
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, Go")
+}
+#+end_src
+
+The following figure illustrates the key elements in the main.go file
+
+[[file:Using_The_Go_Tools/2022-06-17_14-21-51_screenshot.png]]
+
+The first statement is the package declaration. Packages are used to group related features, and every code
+file has to declare the package to which its contents belong. The package declaration uses the package
+keyword, followed by the name of the package.
+
+The next statement is the import statement, which is used to declare dependencies on other
+packages. The import keyword is followed by the name of the package, which is enclosed in
+double quotes, as shown. The import statement  specifies a package named fmt, which is the
+built-in Go package for reading and writing formatted strings. Check all the built-in
+packages here: https://pkg.go.dev/std
+
+
+The remaining statements in the main.go file define a function named main.  When you define
+a function named main in a package named main, you create an entry point, which is where
+execution begins in a command-line application
+
+** Semicolons and Errors in Go Code
+You may have noticed that I didn't append a semicolon in the previous code.
+Go has an unusual approach to semicolons: they are required to terminate code statements, but they
+are not required in source code files. Instead, the Go build tools figure out where the semicolons need to
+go as they process files, acting as though they had been added by the developer.
+
+The result is that semicolons can be used in Go source code files but are not required and are
+conventionally omitted.
+
+Some oddities arise if you don’t follow the expected Go code style. For example, you will receive
+compiler errors if you attempt to put the opening brace for a function or for loop on the next line,
+like this:
+
+#+begin_src go
+package main
+import "fmt"
+func main()
+{
+    fmt.Println("Hello, Go")
+}
+#+end_src
+
+
+The errors report an unexpected semicolon and a missing function body. This is because the Go tools
+have automatically inserted a semicolon like this:
+
+#+begin_src go
+package main
+import "fmt"
+func main();
+{
+    fmt.Println("Hello, Go")
+}
+#+end_src
+
+The error messages make more sense when you understand why they arise, although it can be
+hard to adjust to the expected code format if this is your preferred brace placement.
+
+I have tried to follow the no-semicolon convention throughout this book, but I have been
+writing code in languages that require semicolons for decades, so you may find the
+occasional example where I have added semicolons purely by habit. The go fmt command will
+remove semicolons and adjust other formatting issues.
+
+** Defining a Module
+The previous section demonstrated that you can get `tarted just by creating a code file, but
+a more common approach is to create a Go module, which is the conventional first step when
+starting a new project. Creating a Go module allows a project to easily consume third-party
+packages and can simplify the build process.
+
+#+begin_src sh
+go mod init tool
+#+end_src
+
+This command adds a file named go.mod to the tools folder. The reason that most projects start with
+the go mod init command is that it simplifies the build process. Instead of specifying a particular code file,
+the project can be built and executed using a period, indicating the project in the current directory.
+
+** Linting Go Code
+A linter is a tool that checks code files using a set of rules that describe problems that
+cause confusion, produce unexpected results, or reduce the readability of the code. The most
+widely used linter for Go is called golint, which applies rules taken from two sources. The
+first is the Effective Go document produced by Google
+(https://golang.org/doc/effective_go.html), which provides tips for writing clear and
+concise Go code. The second source is a collection of comments from code reviews
+(https://github.com/golang/go/wiki/CodeReviewComments).
+
+The problem with golint is that it provides no configuration options and will always apply all the rules,
+which can result in warnings you care about being lost in a long list of warnings for rules you don’t care
+about. I prefer to use the revive linter package, which is a direct replacement for golint but with support
+for controlling which rules are applied. To install the revive package, open a new command prompt and run
+the command shown:
+#+begin_src sh
+go install github.com/mgechev/revive@latest
+#+end_src
+
+*** On Linting
+
+
+Linters can be a powerful tool for good, especially in a development team with mixed levels of skill and
+experience. Linters can detect common problems and subtle errors that lead to unexpected behavior
+or long-term maintenance issues. I like this kind of linting, and I like to run my code through the linting
+process after I have completed a major application feature or before I commit my code into version
+control.
+
+But linters can also be a tool of division and strife when rules are used to enforce one developer’s
+personal preferences across an entire team. This is usually done under the banner of being
+“opinionated.” The logic is that developers spend too much time arguing about different coding styles,
+and everyone is better off being forced to write in the same way.
+
+My experience is that developers will just find something else to argue about and that forcing
+a code style is often just an excuse to make one person’s preferences mandatory for an entire
+development team.
+
+My advice is to use linting sparingly and focus on the issues that will cause real problems. Give
+individual developers the freedom to express themselves naturally and focus only on issues that have
+a discernible impact on the project. This is counter to the opinionated ethos of Go, but my view is that
+productivity is not achieved by slavishly enforcing arbitrary rules, however well-intentioned they may be.
+
+*** Using the Linter
+
+The main.go file is so simple that it doesn’t have any problems for the linter to highlight.
+Add the following statements, which are legal Go code that does not comply with
+the rules applied by the linter.
+
+#+begin_src go
+package main
+
+import "fmt"
+
+func main() {
+	PrintHello()
+	for i := 0; i < 5; i++ {
+		PrintNumber(i)
+	}
+}
+
+func PrintHello() {
+	fmt.Print("Hello, Go")
+}
+
+func PrintNumber(number int) {
+	fmt.Print(number)
+}
+#+end_src
+
+#+begin_src sh
+main.go:12:1: exported function PrintHello should have comment or be unexported
+main.go:16:1: exported function PrintNumber should have comment or be unexported
+#+end_src
+
+
+functions whose names start with an uppercase letter are said to be exported and available
+for use outside of the package in which they are defined. The convention for exported
+functions is to provide a descriptive comment. The linter has flagged the fact that no
+comments exist for the PrintHello and PrintNumber functions.
+
+#+begin_src go
+package main
+
+import "fmt"
+
+func main() {
+	PrintHello()
+	for i := 0; i < 5; i++ {
+		PrintNumber(i)
+	}
+}
+
+// PrintHello Does staff
+func PrintHello() {
+	fmt.Print("Hello, Go")
+}
+
+// PrintNumber does staff
+func PrintNumber(number int) {
+	fmt.Print(number)
+}
+#+end_src
+
+*** Disabling Linter Rules
+The revive package can be configured using comments in code files, disabling one or more
+rules for sections of code. I have used comments to disable the rule that causes the warning
+for the ~PrintNumber~ function.
+
+#+begin_src go
+package main
+
+import "fmt"
+
+func main() {
+	PrintHello()
+	for i := 0; i < 5; i++ {
+		PrintNumber(i)
+	}
+}
+
+// revive:disable:exported
+func PrintHello() {
+	fmt.Print("Hello, Go")
+}
+
+// revive:enable:exported
+func PrintNumber(number int) {
+	fmt.Print(number)
+}
+#+end_src
+
+The syntax required to control the linter is revive, followed by a colon, enable or disable,
+and optionally another colon and the name of a linter rule. So, for example, the
+~revive:disable:exported~ comment prevents the linter from enforcing a rule named exported,
+which is the rule that has been generating warnings. The ~revive:enable:exported~ comment
+enables the rule so that it will be applied to subsequent statements in the code file.
+
+Using code comments is helpful when you want to suppress warnings for a specific region of code but still
+apply the rule elsewhere in the project. If you don’t want to apply a rule at all, then you can use a TOML-
+format configuration file. Add a file named revive.toml to the tools folder with the content
+shown:
+
+#+begin_src toml
+ignoreGeneratedHeader = false
+severity = "warning"
+confidence = 0.8
+errorCode = 0
+warningCode = 0
+[rule.blank-imports]
+[rule.context-as-argument]
+[rule.context-keys-type]
+[rule.dot-imports]
+[rule.error-return]
+[rule.error-strings]
+[rule.error-naming]
+#[rule.exported]
+[rule.if-return]
+[rule.increment-decrement]
+[rule.var-naming]
+[rule.var-declaration]
+[rule.package-comments]
+[rule.range]
+[rule.receiver-naming]
+[rule.time-naming]
+[rule.unexported-return]
+[rule.indent-error-flow]
+[rule.errorf]
+#+end_src
+
+This is the default revive configuration described at
+https://github.com/mgechev/revive#recommended-­configuration, except that I have put a #
+character before the entry that enables the exported rule.
+
+** Fixing Common Problems in Go
+The go vet command identifies statements likely to be mistakes. Unlike a linter, which will
+often focus on style issues, the go vet command finds code that compiles but that probably
+won’t do what the developer intended.
+
+I like the go vet command because it spots errors that other tools miss, although the
+analyzers don’t spot every mistake and will sometimes highlight code that isn’t a problem.
+
+Look at the following example:
+
+#+begin_src go
+package main
+
+import "fmt"
+
+func main() {
+	PrintHello()
+	for i := 0; i < 5; i++ {
+		i = i
+		PrintNumber(i)
+	}
+}
+
+func PrintHello() {
+	fmt.Print("Hello, Go")
+}
+
+func PrintNumber(number int) {
+	fmt.Print(number)
+}
+#+end_src
+
+The new statement assigns the variable i to itself, which is allowed by the Go compiler but is likely to be
+a mistake. To analyze the code, use the command prompt to run the command:
+
+#+begin_src shell
+go vet main.go
+#+end_src
+
+#+begin_src
+# party
+.\main.go:8:3: self-assignment of i to i
+#+end_src
+
+The warnings produced by the go vet command specify the location in the code where a problem has
+been detected and provide a description of the issue.
+
+The go vet command applies multiple analyzers to code, and you can see the list of analyzers
+at https://golang.org/cmd/vet. You can select individual analyzers to enable or disable, but
+it can be difficult to know which analyzer has generated a specific message. To figure out
+which analyzer is responsible for a warning, run the command:
+
+#+begin_src
+go vet -json .
+#+end_src
+#+begin_src json
+# party
+{
+	"party": {
+		"assign": [
+			{
+				"posn": "E:\\leet\\go\\DummyPrograms\\main.go:8:3",
+				"message": "self-assignment of i to i"
+			}
+		]
+	}
+}
+#+end_src
+
+* Types, Values, Pointers
+The folloing table puts the basic Go features in context.
+
+| Problem                                                        | Solution                                            |
+|----------------------------------------------------------------+-----------------------------------------------------|
+| Use a value directly                                           | Use a literal value                                 |
+| Define a constant                                              | Use the ~const~ keyword                             |
+| Define a constant that can ve converted to a related data type | Create an untyped constant                          |
+| Define a variable                                              | Use the var keyword or the short declaration syntax |
+| Prevent compiler errors for an unused variable                 | Use the blank identifier                            |
+| Define a pointer                                               | User the address operator                           |
+| Follow a pointer                                               | Use an asterisk with the pointer variable name      |
+
+I've created this new main file:
+#+begin_src go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+func main() {
+	fmt.Println(rand.Int())
+}
+#+end_src
+The code in the main.go file will be compiled and executed, producing the following output:
+#+begin_src
+5577006791947779410
+#+end_src
+
+The output from the code will always be the same value.
+
+** Basic Data Types
+Go provides a set of basic data types, which are described in the table.
+These types are the foundation of Go development, and many of
+the characteristics of these types will be familiar from other languages.
+
+| Name                    | Description                                                                                                                                                                                                                                                                                                       |
+|-------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ~int~                   | This type represents a whole number, which can be positive or negative. The int type size is platform-dependent and will be either 32 or 64 bits. There are also integer types that have a specific size, such as int8, int16, int32, and int64, but the int type should be used unless you need a specific size. |
+| ~uint~                  | This type represents a positive whole number. The uint type size is platform- dependent and will be either 32 or 64 bits. There are also unsigned integer types that have a specific size, such as uint8, uint16, uint32, and uint64, but the uint type should be used unless you need a specific size.           |
+| ~byte~                  | This type is an alias for uint8 and is typically used to represent a byte of data.                                                                                                                                                                                                                                |
+| ~float32, float64~      | These types represent numbers with a fraction. These types allocate 32 or 64 bits to store the value.                                                                                                                                                                                                             |
+| ~complex64, complex128~ | These types represent numbers that have real and imaginary components. These types allocate 64 or 128 bits to store the value.                                                                                                                                                                                    |
+| ~bool~                  | This type represents a Boolean truth with the values true and false.                                                                                                                                                                                                                                              |
+| ~string~                | This type represents a sequence of characters                                                                                                                                                                                                                                                                     |
+| ~rune~                  | This type represents a single Unicode code point. Unicode is complicated, but—loosely—this is the representation of a single character. The rune type is an alias for int32.                                                                                                                                                                                                                                                                                                                  |
+
+Constants are names for specific values, which allows them to be used repeatedly and
+consistently. There are two ways to define constants in Go: typed constants and untyped
+constants. This is an example of typed constants:
+
+#+begin_src go
+package main
+import (
+    "fmt"
+    //"math/rand"
+)
+func main() {
+    const price float32 = 275.00
+    const tax float32 = 27.50
+	const quantity int = 2
+    fmt.Println("Total:", quantity * (price + tax))
+}
+#+end_src
+
+The difference between typed and untyped constants is that, and since go has a very strict
+rules about type conversions, untyped will have some kind of conversions.
+The above code should gives the following error:
+
+#+begin_src
+.\main.go:12:26: invalid operation: quantity * (price + tax) (mismatched types int and float32)
+#+end_src
+
+
+#+begin_src go
+package main
+import (
+    "fmt"
+    //"math/rand"
+)
+func main() {
+    const price float32 = 275.00
+    const tax float32 = 27.50
+    const quantity = 2
+    fmt.Println("Total:", quantity * (price + tax))
+}
+#+end_src
+
+Omitting the type when defining the quantity constant tells the Go compiler that it should
+be more flexible about the constant’s type. When the expression passed to the fmt.Println
+function is evaluated, the Go compiler will convert the quantity value to a float32. Compile
+and execute the code, and you will receive the following output:
+
+#+begin_src
+Total: 605
+#+end_src
+
+
+Untyped constants will be converted only if the value can be represented in the target type.
+In practice, this means you can mix untyped integer and floating-point numeric values, but
+conversions between other data types must be done explicitly.
+
+#+begin_src go
+package main
+import (
+    "fmt"
+    //"math/rand"
+)
+func main() {
+    const price, tax float32 = 275, 27.50
+    const quantity, inStock = 2, true
+    fmt.Println("Total:", quantity * (price + tax))
+    fmt.Println("In stock: ", inStock)
+}
+#+end_src
+
+The const keyword is followed by a comma-separated list of names, an equal sign, and a
+comma separated list of values.
+
+Untyped constants may seem like an odd feature, but they make working with Go a lot easier,
+and you will find yourself relying on this feature, often without realizing, because literal
+values are untyped constants, which means that you can use literal values in expressions and
+rely on the compiler to deal with mismatched types, as shown:
+
+#+begin_src go
+package main
+import (
+    "fmt"
+    //"math/rand"
+)
+func main() {
+    const price, tax float32 = 275, 27.50
+    const quantity, inStock = 2, true
+    fmt.Println("Total:", 2 * quantity * (price + tax))
+    fmt.Println("In stock: ", inStock)
+}
+#+end_src
+
+** Variables
+Variables are defined using the var keyword, and, unlike constants, the value assigned to a
+variable can be changed, as shown:
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    var price float32 = 275.00
+    var tax float32 = 27.50
+    fmt.Println(price + tax)
+    price = 300
+    fmt.Println(price + tax)
+}
+#+end_src
+
+Variables are declared using the var keyword, a name, a type, and a value assignment, as
+illustrated:
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    var price float32 = 275.00
+    var tax float32 = 27.50
+    fmt.Println(price + tax)
+    price = 300
+    fmt.Println(price + tax)
+}
+#+end_src
+
+The Go compiler can infer the type of variables based on the initial value, which allows the
+type to be omitted:
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    var price = 275.00
+    var price2 = price
+    fmt.Println(price)
+    fmt.Println(price2)
+}
+#+end_src
+
+*** Short Variable Declaration Syntax
+The short variable declaration provides a shorthand for declaring variables, as shown:
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    price := 275.00
+    fmt.Println(price)
+}
+#+end_src
+
+Multiple variables can be defined with a single statement by creating comma-separated lists of names
+and values, as shown:
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    price, tax, inStock := 275.00, 27.50, true
+    fmt.Println("Total:", price + tax)
+    fmt.Println("In stock:", inStock)
+}
+#+end_src
+
+Go doesn’t usually allow variables to be redefined but makes a limited exception when the
+short syntax is used. To demonstrate the default behavior, the following block uses the var
+keyword to define a variable that has the same name as one that already exists within the
+same function
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    price, tax, inStock := 275.00, 27.50, true
+    fmt.Println("Total:", price + tax)
+    fmt.Println("In stock:", inStock)
+    var price2, tax = 200.00, 25.00
+    fmt.Println("Total 2:", price2 + tax)
+}
+#+end_src
+
+
+This gives:
+#+begin_src
+.\main.go:10:17: tax redeclared in this block
+#+end_src
+
+However, redefining a variable is allowed if the short syntax is used, as shown as long as
+at least one of the other variables being defined doesn’t already exist and the type of the
+variable doesn’t change.
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    price, tax, inStock := 275.00, 27.50, true
+    fmt.Println("Total:", price + tax)
+    fmt.Println("In stock:", inStock)
+    price2, tax := 200.00, 25.00
+    fmt.Println("Total 2:", price2 + tax)
+}
+#+end_src
+
+*** Blank Declaration
+
+It is illegal in Go to define a variable and not use it:
+
+#+begin_src go
+    price, tax, inStock, discount := 275.00, 27.50, true, true
+    var salesPerson = "Alice"
+    fmt.Println("Total:", price + tax)
+    fmt.Println("In stock:", inStock)
+#+end_src
+#+begin_src txt
+.\main.go:6:26: discount declared but not used
+.\main.go:7:9: salesPerson declared but not used
+#+end_src
+
+One way to resolve this problem is to remove the unused variables, but this isn’t always
+possible. For these situations, Go provides the blank identifier, which is used to denote a
+value that won’t be used, as shown:
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    price, tax, inStock, _ := 275.00, 27.50, true, true
+    var _ = "Alice"
+    fmt.Println("Total:", price + tax)
+    fmt.Println("In stock:", inStock)
+}
+#+end_src
+
+
+It can be also used to ignore function return values:
+
+#+begin_src go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	price4, _, _ := f()
+	fmt.Println(price4)
+}
+
+func f() (int, int, int) {
+	return 42, 53, 5
+}
+#+end_src
+
+** Pointers
+Pointers are often misunderstood, especially if you have come to Go from a language such as
+Java or C#, where pointers are used behind the scenes but carefully hidden from the
+developer. To understand how pointers work, the best place to start is understanding what Go
+does when pointers are not used, as shown:
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    first := 100
+    second := first;
+    first++
+    fmt.Println("First:", first)
+    fmt.Println("Second:", second)
+}
+#+end_src
+
+
+The previous code creates two variables. The value of the variable named first is set using
+a string literal. The value of the variable named second is set using the first value.
+
+Go copies the current value of first when creating second, after which these variables are
+independent of one another. Each variable is a reference to a separate memory location where
+its value is stored
+
+When I use the ++ operator to increment the first variable, Go reads the value at the memory
+location associated with the variable, increments the value, and stores it at the same
+memory location. The value assigned to the second variable remains the same because the
+change affects only the value stored by the first variable.
+
+
+Pointers have a bad reputation because of pointer arithmetic. Pointers store memory
+locations as numeric values, which means they can be manipulated using arithmetic operators,
+providing access to other memory locations. You can start with a location that points to an
+int value, for example; increment the value by the number of bits used to store an int; and
+read the adjacent value. This can be useful but can cause unexpected results, such as trying
+to access the wrong location or a location outside of the memory allocated to the program.
