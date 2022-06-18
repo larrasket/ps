@@ -28,6 +28,7 @@ List:
 | [[https://leetcode.com/problems/single-number/][136. Single Number]]                                             | Array                | Easy       | LC    | [[file:lc/136.single-number.cpp][Accepted]] |
 | [[https://leetcode.com/problems/maximum-subarray/][53. Maximum Subarray]]                                           | Array                | Easy       | LC    | [[file:lc/53.maximum-subarray.cpp][Accepted]] |
 | [[https://leetcode.com/problems/intersection-of-two-arrays-ii/][350. Intersection of Two Arrays II]]                             | Array                | Easy       | LC    | [[file:lc/350.intersection-of-two-arrays-ii.cpp][Accepted]] |
+| [[https://leetcode.com/problems/largest-number-after-digit-swaps-by-parity/][2231. Largest Number After Digit Swaps by Parity]]               | Array                | Easy       | LC    | [[file:lc/2231.largest-number-after-digit-swaps-by-parity.cs][Accepted]] |
 | [[https://leetcode.com/problems/number-of-islands/][200. Number of Islands]]                                         | Array                | Medium     | LC    | [[file:lc/200.number-of-islands.cpp][Accepted]] |
 | [[https://www.lintcode.com/problem/860/?_from=collection&fromId=185][860 · Number of Distinct Islands]]                               | Array                | Medium     | LC    | [[file:nt/860.cpp][Accepted]] |
 | [[https://leetcode.com/problems/product-of-array-except-self/][238. Product of Array Except Self]]                              | Array                | Medium     | LC    | [[file:lc/238.product-of-array-except-self.cpp][Accepted]] |
@@ -35,7 +36,8 @@ List:
 | [[https://leetcode.com/problems/maximum-sum-circular-subarray/][918. Maximum Sum Circular Subarray]]                             | Array                | Medium     | LC    | [[file:lc/918.maximum-sum-circular-subarray.cpp][Accepted]] |
 | [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                     | Array                | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]] |
 | [[https://www.lintcode.com/problem/1882/][1882. Fair Indexes]]                                             | Array                | Medium     | NT    | [[file:nt/1882.cpp][Accepted]] |
-| [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                                              | Array                | Medium     | LC    | Accepted |
+| [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                                              | Array                | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][Accepted]] |
+| [[https://leetcode.com/problems/maximum-product-after-k-increments/][2233. Maximum Product After K Increments]]                       | Array                | Medium     | LC    | [[file:lc/2233.maximum-product-after-k-increments.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                            | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]] |
 | [[https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/][2216. Minimum Deletions to Make Array Beautiful]]                | Greedy               | Medium     | LC    | [[file:lc/2216.minimum-deletions-to-make-array-beautiful.cpp][Accepted]] |
@@ -49,6 +51,7 @@ List:
 | [[https://leetcode.com/problems/reverse-words-in-a-string/][151. Reverse Words in a String]]                                 | String               | Medium     | LC    | [[file:lc/151-reverse-words-in-a-string.cs][Accepted]] |
 | [[https://www.lintcode.com/problem/415/][415. Valid Palindrome]]                                          | String               | Medium     | NT    | [[file:nt/415.cpp][Accepted]] |
 | [[https://leetcode.com/problems/validate-ip-address/][468. Validate IP Address]]                                       | String               | Medium     | LC    | [[file:lc/468.validate-ip-address.cs][Accepted]] |
+| [[https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/][2232. Minimize Result by Adding Parentheses to Expression]]      | String               | Medium     | LC    | [[file:lc/2232.minimize-result-by-adding-parentheses-to-expression.cs][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/valid-sudoku/][36. Valid Sudoku]]                                               | Matrix               | Medium     | LC    | [[file:lc/36.valid-sudoku.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
