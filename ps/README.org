@@ -38,11 +38,14 @@ List:
 | [[https://www.lintcode.com/problem/1882/][1882. Fair Indexes]]                                             | Array                | Medium     | NT    | [[file:nt/1882.cpp][Accepted]] |
 | [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                                              | Array                | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][Accepted]] |
 | [[https://leetcode.com/problems/maximum-product-after-k-increments/][2233. Maximum Product After K Increments]]                       | Array                | Medium     | LC    | [[file:lc/2233.maximum-product-after-k-increments.cpp][Accepted]] |
+| [[https://leetcode.com/problems/subarray-product-less-than-k/][713. Subarray Product Less Than K]]                              | Arrays               | Medium     | LC    | [[file:lc/713.subarray-product-less-than-k.cpp][Accepted]] |
+| [[https://leetcode.com/problems/count-subarrays-with-score-less-than-k/][2302. Count Subarrays With Score Less Than K]]                   | Array                | Hard       | LC    | [[file:lc/2302-count-subarrays-with-score-less-than-k.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                            | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]] |
 | [[https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/][2216. Minimum Deletions to Make Array Beautiful]]                | Greedy               | Medium     | LC    | [[file:lc/2216.minimum-deletions-to-make-array-beautiful.cpp][Accepted]] |
 | [[https://leetcode.com/problems/minimum-operations-to-halve-array-sum/][2208. Minimum Operations to Halve Array Sum]]                    | Greedy               | Medium     | LC    | [[file:lc/2208.minimum-operations-to-halve-array-sum.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/contest/weekly-contest-298/problems/greatest-english-letter-in-upper-and-lower-case/][2309. Greatest English Letter in Upper and Lower Case]]          | String               | Easy       | LC    | [[file:lc/2309.greatest-english-letter-in-upper-and-lower-case.cpp][Accepted]] |
 | [[https://codeforces.com/contest/1634/problem/A][A. Reverse and Concatenate]]                                     | String               | Easy       | CF    | [[file:cf/1634A.cpp][Accepted]] |
 | [[https://leetcode.com/contest/weekly-contest-276/problems/divide-a-string-into-groups-of-size-k/][2138. Divide a String Into Groups of Size k]]                    | String               | Easy       | LC    | [[file:lc/2138.divide-a-string-into-groups-of-size-k.cpp][Accepted]] |
 | [[https://www.lintcode.com/problem/213/?_from=collection&fromId=185][213 · String Compression]]                                       | String               | Easy       | NT    | [[file:nt/213.cpp][Accepted]] |
@@ -155,7 +158,6 @@ List:
 | [[https://leetcode.com/problems/number-of-provinces/][547. Number of Provinces]]                       | Depth-First Search  | Medium     | LC    | [[file:lc/547.number-of-provinces.cpp][TBS]]      |
 | [[https://leetcode.com/problems/shortest-bridge/][934. Shortest Bridge]]                           | Depth-First Search  | Medium     | LC    | TBS      |
 |------------------------------------------------+---------------------+------------+-------+----------|
-
 
 * Solve Again
 |----------------------------------------------+---------------+------------+-------+----------|
