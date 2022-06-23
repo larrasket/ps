@@ -12,9 +12,12 @@ func main() {
 	if true {
 		fmt.Println(total)
 	}
-
-	for c := 0; c < 3; c++ {
-
+	r := "wq3"
+	switch r {
+	case "wq":
+		fmt.Print(true || false)
+	default:
+		fmt.Print("eqe")
 	}
 
 }

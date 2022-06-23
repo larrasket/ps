@@ -4,4 +4,10 @@
 #include <list>
 #include <string>
 #include <vector>
-int main() { std::cout << tolower('E'); }
+int main() {
+  int i = 3;
+  switch (i) {
+  case 1 ... 4:
+    std::cout << "EQQE";
+  }
+}
