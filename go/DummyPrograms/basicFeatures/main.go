@@ -2,13 +2,19 @@ package main
 
 import (
 	"fmt"
+	//math"
 )
 
 func main() {
-	price4, _, _ := f()
-	fmt.Println(price4)
-}
+	kayak := 275
+	soccerBall := 19.50
+	total := float64(kayak) + soccerBall
+	if true {
+		fmt.Println(total)
+	}
 
-func f() (int, int, int) {
-	return 42, 53, 5
+	for c := 0; c < 3; c++ {
+
+	}
+
 }

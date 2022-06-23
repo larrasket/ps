@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\leet\\ps\\tempModule\\tempModule.csproj": {}
+    "e:\\leet\\ps\\tempModule\\tempModule.csproj": {}
   },
   "projects": {
-    "E:\\leet\\ps\\tempModule\\tempModule.csproj": {
+    "e:\\leet\\ps\\tempModule\\tempModule.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\leet\\ps\\tempModule\\tempModule.csproj",
+        "projectUniqueName": "e:\\leet\\ps\\tempModule\\tempModule.csproj",
         "projectName": "tempModule",
-        "projectPath": "E:\\leet\\ps\\tempModule\\tempModule.csproj",
+        "projectPath": "e:\\leet\\ps\\tempModule\\tempModule.csproj",
         "packagesPath": "C:\\Users\\ghd\\.nuget\\packages\\",
-        "outputPath": "E:\\leet\\ps\\tempModule\\obj\\",
+        "outputPath": "e:\\leet\\ps\\tempModule\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ghd\\AppData\\Roaming\\NuGet\\NuGet.Config",

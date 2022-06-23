@@ -628,6 +628,9 @@ func main() {
 #+end_src
 
 ** Variables
+
+
+
 Variables are defined using the var keyword, and, unlike constants, the value assigned to a
 variable can be changed, as shown:
 
@@ -648,6 +651,7 @@ illustrated:
 
 #+begin_src go
 package main
+
 import "fmt"
 func main() {
     var price float32 = 275.00
@@ -785,6 +789,7 @@ func f() (int, int, int) {
 #+end_src
 
 ** Pointers
+
 Pointers are often misunderstood, especially if you have come to Go from a language such as
 Java or C#, where pointers are used behind the scenes but carefully hidden from the
 developer. To understand how pointers work, the best place to start is understanding what Go
@@ -822,3 +827,95 @@ providing access to other memory locations. You can start with a location that p
 int value, for example; increment the value by the number of bits used to store an int; and
 read the adjacent value. This can be useful but can cause unexpected results, such as trying
 to access the wrong location or a location outside of the memory allocated to the program.
+
+*** Some Operators
+
+
+
+Go doesn’t allow types to be mixed in operations and will not automatically convert types,
+except in the case of untyped constants. To show how the compiler responds to mixed data
+types, Following contains a statement that applies the addition operator to values of
+different types.
+
+#+begin_src go
+package main
+import (
+    "fmt"
+//    "math"
+)
+func main() {
+    kayak := 275
+    soccerBall := 19.50
+    total := kayak + soccerBall
+    fmt.Println(total)
+}
+#+end_src
+
+The literal values used to define the kayak and soccerBall variables result in an int value
+and a float64 value, which are then used in the addition operation to set the value of the
+total variable. When the code is compiled, the following error will be reported:
+
+#+begin_src sh
+.\main.go:13:20: invalid operation: kayak + soccerBall (mismatched types int and float64)
+#+end_src
+
+For such a simple example, I could simply change the literal value used to initialize the
+kayak variable to 275.00, which would produce a float64 variable. But types are rarely as
+easy to change in real projects, which is why Go provides the features described in the
+sections that follow.
+
+#+begin_src go
+package main
+
+import (
+	"fmt"
+	//math"
+)
+
+func main() {
+	kayak := 275
+	soccerBall := 19.50
+	total := float64(kayak) + soccerBall
+	fmt.Println(total)
+}
+#+end_src
+
+Explicit conversions can be used only when the value can be represented in the target type.
+This means you can convert between numeric types and between strings and runes, but other
+combinations, such as converting int values to bool values, are not supported.
+
+** Flow Control
+The flow of execution in a Go application is simple to understand, especially when the
+application is as simple as the example. The statements defined in the special main
+function, known as the application’s entry point, are executed in the order in which they
+are defined. Once these statements have all been executed, the application exits.
+Example:
+#+begin_src go
+import "fmt"
+func main() {
+    kayakPrice := 275.00
+    if kayakPrice > 100 {
+        fmt.Println("Price is greater than 100")
+    }
+}
+#+end_src
+
+Go allows an if statement to use an initialization statement, which is executed before the
+if statement’s expression is evaluated. The initialization statement is restricted to a Go
+simple statement, which means—in broad terms—that the statement can define a new variable,
+assign a new value to an existing variable, or invoke a function
+
+#+begin_src go
+import (
+    "fmt"
+    "strconv"
+)
+func main() {
+    priceString := "275"
+    if kayakPrice, err := strconv.Atoi(priceString); err == nil {
+        fmt.Println("Price:", kayakPrice)
+    } else {
+        fmt.Println("Error:", err)
+    }
+}
+#+end_src
