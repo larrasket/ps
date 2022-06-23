@@ -1,8 +1,219 @@
-#+title: Relational Database Design
+#+title: Relational Database Design & Modeling
 
-* f
+* Relational Language
+
+A data model is a collection of conceptual tools for describing data, data relationships,
+data semantics, and consistency constraints. The relational model uses a collection of
+tables to represent both data and the relationships among those data. Its conceptual
+simplicity has led to its widespread adoption; today a vast majority of database products
+are based on the relational model. The relational model describes data at the logical and
+view levels, abstracting away low-level details of data storage.
+
+The relational model remains the primary data model for commercial data-processing
+applications. It attained its primary position because of its simplicity, which eases the
+job of the programmer, compared to earlier data models such as the network model or the
+hierarchical model. It has retained this position by incorporating various new features and
+capabilities over its half-century of existence. Among those additions are object-relational
+features such as complex data types and stored procedures, support for XML data, and various
+tools to support semi-structured data. The relational model’s independence from any speciﬁc
+underlying low-level data structures has allowed it to persist despite the advent of new
+approaches to data storage, including modern column- stores that are designed for
+large-scale data mining.
+
+A relational database consists of a collection of tables, each of which is assigned a unique
+name. For example, consider the instructor the table, which stores information about
+instructors. The table has four column headers: ID, name, dept name, and salary. Each row of
+this table records information about an instructor, consisting of the instructor’s ID, name,
+dept name, and salary. Similarly, the course stores information about
+courses, consisting of a course id, title, dept name, and credits, for each course. Note
+that each instructor is identiﬁed by the value of the column ID, while each course is
+identiﬁed by the value of the column course id.
+
+[[file:Relational_Language/2022-06-20_15-01-02_screenshot.png]]
+[[file:Relational_Language/2022-06-20_14-55-43_screenshot.png]]
+
+This shows another table, prereq, which stores the prerequisite courses for each course. The
+table has two columns, course id and prereq id. Each row consists of a pair of course
+identiﬁers such that the second course is a prerequisite for the ﬁrst course.
+
+[[file:Relational_Language/2022-06-20_15-02-05_screenshot.png]]
+
+Thus, a row in the prereq table indicates that two courses are related in the sense that one
+course is a prerequisite for the other. As another example, when we consider the table
+instructor, a row in the table can be thought of as representing the relationship.  between
+a speciﬁed ID and the corresponding values for name, dept name, and salary values.
 
 
+In general, a row in a table represents a relationship among a set of values. Since a table
+is a collection of such relationships, there is a close correspondence between the concept
+of table and the mathematical concept of relation, from which the relational data model
+takes its name. In mathematical terminology, a _tuple_ is simply a sequence (or list) of
+values. A relationship between n values is represented mathematically by an n-tuple of
+values, that is, a tuple with n values, which corresponds to a row in a table.
+
+Thus, in the relational model the term _relation_ is used to refer to a table, while the
+term _tuple_ is used to refer to a row. Similarly, the term _attribute_ refers to a column
+of a table.
+
+
+For each attribute of a relation, there is a set of permitted values, called the _domain_ of
+that attribute. Thus, the domain of the salary attribute of the instructor relation is the
+set of all possible salary values, while the domain of the name attribute is the set of all
+possible instructor names.
+
+
+We require that, for all relations /r/, the domains of all attributes of /r/ be atomic.  A
+domain is atomic if elements of the domain are considered to be indivisible units.  For
+example, suppose the table instructor had an attribute phone number, which can store a set
+of phone numbers corresponding to the instructor. Then the domain of phone number would not
+be atomic, since an element of the domain is a set of phone numbers, and it has subparts,
+namely, the individual phone numbers in the set.
+
+** Note on Atomism
+"Atomic" means "cannot be divided or split in smaller parts". Applied to 1NF this means that
+a column should not contain more than one value. It should not compose or combine values
+that have a meaning of their own.
+
+This tipically regards 2 very common mistakes made by database designers:
+
+*** 1. Multiple Values in One Column (list columns)
+columns that contain a list of values, tipically space or comma separated, like this blog post table:
+#+begin_src c
+id title     date_posted content tags
+1  new idea  2014-05-23  ...     tag1,tag2,tag3
+2  why this? 2014-05-24  ...     tag2,tag5
+3  towel day 2014-05-26  ...     tag42
+#+end_src
+
+or this contacts table:
+#+begin_src c
+id room phones
+4  432  111-111-111 222-222-222
+5  456  999-999-999
+6  512  888-888-8888 333-3333-3333
+#+end_src
+
+This type of denormalization is rare, as most database designers see this cannot be a good
+thing. But you do find tables like this. They usually come from modifications to the
+database, whereas it may seem simpler to widen a column and use it to stuff multiple values
+instead of adding a normalized related table (which often breaks existing applications).
+
+
+
+
+*** 2. Complex Multi-Part Columns
+In this case one column contains different bits of information and could maybe be designed
+as a set of separate columns.
+
+Typical example are fullname and address columns:
+
+#+begin_src c
+id fullname              address
+1  Mark Tomers           56 Tomato Road
+2  Fred Askalong         3277 Hadley Drive
+3  May Anne Brice        225 Century Avenue - apartment 43/a
+#+end_src
+
+
+These types of denormalizations are very common, as it is quite difficult to draw the line
+and what is atomic and what is not. Depending on the application, a multi-part column could
+very well be the best solution in some cases. It is less structured, but simpler.
+
+Structuring an address in many atomic columns may mean having more complex code to handle
+results for output. Another complexity comes from the structure not being adeguate to fit
+all types of addresses. Using one single VARCHAR column does not pose this problem, but may
+pose others... typically about searching and sorting.
+
+An extreme case of multi-part columns are dates and times. Most RDBMS provide date and time
+data types and provide functions to handle date and time algebra and the extraction of the
+various bits (month, hour, etc...). Few people would consider convenient to have separate
+year, mont, day columns in a relational database. But I've seen it... and with good reasons:
+the use case was birthdates for a justice department database. They had to handle many
+immigrants with few or no documents. Sometimes you just knew a person was born in a certain
+year, but you would not know the day or month or birth. You can't handle that type of info
+with a single date column.
+
+
+------
+
+Let's get back to the phone numbers. The important issue is not what the domain itself is,
+but rather how we use domain elements in our database. Suppose now that the phone number
+attribute stores a single phone number. Even then, if we split the value from the phone
+number attribute into a country code, an area code, and a local number, we would be treating
+it as a non-atomic value. If we treat each phone number as a single indivisible unit, then
+the attribute phone number would have an atomic domain.
+
+The null value is a special value that signiﬁes that the value is unknown or does not exist.
+For example, suppose as before that we include the attribute phone number in the instructor
+relation. It may be that an instructor does not have a phone number at all, or that the
+telephone number is unlisted. We would then have to use the null value to signify that the
+value is unknown or does not exist. We shall see later that null values cause a number of
+diﬃculties when we access or update the database, and thus they should be eliminated if at
+all possible. We shall assume null values are absent initially.
+
+
+The relatively strict structure of relations results in several important practical
+advantages in the storage and processing of data, as we shall see. That strict structure is
+suitable for well-deﬁned and relatively static applications, but it is less suitable for
+applications where not only data but also the types and structure of those data change over
+time. A modern enterprise needs to ﬁnd a good balance between the eﬃciencies of structured
+data and those situations where a predetermined structure is limiting.
+
+** Keys
+We must have a way to specify how tuples within a given relation are distinguished.  This is
+expressed in terms of their attributes. That is, the values of the attribute values of a
+tuple must be such that they can uniquely identify the tuple. In other words, no two tuples
+in a relation are allowed to have exactly the same value for all attributes.
+
+A superkey is a set of one or more attributes that, taken collectively, allow us to identify
+uniquely a tuple in the relation. For example, the ID attribute of the relation instructor
+is suﬃcient to distinguish one instructor tuple from another. Thus, ID is a superkey. The
+name attribute of instructor, on the other hand, is not a superkey, because several
+instructors might have the same name
+
+
+Formally, let /R/ denote the set of attributes in the schema of relation /r/. If we say that a
+subset /K/ of /R/ is a superkey for /r/, we are restricting consideration to instances of
+relations /r/ in which no two distinct tuples have the same values on all attributes in /K/.
+That is, if /t1/ and /t2/ are in /r/ and /t1/ ≠ /t2/ , then /t1/./K/ ≠ /t2/.K.
+
+
+A superkey may contain extraneous attributes. For example, the combination of ID and name is
+a superkey for the relation instructor. If K is a superkey, then so is any superset of K. We
+are often interested in superkeys for which no proper subset is a superkey. Such minimal
+superkeys are called candidate keys.
+
+It is possible that several distinct sets of attributes could serve as a candidate key.
+Suppose that a combination of name and dept name is suﬃcient to distinguish among
+members of the instructor relation. Then, both {ID} and {name, dept name} are candidate
+keys. Although the attributes ID and name together can distinguish instructor tuples,
+their combination, {ID, name}, does not form a candidate key, since the attribute ID
+alone is a candidate key.
+
+
+We shall use the term primary key to denote a candidate key that is chosen by the
+database designer as the principal means of identifying tuples within a relation. A key
+(whether primary, candidate, or super) is a property of the entire relation, rather than
+of the individual tuples. Any two individual tuples in the relation are prohibited from
+having the same value on the key attributes at the same time. The designation of a key
+represents a constraint in the real-world enterprise being modeled. Thus, primary keys
+are also referred to as primary key constraints.
+
+
+** Basic Terminology Table:
+| Term              | Relational Term                                                                                                                                            |
+|-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Relation          | The term relation is used to refer to a table, while the term tuple is used to refer to a row. Similarly, the term attribute refers to a column of a table |
+| Relation instance | We use the term relation instance to refer to a speciﬁc instance of a relation, that is, containing a speciﬁc set of rows                                  |
+| Null value        | A placeholder to denote values that are missing or that we do not know                                                                                     |
+| Database schema   | The logical design of the database                                                                                                                         |
+| Relation schema   | The programming language notion of type deﬁnition.                                                                                                         |
+| Superkey          | A superkey is a set of one or more attributes that, taken collectively, allow us to identify uniquely a tuple in the relation.                             |
+| Canidate key      | A part of the superkey                                                                                                                                     |
+|-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+
+* Design
 ** Introduction
 Nowadays, when people talk about a database, they usually refer to a Relational database,
 but that has not always been the case. In fact, the term database is defined, by the Merriam
@@ -140,226 +351,99 @@ management system must support the ability to define rules that govern data inte
 part of the schema and that the database management system will then ensure that those rules
 are not violated.
 
-** ER Modeling
-There are many methods for designing a database and probably even more methods for
-presenting a graphical representation of the design. Almost all modeling methods use some
-variation of ER modeling, which is short for Entity Relationship modeling. I will use ER
-modeling in this course as well and for the graphical representation of the model, I will
-use the IDEF1x notation, which currently is very popular.
+** Overview of the Design Process
+The task of creating a database application is a complex one, involving design of the
+database schema, design of the programs that access and update the data, and design of a
+security scheme to control access to data. The needs of the users play a central role in the
+design process.
 
-There are good reasons for the popularity of ER modeling. When used in communicating with
-layman such as the subject matter experts that you're working with to create your model, but
-also future users of the database application you are designing, or the managers who are
-responsible for paying your bill, they are not ideal. Not everyone is able to think and
-communicate at the abstraction layer where database models are, but they are at least a lot
-easier to understand than some other diagramming techniques.Especially when used with a good
-tool, automatically hiding details when looking at a helicopter perspective of entire data
-model and then adding in more details as you zoom in specific subsections can be a great
-help in getting to understand both the broad picture, as well as the detials you're
-currently working on. Finally, it is extremely simple to convert a finished ER modeling into
-a logical database design and it is in fact even possible to start with a database that was
-already built and to reverse engineer that into an ER diagram that you can then use as a
-starting point to get to understand the database design, find and repair its flaws, and
-extend its functionality. However, there are also risks involved when using ER modeling.
-Because the diagrams are accessible enough that the mangers and end users can mostly
-understand them, IT professionals have fallen for the trap of having subject matter experts
-or managers sign off on an ER diagram which is silly, even though the subject matter expert
-or manager may get a generic understanding of such a diagram, he or she will not understand
-the details nor be able to verify that everything is entirely accurate. A data modeler
-asking for a sign off on an ER diagram and then blaming the customer if the finished
-database does not work as intended is like an architect asking you to sign off on the
-stability calculations for the house he designed for you, and then blaming you if the house
-collapses.
+*** Design Phases
+For small applications, it may be feasible for a database designer who understands the
+application requirements to decide directly on the relations to be created, their
+attributes, and constraints on the relations. However, such a direct design process is
+diﬃcult for real-world applications, since they are often highly complex. Often no one
+person understands the complete data needs of an application. The database designer must
+interact with users of the application to understand the needs of the application,
+represent them in a high-level fashion that can be understood by the users, and then
+translate the requirements into lower levels of the design. A high-level data model serves
+the database designer by providing a conceptual framework in which to specify, in a
+systematic fashion, the data requirements of the database users, and a database structure
+that fulﬁlls these requirements.
 
-Another risk with using ER diagrams is none of the available diagramming techniques can
-capture all the details an analyst may discover during his work and details that are not
-captured in a model often get lost and have to be discovered again. Finally, because there
-are so many different diagramming techniques with sometimes only minor differences, people
-with different backgrounds may think they use the same notation, even if that is not
-actually the case.
+The initial phase of database design is to characterize fully the data needs of the
+prospective database users. The database designer needs to interact extensively with
+domain experts and users to carry out this task. The outcome of this phase is a
+speciﬁcation of user requirements.
 
-*** Entity
-The term Entity, refers to everything be it a physical object, a person, an event, or an
-abstract notion that is relevant within the context of the information system being
-designed. So if I am creating a data model for my local Snooker Club, examples of entities
-that correspond to physical objects will be Snooker table 3, or the 4 bottles of Coke in
-stock at the bar. Examples of persons will be Mary or Dave both members of the Club.
-Relevant events will include the 2012 Christmas Tournament or my upcoming match against Mary
-where I get to defend my second to last position in the C League, and examples of abstract
-notions will be that same C League or Dave's January 2013 membership fee payment.
+Next, the designer chooses a data model and, by applying the concepts of the chosen data
+model, translates these requirements into a conceptual schema of the database. The schema
+developed at this conceptual-design phase provides a detailed overview of the enterprise.
+The entity-relationship model, which we study in the rest of this chapter, is typically used
+to represent the conceptual design. Stated in terms of the entity-relationship model, the
+conceptual schema speciﬁes the entities that are represented in the database, the
+attributes of the entities, the relation- ships among the entities, and constraints on the
+entities and relationships. Typically, the conceptual-design phase results in the creation
+of an entity-relationship diagram that provides a graphic representation of the schema.
 
+A fully developed conceptual schema also indicates the functional requirements
+of the enterprise. In a specification of functional requirements, users describe the
+kinds of operations (or transactions) that will be performed on the data. Example
+operations include modifying or updating data, searching for and retrieving spe-
+ciﬁc data, and deleting data. At this stage of conceptual design, the designer can
+review the schema to ensure that it meets functional requirements.
 
-All the examples I have named are individual entities sometimes also explicitly called
-entity instances. In data modeling, looking at individual instances may be a good way to ask
-the subject matter expert a question or to clarify consequences of model choices, but the
-model itself is concerned with a higher abstraction level. Entity instances, for which the
-same kind of information is gathered, are grouped together in a new concept the entity type
-or entity class. An entity type is a single concept to describe all instances of the same
-type.  So, even though Mary, Dave, and I are very different we are all members of the
-Snooker Club.  The Snooker Club tracks birthdates, membership fee payments, and met results
-for all three of us. So in a data model, we are all instances of the same entity type
-member.  Unfortunately, many people tend to shorten the term Entity type to just Entity,
-which of course is very confusing because an entity is officially and entity instance.
+The process of moving from an abstract data model to the implementation of the database
+proceeds in two ﬁnal design phases.
 
-For my Snooker Club I already mentioned the entity type member. Similarly, all Snooker
-tables on the club are instances of the entity type table. Both the 2012 Christmas
-Tournament and the 2013 Midsummer Tournament are instances of the entity type tournaments
-and the A, B, C, and Junior Leagues are all instances of the Entity type League.
+In the logical-design phase, the designer maps the high-level conceptual schema onto the
+implementation data model of the database system that will be used.  The implementation data
+model is typically the relational data model, and this step typically consists of mapping
+the conceptual schema deﬁned using the entity-relationship model into a relation schema
 
-In IDEF1x, an Entity type is represented by a rectangle, horizontally divided into two areas
-with the unique entity type name written on top of the rectangle. Some entity types are
-represented by a rectangle with rounded corners.
+The physical schema of a database can be changed relatively easily after an applica- tion
+has been built. However, changes to the logical schema are usually harder to carry out,
+since they may aﬀect a number of queries and updates scattered across application code. It
+is therefore important to carry out the database design phase with care, before building the
+rest of the database application.
+*** The Entity-Relationship Model
 
-[[file:2022-06-11_06-31-14_screenshot.png]]
+The entity-relationship (E-R) data model was developed to facilitate database design by
+allowing speciﬁcation of an enterprise schema that represents the overall logical struc-
+ture of a database.
 
-*** Attributes
+The E-R model is very useful in mapping the meanings and interactions of real- world
+enterprises onto a conceptual schema. Because of this usefulness, many database- design
+tools draw on concepts from the E-R model. The E-R data model employs three basic concepts:
+entity sets, relationship sets, and attributes. The E-R model also has an associated
+diagrammatic representation, the E-R diagram.
 
+An entity is a “thing” or “object” in the real world that is distinguishable from all other
+objects. For example, each person in a university is an entity. An entity has a set of prop-
+erties, and the values for some set of properties must uniquely identify an entity. For
+instance, a person may have a person id property whose value uniquely identiﬁes that person.
 
-Neither Entity types nor Entity occurrences are very interesting on their own, but
-occurrences become interesting by recording facts about them. So for one of our Snooker Club
-members, we might record facts like one our members is named Dave. Dave has phone number
-555-0163, then, Dave was born on December 12, 1982. These fact contain information about the
-name, phone number, and birth date of a specific occurrence of the entity type member.
-Abstracting these facts to the abstraction layer of the model, we call each class a fact an
-attribute and each attribute is associated to exactly one entity type. For instance, the
-facts Dave was born on December 12, 1982 and Mary was born April 18, 1948 are of the same
-class. That effects about the birth date of a specific member of the Club. So in the ER
-model, those effects and all others of the same class are abstracted to the attribute birth
-date of the entity type member.
+**** Entity Set
+An entity is a “thing” or “object” in the real world that is distinguishable from all other
+objects. For example, each person in a university is an entity. An entity has a set of prop-
+erties, and the values for some set of properties must uniquely identify an entity. For
+instance, a person may have a person id property whose value uniquely identiﬁes that
+person. Thus, the value 677-89-9011 for person id would uniquely identify one particu-
+lar person in the university. Similarly, courses can be thought of as entities, and course
+id uniquely identiﬁes a course entity in the university. An entity may be concrete, such
 
-In an IDEF1x diagram, attributes are represented by their
-name, placed in the rectangle that represents the entity type they belong to. Most attribute
-names are places below dividing line in the entity type symbol. Only the so called key
-attributes are placed above the dividing line.
+An entity set is a set of entities of the same type that share the same properties,
+or attributes. The set of all people who are instructors at a given university, for exam-
+ple, can be deﬁned as the entity set instructor. Similarly, the entity set student might
+represent the set of all students in the universit
 
-So, what is a key attribute? This is actually
-a concept we are all very familiar with. We all have been in situations where we wanted to
-identify a single occurrence in a group. For instance, can you give me that apple? No, not
-that one, the one just to the left of it looks tastier. Or, check out that girl over there,
-not the tall one with the long dark hair, but the on just to the left of her, isn't she
-great? So you all know how inconvenient it is if you cannot identify a single occurrence in
-a group of similar entity occurrences. In our Snooker Club, it's no different. We are a
-small club, so we are able to distinguish our members are name only, which is great. That
-makes Name the key attribute of members in our club, but a much larger sports club like a
-football club probably has many members named Dave and if one of them doesn't pay his
-membership fees, none of the other Dave's should get into trouble over that. So the football
-club will probably assign each member a unique number and use that to distinguish the
-members from each other. In their data model Name, will be a regular non-key attribute of
-the member entity type and member number will be the key attribute. There will not always be
-a single attribute that identifies unique occurrences of the entity type. In those cases,
-the combination of two or more attributes has to be used. The membership fee payment entity
-type is a good example of this. There is not a single membership fee payment occurrence for
-Dave, he has to pay his membership fee every month. There also is not a single membership
-fee payment occurrence for January 2013, as all our members have to pay each month, but
-there is only one membership fee payment for Dave's membership in January 2013. The
-combination of member name, year, and month identifies a single membership fee payment. So
-those three attributes are all key attributes for this entity type. The keys that are formed
-out of more than one attribute are called composite keys. It's also possible for an entity
-type to have more than one attribute or combination of attributes that could be used as the
-key. In those cases, one of these so called candidates keys is chosen to be the primary key.
-All other candidate keys become alternate keys. In IDEF1x, this is shown in a diagram by
-placing an abbreviation AK in parentheses after the attribute name, because there can be
-more than one Alternate Key, the letter AK are usually followed by a number.
+An entity is represented by a set of attributes. Attributes are descriptive properties
+possessed by each member of an entity set. The designation of an attribute for an en-
+tity set expresses that the database stores similar information concerning each entity
+in the entity set; however, each entity may have its own value for each attribute. Pos-
+sible attributes of the instructor entity set are ID, name, dept name, and salary. In real
+life, there would be further attributes, such as street number, apartment number, state,
+postal code, and country, but we generally omit them to keep our examples simple.
+Possible attributes of the course entity set are /course id, title, dept name, and credits/.
 
 
-[[file:2022-06-11_06-41-52_screenshot.png]]
-
-
-*** Relationships
-
-No man is an island and no thing stand on its own. That is true in the real world and
-because the data model is supposed to model the real world, it is true in a data model as
-well. Entities relate with each other both at the instance level and at the abstractive
-class level. At the instance level, it is hard to tell the difference between an attribute
-and a relationship because they both appear as facts.
-
-For instance, Dave plays in the B
-league. The only difference between facts of this type and the facts we saw before is that
-in this case, the fact not only gives information about an instance entity type member, but
-it also relates it to an instance of entity type league. So we can say that the relationship
-is a class of facts that associate an instance of an entity type with another instance of an
-entity type.
-
-In an IDEF1x diagram, normal relationships are represented using dashed lines
-connecting the entity types that play a role in the relationship. So for Dave plays in the B
-league, a dashed line is drawn between the rectangles representing the member entity type
-and the league entity type. An important property of relationships in an ER model is their
-cardinality. A cardinality is a restriction on how often an entity occurrence may
-participate in the collection effects represented by the relationship. Members or our club,
-cannot compete in more than one league. So, since Dave already plays in the B league no
-other similar facts about Dave can be valid at the same time and the same applies to all
-members. No member can appear more than once in the collection of facts that this
-relationship represents. We call this the maximum cardinality. The *maximum cardinality* of
-entity type member in this relationship is 1.
-
-However, we can have other similar facts about
-the B league like for instance Mary plays in the B league. So the entity type league has a
-maximum cardinality of *many* in this relationship. Relationships with a maximum cardinality
-of 1 on one side and many on the other side are the most common relationships. They are
-called one-to-many relationships. In these relationships the entity type whose instances can
-participate in many facts is called the parent and the entity type whose instances can only
-appear once is the child.
-
-
-In IDEF1x, the parent entity type is visualized by placing a dot
-at the end of the relationship line that connects to the child entity type. You can read
-this dot s, the entity at the other end of this line, can appear more than once in this
-relationship.
-
-[[file:f/2022-06-11_06-45-12_screenshot.png]]
-
-
- Conversely, the child entity type is marked by not placing at a dot at the
-parent end.
-
-The absence of this dot can then be read as the entity type at the other end of
-this line cannot appear more than once in this relationship. In addition, all key attributes
-of the parent entity type are added as normal attributes for the child entity type and they
-are marked FK for Foreign Key. The word key in this name can be confusing. They are not key
-attributes in a child entity type, but normal attributes that reference the key of another
-entity type, the parent. This Foreign Key attribute is how the relationship is implemented.
-We track who plays in what league by adding the league code in the storage area for a clock
-member. We cannot do it the other way around. If we wanted to add the member name in the
-storage area for a league, we would have to reserve room for a potentially unlimited number
-of members who play in that league.
-
-
-In addition to the maximum cardinality, relationships
-have a minimum cardinality as well. Our club has a few recreational members. They are free
-to stop by and use the tables when they fancy a game of Snooker, but they are not scheduled
-for the league competition matches. So for Jimmy, one of those recreational members, no fact
-of the type Jimmy plays in league exist. That means that the minimum cardinality for entity
-member in this relationship is 0. Looking at the other side of the relationship line, we see
-the entity type league and since a league without members playing in them makes no sense,
-the minimum cardinality for this entity type is 1. Notation of minimum cardinality in IDEF1x
-is different for parent and child entities. For the child entity type, a minimum cardinality
-of 0 is symbolized by placing a diamond at the end of the line that connects to the parent.
-Each instance of the child entity type is associated with 0 or 1 parent occurrences. This is
-also called an optional relationship. No symbol at the parent ends means that the minimum
-cardinality for the child is 1, each child occurrence has to be associated with exactly one
-parent. For the parent entity type a minimum cardinality of 1 is represented by placing a P
-for positive next to the dot at the child end of the line and a minimum cardinality of 0 is
-represented by leaving the dot as is.
-
-IDEF1x also supports special cardinalities. For
-instance, if we require all leagues to have exactly 10 members the symbol P can be replaced
-with the number 10 or if each league has a minimum of 8 and the maximum of 12 members the
-notation 8-12 would be used. Finally, for really odd requirements like every league has to
-contain an even number of members, a parenthesized number can be used. This is a reference
-to a note elsewhere on the page that explains the cardinality rule. Finally, to enable
-better understanding of diagram, one or two readings of the relationship are added to the
-line. The reading is the verb phrase of the facts represented by the relationship type.
-However, IDEF1x requires that the reading must be in parent to child order, although the
-child to parent reading can optionally be added as well.
-
-For the required parent to child
-reading, you may have to rephrase the facts. In our example case, the possible parent to
-child reading could be contains. The child to parent reading is of course plays in. Now the
-meaning end cardinality of a relationship can be reconstructed by following the line,
-reading appropriate symbols along the way. Each league contains one or more members or going
-in the other direction, each member plays in 0 or 1 league. One thing to be aware of when
-working in auto languages is that creating and using relationship readings and this way
-works great in English because most English sentences are built using the form subject, very
-phrase, object. Other languages may use different word orders or even insert the object and
-subject between parts of the verb phrase. In those languages, finding good reading for the
-relationships can be challenging.
+* TBC...
