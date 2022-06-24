@@ -33,7 +33,7 @@ int minimumCardPickup(vector<int> &cards) {
       int rs = r - mp[cards[r]] + 1;
       min = min > rs ? rs : min;
     }
-      mp[cards[r]] = r;
+    mp[cards[r]] = r;
   }
   return min == INT_MAX ? -1 : min;
 }
