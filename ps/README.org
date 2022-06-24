@@ -29,17 +29,13 @@ List:
 | [[https://leetcode.com/problems/maximum-subarray/][53. Maximum Subarray]]                                           | Array                | Easy       | LC    | [[file:lc/53.maximum-subarray.cpp][Accepted]] |
 | [[https://leetcode.com/problems/intersection-of-two-arrays-ii/][350. Intersection of Two Arrays II]]                             | Array                | Easy       | LC    | [[file:lc/350.intersection-of-two-arrays-ii.cpp][Accepted]] |
 | [[https://leetcode.com/problems/largest-number-after-digit-swaps-by-parity/][2231. Largest Number After Digit Swaps by Parity]]               | Array                | Easy       | LC    | [[file:lc/2231.largest-number-after-digit-swaps-by-parity.cs][Accepted]] |
-| [[https://leetcode.com/problems/number-of-islands/][200. Number of Islands]]                                         | Array                | Medium     | LC    | [[file:lc/200.number-of-islands.cpp][Accepted]] |
-| [[https://www.lintcode.com/problem/860/?_from=collection&fromId=185][860 · Number of Distinct Islands]]                               | Array                | Medium     | LC    | [[file:nt/860.cpp][Accepted]] |
 | [[https://leetcode.com/problems/product-of-array-except-self/][238. Product of Array Except Self]]                              | Array                | Medium     | LC    | [[file:lc/238.product-of-array-except-self.cpp][Accepted]] |
-| [[https://leetcode.com/problems/kth-largest-element-in-an-array/][215. Kth Largest Element in an Array]]                           | Array                | Medium     | LC    | [[file:lc/215.kth-largest-element-in-an-array.cpp][Accepted]] |
-| [[https://leetcode.com/problems/maximum-sum-circular-subarray/][918. Maximum Sum Circular Subarray]]                             | Array                | Medium     | LC    | [[file:lc/918.maximum-sum-circular-subarray.cpp][Accepted]] |
-| [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                     | Array                | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]] |
 | [[https://www.lintcode.com/problem/1882/][1882. Fair Indexes]]                                             | Array                | Medium     | NT    | [[file:nt/1882.cpp][Accepted]] |
 | [[https://leetcode.com/problems/spiral-matrix/][54. Spiral Matrix]]                                              | Array                | Medium     | LC    | [[file:lc/54.spiral-matrix.cpp][Accepted]] |
 | [[https://leetcode.com/problems/maximum-product-after-k-increments/][2233. Maximum Product After K Increments]]                       | Array                | Medium     | LC    | [[file:lc/2233.maximum-product-after-k-increments.cpp][Accepted]] |
-| [[https://leetcode.com/problems/subarray-product-less-than-k/][713. Subarray Product Less Than K]]                              | Arrays               | Medium     | LC    | [[file:lc/713.subarray-product-less-than-k.cpp][Accepted]] |
-| [[https://leetcode.com/problems/count-subarrays-with-score-less-than-k/][2302. Count Subarrays With Score Less Than K]]                   | Array                | Hard       | LC    | [[file:lc/2302-count-subarrays-with-score-less-than-k.cpp][Accepted]] |
+|----------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/subarray-product-less-than-k/][713. Subarray Product Less Than K]]                              | Sliding Window       | Medium     | LC    | [[file:lc/713.subarray-product-less-than-k.cpp][Accepted]] |
+| [[https://leetcode.com/problems/count-subarrays-with-score-less-than-k/][2302. Count Subarrays With Score Less Than K]]                   | Sliding Window       | Hard       | LC    | [[file:lc/2302-count-subarrays-with-score-less-than-k.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                            | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]] |
 | [[https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/][2216. Minimum Deletions to Make Array Beautiful]]                | Greedy               | Medium     | LC    | [[file:lc/2216.minimum-deletions-to-make-array-beautiful.cpp][Accepted]] |
@@ -51,8 +47,6 @@ List:
 | [[https://www.lintcode.com/problem/213/?_from=collection&fromId=185][213 · String Compression]]                                       | String               | Easy       | NT    | [[file:nt/213.cpp][Accepted]] |
 | [[https://leetcode.com/problems/first-unique-character-in-a-string/][387. First Unique Character in a String]]                        | String               | Easy       | LC    | [[file:lc/387.first-unique-character-in-a-string.cpp][Accepted]] |
 | [[https://leetcode.com/problems/determine-if-two-strings-are-close/][1657. Determine if Two Strings Are Close]]                       | String               | Medium     | LC    | [[file:lc/1657.determine-if-two-strings-are-close.cpp][Accepted]] |
-| [[https://leetcode.com/problems/reverse-words-in-a-string/][151. Reverse Words in a String]]                                 | String               | Medium     | LC    | [[file:lc/151-reverse-words-in-a-string.cs][Accepted]] |
-| [[https://www.lintcode.com/problem/415/][415. Valid Palindrome]]                                          | String               | Medium     | NT    | [[file:nt/415.cpp][Accepted]] |
 | [[https://leetcode.com/problems/validate-ip-address/][468. Validate IP Address]]                                       | String               | Medium     | LC    | [[file:lc/468.validate-ip-address.cs][Accepted]] |
 | [[https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/][2232. Minimize Result by Adding Parentheses to Expression]]      | String               | Medium     | LC    | [[file:lc/2232.minimize-result-by-adding-parentheses-to-expression.cs][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
@@ -92,6 +86,8 @@ List:
 | [[https://leetcode.com/problems/partition-list/][86. Partition List]]                                             | Two Pointers         | Medium     | LC    | [[file:lc/86.partition-list.cpp][Accepted]] |
 | [[https://leetcode.com/problems/interval-list-intersections/][986. Interval List Intersections]]                               | Two Pointers         | Medium     | LC    | [[file:lc/986.interval-list-intersections.cpp][Accepted]] |
 | [[https://leetcode.com/problems/rearrange-array-elements-by-sign/][2149. Rearrange Array Elements by Sign]]                         | Two Pointers         | Medium     | LC    | [[file:lc/2149.rearrange-array-elements-by-sign.cpp][Accepted]] |
+| [[https://leetcode.com/problems/reverse-words-in-a-string/][151. Reverse Words in a String]]                                 | Two Pointers         | Medium     | LC    | [[file:lc/151-reverse-words-in-a-string.cs][Accepted]] |
+| [[https://www.lintcode.com/problem/415/][415. Valid Palindrome]]                                          | Two Pointers         | Medium     | NT    | [[file:nt/415.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/diameter-of-binary-tree/][543. Diameter of Binary Tree]]                                   | Binary Search        | Easy       | LC    | [[file:lc/543.diameter-of-binary-tree.cpp][Accepted]] |
 | [[https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/][4. Find First and Last Position of Element in Sorted Array]]     | Binary Search        | Medium     | LC    | [[file:lc/34.find-first-and-last-position-of-element-in-sorted-array.cpp][Accepted]] |
@@ -111,10 +107,13 @@ List:
 | [[https://www.lintcode.com/problem/1704/][1704. Range Sum of BST]]                                         | Depth-First Search   | Medium     | NT    | [[file:nt/1704.cpp][Accepted]] |
 | [[https://leetcode.com/problems/create-binary-tree-from-descriptions/][2196. Create Binary Tree From Descriptions]]                     | Depth-First Search   | Medium     | LC    | [[file:lc/2196.create-binary-tree-from-descriptions.cpp][Accepted]] |
 | [[https://www.lintcode.com/problem/1862/?_from=problem_tag&fromId=undefined][1862. Time to Flower Tree]]                                      | Depth-First Search   | Medium     | NT    | [[file:nt/1862.cpp][Accepted]] |
+| [[https://leetcode.com/problems/number-of-islands/][200. Number of Islands]]                                         | Depth-First Search   | Medium     | LC    | [[file:lc/200.number-of-islands.cpp][Accepted]] |
+| [[https://www.lintcode.com/problem/860/?_from=collection&fromId=185][860 · Number of Distinct Islands]]                               | Depth-First Search   | Medium     | NT    | [[file:nt/860.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-tree-cameras/][968. Binary Tree Cameras]]                                       | Depth-First Search   | Hard       | LC    | [[file:lc/968.binary-tree-cameras.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]                           | Dynamic Programming  | Easy       | LC    | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][Accepted]] |
 | [[https://leetcode.com/problems/integer-replacement/][397. Integer Replacement]]                                       | Dynamic Programming  | Medium     | LC    | [[file:lc/397.integer-replacement.cpp][Accepted]] |
+| [[https://leetcode.com/problems/maximum-sum-circular-subarray/][918. Maximum Sum Circular Subarray]]                             | Dyanmic Programming  | Medium     | LC    | [[file:lc/918.maximum-sum-circular-subarray.cpp][Accepted]] |
 | [[https://leetcode.com/problems/unique-paths/][62. Unique Paths]]                                               | Dynamic Programming  | Medium     | LC    | [[file:lc/62.unique-paths.cpp][Accepted]] |
 | [[https://leetcode.com/problems/minimum-jumps-to-reach-home/][1654. Minimum Jumps to Reach Home]]                              | Dynamic Programming  | Medium     | LC    | [[file:built/1654.minimum-jumps-to-reach-home.cpp][TBS]]      |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
@@ -124,6 +123,9 @@ List:
 | [[https://leetcode.com/problems/n-ary-tree-level-order-traversal/][429. N-ary Tree Level Order Traversal]]                          | Breadth-First Search | Medium     | LC    | [[file:lc/429.n-ary-tree-level-order-traversal.cpp][Accepted]] |
 | [[https://leetcode.com/problems/populating-next-right-pointers-in-each-node/][116. Populating Next Right Pointers in Each Node]]               | Breadth-First Search | Medium     | LC    | [[file:lc/166.populating-next-right-pointers-in-each-node.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/][103. Binary Tree Zigzag Level Order Traversal]]                  | Breadth-First Search | Medium     | LC    | [[file:lc/103.binary-tree-zigzag-level-order-traversal.cpp][Accepted]] |
+|----------------------------------------------------------------+----------------------+------------+-------+----------|
+| [[https://leetcode.com/problems/kth-largest-element-in-an-array/][215. Kth Largest Element in an Array]]                           | Heap                 | Medium     | LC    | [[file:lc/215.kth-largest-element-in-an-array.cpp][Accepted]] |
+| [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]                     | Heap                 | Medium     | LC    | [[file:lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 
 * To Be Solved
