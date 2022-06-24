@@ -35,6 +35,7 @@ List:
 | [[https://leetcode.com/problems/maximum-product-after-k-increments/][2233. Maximum Product After K Increments]]                       | Array                | Medium     | LC    | [[file:lc/2233.maximum-product-after-k-increments.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://leetcode.com/problems/subarray-product-less-than-k/][713. Subarray Product Less Than K]]                              | Sliding Window       | Medium     | LC    | [[file:lc/713.subarray-product-less-than-k.cpp][Accepted]] |
+| [[https://leetcode.com/problems/binary-subarrays-with-sum/][930. Binary Subarrays With Sum]]                                 | Sliding Window       | Medium     | LC    | [[file:lc/930.binary-subarrays-with-sum.cpp][Accepted]] |
 | [[https://leetcode.com/problems/count-subarrays-with-score-less-than-k/][2302. Count Subarrays With Score Less Than K]]                   | Sliding Window       | Hard       | LC    | [[file:lc/2302-count-subarrays-with-score-less-than-k.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                            | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]] |
