@@ -37,6 +37,7 @@ List:
 | [[https://leetcode.com/problems/find-the-k-beauty-of-a-number/][2269. Find the K-Beauty of a Number]]                            | Sliding Window       | Easy       | LC    | [[file:lc/2269.find-the-k-beauty-of-a-number.cs][Accepted]] |
 | [[https://leetcode.com/problems/subarray-product-less-than-k/][713. Subarray Product Less Than K]]                              | Sliding Window       | Medium     | LC    | [[file:lc/713.subarray-product-less-than-k.cpp][Accepted]] |
 | [[https://leetcode.com/problems/binary-subarrays-with-sum/][930. Binary Subarrays With Sum]]                                 | Sliding Window       | Medium     | LC    | [[file:lc/930.binary-subarrays-with-sum.cpp][Accepted]] |
+| [[https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/][2260. Minimum Consecutive Cards to Pick Up]]                     | Sliding Window       | Medium     | LC    | [[file:lc/2260.minimum-consecutive-cards-to-pick-up.cpp][Accepted]] |
 | [[https://leetcode.com/problems/count-subarrays-with-score-less-than-k/][2302. Count Subarrays With Score Less Than K]]                   | Sliding Window       | Hard       | LC    | [[file:lc/2302-count-subarrays-with-score-less-than-k.cpp][Accepted]] |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
 | [[https://www.lintcode.com/problem/920/][920 · Meeting Rooms]]                                            | Greedy               | Medium     | NT    | [[file:nt/920.cpp][Accepted]] |
