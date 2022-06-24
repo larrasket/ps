@@ -1,4 +1,6 @@
-﻿public class Solution
+﻿using System.Text;
+
+public class Solution
 
 {
 
@@ -33,6 +35,44 @@
         ans += (word2.Length - 1 - t);
         return ans;
     }
+
+
+
+
+
+
+
+
+
+
+
+    public int DivisorSubstrings(int num, int k)
+    {
+        StringBuilder bldr = new();
+        var snums = num.ToString();
+        int n = snums.Length, s = 0;
+        for (int l = 0, r = 0; r < n; r++)
+        {
+            bldr.Append(snums[r]);
+
+        }
+        return 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void Main()
     {
         Console.WriteLine(MinDistance("intention", "execution"));
