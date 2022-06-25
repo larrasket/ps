@@ -13,7 +13,7 @@
   + [[file:csharp/buildingAPi.org][Bulding a RESTful API with ASP.NET Core]]
 + [[file:STD/][STDs]]
 + [[file:ps/][Problem Solving]]
-  + [[file:ps/perparation/README.org][Preparations]]
+  # + [[file:ps/perparation/README.org][Preparations]]
 + [[file:psql/][PostgreSQL]]
 + [[file:ptrns/README.org][Design Patterns]]
 + [[file:qt/README.org][Qt]]
