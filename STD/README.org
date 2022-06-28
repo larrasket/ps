@@ -1586,9 +1586,36 @@ public class Person
 
 </div>
 #+end_src
+
+** Multi Implementation for Same Interface, Using Services Resolver
+First declare shared delegate:
+#+begin_src csharp
+public delegate IMetaCollector? ServiceResolver(Services key);
+#+end_src
+Second, add your services:
+#+begin_src csharp
+builder.Services.AddSingleton<MetaFacebook>();
+builder.Services.AddSingleton<MetaTwitter>();
+builder.Services.AddSingleton<MetaInstagram>();
+#+end_src
+In this case, all of them implements IMetaCollector interface. Now Implement the services
+resolver;
+#+begin_src csharp
+builder.Services.AddSingleton<Helper.ServiceResolver>(provider => key =>
+{
+    return key switch
+    {
+        Services.Facebook => provider.GetService<MetaFacebook>(),
+        Services.Twitter => throw new NotImplementedException(),
+        Services.Instagram => throw new NotImplementedException(),
+        _ => throw new KeyNotFoundException()
+    };
+});
+#+end_src
+To consume it:
+
 * Regex
 Match everything except for specified strings
 #+begin_src regex
 ^(?!.*(red|green|blue))
 #+end_src
-j

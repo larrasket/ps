@@ -380,7 +380,6 @@ POST is never idempotent. You should assume that every time you POST to an API t
 going to return a brand new object each and every time, so you don't have to worry about
 idempotency in the case of POST.
 
-
 *** Designing Results
 Now so far in our examples, we've simply been returning the
 data that we saw, right? And this is an example of the structuredness, right? It's just a
@@ -475,7 +474,6 @@ in a while it comes and it's super useful, so understanding it as something you 
 optionally include in your APIs is important. I just want to get stuck in that if it doesn't
 include hypermedia or links to other parts that are self-describing, that you're purposely
 RESTful. Again, I want to error on pragmatism versus dogma. Let's wrap up this module.
-
 
 
 *** TODO Check HTTP Responses List
