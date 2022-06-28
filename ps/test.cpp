@@ -5,9 +5,16 @@
 #include <string>
 #include <vector>
 int main() {
-  int i = 3;
-  switch (i) {
-  case 1 ... 4:
-    std::cout << "EQQE";
+  try {
+    int age = 15;
+    if (age >= 18) {
+      cout << "Access granted - you are old enough.";
+    } else {
+      throw(age);
+    }
+  } catch (int myNum) {
+    cout << "Access denied - You must be at least 18 years old.\n";
+    cout << "Age is: " << myNum;
   }
+}
 }

@@ -231,7 +231,5 @@ We're essentially making versioning very hard because by reusing those entity cl
 database can't evolve separately from the API. So when developing, it's very important to
 keep these separate.
 
-
-
 * Footnotes
 [fn:1] SOAP is a standard communication protocol system that permits processes using different operating systems like Linux and Windows to communicate via HTTP and its XML. SOAP based APIs are designed to create, recover, update and delete records like accounts, passwords, leads, and custom objects
