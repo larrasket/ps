@@ -1162,6 +1162,11 @@ static T? GetData<T>(this RestClient t, RestRequest request)
 float value = 92.197354542F;
 value = (float)System.Math.Round(value,2);
 #+end_src
+** Create a new array with a thousand true values:
+#+begin_src csharp
+var items = Enumerable.Repeat<bool>(true, 1000).ToArray();  // Or ToList(), etc.
+#+end_src
+
 * ASP.NET Notes
 ** Redirect Manage to Login
 #+begin_src csharp
