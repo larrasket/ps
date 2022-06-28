@@ -475,34 +475,32 @@ optionally include in your APIs is important. I just want to get stuck in that i
 include hypermedia or links to other parts that are self-describing, that you're purposely
 RESTful. Again, I want to error on pragmatism versus dogma. Let's wrap up this module.
 
-
 *** TODO Check HTTP Responses List
 *** TODO Check HTTP Full Requests List
 * Going Complex
 ** Associations
 
-When I talk about
-associations, I typically mean sub-objects for existing APIs. For example, I might have the
-invoices related to a specific customer, I might have the ratings related to a specific
-game, I might have the payments related to a specific invoice. The idea behind associations
-in these simple cases is to allow the navigation of the URL to imply ownership. You would
-never use this customers/123/Invoices URI as a way to look at all invoices, it's clear that
-this should be the invoices of that specific customer.
+When I talk about associations, I typically mean sub-objects for existing APIs. For example,
+I might have the invoices related to a specific customer, I might have the ratings related
+to a specific game, I might have the payments related to a specific invoice. The idea behind
+associations in these simple cases is to allow the navigation of the URL to imply ownership.
+You would never use this customers/123/Invoices URI as a way to look at all invoices, it's
+clear that this should be the invoices of that specific customer.
 
-In the same way, both of these URIs,
-one that returns all or individual invoices, should also return the same type of shape that
-the invoices within a specific customer would return. The difference here is the scope. The
-invoices inside an individual customer should return a collection, but only invoices that
-belong to that customer. Where the other URI, a top-level URI, would return invoices across
-different customers. In this same way, URI endpoints can have multiple associations. So even
-though we have invoices for a specific customer, we could also have payments for a specific
-customer or shipments for a specific customer. There's not a limitation that an endpoint
-for, let's say, a particular customer or a particular resource, has to have only one
-association to it. It's pretty common for it to have multiple associations. These
-associations shouldn't be confused with search queries. In the last module, we talked about
-the uses for query strings. I wouldn't use navigation or associations as a way to get things
-like all of the customers within a state or all the customers that belong to a certain sales
-id. I would certainly use query strings to do that instead.
+In the same way, both of these URIs, one that returns all or individual invoices, should
+also return the same type of shape that the invoices within a specific customer would
+return. The difference here is the scope. The invoices inside an individual customer should
+return a collection, but only invoices that belong to that customer. Where the other URI, a
+top-level URI, would return invoices across different customers. In this same way, URI
+endpoints can have multiple associations. So even though we have invoices for a specific
+customer, we could also have payments for a specific customer or shipments for a specific
+customer. There's not a limitation that an endpoint for, let's say, a particular customer or
+a particular resource, has to have only one association to it. It's pretty common for it to
+have multiple associations. These associations shouldn't be confused with search queries. In
+the last module, we talked about the uses for query strings. I wouldn't use navigation or
+associations as a way to get things like all of the customers within a state or all the
+customers that belong to a certain sales id. I would certainly use query strings to do that
+instead.
 ** Paging
 Now let's look at paging. Most lists that you're going to be dealing with inside of your API
 should probably support paging, and the idea here is pretty simple, that unless your list is
