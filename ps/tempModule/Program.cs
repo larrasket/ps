@@ -38,7 +38,11 @@ public class Solution
 
 
 
-
+    public static string SortSentence(string s)
+    {
+        var ss = s.Split(' ').OrderBy(x => x[^1]).Select(x => x.Replace(x[^1].ToString(), string.Empty));
+        return string.Join(" ", ss.ToArray());
+    }
 
 
 
@@ -50,8 +54,7 @@ public class Solution
     {
         StringBuilder bldr = new();
         var snums = num.ToString();
-        int n = snums.Length, s = 0;
-        for (int l = 0, r = 0; r < n; r++)
+        int n = snums.Length, s = 0; for (int l = 0, r = 0; r < n; r++)
         {
             bldr.Append(snums[r]);
 
@@ -75,7 +78,7 @@ public class Solution
 
     public static void Main()
     {
-        Console.WriteLine(MinDistance("intention", "execution"));
+        SortSentence("is2 sentence4 This1 a3");
     }
 
 }

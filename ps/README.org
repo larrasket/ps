@@ -10,6 +10,10 @@ Problem in ~built~ directory are either not completed or wrong answers. The Main
 
 List:
 
+* THIS MAP IS *REDUNDANT* CHECK ~lc~ DIRECTORY
+
+
+
 
 | Problem                                                        | Tags                 | Difficulty | Judge | Status   |
 |----------------------------------------------------------------+----------------------+------------+-------+----------|
