@@ -24,7 +24,9 @@
 - [[#collection-types][Collection Types]]
   - [[#slices][Slices]]
     - [[#the-copy-function][The Copy Function]]
-- [[#methods][Methods]]
+- [[#functions][Functions]]
+  - [[#defer][~defer~]]
+- [[#struct][Struct]]
 
 * Introduction
 
@@ -1159,4 +1161,94 @@ func main() {
 #+RESULTS:
 : someNames: [Lifejacket Paddle]
 : allNames [Lifejacket Paddle Hat]
-* Methods
+* Functions
+
+Functions are groups of statements that can be used and reused as a single action. To get started
+define a simple function:
+#+begin_src go
+package main
+import "fmt"
+func printPrice() {
+    kayakPrice := 275.00
+    kayakTax := kayakPrice * 0.2
+    fmt.Println("Price:", kayakPrice, "Tax:", kayakTax)
+}
+func main() {
+    fmt.Println("About to call function")
+    printPrice()
+    fmt.Println("Function complete")
+}
+#+end_src
+
+#+RESULTS:
+: About to call function
+: Price: 275 Tax: 55
+: Function complete
+** ~defer~
+The defer keyword is used to schedule a function call that will be performed immediately before the current
+function returns, as shown
+#+begin_src go
+package main
+import "fmt"
+func calcTotalPrice(products map[string]float64) (count int, total float64){
+    fmt.Println("Function started")
+    defer fmt.Println("First defer call")
+    count = len(products)
+    for _, price := range products {
+        total += price
+    }
+    defer fmt.Println("Second defer call")
+    fmt.Println("Function about to return")
+    return
+}
+func main() {
+    products := map[string]float64 {
+        "Kayak" : 275,
+        "Lifejacket": 48.95,
+    }
+    _, total  := calcTotalPrice(products)
+    fmt.Println("Total:", total)
+}
+#+end_src
+
+#+RESULTS:
+: Function started
+: Function about to return
+: Second defer call
+: First defer call
+: Total: 323.95
+* Struct
+
+
+Custom data types are defined using the Go structs feature:
+
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    type Product struct {
+        name, category string
+        price float64
+    }
+    kayak := Product {
+        name: "Kayak",
+        category: "Watersports",
+        price: 275,
+    }
+    fmt.Println(kayak.name, kayak.category, kayak.price)
+    kayak.price = 300
+    fmt.Println("Changed price:", kayak.price)
+}
+#+end_src
+
+#+RESULTS:
+: Kayak Watersports 275
+: Changed price: 300
+
+Go doesn’t differentiate between structs and classes, in the way that other languages do.
+All custom data types are defined as structs, and the decision to pass them by reference or
+by value is made depending on whether a pointer is used. As I explained in Chapter 4, this
+achieves the same effect as having separate type categories but with the additional
+flexibility of allowing the choice to be made every time a value is used. It does, however,
+require more diligence from the programmer, who must think through the consequences of that
+choice during coding. Neither approach is better, and the results are essentially the same.
