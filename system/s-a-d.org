@@ -1,5 +1,18 @@
 #+TITLE: System Analysis & Design
 
+* Table of Content :TOC_3:
+- [[#introduction][Introduction]]
+  - [[#a-cries][A Cries]]
+  - [[#system-development-life-cycle][System Development Life Cycle]]
+    - [[#planing][Planing]]
+    - [[#analysis][Analysis]]
+    - [[#design][Design]]
+    - [[#implementation][Implementation]]
+  - [[#methodologies][Methodologies]]
+    - [[#structured-design][Structured Design]]
+    - [[#rapid-application-development][Rapid Application Development]]
+- [[#footnotes][Footnotes]]
+
 * Introduction
 
 The systems development life cycle (SDLC), contains the fundamental four- phase model

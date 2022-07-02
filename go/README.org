@@ -1,5 +1,31 @@
 #+title: GO Notes
 
+* Table of Content :TOC_3:
+- [[#introduction][Introduction]]
+- [[#get-go][get-go]]
+  - [[#define-a-data-type][Define a Data Type]]
+- [[#using-the-go-tools][Using The Go Tools]]
+  - [[#creating-a-go-project][Creating a Go Project]]
+  - [[#semicolons-and-errors-in-go-code][Semicolons and Errors in Go Code]]
+  - [[#defining-a-module][Defining a Module]]
+  - [[#linting-go-code][Linting Go Code]]
+    - [[#on-linting][On Linting]]
+    - [[#using-the-linter][Using the Linter]]
+    - [[#disabling-linter-rules][Disabling Linter Rules]]
+  - [[#fixing-common-problems-in-go][Fixing Common Problems in Go]]
+- [[#types-values-pointers][Types, Values, Pointers]]
+  - [[#basic-data-types][Basic Data Types]]
+  - [[#variables][Variables]]
+    - [[#short-variable-declaration-syntax][Short Variable Declaration Syntax]]
+    - [[#blank-declaration][Blank Declaration]]
+  - [[#pointers][Pointers]]
+    - [[#some-operators][Some Operators]]
+  - [[#flow-control][Flow Control]]
+- [[#collection-types][Collection Types]]
+  - [[#slices][Slices]]
+    - [[#the-copy-function][The Copy Function]]
+- [[#methods][Methods]]
+
 * Introduction
 
 GO programming language notes. Reading Adam Freeman's Pro Go.
@@ -1133,3 +1159,4 @@ func main() {
 #+RESULTS:
 : someNames: [Lifejacket Paddle]
 : allNames [Lifejacket Paddle Hat]
+* Methods

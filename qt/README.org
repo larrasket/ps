@@ -1,10 +1,13 @@
 #+TITLE: Introduction to Qt5
 
-Qt 5 allows us to easily design our program's user interface through a method most people
-are familiar with. Qt not only provides us with a powerful user interface toolkit, called Qt
-Designer, which enables us to design our user interface without writing a single line of
-code, but it also allows advanced users to customize their user interface components through
-a simple scripting language called Qt Style Sheets.
+
+* Table of Content :TOC_3:
+- [[#stylesheet][~styleSheet~]]
+  - [[#basic-style-sheet][Basic Style Sheet]]
+- [[#event-handling][Event Handling]]
+  - [[#signals--slots][Signals & Slots]]
+  - [[#working-with-signals-and-slots][Working with Signals and Slots]]
+
 * ~styleSheet~
 First create your first project/app. Go to *File* from the menu bar, click next multiple
 times until you find a new window with the ~mainwindow.cpp~ file to edit. Obviously this is

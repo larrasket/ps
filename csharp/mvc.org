@@ -2,17 +2,12 @@
 #+date: 2022-01-08T05:28:26+02:00
 #+draft: true
 #+hugo_tags: "Computer Science" ".NET"
-* Introduction
-ASP.NET Core is the latest evolution of Microsoft’s popular ASP.NET web framework,
-released in June 2016. Recent versions of ASP.NET have seen many incremental
-updates, focusing on high developer productivity and prioritizing backwards compati-
-bility. ASP.NET Core bucks that trend by making significant architectural changes that
-rethink the way the web framework is designed and built.
 
- ASP.NET Core owes a lot to its ASP.NET heritage and many features have been car-
-ried forward from before, but ASP.NET Core is a new framework. The whole technol-
-ogy stack has been rewritten, including both the web framework and the underlying
-platform.
+* Introduction :TOC_3:
+- [[#a-first-project-of-aspnet-core][A First Project of ASP.NET Core]]
+  - [[#overview][Overview]]
+  - [[#csproj-dependencies][~csproj~: Dependencies]]
+  - [[#the-program-class][The Program Class]]
 
 *What is ASP.NET Core?*
 

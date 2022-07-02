@@ -1,5 +1,20 @@
 #+title: Relational Database Design & Modeling
 
+* Table of Content :TOC_3:
+- [[#relational-language][Relational Language]]
+  - [[#note-on-atomism][Note on Atomism]]
+    - [[#1-multiple-values-in-one-column-list-columns][1. Multiple Values in One Column (list columns)]]
+    - [[#2-complex-multi-part-columns][2. Complex Multi-Part Columns]]
+  - [[#keys][Keys]]
+  - [[#basic-terminology-table][Basic Terminology Table:]]
+- [[#design][Design]]
+  - [[#introduction][Introduction]]
+  - [[#the-relational-model][The Relational Model]]
+  - [[#overview-of-the-design-process][Overview of the Design Process]]
+    - [[#design-phases][Design Phases]]
+    - [[#the-entity-relationship-model][The Entity-Relationship Model]]
+- [[#tbc][TBC...]]
+
 * Relational Language
 
 A data model is a collection of conceptual tools for describing data, data relationships,

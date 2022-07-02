@@ -3,6 +3,28 @@
 
 One of the most popular .NET libraries for working with the JSON serialization
 format is Newtonsoft.Json, known as Json.NET. It is mature and powerful.
+* Table of Content :TOC_3:
+- [[#introduction][Introduction]]
+  - [[#json-specification][Json Specification]]
+- [[#serialization--deserialization][Serialization & Deserialization]]
+  - [[#basic-serialization][Basic Serialization]]
+  - [[#preservereferenceshandling][~PreserveReferencesHandling~]]
+  - [[#reading-and-writing-json][Reading and Writing JSON]]
+    - [[#jsonserializer-class][~JsonSerializer~ Class]]
+    - [[#jsontextreader-class][~JsonTextReader~ Class]]
+    - [[#jsontextwriter-class][~JsonTextWriter~ Class]]
+    - [[#date-with-json][Date with JSON]]
+    - [[#error-handling][Error Handling]]
+- [[#settings--attributes][Settings & Attributes]]
+  - [[#serialization-settings][Serialization Settings]]
+    - [[#missingmemberhandling][~MissingMemberHandling~]]
+    - [[#referenceloophandling][~ReferenceLoopHandling~]]
+    - [[#defaultvaluehandling][~DefaultValueHandling~]]
+    - [[#objectcreationhandling][~ObjectCreationHandling~]]
+    - [[#typenamehandling][~TypeNameHandling~]]
+    - [[#serializationbinder][~SerializationBinder~]]
+  - [[#serialization-attributes][Serialization Attributes]]
+- [[#see-also][See Also]]
 
 * Introduction
 

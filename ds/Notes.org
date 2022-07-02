@@ -2,6 +2,13 @@
 #+Description: Data Structures and Algorithm Notes
 #+hugo_tags: "Computer Science"
 
+* Table of Content :TOC_3:
+- [[#lists][Lists]]
+    - [[#array-based-implementation][Array-Based Implementation]]
+    - [[#linked-list][Linked List]]
+    - [[#doubly-linked-list][Doubly Linked List]]
+- [[#b-tree][B-Tree]]
+- [[#commented][Commented]]
 
 * Lists
 
