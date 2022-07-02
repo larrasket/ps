@@ -44,7 +44,12 @@ public class Solution
         return string.Join(" ", ss.ToArray());
     }
 
-
+    public char FindTheDifference(string s, string t)
+    {
+        var nt = String.Concat(t.OrderBy(x => x));
+        var indx = nt.IndexOf(s);
+        return t.Remove(indx, s.Length).First();
+    }
 
 
 
