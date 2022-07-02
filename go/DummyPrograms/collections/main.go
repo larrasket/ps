@@ -1,13 +1,12 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-
-	mp := map[int]string{
-		0: "32",
-	}
-	fmt.Println(mp[0])
+	products := [4]string{"Kayak", "Lifejacket", "Paddle", "Hat"}
+	allNames := products[:]
+	someNames := make([]string, 2)
+	copy(someNames, allNames)
+	fmt.Println("someNames:", someNames)
+	fmt.Println("allNames", allNames)
 }

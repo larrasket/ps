@@ -31,6 +31,9 @@ func main() {
 }
 #+end_src
 
+#+RESULTS:
+: TODO: add some features
+
 The syntax of Go will be familiar if you have used any C or C-like language, such as C# or
 Java. I describe the Go language in depth in this book, but you can discern a lot just by
 looking at the keywords and structure of the code.
@@ -99,6 +102,9 @@ func main() {
     fmt.Println("TODO: add some features");
 }
 #+end_src
+
+#+RESULTS:
+: TODO: add some features
 
 
 This new statement relies on several Go features, which are most readily understood by
@@ -170,6 +176,9 @@ func main() {
 }
 #+end_src
 
+#+RESULTS:
+: Hello, Go
+
 The following figure illustrates the key elements in the main.go file
 
 [[file:Using_The_Go_Tools/2022-06-17_14-21-51_screenshot.png]]
@@ -205,11 +214,13 @@ like this:
 #+begin_src go
 package main
 import "fmt"
-func main()
-{
+func main() {
     fmt.Println("Hello, Go")
 }
 #+end_src
+
+#+RESULTS:
+: Hello, Go
 
 
 The errors report an unexpected semicolon and a missing function body. This is because the Go tools
@@ -218,11 +229,13 @@ have automatically inserted a semicolon like this:
 #+begin_src go
 package main
 import "fmt"
-func main();
-{
+func main() {
     fmt.Println("Hello, Go")
 }
 #+end_src
+
+#+RESULTS:
+: Hello, Go
 
 The error messages make more sense when you understand why they arise, although it can be
 hard to adjust to the expected code format if this is your preferred brace placement.
@@ -314,6 +327,9 @@ func PrintNumber(number int) {
 }
 #+end_src
 
+#+RESULTS:
+: Hello, Go01234
+
 #+begin_src sh
 main.go:12:1: exported function PrintHello should have comment or be unexported
 main.go:16:1: exported function PrintNumber should have comment or be unexported
@@ -348,6 +364,9 @@ func PrintNumber(number int) {
 }
 #+end_src
 
+#+RESULTS:
+: Hello, Go01234
+
 *** Disabling Linter Rules
 The revive package can be configured using comments in code files, disabling one or more
 rules for sections of code. I have used comments to disable the rule that causes the warning
@@ -375,6 +394,9 @@ func PrintNumber(number int) {
 	fmt.Print(number)
 }
 #+end_src
+
+#+RESULTS:
+: Hello, Go01234
 
 The syntax required to control the linter is revive, followed by a colon, enable or disable,
 and optionally another colon and the name of a linter rule. So, for example, the
@@ -449,6 +471,9 @@ func PrintNumber(number int) {
 	fmt.Print(number)
 }
 #+end_src
+
+#+RESULTS:
+: Hello, Go01234
 
 The new statement assigns the variable i to itself, which is allowed by the Go compiler but is likely to be
 a mistake. To analyze the code, use the command prompt to run the command:
@@ -525,16 +550,16 @@ Go provides a set of basic data types, which are described in the table.
 These types are the foundation of Go development, and many of
 the characteristics of these types will be familiar from other languages.
 
-| Name                    | Description                                                                                                                                                                                                                                                                                                       |
-|-------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name                    | Description                                                                                                                                                                                                                                                                      |
+|-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ~int~                   | This type represents a whole number, which can be positive or negative. The int type size is platform-dependent and will be either 32 or 64 bits. There are also integer types that have a specific size, such as int8, int16, int32, and int64, but the int type should be used unless you need a specific size. |
-| ~uint~                  | This type represents a positive whole number. The uint type size is platform- dependent and will be either 32 or 64 bits. There are also unsigned integer types that have a specific size, such as uint8, uint16, uint32, and uint64, but the uint type should be used unless you need a specific size.           |
-| ~byte~                  | This type is an alias for uint8 and is typically used to represent a byte of data.                                                                                                                                                                                                                                |
-| ~float32, float64~      | These types represent numbers with a fraction. These types allocate 32 or 64 bits to store the value.                                                                                                                                                                                                             |
-| ~complex64, complex128~ | These types represent numbers that have real and imaginary components. These types allocate 64 or 128 bits to store the value.                                                                                                                                                                                    |
-| ~bool~                  | This type represents a Boolean truth with the values true and false.                                                                                                                                                                                                                                              |
-| ~string~                | This type represents a sequence of characters                                                                                                                                                                                                                                                                     |
-| ~rune~                  | This type represents a single Unicode code point. Unicode is complicated, but—loosely—this is the representation of a single character. The rune type is an alias for int32.                                                                                                                                                                                                                                                                                                                  |
+| ~uint~                  | This type represents a positive whole number. The uint type size is platform- dependent and will be either 32 or 64 bits. There are also unsigned integer types that have a specific size, such as uint8, uint16, uint32, and uint64, but the uint type should be used unless you need a specific size. |
+| ~byte~                  | This type is an alias for uint8 and is typically used to represent a byte of data.                                                                                                                                                                                               |
+| ~float32, float64~      | These types represent numbers with a fraction. These types allocate 32 or 64 bits to store the value.                                                                                                                                                                            |
+| ~complex64, complex128~ | These types represent numbers that have real and imaginary components. These types allocate 64 or 128 bits to store the value.                                                                                                                                                   |
+| ~bool~                  | This type represents a Boolean truth with the values true and false.                                                                                                                                                                                                             |
+| ~string~                | This type represents a sequence of characters                                                                                                                                                                                                                                    |
+| ~rune~                  | This type represents a single Unicode code point. Unicode is complicated, but—loosely—this is the representation of a single character. The rune type is an alias for int32.                                                                                                     |
 
 Constants are names for specific values, which allows them to be used repeatedly and
 consistently. There are two ways to define constants in Go: typed constants and untyped
@@ -553,6 +578,8 @@ func main() {
     fmt.Println("Total:", quantity * (price + tax))
 }
 #+end_src
+
+#+RESULTS:
 
 The difference between typed and untyped constants is that, and since go has a very strict
 rules about type conversions, untyped will have some kind of conversions.
@@ -576,6 +603,8 @@ func main() {
     fmt.Println("Total:", quantity * (price + tax))
 }
 #+end_src
+
+#+RESULTS:
 
 Omitting the type when defining the quantity constant tells the Go compiler that it should
 be more flexible about the constant’s type. When the expression passed to the fmt.Println
@@ -1076,12 +1105,31 @@ emphasizes the nature of slices as views onto arrays
 package main
 import "fmt"
 func main() {
-    products := [4]string { "Kayak", "Lifejacket", "Paddle", "Hat"}
-    someNames := products[1:3]
-    allNames := products[:]
-    fmt.Println("someNames:", someNames)
-    fmt.Println("allNames", allNames)
+products := [4]string { "Kayak", "Lifejacket", "Paddle", "Hat"}
+someNames := products[2:4]
+allNames := products[:]
+fmt.Println("someNames:", someNames)
+fmt.Println("allNames", allNames)
 }
 #+end_src
 
-**
+#+RESULTS:
+: someNames: [Paddle Hat]
+: allNames [Kayak Lifejacket Paddle Hat]
+*** The Copy Function
+#+begin_src go
+package main
+import "fmt"
+func main() {
+    products := [4]string { "Kayak", "Lifejacket", "Paddle", "Hat"}
+    allNames := products[1:]
+    someNames := make([]string, 2)
+    copy(someNames, allNames)
+    fmt.Println("someNames:", someNames)
+    fmt.Println("allNames", allNames)
+}
+#+end_src
+
+#+RESULTS:
+: someNames: [Lifejacket Paddle]
+: allNames [Lifejacket Paddle Hat]
