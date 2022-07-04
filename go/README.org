@@ -1126,14 +1126,14 @@ length of 3 and a capacity of 6.
 
 
 
-Slices can be created using existing arrays, which builds on the behavior described in earlier examples and
-emphasizes the nature of slices as views onto arrays
+Slices can be created using existing arrays, which builds on the behavior described in
+earlier examples and emphasizes the nature of slices as views onto arrays
 
 #+begin_src go
 package main
 import "fmt"
 func main() {
-products := [4]string { "Kayak", "Lifejacket", "Paddle", "Hat"}
+products := [4]string { "Shblanga", "Lifejacket", "Paddle", "Hat"}
 someNames := products[2:4]
 allNames := products[:]
 fmt.Println("someNames:", someNames)
@@ -1142,8 +1142,9 @@ fmt.Println("allNames", allNames)
 #+end_src
 
 #+RESULTS:
+: 12
 : someNames: [Paddle Hat]
-: allNames [Kayak Lifejacket Paddle Hat]
+: allNames [Shblanga Lifejacket Paddle Hat]
 *** The Copy Function
 #+begin_src go
 package main
