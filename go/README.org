@@ -1163,7 +1163,6 @@ func main() {
 : someNames: [Lifejacket Paddle]
 : allNames [Lifejacket Paddle Hat]
 * Functions
-
 Functions are groups of statements that can be used and reused as a single action. To get started
 define a simple function:
 #+begin_src go
