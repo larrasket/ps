@@ -24,7 +24,7 @@ func (s Product) getCost(recur bool) float64 {
 	return s.monthlyFee
 }
 
-func (s Service) getName() string {
+func (s Service) getName() string { //
 	return s.description
 }
 func (s Service) getCost(recur bool) float64 {

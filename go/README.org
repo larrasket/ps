@@ -28,6 +28,10 @@
   - [[#defer][~defer~]]
 - [[#struct][Struct]]
 - [[#interfaces][Interfaces]]
+- [[#packages][Packages]]
+  - [[#package-conflicts][Package Conflicts]]
+  - [[#package-initialization][Package Initialization]]
+    - [[#import-package-for-intialization][Import Package For Intialization]]
 
 * Introduction
 
@@ -1260,3 +1264,248 @@ flexibility of allowing the choice to be made every time a value is used. It doe
 require more diligence from the programmer, who must think through the consequences of that
 choice during coding. Neither approach is better, and the results are essentially the same.
 * TODO Interfaces
+* Packages
+
+The first step for all the example projects in this book has been to create a module file,
+which was done with the command:
+
+#+begin_src shell
+go mod init <name>
+#+end_src
+
+The original purpose of a module file was to enable code to be published so that it can be
+used in other projects and, potentially, by other developers. Module files are still used
+for this purpose, but Go has started to gain mainstream development, and as this has
+happened, the percentage of projects that are published has fallen. These days, the most
+common reason for creating a module file is that it makes it easy to install packages that
+have been published and has the bonus effect of allowing the use of the run command rather
+than having to provide the Go build tools with a list of individual files to compile.
+
+That command created a file named go.mod in the packages folder, with the
+following content:
+
+#+begin_src mod
+module pkg
+
+go 1.18
+#+end_src
+
+The module statement specifies the name of the module, which was specified by the command
+in. This name is important because it is used to import features from other packages created
+within the same project and third-party packages, as later examples will demonstrate. The go
+statement specifies the version of Go that is used, which is 1.17 for this book.
+
+Packages make it possible to add structure to a project so that related features are grouped
+together. Create the packages/store folder and add to it a file named product.go, with the
+contents shown in:
+
+#+begin_src go
+package store
+
+type Product struct {
+	Name, Category string
+	price          int
+}
+#+end_src
+
+And use it in your main:
+#+begin_src go
+package main
+
+import (
+	"fmt"
+	"packges/store"
+)
+
+func main() {
+	pr := store.Product{
+		Name:     "o",
+		Category: "fr",
+	}
+	fmt.Print(pr)
+}
+#+end_src
+
+#+RESULTS:
+: {o fr 0}
+
+Packages can contain multiple code files, and to simplify development, access control rules
+and package prefixes do not apply when accessing features defined in the same package. Add a
+file named tax.go to the store folder with the contents shown:
+#+begin_src go
+package store
+const defaultTaxRate float64 = 0.2
+const minThreshold = 10
+type taxRate struct {
+    rate, threshold float64
+}
+
+func newTaxRate(rate, threshold float64) *taxRate {
+    if (rate == 0) {
+        rate = defaultTaxRate
+    }
+    if (threshold < minThreshold) {
+        threshold = minThreshold
+    }
+    return &taxRate { rate, threshold }
+}
+func (taxRate *taxRate) calcTax(product *Product) float64 {
+    if (product.price > taxRate.threshold) {
+        return product.price + (product.price * taxRate.rate)
+    }
+    return product.price
+}
+#+end_src
+
+All the features defined in the tax.go file are unexported, which means they can be used
+only within the store package. Notice that the calcTax method can access the price field of
+the Product type and that it does so without having to refer to the type as store.Product
+because it is in the same package:
+#+begin_src go
+...
+func (taxRate *taxRate) calcTax(product *Product) float64 {
+    if (product.price > taxRate.threshold) {
+        return product.price + (product.price * taxRate.rate)
+    }
+    return product.price
+}
+...
+#+end_src
+** Package Conflicts
+
+When a package is imported, the combination of the module name and package name ensures that
+the package is uniquely identified. But only the package name is used when accessing the
+features provided by the package, which can lead to conflicts. To see how this problem
+arises, create the packages/fmt folder and add to it a file named formats.go with the code
+shown:
+#+begin_src go
+package fmt
+import "strconv"
+func ToCurrency(amount float64) string {
+    return "$" + strconv.FormatFloat(amount, 'f', 2, 64)
+}
+#+end_src
+
+This will never compile:
+
+#+begin_src shell
+go run .
+# packges
+./main.go:5:2: fmt redeclared in this block
+	./main.go:4:2: other declaration of fmt
+./main.go:5:2: imported and not used: "packges/fmt"
+#+end_src
+
+One way to deal with package name conflicts is to use an alias, which allows a package to be
+accessed using a different name, as shown:
+#+begin_src go
+package main
+import (
+    "fmt"
+    "packages/store"
+    currencyFmt "packages/fmt"
+)
+func main() {
+    product := store.NewProduct("Kayak", "Watersports", 279)
+    fmt.Println("Name:", product.Name)
+    fmt.Println("Category:", product.Category)
+    fmt.Println("Price:", currencyFmt.ToCurrency(product.Price()))
+}
+#+end_src
+
+There is a special alias, known as the dot import, that allows a package’s features to be
+used without using a prefix, as shown:
+
+#+begin_src go
+import (
+    "fmt"
+    "packages/store"
+    . "packages/fmt"
+)
+func main() {
+    product := store.NewProduct("Kayak", "Watersports", 279)
+    fmt.Println("Name:", product.Name)
+    fmt.Println("Category:", product.Category)
+    fmt.Println("Price:", ToCurrency(product.Price()))
+}
+#+end_src
+** Package Initialization
+
+Each code file can contain an initialization function that is executed only when all
+packages have been loaded and all other initialization—such as defining constants and
+variables—has been done. The most common use for initialization functions is to perform
+calculations that are difficult to perform or that require duplication to perform, as shown:
+#+begin_src go
+package store
+const defaultTaxRate float64 = 0.2
+const minThreshold = 10
+var categoryMaxPrices = map[string]float64 {
+    "Watersports": 250 + (250 * defaultTaxRate),
+    "Soccer": 150 + (150 * defaultTaxRate),
+    "Chess": 50 + (50 * defaultTaxRate),
+}
+type taxRate struct {
+    rate, threshold float64
+}
+func newTaxRate(rate, threshold float64) *taxRate {
+    if (rate == 0) {
+        rate = defaultTaxRate
+    }
+    if (threshold < minThreshold) {
+        threshold = minThreshold
+    }
+    return &taxRate { rate, threshold }
+}
+func (taxRate *taxRate) calcTax(product *Product) (price float64) {
+    if (product.price > taxRate.threshold) {
+        price = product.price + (product.price * taxRate.rate)
+    } else {
+        price = product.price
+    }
+    if max, ok := categoryMaxPrices[product.Category]; ok && price > max {
+        price = max
+    }
+    return
+}
+#+end_src
+*** Import Package For Intialization
+
+Go prevents packages from being imported but not used, which can be a problem if you rely on
+the effect of an initialization function but don’t need to use any of the features the
+package exports. Create the packages/ data folder and add to it a file named data.go.
+
+#+begin_src go
+package data
+import "fmt"
+func init() {
+    fmt.Println(("data.go init function invoked"))
+}
+func GetData() []string {
+    return []string {"Kayak", "Lifejacket", "Paddle", "Soccer Ball"}
+}
+#+end_src
+
+The initialization function writes out a message when it is invoked for the purposes of this
+example.  If I need the effect of the initialization function, but I don’t need to use the
+GetData function the package exports, then I can import the package using the blank
+identifier as an alias for the package name, as shown
+
+#+begin_src go
+package main
+import (
+    "fmt"
+    "packages/store"
+    . "packages/fmt"
+    "packages/store/cart"
+    _ "packages/data"
+)
+func main() {
+    product := store.NewProduct("Kayak", "Watersports", 279)
+    cart := cart.Cart {
+        CustomerName: "Alice",
+        Products: []store.Product{ *product },
+    }
+    fmt.Println("Name:", cart.CustomerName)
+    fmt.Println("Total:",  ToCurrency(cart.GetTotal()))
+}
+#+end_src
