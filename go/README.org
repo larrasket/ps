@@ -27,6 +27,7 @@
 - [[#functions][Functions]]
   - [[#defer][~defer~]]
 - [[#struct][Struct]]
+- [[#interfaces][Interfaces]]
 
 * Introduction
 
@@ -950,12 +951,15 @@ Example:
 #+begin_src go
 import "fmt"
 func main() {
-    kayakPrice := 275.00
-    if kayakPrice > 100 {
-        fmt.Println("Price is greater than 100")
-    }
+    kayakPrice := 275.00
+    if kayakPrice > 100 {
+        fmt.Println("Price is greater than 100")
+    }
 }
 #+end_src
+
+#+RESULTS:
+: Price is greater than 100
 
 Go allows an if statement to use an initialization statement, which is executed before the
 if statement’s expression is evaluated. The initialization statement is restricted to a Go
@@ -964,18 +968,21 @@ assign a new value to an existing variable, or invoke a function
 
 #+begin_src go
 import (
-    "fmt"
-    "strconv"
+    "fmt"
+    "strconv"
 )
 func main() {
-    priceString := "275"
-    if kayakPrice, err := strconv.Atoi(priceString); err == nil {
-        fmt.Println("Price:", kayakPrice)
-    } else {
-        fmt.Println("Error:", err)
-    }
+    priceString := "275"
+    if kayakPrice, err := strconv.Atoi(priceString); err == nil {
+        fmt.Println("Price:", kayakPrice)
+    } else {
+        fmt.Println("Error:", err)
+    }
 }
 #+end_src
+
+#+RESULTS:
+: Price: 275
 
 * Collection Types
 
@@ -1231,7 +1238,7 @@ func main() {
         price float64
     }
     kayak := Product {
-        name: "Kayak",
+       name: "Kayak",
         category: "Watersports",
         price: 275,
     }
@@ -1252,3 +1259,4 @@ achieves the same effect as having separate type categories but with the additio
 flexibility of allowing the choice to be made every time a value is used. It does, however,
 require more diligence from the programmer, who must think through the consequences of that
 choice during coding. Neither approach is better, and the results are essentially the same.
+* TODO Interfaces
