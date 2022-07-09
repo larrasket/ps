@@ -32,6 +32,7 @@
   - [[#package-conflicts][Package Conflicts]]
   - [[#package-initialization][Package Initialization]]
     - [[#import-package-for-intialization][Import Package For Intialization]]
+- [[#interface-composition][Interface Composition]]
 
 * Introduction
 
@@ -1507,5 +1508,81 @@ func main() {
     }
     fmt.Println("Name:", cart.CustomerName)
     fmt.Println("Total:",  ToCurrency(cart.GetTotal()))
+}
+#+end_src
+* Interface Composition
+If you are used to languages such as C# or Java, then you will have created a base class and
+created subclasses to add more specific features. The subclasses inherit functionality from
+the base class, which prevents code duplication. The result is a set of classes, where the
+base class defines common functionality that is supplemented by more specific features in
+individual subclasses.
+
+
+The starting point is to define a struct type and a method, which I will use to create more
+specific types in later examples. Create the composition/store folder and add to it a file
+named product.go with the content shown:
+
+Because Go doesn’t support classes, it doesn’t support class constructors either. As I
+explained, a common convention is to define a constructor function whose name is New<Type>,
+such as NewProduct, as shown, and that allows values to be provided for all fields, even
+those that have not been exported. As with other code features, the capitalization of the
+first letter of the constructor function name determines whether it is exported outside of
+the package.
+
+#+begin_src go
+package store
+
+type Product struct {
+	Name, Category string
+	price          float64
+}
+
+func NewProduct(name, category string, price float64) *Product {
+	return &Product{name, category, price}
+}
+
+func (p *Product) Price(taxRate float64) float64 {
+	return p.price + (p.price * taxRate)
+}
+#+end_src
+
+
+Constructor functions are only a convention, and their use is not enforced, which means that
+exported types can be created using the literal syntax, just as long as no values are
+assigned to the unexported fields.  This shows the use of the constructor function
+and the literal syntax:
+
+#+begin_src go
+package main
+
+import (
+	"comps/store"
+	"fmt"
+)
+
+func main() {
+	kayak := store.NewProduct("Kayak", "Watersports", 275)
+	lifejacket := &store.Product{Name: "Lifejacket", Category: "Watersports"}
+	for _, p := range []*store.Product{kayak, lifejacket} {
+		fmt.Println("Name:", p.Name, "Category:", p.Category, "Price:", p.Price(0.2))
+	}
+}
+#+end_src
+
+Constructors should be used whenever they are defined because they make it easier to manage
+changes in the way that values are created and because they ensure that fields are properly
+initialized. Using the literal syntax means that no value is assigned to the price field,
+which affects the output from the Price method. But, since Go doesn’t support enforcing the
+use of constructors, their use requires discipline.
+
+Go supports composition, rather than inheritance, which is done by combining struct types.
+Add a file named boat.go to the store folder with the contents shown:
+
+#+begin_src go
+package store
+type Boat struct {
+    *Product
+    Capacity int
+    Motorized bool
 }
 #+end_src

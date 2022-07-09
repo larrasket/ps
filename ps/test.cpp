@@ -4,8 +4,23 @@
 #include <list>
 #include <string>
 #include <vector>
-// using namespace std;
-int main() {
+using namespace std;
+
+void rr();
+int main() { rr(); }
+
+void rr() {
+  vector<int> e{1, 2, 3, 4, 5};
+  for (auto &i : e) {
+    i = -1;
+  }
+
+  for (auto &i : e) {
+    std::cout << i << std::endl;
+  }
+}
+
+void r() {
   try {
     int nage = 15;
     if (nage >= 18) {
