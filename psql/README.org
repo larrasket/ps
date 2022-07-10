@@ -1,5 +1,6 @@
 #+TITLE: PostgreSQL Notes
 #+hugo_tags: "Computer Science" "Databases"
+#+date: 2022-01-08T05:28:26+02:00
 
 * Table of Content :TOC_3:
 - [[#introduction-into-postgresql][Introduction into PostgreSQL]]

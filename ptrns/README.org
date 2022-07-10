@@ -1,4 +1,5 @@
 #+TITLE: Design Patterns
+#+hugo_tags: "Computer Science"
 
 /Based on  Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph
 Johnson and John Vlissides/

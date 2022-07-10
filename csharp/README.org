@@ -1,7 +1,6 @@
 #+title: ".NET Notes in C#"
 #+date: 2022-01-08T05:28:26+02:00
 #+draft: false
-#+categories: ["Computer Science"]
 #+description: C# Notebook
 #+hugo_tags: "Computer Science" ".NET"
 #+draft: true

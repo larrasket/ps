@@ -1,6 +1,5 @@
 #+TITLE: Designing RESTful APIs
 #+hugo_tags: "Computer Science"
-#+hugo_categories: "Computer Science"
 
 * Table of Content :TOC_3:
 - [[#representational-state-transfer-apis-basics-to-design][Representational State Transfer APIs: Basics to Design]]

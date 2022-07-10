@@ -1,5 +1,6 @@
-#+TITLE: STD Notes
-#+hugo_tags: "Computer Science" "C++"
+#+TITLE: Language Built-in Feature Preview
+#+date: 2022-01-08T05:28:26+02:00
+#+hugo_tags: "Computer Science" "C++" "C#" ".NET"
 * Table of Content :TOC_3:
 - [[#cc-std-notes][C/C++ STD Notes]]
   - [[#sorting][Sorting]]

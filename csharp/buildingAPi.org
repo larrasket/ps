@@ -1,4 +1,5 @@
 #+title: Building a RESTful API with ASP.NET Core
+#+hugo_tags: "Computer Science" ".NET"
 Check: [[https://github.com/salehmu/leet/blob/main/API/Designing%20RESTful%20API.org][Designing RESTful APIs]]
 
 * Table of Content :TOC_3:
