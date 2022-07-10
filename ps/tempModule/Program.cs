@@ -55,7 +55,12 @@ public class Solution
         return t.Remove(indx, s.Length).First();
     }
 
-
+    public string FirstPalindrome(string[] words)
+    {
+        var i = words.FirstOrDefault(x => new string(x.Reverse().ToArray()) == x);
+        if (i is null) return "";
+        return i;
+    }
 
 
 
