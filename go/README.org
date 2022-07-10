@@ -1,4 +1,8 @@
 #+title: GO Notes
+#+date: 2022-01-08T05:28:26+02:00
+#+draft: false
+#+description: GO Notebook
+#+hugo_tags: "Computer Science" "GO"
 
 * Table of Content :TOC_3:
 - [[#introduction][Introduction]]
@@ -33,6 +37,8 @@
   - [[#package-initialization][Package Initialization]]
     - [[#import-package-for-intialization][Import Package For Intialization]]
 - [[#interface-composition][Interface Composition]]
+- [[#goroutines][Goroutines]]
+  - [[#receiving-without-blocking][Receiving Without Blocking]]
 
 * Introduction
 
@@ -1584,5 +1590,343 @@ type Boat struct {
     *Product
     Capacity int
     Motorized bool
+}
+#+end_src
+* Goroutines
+
+Go has excellent support for writing concurrent applications, using features that are
+simpler and more intuitive than any other language I have used. In this chapter, I describe
+the use of ~goroutines~, which allow functions to be executed concurrently, and channels,
+through which ~goroutines~ can produce results asynchronously.
+
+#+begin_src go
+package main
+
+import "strconv"
+
+type Product struct {
+	Name, Category string
+	Price          float64
+}
+
+var ProductList = []*Product{
+	{"Kayak", "Watersports", 279},
+	{"Lifejacket", "Watersports", 49.95},
+	{"Soccer Ball", "Soccer", 19.50},
+	{"Corner Flags", "Soccer", 34.95},
+	{"Stadium", "Soccer", 79500},
+	{"Thinking Cap", "Chess", 16},
+	{"Unsteady Chair", "Chess", 75},
+	{"Bling-Bling King", "Chess", 1200},
+}
+
+type ProductGroup []*Product
+type ProductData = map[string]ProductGroup
+
+var Products = make(ProductData)
+
+func ToCurrency(val float64) string {
+	return "$" + strconv.FormatFloat(val, 'f', 2, 64)
+}
+func init() {
+	for _, p := range ProductList {
+		if _, ok := Products[p.Category]; ok {
+			Products[p.Category] = append(Products[p.Category], p)
+		} else {
+			Products[p.Category] = ProductGroup{p}
+		}
+	}
+}
+#+end_src
+
+
+This file defines a custom type named Product, along with type aliases that I use to create
+a map that organizes products by category. I use the Product type in a slice and a map, and
+I rely on an init function, to populate the map from the contents of the slice, which is
+itself populated using the literal syntax. This file also contains a ToCurrency function
+that formats float64 values into dollar currency strings, which I will use to format the
+results in this chapter. Add another file called ~operation.go~:
+
+#+begin_src go
+package main
+
+import "fmt"
+
+func CalcStoreTotal(data ProductData) {
+	var storeTotal float64
+	for category, group := range data {
+		storeTotal += group.TotalPrice(category)
+	}
+	fmt.Println("Total:", ToCurrency(storeTotal))
+}
+func (group ProductGroup) TotalPrice(category string) (total float64) {
+	for _, p := range group {
+		total += p.Price
+	}
+	fmt.Println(category, "subtotal:", ToCurrency(total))
+	return
+}
+#+end_src
+
+The key building block for executing a Go program is the ~goroutine~, which is a lightweight
+thread created by the Go runtime. All Go programs use at least one ~goroutine~ because this is
+how Go executes the code in the main function. When compiled Go code is executed, the
+runtime creates a ~goroutine~ that starts executing the statements in the entry point, which
+is the main function in the main package. Each statement in the main function is executed in
+the order in which they are defined. The ~goroutine~ keeps executing statements until it
+reaches the end of the main function, at which point the application terminates.
+
+
+The ~goroutine~ executes each statement in the main function synchronously, which means that
+it waits for the statement to complete before moving on to the next statement. The
+statements in the main function can call other functions, use for loops, create values, and
+use all the other features. The main ~goroutine~ will work its way through the code, following
+its path by executing one statement at a time.
+
+
+#+DOWNLOADED: screenshot @ 2022-07-10 18:02:28
+[[file:Goroutines/2022-07-10_18-02-28_screenshot.png]]
+
+Follows adds a statement that writes out details of each product as it is processed, which
+will demonstrate the flow shown in the figure:
+
+#+begin_src go
+func (group ProductGroup) TotalPrice(category string) (total float64) {
+	for _, p := range group {
+		fmt.Printf(category, "product", p.Name)
+		total += p.Price
+	}
+	fmt.Println(category, "subtotal:", ToCurrency(total))
+	return
+}
+#+end_src
+
+#+RESULTS:
+: main function started
+: Soccer product: Soccer Ball
+: Soccer product: Corner Flags
+: Soccer product: Stadium
+: Soccer subtotal: $79554.45
+: Chess product: Thinking Cap
+: Chess product: Unsteady Chair
+: Chess product: Bling-Bling King
+: Chess subtotal: $1291.00
+: Watersports product: Kayak
+: Watersports product: Lifejacket
+: Watersports subtotal: $328.95
+: Total: $81174.40
+: main function complete
+
+You may see different results based on the order in which keys are retrieved from the map,
+but what’s important is that all the products in a category are processed before execution
+moves onto the next category.  The advantages of synchronous execution are simplicity and
+consistency—the behavior of synchronous code is easy to understand and predictable. The
+disadvantage is that it can be inefficient. Working sequentially through nine data items, as
+in the example, doesn’t present any issues, but most real projects have larger volumes of
+data or have other tasks to perform, which means that sequential execution takes too long
+and doesn’t produce results fast enough.
+
+
+Go allows the developer to create additional goroutines, which execute code at the same time
+as the main ~goroutine~. Go makes it easy to create new goroutines, as shown:
+
+#+begin_src go
+package main
+
+import "fmt"
+
+func CalcStoreTotal(data ProductData) {
+	var storeTotal float64
+	for category, group := range data {
+		go group.TotalPrice(category)
+	}
+	fmt.Println("Total:", ToCurrency(storeTotal))
+}
+func (group ProductGroup) TotalPrice(category string) (total float64) {
+	for _, p := range group {
+		fmt.Printf(category, "product", p.Name)
+		total += p.Price
+	}
+	fmt.Println(category, "subtotal:", ToCurrency(total))
+	return
+}
+#+end_src
+
+A ~goroutine~ is created using the go keyword followed by the function or method that should
+be executed asynchronously, as shown in:
+
+#+DOWNLOADED: screenshot @ 2022-07-10 18:25:31
+[[file:Goroutines/2022-07-10_18-25-31_screenshot.png]]
+
+When the Go runtime encounters the go keyword, it creates a new goroutine and uses it to
+execute the specified function or method.  This changes the program execution because, at
+any given moment, there are multiple goroutines, each of which is executing its own set of
+statements. These statements are executed concurrently, which just means they are being
+executed at the same time.  In the case of the example, a goroutine is created for each call
+to the TotalPrice method, which means that the categories are processed concurrently, as
+shown:
+
+
+#+DOWNLOADED: screenshot @ 2022-07-10 18:30:17
+[[file:Goroutines/2022-07-10_18-30-17_screenshot.png]]
+
+Getting a result from a function that is being executed asynchronously can be complicated
+because it requires coordination between the goroutine that produces the result and the
+goroutine that consumes the result.  To address this issue, Go provides channels, which are
+conduits through which data can be sent and received. I am going to introduce a channel into
+the example in steps:
+
+#+begin_src go
+package main
+
+import "fmt"
+
+func CalcStoreTotal(data ProductData) {
+	var storeTotal float64
+	for category, group := range data {
+		var channel chan float64 = make(chan float64)
+		go group.TotalPrice(category)
+	}
+	fmt.Println("Total:", ToCurrency(storeTotal))
+}
+func (group ProductGroup) TotalPrice(category string) (total float64) {
+	for _, p := range group {
+		fmt.Printf(category, "product", p.Name)
+		total += p.Price
+	}
+	fmt.Println(category, "subtotal:", ToCurrency(total))
+	return
+}
+#+end_src
+
+
+Channels are strongly typed, which means that they will carry values of a specified type or
+interface. The type for a channel is the chan keyword, followed by the type the channel will
+carry.  Channels are created using the built-in make function, specifying the channel type.
+
+I used the full variable declaration syntax in this listing to emphasize the type, which is
+chan float64, meaning a channel that will carry float64 values.
+
+The next step is to update the TotalPrice method so that it sends its result through the
+channel, as shown:
+#+begin_src go
+func (group ProductGroup) TotalPrice(category string, resultChannel chan float64)  {
+    var total float64
+    for _, p := range group {
+        fmt.Println(category, "product:", p.Name)
+        total += p.Price
+        time.Sleep(time.Millisecond * 100)
+    }
+    fmt.Println(category, "subtotal:", ToCurrency(total))
+    resultChannel <- total
+}
+#+end_src
+
+By default, sending and receiving through a channel are blocking operations. This means a
+goroutine that sends a value will not execute any further statements until another goroutine
+receives the value from the channel. If a second goroutine sends a value, it will be blocked
+until the channel is cleared, causing a queue of goroutines waiting for values to be
+received. This happens in the other direction, too, so that goroutines that receive values
+will block until another goroutine sends one
+
+#+begin_src go
+package main
+import (
+    "fmt"
+    "time"
+)
+func CalcStoreTotal(data ProductData) {
+    var storeTotal float64
+    var channel chan float64 = make(chan float64)
+    for category, group := range data {
+        go group.TotalPrice(category, channel)
+    }
+    time.Sleep(time.Second * 5)
+    fmt.Println("-- Starting to receive from channel")
+    for i := 0; i < len(data); i++ {
+        fmt.Println("-- channel read pending")
+        value :=  <- channel
+        fmt.Println("-- channel read complete", value)
+        storeTotal += value
+        time.Sleep(time.Second)
+    }
+    fmt.Println("Total:", ToCurrency(storeTotal))
+}
+func (group ProductGroup) TotalPrice(category string, resultChannel chan float64)  {
+    var total float64
+    for _, p := range group {
+        //fmt.Println(category, "product:", p.Name)
+        total += p.Price
+        time.Sleep(time.Millisecond * 100)
+    }
+    fmt.Println(category, "channel sending", ToCurrency(total))
+    resultChannel <- total
+    fmt.Println(category, "channel send complete")
+}
+#+end_src
+
+The default channel behavior can lead to bursts of activity as goroutines do their work,
+followed by a long idle period waiting for messages to be received. This doesn’t have an
+impact on the example application because the goroutines finish once their messages are
+received, but in a real project goroutines often have repetitive tasks to perform, and
+waiting for a receiver can cause a performance bottleneck.
+
+
+An alternative approach is to create a channel with a buffer, which is used to accept values
+from a sender and store them until a receiver becomes available. This makes sending a
+message a nonblocking operation, allowing a sender to pass its value to the channel and
+continue working without having to wait for a receiver. This is similar to Alice having an
+inbox on her desk. Senders come to Alice’s office and put their message into the inbox,
+leaving it for Alice to read when she is ready. But, if the inbox is full, then they will
+have to wait until she has processed some of her backlog before sending a new message.
+
+
+It is possible to create bidirectional as well as uni-directional channels in golang. A
+channel can be created to which we can only send data, as well as a channel, can be created
+from which we can only receive data. This is determined by the direction of the arrow of the
+channel. The direction of the arrow for a channel specifies the direction of flow of data
+
++ ~chan~  :bidirectional channel (Both read and write)
++ ~chan <-~  :only writing to channel
++ ~<- chan~  :only reading from channel (input channel)
+** Receiving Without Blocking
+
+The simplest use for select statements is to receive from a channel without blocking,
+ensuring that a goroutine won’t have to wait when the channel is empty.
+
+
+#+begin_src go
+package main
+import (
+    "fmt"
+    "time"
+)
+// func receiveDispatches(channel <-chan DispatchNotification) {
+//     for details := range channel {
+//         fmt.Println("Dispatch to", details.Customer, ":", details.Quantity,
+//             "x", details.Product.Name)
+//     }
+//     fmt.Println("Channel has been closed")
+// }
+func main() {
+    dispatchChannel := make(chan DispatchNotification, 100)
+    go DispatchOrders(chan<- DispatchNotification(dispatchChannel))
+    // receiveDispatches((<-chan DispatchNotification)(dispatchChannel))
+    for {
+        select {
+            case details, ok := <- dispatchChannel:
+	                if ok {
+                    fmt.Println("Dispatch to", details.Customer, ":",
+                        details.Quantity, "x", details.Product.Name)
+                } else {
+                    fmt.Println("Channel has been closed")
+                    goto alldone
+                }
+            default:
+                fmt.Println("-- No message ready to be received")
+                time.Sleep(time.Millisecond * 500)
+        }
+    }
+    alldone: fmt.Println("All values received")
 }
 #+end_src
