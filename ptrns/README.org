@@ -4,43 +4,6 @@
 /Based on  Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph
 Johnson and John Vlissides/
 
-* Table of Content :TOC_3:
-- [[#introduction--basic-definition][Introduction & Basic Definition]]
-- [[#behavioral-patterns-018][Behavioral Patterns]]
-  - [[#strategy][Strategy]]
-  - [[#singleton][Singleton]]
-  - [[#command][Command]]
-  - [[#null-object][Null Object]]
-  - [[#specification-pattern][Specification Pattern]]
-  - [[#state][State]]
-  - [[#data-access-pattern][Data Access Pattern]]
-  - [[#mediator][Mediator]]
-  - [[#chain-of-responsibility][Chain of Responsibility]]
-  - [[#template-method][Template Method]]
-  - [[#visitor][Visitor]]
-  - [[#memento][Memento]]
-  - [[#rules-engine-pattern][Rules Engine Pattern]]
-  - [[#bridge][Bridge]]
-  - [[#interpreter][Interpreter]]
-  - [[#iterator][Iterator]]
-  - [[#observer][Observer]]
-  - [[#discussion-of-behavioral-patterns][Discussion of Behavioral Patterns]]
-- [[#creational-patterns-55][Creational Patterns]]
-  - [[#builder][Builder]]
-  - [[#prototype][Prototype]]
-  - [[#factory-design-pattern][Factory Design Pattern]]
-  - [[#factory-method][Factory Method]]
-  - [[#abstract-factory][Abstract Factory]]
-- [[#structural-patterns-17][Structural Patterns]]
-  - [[#facade][Facade]]
-  - [[#decorator][Decorator]]
-  - [[#composite][Composite]]
-  - [[#adapter][Adapter]]
-    - [[#object-adapter-pattern][Object Adapter Pattern]]
-  - [[#flyweight][Flyweight]]
-  - [[#proxy][Proxy]]
-  - [[#discussion-of-structural-patterns][Discussion of Structural Patterns]]
-
 * Introduction & Basic Definition
 
 Christopher Alexander says, "Each pattern describes a problem which occurs over and over

@@ -6,11 +6,6 @@
 The following text is based on /Concurrency in C# Cookbook: Asynchronous, Parallel, and
 Multithreaded Programming/ by Stephen Cleary
 
-* Table of Content :TOC_3:
-- [[#introduction][Introduction]]
-  - [[#asyncronous-programming][Asyncronous Programming]]
-- [[#async-problems--solutions][Async: Problems & Solutions]]
-
 * Introduction
 Before Starting, I’d like to clear up some terminology that I’ll be using throughout
 this book. Let’s start with concurrency.

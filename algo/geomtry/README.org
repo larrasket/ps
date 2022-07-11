@@ -1,4 +1,4 @@
-#+title: "Introduction to Non-theoretical Computational Geometry"
+#+title: Introduction to Non-theoretical Computational Geometry
 #+date: 2021-12-17T19:57:19+02:00
 #+description: The ultimate computational geometry for computer science tutorial
 #+draft: false
@@ -6,28 +6,6 @@
 
 Based on TopCoder's thrive and [[https://www.ti.inf.ethz.ch/ew/courses/CG13/index.html][Computational Geometry (252-1425-00L) HS13]] lecture notes.
 (Problems mostly from [[https://leetcode.com/tag/geometry][LeetCode]])
-* Table Of Content :TOC_3:
-- [[#introduction][Introduction]]
-- [[#vectors][Vectors]]
-  - [[#operations-on-vectors][Operations on Vectors]]
-    - [[#addition][Addition]]
-    - [[#dot-product][Dot Product]]
-    - [[#cross-product][Cross Product]]
-    - [[#line-point-distance][Line-Point Distance]]
-  - [[#polygon-area][Polygon Area]]
-- [[#intersection][Intersection]]
-- [[#finding-the-equation-of-a-line-for-a-segment][Finding The Equation of a Line for a Segment]]
-  - [[#real-case-vs-integer-case][Real Case vs. Integer Case]]
-- [[#orientation-of-3-points][Orientation of 3 Points]]
-- [[#finding-a-circle-from-3-points][Finding a Circle From 3 Points]]
-- [[#convex-hull][Convex Hull]]
-  - [[#jarvis-algorithm][Jarvi's algorithm]]
-    - [[#trace][Trace]]
-    - [[#complexity][Complexity]]
-    - [[#further-reading][Further Reading]]
-  - [[#grahm-scan][Grahm Scan]]
-  - [[#monotone-chain-algorithm][Monotone chain Algorithm]]
-
 * Introduction
 
 I'm not sure how to properly introduce this long plain text —or even how to put it—. You can

@@ -1,23 +1,5 @@
 #+TITLE: Working With Files and Streams in C#
 #+hugo_tags: "Computer Science" ".NET"
-* Table of Content :TOC_3:
-- [[#introduction][Introduction]]
-- [[#managing-files-and-directories][Managing Files and Directories]]
-  - [[#check-if-a-file-exist][Check if a File Exist]]
-  - [[#getting-the-parent-directory][Getting the Parent Directory]]
-  - [[#checking-if-a-directory-exist-and-creating-new-ones][Checking if a Directory Exist and Creating New Ones]]
-  - [[#copying-a-file][Copying a File]]
-  - [[#moving-a-file][Moving a File]]
-  - [[#getting-the-file-extension-from-a-file-name][Getting the File Extension from a File Name]]
-  - [[#deleting-a-directory][Deleting a Directory]]
-- [[#monitoring-the-file-system-for-changes][Monitoring the File System for Changes]]
-  - [[#the-filesystemwatcher-class][The ~FileSystemWatcher~ Class]]
-  - [[#buffer-and-buffersize][Buffer and ~BufferSize~]]
-  - [[#notification-filters][Notification Filters]]
-  - [[#other-properties][Other Properties]]
-  - [[#refactoring-to-use-a-filesystemwatcher][Refactoring to Use a FileSystemWatcher]]
-- [[#footnotes][Footnotes]]
-
 * Introduction
 I was thinking in the first place to make this file just a part of the major C# note file,
 but I believe that I might and will face a lot of filesystem topics, however I'm sure I will

@@ -1,16 +1,6 @@
 #+TITLE: Entity Framework
 #+hugo_tags: "Computer Science" ".NET"
 
-* Table of Content :TOC_3:
-- [[#introduction][Introduction]]
-  - [[#where-the-database-will-come-from][Where the Database Will Come From?]]
-- [[#querying-the-database][Querying The Database]]
-  - [[#the-classes-the-ef-core-maps-to-the-database][The Classes the EF Core Maps to the Database]]
-- [[#understanding-migrations][Understanding Migrations]]
-  - [[#trying-migrate][Trying Migrate]]
-  - [[#reverse-engineering-an-existing-database][Reverse Engineering an Existing Database]]
-- [[#migrate-commands][Migrate Commands]]
-
 * Introduction
 Entity Framework Core, or EF Core, is a library that software developers can use to
 access databases. There are many ways to build such a library, but EF Core is

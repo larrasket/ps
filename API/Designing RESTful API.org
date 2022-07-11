@@ -1,28 +1,5 @@
 #+TITLE: Designing RESTful APIs
 #+hugo_tags: "Computer Science"
-
-* Table of Content :TOC_3:
-- [[#representational-state-transfer-apis-basics-to-design][Representational State Transfer APIs: Basics to Design]]
-    - [[#introduction-and-history][Introduction and History]]
-    - [[#oversimplified-http][Oversimplified HTTP]]
-    - [[#what-is-rest][What is REST]]
-    - [[#designing-rest][Designing REST]]
-    - [[#designing-results][Designing Results]]
-    - [[#check-http-responses-list][Check HTTP Responses List]]
-    - [[#check-http-full-requests-list][Check HTTP Full Requests List]]
-- [[#going-complex][Going Complex]]
-  - [[#associations][Associations]]
-  - [[#paging][Paging]]
-  - [[#error-handling][Error Handling]]
-  - [[#caching][Caching]]
-  - [[#functional-apis][Functional APIs]]
-- [[#versioning-rest][Versioning REST]]
-  - [[#designing-versioning][Designing Versioning]]
-    - [[#versioning-with-the-uri-path][Versioning with The URI Path]]
-    - [[#versioning-with-query-string][Versioning with Query String]]
-    - [[#versioning-with-headers][Versioning with Headers]]
-    - [[#versioning-with-content-type][Versioning with Content Type]]
-
 * Representational State Transfer APIs: Basics to Design
 *** Introduction and History
 I'm not going to talk about how to implement these web APIs, but talk about the design

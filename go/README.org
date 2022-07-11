@@ -4,42 +4,6 @@
 #+description: GO Notebook
 #+hugo_tags: "Computer Science" "GO"
 
-* Table of Content :TOC_3:
-- [[#introduction][Introduction]]
-- [[#get-go][get-go]]
-  - [[#define-a-data-type][Define a Data Type]]
-- [[#using-the-go-tools][Using The Go Tools]]
-  - [[#creating-a-go-project][Creating a Go Project]]
-  - [[#semicolons-and-errors-in-go-code][Semicolons and Errors in Go Code]]
-  - [[#defining-a-module][Defining a Module]]
-  - [[#linting-go-code][Linting Go Code]]
-    - [[#on-linting][On Linting]]
-    - [[#using-the-linter][Using the Linter]]
-    - [[#disabling-linter-rules][Disabling Linter Rules]]
-  - [[#fixing-common-problems-in-go][Fixing Common Problems in Go]]
-- [[#types-values-pointers][Types, Values, Pointers]]
-  - [[#basic-data-types][Basic Data Types]]
-  - [[#variables][Variables]]
-    - [[#short-variable-declaration-syntax][Short Variable Declaration Syntax]]
-    - [[#blank-declaration][Blank Declaration]]
-  - [[#pointers][Pointers]]
-    - [[#some-operators][Some Operators]]
-  - [[#flow-control][Flow Control]]
-- [[#collection-types][Collection Types]]
-  - [[#slices][Slices]]
-    - [[#the-copy-function][The Copy Function]]
-- [[#functions][Functions]]
-  - [[#defer][~defer~]]
-- [[#struct][Struct]]
-- [[#interfaces][Interfaces]]
-- [[#packages][Packages]]
-  - [[#package-conflicts][Package Conflicts]]
-  - [[#package-initialization][Package Initialization]]
-    - [[#import-package-for-intialization][Import Package For Intialization]]
-- [[#interface-composition][Interface Composition]]
-- [[#goroutines][Goroutines]]
-  - [[#receiving-without-blocking][Receiving Without Blocking]]
-
 * Introduction
 
 GO programming language notes. Reading Adam Freeman's Pro Go.
@@ -1930,3 +1894,73 @@ func main() {
     alldone: fmt.Println("All values received")
 }
 #+end_src
+* Error Handling
+
+This file defines a custom type named Product, an alias for a slice of *Product values, and
+a slice populated using the literal syntax. I have also defined a function to format float64
+values into dollar currency amounts.
+
+#+begin_src go
+package main
+
+import "strconv"
+import "fmt"
+
+type Product struct {
+	Name, Category string
+	Price          float64
+}
+type ProductSlice []*Product
+
+var Products = ProductSlice{
+	{"Kayak", "Watersports", 279},
+	{"Lifejacket", "Watersports", 49.95},
+	{"Soccer Ball", "Soccer", 19.50},
+	{"Corner Flags", "Soccer", 34.95},
+	{"Stadium", "Soccer", 79500},
+	{"Thinking Cap", "Chess", 16},
+	{"Unsteady Chair", "Chess", 75},
+	{"Bling-Bling King", "Chess", 1200},
+}
+
+func ToCurrency(val float64) string {
+	return "$" + strconv.FormatFloat(val, 'f', 2, 64)
+}
+func main() {
+	categories := []string{"Watersports", "Chess"}
+	for _, cat := range categories {
+		total := Products.TotalPrice(cat)
+		fmt.Println(cat, "Total:", ToCurrency(total))
+	}
+}
+func (slice ProductSlice) TotalPrice(category string) (total float64) {
+	for _, p := range slice {
+		if p.Category == category {
+			total += p.Price
+		}
+	}
+	return
+}
+#+end_src
+
+#+RESULTS:
+: Watersports Total: $328.95
+: Chess Total: $1291.00
+
+Go makes it easy to express exceptional conditions, which allows a function or method to
+indicate to the calling code that something has gone wrong. As an example this adds
+statements that produce a problematic response from the ~TotalPrice~ method
+#+begin_src go
+func main() {
+	categories := []string{"Watersports", "Chess", "Running"}
+	for _, cat := range categories {
+		total := Products.TotalPrice(cat)
+		fmt.Println(cat, "Total:", ToCurrency(total))
+	}
+}
+#+end_src
+
+#+RESULTS:
+: Watersports Total: $328.95
+: Chess Total: $1291.00
+: Running Total: $0.00

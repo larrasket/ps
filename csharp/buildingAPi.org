@@ -2,16 +2,6 @@
 #+hugo_tags: "Computer Science" ".NET"
 Check: [[https://github.com/salehmu/leet/blob/main/API/Designing%20RESTful%20API.org][Designing RESTful APIs]]
 
-* Table of Content :TOC_3:
-- [[#introduction-the-richardson-maturity-model][Introduction, The Richardson Maturity Model]]
-- [[#structuring-outer-facing-contract][Structuring Outer Facing Contract]]
-  - [[#status-codes][Status Codes]]
-    - [[#level-200][Level 200]]
-    - [[#level-400][Level 400]]
-  - [[#errors-vs-faults][Errors vs. Faults]]
-- [[#getting-resources][Getting Resources]]
-- [[#footnotes][Footnotes]]
-
 * Introduction, The Richardson Maturity Model
 The Richardson Maturity Model is a model developed by Leonard Richardson. It grades, if you
 will, APIs by the their RESTful maturity. So it's interesting to look at it, as it shows us

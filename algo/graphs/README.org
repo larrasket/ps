@@ -1,40 +1,8 @@
-#+title: "Representations, Implementations and Algorithms of Graphs (and Trees)"
+#+title: Representations, Implementations and Algorithms of Graphs (and Trees)
 #+date: 2022-01-03T14:56:42+02:00
 #+hugo_tags: "Grahps" "Algorithms" "Computer Science"
 #+description: A simplified introduction into graph theory applications.
-#+draft: true
-
-* Table of Content :TOC_3:
-- [[#terminology][Terminology]]
-- [[#direction-relationships][Direction Relationships]]
-- [[#adjacency-matrix-vs-adjacency-list][Adjacency Matrix vs. Adjacency List]]
-- [[#multigraph-multi-edges-graph][Multigraph (Multi-edges graph)]]
-- [[#weighted-graph][Weighted Graph]]
-- [[#transpose-graph][Transpose Graph]]
-- [[#definition-sheet][Definition Sheet]]
-- [[#graph-traversal][Graph Traversal]]
-  - [[#depth-first-search-dfs][Depth First Search (DFS)]]
-  - [[#strongly-connected-components-scc][Strongly Connected Components (SCC)]]
-    - [[#kosarjus-algorithm][Kosarju's Algorithm]]
-    - [[#tarjans-algorithm][Tarjan's Algorithm]]
-- [[#detecting-cycles][Detecting Cycles]]
-  - [[#directed-graphs][Directed Graphs]]
-    - [[#using-depth-first-search][Using Depth First Search]]
-- [[#biconnected-components][Biconnected Components]]
-- [[#problems][Problems]]
-  - [[#reach-the-mother-vertex][Reach The Mother Vertex]]
-- [[#todos-topics-010][TODOs Topics]]
-  - [[#bfs][BFS]]
-  - [[#handling-disconnected-graphs][Handling Disconnected graphs]]
-  - [[#bellmanford-algorithm][Bellman–Ford algorithm]]
-  - [[#floydwarshall-algorithm][Floyd–Warshall algorithm]]
-  - [[#union-find-algorithm][Union-Find Algorithm]]
-  - [[#tarjans-strongly-connected-components-algorithm][Tarjan's strongly connected components algorithm]]
-  - [[#shortest-path][Shortest Path]]
-  - [[#longest-path][Longest Path]]
-  - [[#tree][Tree]]
-  - [[#tree-diamteter-aka-logest-path][Tree Diamteter /(aka. Logest Path)/]]
-- [[#footnotes][Footnotes]]
+#+draft: false
 
 * Terminology
 A graph $G = (V, E)$ consists of a set of vertices $V$ and a set of edges $E$, such that each edge

@@ -2,30 +2,6 @@
 #+hugo_tags: "Computer Science" "Databases"
 #+date: 2022-01-08T05:28:26+02:00
 
-* Table of Content :TOC_3:
-- [[#introduction-into-postgresql][Introduction into PostgreSQL]]
-  - [[#selecting][Selecting]]
-    - [[#regular-selection][Regular Selection]]
-    - [[#select-distinct-rows-using-distinct-operator][Select distinct rows using ~distinct~ operator]]
-    - [[#sort-rows-using-order-by][Sort rows using ~order by~]]
-    - [[#filter-rows-using-where][Filter rows using ~where~]]
-    - [[#in][IN]]
-    - [[#group-using-group-by][Group using ~group by~]]
-    - [[#filter-group-using-having][Filter group using ~having~]]
-    - [[#perform-set-operations-using-union-intersect-and-except][Perform set operations using ~UNION~, ~intersect~ and ~except~]]
-    - [[#grouping-sets][Grouping Sets]]
-    - [[#joins][Joins]]
-    - [[#sub-queries][Sub-queries]]
-    - [[#exist][Exist]]
-  - [[#tables-management][Tables Management]]
-    - [[#upsert][Upsert]]
-    - [[#alert][Alert]]
-    - [[#truncate][Truncate]]
-    - [[#temporary-tables][Temporary Tables]]
-    - [[#other-utilities][Other Utilities]]
-  - [[#logging][Logging]]
-  - [[#check][Check]]
-
 * Introduction into PostgreSQL
 Notes:
 + SQL commands is not case sensitive, therefore ~SELECT~ = ~select~ = ~SeLeCt~
