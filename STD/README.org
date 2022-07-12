@@ -1167,6 +1167,25 @@ value = (float)System.Math.Round(value,2);
 #+begin_src csharp
 var items = Enumerable.Repeat<bool>(true, 1000).ToArray();  // Or ToList(), etc.
 #+end_src
+** Reverse String
+#+begin_src csharp
+public string Reverse(string text)
+{
+   if (text == null) return null;
+
+   // this was posted by petebob as well
+   char[] array = text.ToCharArray();
+   Array.Reverse(array);
+   return new String(array);
+}
+
+public string ReverseString(string srtVarable)
+{
+    return new string(srtVarable.Reverse().ToArray());
+}
+
+
+#+end_src
 
 * ASP.NET Notes
 ** Redirect Manage to Login
