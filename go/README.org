@@ -143,7 +143,7 @@ responses variable to the newly created slice. I don’t have to specify the typ
 responses variable because the Go compiler will infer it from the value that is assigned to
 it.
 
-* Using The Go Tools
+** Using The Go Tools
 
 The go command provides access to all the features needed to compile and execute Go code and
 is used throughout this book. The argument used with the go command specifies the operation
@@ -166,7 +166,7 @@ most useful ones
 | ~vet~     | The go vet command detects common problems in Go code                                                                                                                                                                           |
 |-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-** Creating a Go Project
+*** Creating a Go Project
 
 Go projects don’t have an elaborate structure and are quick to set up. Open a new command
 prompt and create a folder named tools in a convenient location. Add a file named main.go to
@@ -202,7 +202,7 @@ The remaining statements in the main.go file define a function named main.  When
 a function named main in a package named main, you create an entry point, which is where
 execution begins in a command-line application
 
-** Semicolons and Errors in Go Code
+*** Semicolons and Errors in Go Code
 You may have noticed that I didn't append a semicolon in the previous code.
 Go has an unusual approach to semicolons: they are required to terminate code statements, but they
 are not required in source code files. Instead, the Go build tools figure out where the semicolons need to
@@ -249,7 +249,7 @@ writing code in languages that require semicolons for decades, so you may find t
 occasional example where I have added semicolons purely by habit. The go fmt command will
 remove semicolons and adjust other formatting issues.
 
-** Defining a Module
+*** Defining a Module
 The previous section demonstrated that you can get `tarted just by creating a code file, but
 a more common approach is to create a Go module, which is the conventional first step when
 starting a new project. Creating a Go module allows a project to easily consume third-party
@@ -263,7 +263,7 @@ This command adds a file named go.mod to the tools folder. The reason that most 
 the go mod init command is that it simplifies the build process. Instead of specifying a particular code file,
 the project can be built and executed using a period, indicating the project in the current directory.
 
-** Linting Go Code
+*** Linting Go Code
 A linter is a tool that checks code files using a set of rules that describe problems that
 cause confusion, produce unexpected results, or reduce the readability of the code. The most
 widely used linter for Go is called golint, which applies rules taken from two sources. The
@@ -281,7 +281,7 @@ the command shown:
 go install github.com/mgechev/revive@latest
 #+end_src
 
-*** On Linting
+**** On Linting
 
 
 Linters can be a powerful tool for good, especially in a development team with mixed levels of skill and
@@ -304,7 +304,7 @@ individual developers the freedom to express themselves naturally and focus only
 a discernible impact on the project. This is counter to the opinionated ethos of Go, but my view is that
 productivity is not achieved by slavishly enforcing arbitrary rules, however well-intentioned they may be.
 
-*** Using the Linter
+**** Using the Linter
 
 The main.go file is so simple that it doesn’t have any problems for the linter to highlight.
 Add the following statements, which are legal Go code that does not comply with
@@ -371,7 +371,7 @@ func PrintNumber(number int) {
 #+RESULTS:
 : Hello, Go01234
 
-*** Disabling Linter Rules
+**** Disabling Linter Rules
 The revive package can be configured using comments in code files, disabling one or more
 rules for sections of code. I have used comments to disable the rule that causes the warning
 for the ~PrintNumber~ function.
@@ -444,7 +444,7 @@ This is the default revive configuration described at
 https://github.com/mgechev/revive#recommended-­configuration, except that I have put a #
 character before the entry that enables the exported rule.
 
-** Fixing Common Problems in Go
+*** Fixing Common Problems in Go
 The go vet command identifies statements likely to be mistakes. Unlike a linter, which will
 often focus on style issues, the go vet command finds code that compiles but that probably
 won’t do what the developer intended.
@@ -516,7 +516,7 @@ go vet -json .
 }
 #+end_src
 
-* Types, Values, Pointers
+** Types, Values, Pointers
 The folloing table puts the basic Go features in context.
 
 | Problem                                                        | Solution                                            |
@@ -549,7 +549,7 @@ The code in the main.go file will be compiled and executed, producing the follow
 
 The output from the code will always be the same value.
 
-** Basic Data Types
+*** Basic Data Types
 Go provides a set of basic data types, which are described in the table.
 These types are the foundation of Go development, and many of
 the characteristics of these types will be familiar from other languages.
@@ -660,7 +660,7 @@ func main() {
 }
 #+end_src
 
-** Variables
+*** Variables
 
 
 
@@ -709,7 +709,7 @@ func main() {
 }
 #+end_src
 
-*** Short Variable Declaration Syntax
+**** Short Variable Declaration Syntax
 The short variable declaration provides a shorthand for declaring variables, as shown:
 
 #+begin_src go
@@ -772,7 +772,7 @@ func main() {
 }
 #+end_src
 
-*** Blank Declaration
+**** Blank Declaration
 
 It is illegal in Go to define a variable and not use it:
 
@@ -821,7 +821,7 @@ func f() (int, int, int) {
 }
 #+end_src
 
-** Pointers
+*** Pointers
 
 Pointers are often misunderstood, especially if you have come to Go from a language such as
 Java or C#, where pointers are used behind the scenes but carefully hidden from the
@@ -861,7 +861,7 @@ int value, for example; increment the value by the number of bits used to store 
 read the adjacent value. This can be useful but can cause unexpected results, such as trying
 to access the wrong location or a location outside of the memory allocated to the program.
 
-*** Some Operators
+**** Some Operators
 
 
 
@@ -917,7 +917,7 @@ Explicit conversions can be used only when the value can be represented in the t
 This means you can convert between numeric types and between strings and runes, but other
 combinations, such as converting int values to bool values, are not supported.
 
-** Flow Control
+*** Flow Control
 The flow of execution in a Go application is simple to understand, especially when the
 application is as simple as the example. The statements defined in the special main
 function, known as the application’s entry point, are executed in the order in which they
@@ -959,7 +959,7 @@ func main() {
 #+RESULTS:
 : Price: 275
 
-* Collection Types
+** Collection Types
 
 Go arrays are a fixed length and contain elements of a single type, which are accessed by
 index,
@@ -1023,7 +1023,7 @@ func main() {
 }
 #+end_src
 
-** Slices
+*** Slices
 
 The best way to think of slices is as a variable-length array because they are useful when
 you don’t know how many values you need to store or when the number changes over time. One
@@ -1127,7 +1127,7 @@ fmt.Println("allNames", allNames)
 : 12
 : someNames: [Paddle Hat]
 : allNames [Shblanga Lifejacket Paddle Hat]
-*** The Copy Function
+**** The Copy Function
 #+begin_src go
 package main
 import "fmt"
@@ -1144,7 +1144,7 @@ func main() {
 #+RESULTS:
 : someNames: [Lifejacket Paddle]
 : allNames [Lifejacket Paddle Hat]
-* Functions
+** Functions
 Functions are groups of statements that can be used and reused as a single action. To get started
 define a simple function:
 #+begin_src go
@@ -1166,7 +1166,7 @@ func main() {
 : About to call function
 : Price: 275 Tax: 55
 : Function complete
-** ~defer~
+*** ~defer~
 The defer keyword is used to schedule a function call that will be performed immediately before the current
 function returns, as shown
 #+begin_src go
@@ -1199,7 +1199,7 @@ func main() {
 : Second defer call
 : First defer call
 : Total: 323.95
-* Struct
+** Struct
 
 
 Custom data types are defined using the Go structs feature:
@@ -1234,8 +1234,8 @@ achieves the same effect as having separate type categories but with the additio
 flexibility of allowing the choice to be made every time a value is used. It does, however,
 require more diligence from the programmer, who must think through the consequences of that
 choice during coding. Neither approach is better, and the results are essentially the same.
-* TODO Interfaces
-* Packages
+** TODO Interfaces
+** Packages
 
 The first step for all the example projects in this book has been to create a module file,
 which was done with the command:
@@ -1342,7 +1342,7 @@ func (taxRate *taxRate) calcTax(product *Product) float64 {
 }
 ...
 #+end_src
-** Package Conflicts
+*** Package Conflicts
 
 When a package is imported, the combination of the module name and package name ensures that
 the package is uniquely identified. But only the package name is used when accessing the
@@ -1400,7 +1400,7 @@ func main() {
     fmt.Println("Price:", ToCurrency(product.Price()))
 }
 #+end_src
-** Package Initialization
+*** Package Initialization
 
 Each code file can contain an initialization function that is executed only when all
 packages have been loaded and all other initialization—such as defining constants and
@@ -1439,7 +1439,7 @@ func (taxRate *taxRate) calcTax(product *Product) (price float64) {
     return
 }
 #+end_src
-*** Import Package For Intialization
+**** Import Package For Intialization
 
 Go prevents packages from being imported but not used, which can be a problem if you rely on
 the effect of an initialization function but don’t need to use any of the features the
@@ -1480,7 +1480,7 @@ func main() {
     fmt.Println("Total:",  ToCurrency(cart.GetTotal()))
 }
 #+end_src
-* Interface Composition
+** Interface Composition
 If you are used to languages such as C# or Java, then you will have created a base class and
 created subclasses to add more specific features. The subclasses inherit functionality from
 the base class, which prevents code duplication. The result is a set of classes, where the
@@ -1556,7 +1556,7 @@ type Boat struct {
     Motorized bool
 }
 #+end_src
-* Goroutines
+** Goroutines
 
 Go has excellent support for writing concurrent applications, using features that are
 simpler and more intuitive than any other language I have used. In this chapter, I describe
@@ -1853,7 +1853,7 @@ channel. The direction of the arrow for a channel specifies the direction of flo
 + ~chan~  :bidirectional channel (Both read and write)
 + ~chan <-~  :only writing to channel
 + ~<- chan~  :only reading from channel (input channel)
-** Receiving Without Blocking
+*** Receiving Without Blocking
 
 The simplest use for select statements is to receive from a channel without blocking,
 ensuring that a goroutine won’t have to wait when the channel is empty.
@@ -1894,7 +1894,7 @@ func main() {
     alldone: fmt.Println("All values received")
 }
 #+end_src
-* Error Handling
+** Error Handling
 
 This file defines a custom type named Product, an alias for a slice of *Product values, and
 a slice populated using the literal syntax. I have also defined a function to format float64
@@ -1964,3 +1964,21 @@ func main() {
 : Watersports Total: $328.95
 : Chess Total: $1291.00
 : Running Total: $0.00
+
+# * Go Standard Library
+# ** String
+
+# The strings package provides a set of functions for processing strings. In the sections that
+# follow, I describe the most useful features of the strings package and demonstrate their
+# use.
+# *** Compare Strings
+# The ~strings~ packages provides comparison functions;
+
+# | Function                 | Description                                                                                                |
+# |--------------------------+------------------------------------------------------------------------------------------------------------|
+# | ~Contains(s, substr)~    | This function returns true if the string s contains substr and false if it does not.                       |
+# | ~ContainsAny(s, substr)~ | This function returns true if the string s contains any of the characters contained in the string substr.  |
+# | ~EqualFold(s1, s2)~      | This function performs a case-*insensitive* comparison and returns true of strings s1 and s2 are the same. |
+# | ~ContainsRune(s, rune)~  | This function returns true if the string s contains a specific rune.                                       |
+# | ~HasPrefix(s, prefix)~   | This function returns true if the string s begins with the string prefix.                                  |
+# | ~HasSuffix(s, suffix)~   | This function returns true if the string ends with the string suffix.                                      |
