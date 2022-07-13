@@ -1639,6 +1639,18 @@ builder.Services.AddSingleton<Helper.ServiceResolver>(provider => key =>
 #+end_src
 To consume it:
 
+* Entity Framework
+
+** Update Entity
+#+begin_src csharp
+public async Task<bool> Update(MyObject item)
+{
+    Context.Entry(await Context.MyDbSet.FirstOrDefaultAsync(x => x.Id == item.Id)).CurrentValues.SetValues(item);
+    return (await   Context.SaveChangesAsync()) > 0;
+}
+#+end_src
+
+
 * Regex
 Match everything except for specified strings
 #+begin_src regex
