@@ -1,11 +1,15 @@
 #+TITLE: Working With Files and Streams in C#
+#+DATA: <2022-02-28 Mon>
 #+hugo_tags: "Computer Science" ".NET"
 * Introduction
+#+BEGIN_PREVIEW
 I was thinking in the first place to make this file just a part of the major C# note file,
 but I believe that I might and will face a lot of filesystem topics, however I'm sure I will
 not ever solve such a problem using C# (don't shout, microsoft kid), but surely it will be
 useful to know. (Actually no, it probably will not but I Wall feel insecure if I didn't know
 it).
+#+END_PREVIEW
+
 * Managing Files and Directories
 ** Check if a File Exist
 Sometimes when we're processing a file, we don't want to process a file that doesn't exist,

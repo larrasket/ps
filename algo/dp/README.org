@@ -1,11 +1,15 @@
 #+TITLE: Dynamic Programming
+#+DATE: <2021-05-31 Mon>
 #+hugo_tags: "Computer Science"
 #+AUTHOR: ghd
 * Introduction
 
+#+BEGIN_PREVIEW
 Follows:
 Roofgarden, T. (2019). /Algorithms Illuminated (Part 3): Greedy Algorithms and Dynamic
 Programming/ (Illustrated ed.). Soundlikeyourself Publishing, LLC. [[https://www.youtube.com/channel/UCcH4Ga14Y4ELFKrEYM1vXCg/videos][Channel @ YouTube.com]]
+#+END_PREVIEW
+
 
 * Objectives
 

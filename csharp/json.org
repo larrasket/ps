@@ -1,8 +1,12 @@
 #+TITLE: JSON in C# Using Json.NET
+#+DATE: <2022-02-14 Mon>
 #+hugo_tags: "Computer Science" ".NET"
 
+#+BEGIN_PREVIEW
 One of the most popular .NET libraries for working with the JSON serialization
 format is Newtonsoft.Json, known as Json.NET. It is mature and powerful.
+#+END_PREVIEW
+
 * Introduction
 
 Let's start by defining what JSON is. JSON stands for JavaScript Object Notation.  It is a

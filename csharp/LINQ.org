@@ -1,10 +1,10 @@
 #+title: LINQ Notes
-#+draft: false
-#+date: 2022-01-08T05:28:26+02:00
+#+date: <2022-01-09 Sun>
 #+hugo_tags: "Computer Science" ".NET"
 
 * Motivation
 *What is LINQ?*
+
 
 Suppose you are writing an application using .NET. Chances are high that at
 some point you’ll need to persist objects to a database, query the database, and load the
@@ -15,6 +15,7 @@ object-oriented platforms and imperative programming lan- guages such as C# and 
 However, after all these years, relational databases are still pervasive, and you still have
 to struggle with data access and persistence in all of your programs.
 
+#+BEGIN_PREVIEW
 The original motivation behind LINQ was to address the conceptual and tech- nical
 difficulties encountered when using databases with .NET programming lan- guages. With LINQ,
 Microsoft’s intention was to provide a solution for the problem of object-relational
@@ -22,6 +23,9 @@ mapping, as well as to simplify the interaction between objects and data sources
 eventually evolved into a general-purpose language-integrated querying toolset. This toolset
 can be used to access data com- ing from in-memory objects (LINQ to Objects), databases
 (LINQ to SQL), XML documents (LINQ to XML), a file-system, or any other source.
+#+END_PREVIEW
+
+
 
 sions to these languages: LINQ means Language-INtegrated Query.
  Before LINQ, we had to juggle different languages like SQL, XML, or XPath

@@ -1,12 +1,18 @@
 #+TITLE: Designing RESTful APIs
+#+DATE: <2021-03-22 Mon>
 #+hugo_tags: "Computer Science"
 * Representational State Transfer APIs: Basics to Design
 *** Introduction and History
+
+#+BEGIN_PREVIEW
 I'm not going to talk about how to implement these web APIs, but talk about the design
 aspects of how to design them so that they're easier to use and easier to maintain. The goal
 here is for you to understand REST's role in creation of this API, not to simply adhere to
 the dogma that surrounds REST. I want to introduce you to a way of designing APIs that's
 pragmatic and simple.
+#+END_PREVIEW
+
+
 
 When you consider creating a web API, I want you to realize that this is a problem that has
 a long history. We've been trying to connect different systems together for a long time.  In

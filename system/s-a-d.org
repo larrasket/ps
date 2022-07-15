@@ -1,9 +1,10 @@
 #+TITLE: System Analysis & Design
 #+hugo_tags: "Computer Science" ".NET"
-#+date: 2022-01-08T05:28:26+02:00
+#+date: <2022-01-10 Mon 00:00>
 
 * Introduction
 
+#+BEGIN_PREVIEW
 The systems development life cycle (SDLC), contains the fundamental four- phase model
 (planning, analysis, design, and implementation) common to all information  systems
 development projects. It describes the evolution of system development method- ologies and
@@ -11,6 +12,8 @@ discusses the roles and skills required of a systems analyst. Th e chapter then 
 the basic characteristics of object-oriented systems and the fundamentals of object-oriented
 systems analysis and design and closes with a description of the Unified Process and its
 extentions and Unified Modeling Language
+#+END_PREVIEW
+
 
 ** A Cries
 Let's take a look at how the software engineering cries has been formed:

@@ -1,12 +1,15 @@
 #+title: GO Notes
-#+date: 2022-01-08T05:28:26+02:00
+#+date: <2022-01-09 Sun>
 #+draft: false
 #+description: GO Notebook
 #+hugo_tags: "Computer Science" "GO"
 
 * Introduction
 
+#+BEGIN_PREVIEW
 GO programming language notes. Reading Adam Freeman's Pro Go.
+#+END_PREVIEW
+
 
 * get-go
 

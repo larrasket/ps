@@ -1,6 +1,11 @@
 #+TITLE: PostgreSQL Notes
 #+hugo_tags: "Computer Science" "Databases"
-#+date: 2022-01-08T05:28:26+02:00
+#+date: <2022-01-09 Sun 00:00>
+
+#+BEGIN_PREVIEW
+PostgreSQL mini-cookbook
+#+END_PREVIEW
+
 
 * Introduction into PostgreSQL
 Notes:

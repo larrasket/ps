@@ -1,5 +1,10 @@
 #+TITLE: Binary Tree Algorithms
+#+DATE: <2021-01-04 Mon>
 #+hugo_tags: "Computer Science"
+#+BEGIN_PREVIEW
+Introduction into binary trees algorithms
+#+END_PREVIEW
+
 * Binart Tree Traversal
 ** DFS
 Often we wish to process a binary tree by “visiting” each of its nodes, each time

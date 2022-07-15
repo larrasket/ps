@@ -1,4 +1,4 @@
-* MOST OF THE CONTENT WILL BE JUST A MIRROR OF http://salehmu.github.io/tags/computer-science/
+* MOST OF THE CONTENT WILL BE JUST A MIRROR OF https://salehmu.github.io/cs.html
 * Content
 + [[file:algo/][Algorithms]]
   + [[file:algo/geomtry][Computational Geometry]]

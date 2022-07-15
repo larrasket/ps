@@ -1,12 +1,18 @@
 #+title: Building a RESTful API with ASP.NET Core
+#+data: <2022-04-02 Sat>
 #+hugo_tags: "Computer Science" ".NET"
+
+
 Check: [[https://github.com/salehmu/leet/blob/main/API/Designing%20RESTful%20API.org][Designing RESTful APIs]]
 
 * Introduction, The Richardson Maturity Model
+#+BEGIN_PREVIEW
 The Richardson Maturity Model is a model developed by Leonard Richardson. It grades, if you
 will, APIs by the their RESTful maturity. So it's interesting to look at it, as it shows us
 how we can go from a simple API that doesn't really care about protocol, nor standards. To
 an API, that can be considered RESTful.
+#+END_PREVIEW
+
 
 The first level is level 0, the Swamp of POX, or Plain Old XML. This level states that the
 implementing protocol, HTTP, is used for remote interaction, but we just use it as that, and

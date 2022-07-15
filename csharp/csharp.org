@@ -1,5 +1,5 @@
 #+title: .NET Notes in C#
-#+date: 2022-01-08T05:28:26+02:00
+#+date: <2022-01-09 Sun>
 #+draft: false
 #+description: C# Notebook
 #+hugo_tags: "Computer Science" ".NET"
@@ -82,9 +82,12 @@ Your projects must target either ~netcoreapp3.0~ or ~netstandard2.1~ to use the 
 features of C# 8.0.
 ** C# Basics
 
+#+BEGIN_PREVIEW
 C# indicates the end of a statement with a semicolon. A statement can be composed of
 multiple variables and expressions. For example, in the following statement, ~totalPrice~ is a
 variable and ~subtotal + salesTax~ is an expression:
+#+END_PREVIEW
+
 
 #+begin_src C++
 var totalPrice = subtotal + salesTax;

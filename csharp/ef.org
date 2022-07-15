@@ -1,7 +1,9 @@
 #+TITLE: Entity Framework
 #+hugo_tags: "Computer Science" ".NET"
+#+DATA: <2022-03-21 Mon>
 
 * Introduction
+#+BEGIN_PREVIEW
 Entity Framework Core, or EF Core, is a library that software developers can use to
 access databases. There are many ways to build such a library, but EF Core is
 designed as an object-relational mapper (O/RM). O/RMs work by mapping between
@@ -9,6 +11,8 @@ two worlds: the relational database, with its own API, and the object-oriented s
 ware world of classes and software code. EF Core’s main strength is allowing software
 developers to write database access code quickly in a language that you may know
 better than SQL.
+#+END_PREVIEW
+
 
 As they say, EF can be just an portal of OOP into databases, here is the EF Core mapping
 between a database and .NET software:

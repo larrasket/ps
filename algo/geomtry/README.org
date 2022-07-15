@@ -1,10 +1,13 @@
 #+title: Introduction to Non-theoretical Computational Geometry
-#+date: 2021-12-17T19:57:19+02:00
+#+date: <2021-12-18 Sat>
 #+description: The ultimate computational geometry for computer science tutorial
 #+draft: false
 #+hugo_tags: "Computer Science" "Algorithms"
 
+#+BEGIN_PREVIEW
 Based on TopCoder's thrive and [[https://www.ti.inf.ethz.ch/ew/courses/CG13/index.html][Computational Geometry (252-1425-00L) HS13]] lecture notes.
+#+END_PREVIEW
+
 (Problems mostly from [[https://leetcode.com/tag/geometry][LeetCode]])
 * Introduction
 

@@ -1,10 +1,13 @@
-#+title: "Async Basics"
-#+date: 2022-01-08T05:28:26+02:00
-#+draft: true
+#+title: Concurrency in C#
+#+date: <2022-01-09>
 #+hugo_tags: "Computer Science" ".NET"
 
+
+#+BEGIN_PREVIEW
 The following text is based on /Concurrency in C# Cookbook: Asynchronous, Parallel, and
 Multithreaded Programming/ by Stephen Cleary
+#+END_PREVIEW
+
 
 * Introduction
 Before Starting, I’d like to clear up some terminology that I’ll be using throughout

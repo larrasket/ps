@@ -1,8 +1,12 @@
 #+TITLE: Design Patterns
+#+DATA: <2022-01-15 Sat>
 #+hugo_tags: "Computer Science"
 
+#+BEGIN_PREVIEW
 /Based on  Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph
 Johnson and John Vlissides/
+#+END_PREVIEW
+
 
 * Introduction & Basic Definition
 

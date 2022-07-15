@@ -1,4 +1,5 @@
 #+title: Relational Database Design & Modeling
+#+DATA: <2021-03-05 Fri>
 
 * Relational Language
 
@@ -215,11 +216,16 @@ are also referred to as primary key constraints.
 
 * Design
 ** Introduction
+
+#+BEGIN_PREVIEW
 Nowadays, when people talk about a database, they usually refer to a Relational database,
 but that has not always been the case. In fact, the term database is defined, by the Merriam
 Webster English dictionary as, a "usually large collection of data organized especially for
 rapid search and retrieval (as by a computer)". The Relational model is one way to organize
 a large collection of data, but not the only one.
+#+END_PREVIEW
+
+
 
 In the earlier days of computing, there was only one way to organize data. Due to the
 limitations of storage on punch cards, punch tape, or magnetic tape, data had to stored as a
