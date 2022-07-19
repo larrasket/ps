@@ -962,6 +962,34 @@ func main() {
 #+RESULTS:
 : Price: 275
 
+*** Loops
++ *Three-component loop*
+  #+begin_src go
+sum := 0
+for i := 1; i < 5; i++ {
+    sum += i
+}
+fmt.Println(sum) // 10 (1+2+3+4)
+  #+end_src
++ *While Loop*
+  #+begin_src go
+n := 1
+for n < 5 {
+    n *= 2
+}
+fmt.Println(n) // 8 (1*2*2*2)
+  #+end_src
++ *For-each range loop*
+  #+begin_src go
+strings := []string{"hello", "world"}
+for i, s := range strings {
+    fmt.Println(i, s)
+}
+
+  #+end_src
+
+
+
 ** Collection Types
 
 Go arrays are a fixed length and contain elements of a single type, which are accessed by
@@ -2018,3 +2046,14 @@ func main() {
 : 3...2...1...ignition
 
  ,
+*** Editing a String
+
+Strings are immutable in Go, you have to convert it to runes then modify it then convert it
+back to a string.
+#+begin_src go
+func replaceAtIndex(in string, r rune, i int) string {
+    out := []rune(in)
+    out[i] = r
+    return string(out)
+}
+#+end_src
