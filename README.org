@@ -1,4 +1,4 @@
-* MOST OF THE CONTENT WILL BE JUST A MIRROR OF https://salehmu.github.io/cs.html
+* MOST OF THE CONTENT WILL BE JUST A MIRROR OF https://salehmu.github.io/cs.html, SOMETHINGS MIGHT BE BROKE, NOT READABLE WITH GITHUB'S MARKDOWN RENDERING
 * Content
 + [[file:algo/][Algorithms]]
   + [[file:algo/geomtry][Computational Geometry]]
