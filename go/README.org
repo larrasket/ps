@@ -2057,3 +2057,35 @@ func replaceAtIndex(in string, r rune, i int) string {
     return string(out)
 }
 #+end_src
+
+*** String Mapping
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "strings"
+)
+
+func main() {
+    transform := func(r rune) rune {
+        // Map uppercase A to underscore.
+        if r == 'A' {
+            return '_'
+        }
+        return r
+    }
+
+    input := "STARRY NIGHT, A PAINTING"
+    fmt.Println(input)
+
+    // Use Map() to run func on each rune.
+    result := strings.Map(transform, input)
+    fmt.Println(result)
+}
+
+#+end_src
+
+#+RESULTS:
+: STARRY NIGHT, A PAINTING
+: ST_RRY NIGHT, _ P_INTING
