@@ -198,8 +198,8 @@ Since this is one of the most problems I noticed people have trouble with, let's
 simplify more than that, consider the following equation:
 
 \begin{equation}
-y= \underbrace{m}_{slope} \times \overbrace{x}^{x \ coordinate} + \underbrace{y}_{y \ intercept}
-\end{equation}
+y= \underbrace{m}_{slope} \times \overbrace{x}^{x \ coordinate} + \underbrace{y}_{y \
+intercept} \end{equation}
 
 This basic formula is called /slope-intercept form/:
 
@@ -212,19 +212,21 @@ the slope-intercept form for this line is $y=.5x+1$. That's nice, but in code, w
 we shouldn't solve this visually at all.
 
 So, we have got to, first, calculate the swap form the formula $\frac{y_{2} - y_{1}}{x_2 -
-x_1}$, here we can take $\frac{4-2}{6-2} = \frac{2}{4} = 0.5$, this gives us $y = .5x + b$
-now we can use each of the given point  [ $(2,2)$ or $(6,4)$ ] in this equation, let's take
-$(2,2)$, this give us: $2=0.5 \times 2 + b$, $2 = 1 + b$, $b = 1$, and we have the final
+x_1}$, here we can take
+$\frac{4-2}{6-2} = \frac{2}{4} = 0.5$, this gives us $y = .5x + b$ now we can use each of the given point
+[ $(2,2)$ or $(6,4)$ ] in this equation, let's take $(2,2)$, this give us: $2=0.5 \times 2 + b$, $2 = 1 + b$, $b = 1$,
+and we have the final
 formula again: $$y = 0.5x + 1$$
 
 Anther way to define a line is called /the standard form/: $A_x + B_y = C$ and both $A_x$
-and $B_y$ should be integers, and $A_x$ can't be negative. We can rearrange
-our final formula to fit the standard form by reformatting it to $-0.5x + y = 1$, you can
-observe that $A_x$ is neither positive nor integer, we can fix it by multiplying by -2: we
-should get: $x - 2y = -2$ and of course you can test it with replacing $x$ and $y$ by any of
-the given points, the result should be equal to $-2$.
+and $B_y$ should be integers, and $A_x$ can't be negative. We can rearrange our final
+formula to fit the standard form by reformatting it to $-0.5x + y = 1$, you can observe that
+$A_x$ is neither positive nor integer, we can fix it by multiplying by -2: we should get:
+$x - 2y = -2$ and of course you can test it with replacing $x$ and $y$ by any of the given
+points, the result should be equal to $-2$.
 
-Another nice way to get this form is that we can calculate $A$ by this subtraction: $A_x =
+Another nice way to get this form is that we can calculate $A$ by this subtraction:
+$A_x =
 y_2 - y_1$, and $B_y$ is $x_{1} - x_{2}$ and $C$ is just $A_x + B_y$, lets' take the points
 we have and try to apply this, we get:
 
@@ -236,20 +238,18 @@ Now all what you have to do is putting these numbers in the standard form equati
 get:
 
 \begin{equation*}
-2x-4y=C
-\end{equation*}
+2x-4y=C \end{equation*}
 
 And by replacing $x$ and $y$ by any of the given points, say $(2,2)$, we can solve this
 equation for $C$, it is $-4$ so the final equation is:
 
 \begin{equation*}
-2x - 4y = -4
-\end{equation*}
+2x - 4y = -4 \end{equation*}
 
 
-Now, let's define what we mean by intersection, let's say we have the following points $P_1,
-\ P_2,
-\ P_3, \ P_4$ showing in the following figure:
+Now, let's define what we mean by intersection, let's say we have the following points
+$P_1,
+\ P_2, \ P_3, \ P_4$ showing in the following figure:
 
 
 [[file:Intersection/2022-01-19_05-00-07_screenshot.png]]
