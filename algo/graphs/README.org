@@ -1,18 +1,21 @@
 #+title: Representations, Implementations and Algorithms of Graphs (and Trees)
-#+date: <2022-01-04 Tue>
+#+date: <2020-01-04 Tue>
 #+hugo_tags: "Grahps" "Algorithms" "Computer Science"
 #+description: A simplified introduction into graph theory applications.
 #+draft: false
 
+
+
 * Terminology
+
 #+BEGIN_PREVIEW
 A graph $G = (V, E)$ consists of a set of vertices $V$ and a set of edges $E$, such that each edge
-in $E$ is a connection between a pair of vertices in $V$[fn:1] The number of vertices is
+in $E$ is a connection between a pair of vertices in $V$  The number of vertices is
 written $|V|$, and the number of edges is written $|E|$. $|E|$ can range from zero to a maximum
 of $|V|^{2} - |V|$. A graph with relatively few edges is called sparse, while a graph with many
 edges is called dense. A graph containing all possible edges is said to be complete.
-
 #+END_PREVIEW
+
 
 
 
@@ -998,6 +1001,7 @@ them.
 ** TODO Longest Path
 ** TODO Tree
 ** TODO Tree Diamteter /(aka. Logest Path)/
+
 * Footnotes
-[fn:1] Some graph applications require that a given pair of vertices can have multiple or
+Some graph applications require that a given pair of vertices can have multiple or
 parallel edges connecting them, or that a vertex can have an edge to itself.
