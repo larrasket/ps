@@ -1996,7 +1996,189 @@ func main() {
 : Chess Total: $1291.00
 : Running Total: $0.00
 
+
 * Go Standard Library
+
+** Go ~fstream~
+To work with files in Go, we use the ~os~ and ~ioutil~packages.
+
+The os.Stat function returns the ~FileInfo~ structure describing the file.
+*** Operate on Files
+**** Checking if a File Exists
+In the following example, we check if the given file exists:
+
+#+begin_src go
+package main
+
+import (
+    "errors"
+    "fmt"
+    "os"
+)
+
+func main() {
+
+    _, err := os.Stat("words.txt")
+
+    if errors.Is(err, os.ErrNotExist) {
+
+        fmt.Println("file does not exist")
+    } else {
+
+        fmt.Println("file exists")
+    }
+}
+
+#+end_src
+
+#+RESULTS:
+: file does not exist
+
+We call the os.Stat function on the file. If the function returns the ~os.ErrNotExist~ error,
+the file does not exist.
+
+
+
+
+
+**** Creating a File
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "log"
+    "os"
+)
+
+func main() {
+
+    file, err := os.Create("empty.txt")
+
+    defer file.Close()
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println("file created")
+}
+#+end_src
+
+#+RESULTS:
+: file created
+
+**** Delete a File
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "log"
+    "os"
+)
+
+func main() {
+
+    err := os.Remove("words.txt")
+
+    if err != nil {
+
+        log.Fatal(err)
+    }
+
+    fmt.Println("file deleted")
+}
+#+end_src
+**** Go File Size
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "log"
+    "os"
+)
+
+func main() {
+
+    fInfo, err := os.Stat("words.txt")
+
+    if err != nil {
+
+        log.Fatal(err)
+    }
+
+    fsize := fInfo.Size()
+
+    fmt.Printf("The file size is %d bytes\n", fsize)
+}
+
+#+end_src
+**** Read File
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "io/ioutil"
+    "log"
+)
+
+func main() {
+
+    content, err := ioutil.ReadFile("words.txt")
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(string(content))
+}
+#+end_src
+
+#+RESULTS:
+**** List Files
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "log"
+    "os"
+    "path/filepath"
+)
+
+func main() {
+
+    var files []string
+
+    root := "/home/janbodnar/Documents"
+
+    err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+
+        if err != nil {
+
+            fmt.Println(err)
+            return nil
+        }
+
+        if !info.IsDir() && filepath.Ext(path) == ".txt" {
+            files = append(files, path)
+        }
+
+        return nil
+    })
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, file := range files {
+        fmt.Println(file)
+    }
+}
+#+end_src
 ** String
 
 The strings package provides a set of functions for processing strings. In the sections that
@@ -2089,3 +2271,181 @@ func main() {
 #+RESULTS:
 : STARRY NIGHT, A PAINTING
 : ST_RRY NIGHT, _ P_INTING
+
+** Errors
+An error is an abnormal, unexpected condition which occurs in the program. In programming,
+errors are often called bugs. The process of finding and resolving bugs is called debugging.
+Go provide tools for dealing with errors. Errors in Go are plain values. Therefore, errors
+can be stored in variables, passed as parameters to functions, or returned from functions.
+
+Errors are represented using the built-in error type.
+
+Most Go functions return an error value among its return values. (Go supports multiple
+return values.) It is our responsibility to check this error value. A value of nil means
+there is no error. By convention, the error value is the rightmost value among the returned
+values.
+
+#+begin_src go
+content, err := ioutil.ReadFile("thermopylae.txt")
+
+if err != nil {
+    log.Fatal(err)
+}
+#+end_src
+
+The idiomatic way of handling errors is to check for error right after the function call.
+
+A panic is a runtime-error that we are not prepared to handle gracefully. A panic can occur
+for example when we try to divide by zero or try to access non-existing array index.
+
+A stack trace is a report of the active stack frames at a certain point in time during the
+execution of a program. A panic is Go prints the stack trace to the console, assisting us in
+debugging.
+
+
+The idiomatic way of handling errors is to check for error right after the function call.
+
+A panic is a runtime-error that we are not prepared to handle gracefully. A panic can occur
+for example when we try to divide by zero or try to access non-existing array index.
+
+A stack trace is a report of the active stack frames at a certain point in time during the
+execution of a program. A panic is Go prints the stack trace to the console, assisting us in
+debugging.
+
+*** Implementing Errors
+To define a custom error, we implement the error interface.
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "log"
+)
+
+func enterAge(age int) (string, error) {
+
+    if age < 0 || age > 130 {
+
+        return "", &wrongAge{age, "wrong age value"}
+    }
+
+    return fmt.Sprintf("processing %d age value", age), nil
+}
+
+type wrongAge struct {
+    age int
+    msg string
+}
+
+func (e *wrongAge) Error() string {
+
+    return fmt.Sprintf("%d: %s", e.age, e.msg)
+}
+
+func main() {
+
+    var age int = 18
+    msg, err := enterAge(age)
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(msg)
+
+    age = 178
+    msg, err = enterAge(age)
+
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(msg)
+}
+#+end_src
+
+
+*** Comparing Errors
+Declaring an error, and comparing it with ~'==' (as in err == myPkg.ErrTokenExpired)~ is no
+longer the best practice with Go 1.13 (Q3 2019).
+
+The right way is:
+#+begin_src go
+if errors.Is(err, io.ErrUnexpectedEOF)
+#+end_src
+
+** Json
+~JSON~ is a lightweight data-interchange format. It is easily read and written by humans and
+parsed and generated by machines. The application/json is the official Internet media type
+for JSON. The JSON filename extension is .json.
+
+#+begin_src go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "log"
+)
+
+type User struct {
+    Id         int
+    Name       string
+    Occupation string
+}
+
+func main() {
+    u1 := User{1, "John Doe", "gardener"}
+    json_data, err := json.Marshal(u1)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(string(json_data))
+    users := []User{
+        {Id: 2, Name: "Roger Roe", Occupation: "driver"},
+        {Id: 3, Name: "Lucy Smith", Occupation: "teacher"},
+        {Id: 4, Name: "David Brown", Occupation: "programmer"},
+    }
+
+    json_data2, err := json.Marshal(users)
+
+    if err != nil {
+
+        log.Fatal(err)
+    }
+
+    fmt.Println(string(json_data2))
+}
+
+#+end_src
+
+#+RESULTS:
+: {"Id":1,"Name":"John Doe","Occupation":"gardener"}
+: [{"Id":2,"Name":"Roger Roe","Occupation":"driver"},{"Id":3,"Name":"Lucy Smith","Occupation":"teacher"},{"Id":4,"Name":"David Brown","Occupation":"programmer"}]
+
+In the code example, we transform a Go struct and a slice of structs into ~JSON~ format.
+
+#+begin_src go
+type User struct {
+    Id         int
+    Name       string
+    Occupation string
+}
+#+end_src
+
+We decode a JSON string into a Go struct and a slice of structs.
+
+#+begin_src go
+data := []byte(`{
+    "Id" : 1,
+    "Name": "John Doe",
+    "Occupation": "gardener"
+}`)
+#+end_src
+
+** TODO Databases
+** TODO Compiler Options
+** TODO Models
+** TODO ORM
+** TODO Concurrency
+** TODO Logging
