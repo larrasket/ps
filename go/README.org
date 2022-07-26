@@ -2446,6 +2446,7 @@ data := []byte(`{
 ** KILL ORM
 I decided that ORMs suck, I'm going raw SQL, or using SQLBoiler.
 ** TODO Compiler Options
-** TODO Models
+** TODO Go Modules
+https://go.dev/blog/using-go-modules
 ** TODO Concurrency
 ** TODO Logging
