@@ -1,4 +1,4 @@
-package main
+package kata
 
 func TwoSum(numbers []int, target int) [2]int {
 	m := map[int]int{}
