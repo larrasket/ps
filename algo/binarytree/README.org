@@ -1,11 +1,254 @@
-#+TITLE: Binary Tree Algorithms
+#+TITLE: Tress
 #+DATE: <2021-01-04 Mon>
 #+hugo_tags: "Computer Science"
 #+BEGIN_PREVIEW
-Introduction into binary trees algorithms
+Tree notes
 #+END_PREVIEW
 
-* Binart Tree Traversal
+* Balanced Trees
+
+We call a tree binary if each node in it has at most two children. A node’s left child with
+descendants forms the node’s left sub-tree. The definition of the right sub-tree is similar.
+
+Although suitable for storing hierarchical data, binary trees of this general form don’t
+guarantee a fast lookup. Let’s take as the example the search for number 9 in the following
+tree:
+
+
+#+DOWNLOADED: screenshot @ 2022-07-29 09:50:33
+[[file:Balanced_Trees/2022-07-29_09-50-33_screenshot.png]]
+
+
+
+
+Whichever node we visit, we don’t know if we should traverse the left or the right sub-tree
+next. That’s because the tree hierarchy doesn’t follow the relation $\leq$.
+
+So, in the worst case, a search takes $\boldsymbol{O(n)}$ time, where $\boldsymbol{n}$ is the
+number of nodes in the tree.
+
+
+We solve this problem by turning to a special type of binary tree called binary search tree
+(BST). For each node $\boldsymbol{x}$ in a BST, all the nodes in the left sub-tree of
+$\boldsymbol{x}$ contain the values that are strictly lower than $\boldsymbol{x}$. Further, all
+the nodes in the $\boldsymbol{x}$‘s right sub-tree are $\boldsymbol{\geq x}$. For instance:
+
+
+#+DOWNLOADED: screenshot @ 2022-07-29 09:52:24
+[[file:Balanced_Trees/2022-07-29_09-52-24_screenshot.png]]
+
+
+The order the tree maintains allows us to prune it during a lookup. Suppose we visit the
+node $x < y$ while searching for y. We can disregard the $x$‘s left sub-tree and focus only on
+the right, which speeds up the search. This is how we find 9 in the above search tree:
+
+
+
+#+DOWNLOADED: screenshot @ 2022-07-29 09:53:07
+[[file:Balanced_Trees/2022-07-29_09-53-07_screenshot.png]]
+
+However, the worst-case complexity of the search is still $\boldsymbol{O(n)}$. It occurs if we
+construct the tree from a sorted array, in which case the tree has height n and degenerates
+to a linked list. Since insertion and deletion include the search, all operations commonly
+performed on a BST are $\boldsymbol{O(n)}$ in the worst case. So, it’s the height of the tree
+that determines the complexity. That’s where balanced trees come in. They’re a special type
+of binary search tree.
+
+
+
+
+*A balanced tree is a search tree that doesn’t just maintain the order between nodes. It also
+controls its height, making sure it stays $\boldsymbol{O(\log n)}$ after insertion or
+deletion*.
+
+To do that, a balanced tree must re-balance itself after we add or delete a node. That
+causes a computational overhead and complicates the algorithms for insertion and deletion.
+However, that’s the price we’re ready to pay for a logarithmic-height search tree with fast
+search, insertion, and deletion operations. We won’t cover the re-balancing algorithms in
+this article.
+
+There are several types of such trees. They require all their nodes to be balanced, but the
+notion of balance differs from type to type.
+
+
+
+
+
+
+** AVL Trees
+In an AVL tree, we call a node balanced if the heights of its left and right sub-trees
+differ at most by 1. So, a search tree with root x is an AVL tree if all its nodes are
+balanced in the AVL sense (empty search trees, with height 0, are trivially balanced):
+
+\begin{equation*}
+AVL(x) \iff \left|height(x.left) - height(x.right)\right| \leq 1           \text{ and } AVL(x.left) \text{ and } AVL(x.right)
+\end{equation*}
+
+
+
+#+DOWNLOADED: screenshot @ 2022-07-29 09:57:36
+[[file:Balanced_Trees/2022-07-29_09-57-36_screenshot.png]]
+
+
+The AVL tree (named for its inventors Adelson-Velskii and Landis) should be viewed as a BST
+with the following additional property: For every node, the heights of its left and right
+subtrees differ by at most 1. As long as the tree maintains this property, if the tree
+contains n nodes, then it has a depth of at most $O(log n)$. As a result, search for any node
+will cost $O(log n)$, and if the updates can be done in time proportional to the depth of the
+node inserted or deleted, then updates will also cost O(log n), even in the worst case.
+
+The key to making the AVL tree work is to alter the insert and delete routines so as to
+maintain the balance property. Of course, to be practical, we must be able to implement the
+revised update routines in $Θ(log n)$ time.
+
+
+Consider what happens when we insert a node with key value 5, as shown. The tree on the left
+meets the AVL tree balance requirements. After the insertion, two nodes no longer meet the
+requirements. Because the original tree met the balance requirement, nodes in the new tree
+can only be unbalanced by a difference of at most 2 in the subtrees. For the bottommost
+unbalanced node, call it S, there are 4 cases:
+
+#+DOWNLOADED: screenshot @ 2022-07-29 10:35:29
+[[file:Balanced_Trees/2022-07-29_10-35-29_screenshot.png]]
+
+1. The extra node is in the left child of the left child of S.
+2. The extra node is in the right child of the left child of S.
+3. The extra node is in the left child of the right child of S.
+4. The extra node is in the right child of the right child of S.
+
+
+Cases 1 and 4 are symmetrical, as are cases 2 and 3. Note also that the unbalanced nodes
+must be on the path from the root to the newly inserted node.  Our problem now is how to
+balance the tree in O(log n) time. It turns out that we can do this using a series of local
+operations known as *rotations*.
+
+
+#+CAPTION: A single rotation in an AVL tree. This operation occurs when the excess node (in subtree A) is in the left child of the left child of the unbalanced node labeled S. By rearranging the nodes as shown, we preserve the BST property, as well as re-balance the tree to preserve the AVL tree balance property. The case where the excess node is in the right child of the right child of the unbalanced node is handled in the same way.
+[[file:Balanced_Trees/2022-07-29_10-49-03_screenshot.png]]
+
+
+#+CAPTION: A double rotation in an AVL tree. This operation occurs when the excess node (in subtree B) is in the right child of the left child of the unbalanced node labeled S. By rearranging the nodes as shown, we preserve the BST property, as well as re-balance the tree to preserve the AVL tree balance property. The case where the excess node is in the left child of the right child of S is handled in the same way
+[[file:Balanced_Trees/2022-07-29_10-50-12_screenshot.png]]
+
+4 can be fixed using a single rotation, as shown in the first figure. Cases 2 and 3 can
+be fixed using a double rotation, as shown in last figure.
+
+
+#+begin_src c++
+avl *avl_tree::rr_rotat(avl *parent) {
+   avl *t;
+   t = parent->r;
+   parent->r = t->l;
+   t->l = parent;
+   cout<<"Right-Right Rotation";
+   return t;
+}
+avl *avl_tree::ll_rotat(avl *parent) {
+   avl *t;
+   t = parent->l;
+   parent->l = t->r;
+   t->r = parent;
+   cout<<"Left-Left Rotation";
+   return t;
+}
+avl *avl_tree::lr_rotat(avl *parent) {
+   avl *t;
+   t = parent->l;
+   parent->l = rr_rotat(t);
+   cout<<"Left-Right Rotation";
+   return ll_rotat(parent);
+}
+avl *avl_tree::rl_rotat(avl *parent) {
+   avl *t;
+   t = parent->r;
+   parent->r = ll_rotat(t);
+   cout<<"Right-Left Rotation";
+   return rr_rotat(parent);
+}
+avl *avl_tree::balance(avl *t) {
+   int bal_factor = difference(t);
+   if (bal_factor > 1) {
+      if (difference(t->l) > 0)
+         t = ll_rotat(t);
+      else
+         t = lr_rotat(t);
+   } else if (bal_factor < -1) {
+      if (difference(t->r) > 0)
+         t = rl_rotat(t);
+      else
+         t = rr_rotat(t);
+   }
+   return t;
+}
+
+#+end_src
+** Day–Stout–Warren algorithm
+The Day–Stout–Warren (DSW) algorithm is a method for efficiently balancing binary search
+trees – that is, decreasing their height to O(log n) nodes, where n is the total number of
+nodes. Unlike a self-balancing binary search tree, it does not do this incrementally during
+each operation, but periodically, so that its cost can be amortized over many operations.
+
+The algorithm requires linear (O(n)) time and is in-place. The original algorithm by Day
+generates as compact a tree as possible: all levels of the tree are completely full except
+possibly the bottom-most. It operates in two phases.
+
+First, *the tree is turned into a linked list* by means of an in-order traversal, reusing
+the pointers in the (threaded) tree's nodes.
+
+A series of left-rotations forms the second phase. The Stout–Warren modification generates a
+complete binary tree, namely one in which the bottom-most level is filled strictly from left
+to right. This is a useful transformation to perform if it is known that no more inserts
+will be done. It does not require the tree to be threaded, nor does it require more than
+constant space to operate.  Like the original algorithm, Day–Stout–Warren operates in two
+phases, the first entirely new, the second a modification of Day's rotation phase.
+
+The following is a presentation of the basic DSW algorithm in pseudocode, after the
+Stout–Warren paper. It consists of a main routine with three subroutines. The main routine
+is given by
+
+1. Allocate a node, the "pseudo-root", and make the tree's actual root the right child of the pseudo-root.
+2. Call tree-to-vine with the pseudo-root as its argument.
+   #+begin_src lisp
+routine tree-to-vine(root)
+    // Convert tree to a "vine", i.e., a sorted linked list,
+    // using the right pointers to point to the next node in the list
+    tail ← root
+    rest ← tail.right
+    while rest ≠ nil
+        if rest.left = nil
+            tail ← rest
+            rest ← rest.right
+        else
+            temp ← rest.left
+            rest.left ← temp.right
+            temp.right ← rest
+            rest ← temp
+            tail.right ← temp
+   #+end_src
+3. Call vine-to-tree on the pseudo-root and the size (number of elements) of the tree.
+   #+begin_src lisp
+routine vine-to-tree(root, size)
+    leaves ← size + 1 − 2⌊log2(size + 1))⌋
+    compress(root, leaves)
+    size ← size − leaves
+    while size > 1
+        compress(root, ⌊size / 2⌋)
+        size ← ⌊size / 2⌋
+routine compress(root, count)
+    scanner ← roo   t
+    for i ← 1 to count
+        child ← scanner.right
+        scanner.right ← child.right
+        scanner ← scanner.right
+        child.right ← scanner.left
+        scanner.left ← child
+
+   #+end_src
+4. Make the tree's actual root equal to the pseudo-root's right child.
+5. Dispose of the pseudo-root.
+
+
+* Binary Tree Traversal
 ** DFS
 Often we wish to process a binary tree by “visiting” each of its nodes, each time
 performing a specific action such as printing the contents of the node. Any process
@@ -114,3 +357,48 @@ if (root == NULL) return 0; // Nothing to count
 return 1 + count(root->left()) + count(root->right());
 }
 #+end_src
+
+* Height of a Binary Tree
+
+The height of a node in a binary tree is the largest number of edges in a path from a leaf
+node to a target node. If the target node doesn’t have any other nodes connected to it, the
+height of that node would be 0. *The height of a binary tree is the height of the
+root node in the whole binary tree*. In other words, the height of a binary tree is equal to
+the largest number of edges from the root to the most distant leaf node.
+
+A similar concept in a binary tree is the depth of the tree. The depth of a node in a binary
+tree is the total number of edges from the root node to the target node. Similarly, the
+depth of a binary tree is the total number of edges from the root node to the most distant
+leaf node.
+
+One important observation here is that when we calculate the depth of a whole binary tree,
+it’s equivalent to the height of the binary tree.
+
+Let's take the following tree as an example:
+
+
+[[file:Height_of_a_Binary_Tree/2022-07-29_09-31-15_screenshot.png]]
+
+First, we’ll calculate the height of node $C$. So, according to the definition, the height of
+node $C$ is the largest number of edges in a path from the leaf node to node $C$. We can see
+that there are two paths for node $C: C \rightarrow E \rightarrow G$, and $C \rightarrow F$. The
+largest number of edges among these two paths would be $\mathsf{2}$; hence, the height of node
+$C$ is $\mathsf{2}$.
+
+Now we’ll calculate the height of the binary tree. From the root, we can have three
+different paths leading to the leaf nodes: $A \rightarrow C \rightarrow F$, $A \rightarrow B \rightarrow D$, and $A \rightarrow C \rightarrow E \rightarrow G$. Among these three paths, the
+path $A \rightarrow C \rightarrow E \rightarrow G$ contains the largest number of edges, which
+is $\mathsf{3}$. Therefore, the height of the tree is $\mathbf{3}$.
+
+Next, we want to find the depth of node $B$. We can see that from the root, there’s only one
+path to node $B$, and it has one edge. Thus, the depth of node $B$ is $\mathsf{1}$.
+
+As we previously mentioned, the depth of a binary tree is equal to the height of the tree.
+Therefore, the depth of the binary tree is $\mathbf{3}$.
+
+Algorithm:
+
+#+DOWNLOADED: screenshot @ 2022-07-29 09:34:44
+[[file:Height_of_a_Binary_Tree/2022-07-29_09-34-44_screenshot.png]]
+
+*
