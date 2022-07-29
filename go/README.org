@@ -2546,3 +2546,125 @@ I'll take pkg over internal blog post by Travis Jeffery provides a good overview
 and internal directories and when it might make sense to use them.
 
 ** TODO ~/vendor~
+
+* Misc
+** ~omitempty~
+
+
+If you’ve worked with Go for sometime, you have probably encountered the ~omitempty~ tag,
+when trying to encode a struct to JSON.
+
+When using Go to build web applications, or HTTP servers, there will eventually come a time
+when we need to encode some data as JSON. The problem here is that the JSON representation
+does not exactly match the way Go handles data.
+
+One key difference, is that in a struct, there are always clearly defined fields, while in
+JSON there are not. For example, consider describing a dog as a struct in Go:
+
+#+begin_src go
+type Dog struct {
+	Breed string
+	WeightKg int
+}
+#+end_src
+
+
+Now, if we were to initialize, encode to JSON, and print a sample dog :
+#+begin_src go
+func main() {
+	d := Dog{
+		Breed:    "dalmation",
+		WeightKg: 45,
+	}
+	b, _ := json.Marshal(d)
+	fmt.Println(string(b))
+}
+#+end_src
+
+
+We would get the output: ~{"Breed":"dalmation","WeightKg":45}~
+
+Now, a dog for whom we do not have the weight, would be slightly awkward to deal with:
+
+
+#+begin_src go
+func main() {
+	d := Dog{
+		Breed:    "pug",
+	}
+	b, _ := json.Marshal(d)
+	fmt.Println(string(b))
+}
+#+end_src
+
+
+
+This prints ~{"Breed":"pug","WeightKg":0}~, even though the weight of of pug was unknown. A
+better option would be to print ~"WeightKg":null~, or to not have the WeightKg key at all.
+
+
+This is where the omitempty tag helps us. Let’s add the ~omitempty~ tag to our Dog struct:
+
+#+begin_src go
+type Dog struct {
+	Breed    string
+	// The first comma below is to separate the name tag from the omitempty tag
+	WeightKg int `json:",omitempty"`
+}
+#+end_src
+
+
+Now, if ~WeightKg~ is set to it’s default value (which is 0 for the int type), the key
+itself will be omitted from the JSON object.
+
+The same will happen if a string is empty "", or if a pointer is nil, or if a slice has zero
+elements in it.
+
+In cases where an empty value does not exist, omitempty is of no use. An embedded struct,
+for example, does not have an empty value:
+
+#+begin_src go
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type dimension struct {
+	Height int
+	Width int
+	}
+
+type Dog struct {
+	Breed    string
+	WeightKg int
+	Size dimension `json:",omitempty"`
+}
+
+func main() {
+	d := Dog{
+		Breed: "pug",
+	}
+	b, _ := json.Marshal(d)
+	fmt.Println(string(b))
+}
+
+#+end_src
+
+#+RESULTS:
+: {"Breed":"pug","WeightKg":0,"Size":{"Height":0,"Width":0}}
+
+
+In this case, even though we never set the value of the Size attribute, and set its
+~omitempty~ tag, it still appears in the output. This is because structs do not have any empty
+value in Go. To solve this, use a struct pointer instead :
+
+
+#+begin_src go
+type Dog struct {
+	Breed    string
+	WeightKg int
+	// Now `Size` is a pointer to a `dimension` instance
+	Size *dimension `json:",omitempty"`
+}
+#+end_src
