@@ -1,5 +1,5 @@
-#+title: Building a RESTful API with ASP.NET Core
-#+data: <2022-04-02 Sat>
+#+title: Building a RESTful API
+#+date: <2022-04-02 Sat>
 #+hugo_tags: "Computer Science" ".NET"
 
 

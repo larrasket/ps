@@ -1,4 +1,4 @@
-#+title: Concurrency in C#
+#+title: Concurrency
 #+date: <2022-01-09>
 #+hugo_tags: "Computer Science" ".NET"
 
