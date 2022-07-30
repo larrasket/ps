@@ -1,6 +1,7 @@
 #+TITLE: Tress
 #+DATE: <2021-01-04 Mon>
 #+hugo_tags: "Computer Science"
+
 #+BEGIN_PREVIEW
 Tree notes
 #+END_PREVIEW
@@ -247,7 +248,6 @@ routine compress(root, count)
 4. Make the tree's actual root equal to the pseudo-root's right child.
 5. Dispose of the pseudo-root.
 
-
 * Binary Tree Traversal
 ** DFS
 Often we wish to process a binary tree by “visiting” each of its nodes, each time
@@ -400,5 +400,3 @@ Algorithm:
 
 #+DOWNLOADED: screenshot @ 2022-07-29 09:34:44
 [[file:Height_of_a_Binary_Tree/2022-07-29_09-34-44_screenshot.png]]
-
-*
