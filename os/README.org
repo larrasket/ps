@@ -1,0 +1,39 @@
+#+TITLE: Introduction into Operating Systems
+#+DATE:  <2022-08-01>
+
+An operating system is software that manages a computer’s hardware. It also provides a basis
+for application programs and acts as an intermediary between the computer user and the
+computer hardware. An amazing aspect of operating systems is how they vary in accomplishing
+these tasks in a wide variety of computing environments. Operating systems are everywhere,
+from cars and home appliances that include “Internet of Things” devices, to smart phones,
+phones, personal computers, enterprise computers, and cloud computing environments.
+
+The user’s view of the computer varies according to the interface being used.  Many computer
+users sit with a laptop or in front of a PC consisting of a monitor, keyboard, and mouse.
+Such a system is designed for one user to monopolize its resources. The goal is to maximize
+the work (or play) that the user is performing. In this case, the operating system is
+designed mostly for ease of use, with some attention paid to performance and security and
+none paid to resource utilization—how various hardware and software resources are shared.
+
+#+BEGIN_PREVIEW
+Although there are many practitioners of computer science, only a small percentage of them
+will be involved in the creation or modification of an operating system. Why, then, study
+operating systems and how they work? Simply because, as almost all code runs on top of an
+operating system, knowledge of how operating systems work is crucial to proper, efficient,
+effective, and secure programming. Understanding the fundamentals of operating systems, how
+they drive computer hardware, and what they provide to applications is not only essential to
+those who program them but also highly useful to those who write programs on them and use
+them.
+#+END_PREVIEW
+
+
+A modern general-purpose computer system consists of one or more CPUs and
+a number of device controllers connected through a common bus that provides
+access between components and shared memory (Figure 1.2). Each device
+controller is in charge of a specific type of device (for example, a disk drive,
+audio device, or graphics display). Depending on the controller, more than one
+device may be attached. For instance, one system USB port can connect to a
+USB hub, to which several devices can connect. A device controller maintains
+some local buffer storage and a set of special-purpose registers. The device
+controller is responsible for moving the data between the peripheral devices
+that it controls and its local buffer storage.
