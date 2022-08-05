@@ -1,0 +1,5 @@
+package kata
+
+import (
+	"fmt"
+)
