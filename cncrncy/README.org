@@ -1,0 +1,558 @@
+#+title: Concurrency
+#+date: <2022-01-09>
+#+hugo_tags: "Computer Science" ".NET"
+
+
+#+BEGIN_PREVIEW
+The following text is based on /Concurrency in C# Cookbook: Asynchronous, Parallel, and
+Multithreaded Programming/ by Stephen Cleary
+#+END_PREVIEW
+
+
+* Basic Introduction (the TL;DR)
+Before Starting, I’d like to clear up some terminology that I’ll be using throughout
+this book. Let’s start with concurrency.
+
+
+#+begin_quote
+*Concurrency*: Doing more than one thing at a time.
+#+end_quote
+
+I hope it’s obvious how concurrency is helpful. End-user applications use concurrency
+to respond to user input while writing to a database. Server applications use concurrency
+to respond to a second request while finishing the first request. You need concurrency
+any time you need an application to do one thing while it’s working on something else.
+Almost every software application in the world can benefit from concurrency.
+
+Most developers hearing the term “concurrency” immediately think of “multithreading.” I’d
+like to draw a distinction between these two.
+
+#+begin_quote
+*Multithreading*: A form of concurrency that uses multiple threads of execution.
+#+end_quote
+
+
+Multithreading literally refers to using multiple threads. Multithreading is one form of
+concurrency, but certainly not the only one. In fact, direct use of the low-level threading
+types has almost no purpose in a modern application; higher-level abstractions are more
+powerful and more efficient than old- school multithreading.
+
+#+begin_quote
+*Parallel Processing*: Doing lots of work by dividing it up among multiple threads that run
+concurrently.
+#+end_quote
+
+Parallel processing (or parallel programming) uses multithreading to maximize the use
+of multiple processors. Modern CPUs have multiple cores, and if there’s a lot of work
+to do, then it makes no sense to just make one core do all the work while the others sit
+idle. Parallel processing will split up the work among multiple threads, which can each
+run independently on a different core.
+
+
+#+begin_quote
+*Asynchronous Programming*
+A form of concurrency that uses futures or callbacks to avoid unnecessary threads.
+#+end_quote
+
+
+A future (or promise) is a type that represents some operation that will complete in the
+future. The modern future types in .NET are Task and Task<TResult>. Older asyn‐
+chronous APIs use callbacks or events instead of futures. Asynchronous programming
+is centered around the idea of an asynchronous operation: some operation that is started
+that will complete some time later. While the operation is in progress, it does not block
+the original thread; the thread that starts the operation is free to do other work. When
+the operation completes, it notifies its future or invokes its completion callback event
+to let the application know the operation is finished.
+
+Another form of concurrency is reactive programming. Asynchronous programming implies that
+the application will start an operation that will complete once at a later time. Reactive
+programming is closely related to asynchronous programming, but is built on asynchronous
+events instead of asynchronous operations. Asynchronous events may not have an actual
+“start,” may happen at any time, and may be raised multiple times.
+
+#+begin_quote
+*Reactive Programming*: A declarative style of programming where the application reacts to
+events.
+#+end_quote
+
+If you consider an application to be a /massive state machine,/ the application’s behavior
+can be described as reacting to a series of events by updating its state at each event. This
+is not as abstract or theoretical as it sounds; modern frameworks make this approach quite
+useful in real-world applications. Reactive programming is not necessarily con current, but
+it is closely related to concurrency.  book.
+
+Concurrency is an interesting word because it means different things to different people in
+our field. In addition to “concurrency,” you may have heard the words, “asynchronous,”
+“parallel,” or “threaded” bandied about. Some people take these words to mean the same
+thing, and other people very specifically delineate between each of those words. If we’re to
+spend an entire book’s worth of time discussing concurrency, it would be beneficial to first
+spend some time discussing what we mean when we say “concurrency.”
+
+When most people use the word “concurrent,” they’re usually referring to a process
+that occurs simultaneously with one or more processes. It is also usually implied that
+all of these processes are making progress at about the same time. Under this definition, an
+easy way to think about this are people. You are currently reading this sentence while
+others in the world are simultaneously living their lives. They are existing
+concurrently to you.
+
+Concurrency is a broad topic in computer science, and from this definition spring all
+kinds of topics: theory, approaches to modeling concurrency, correctness of logic,
+practical issues—even theoretical physics!
+
+** Moore's Law
+In 1965, Gordon Moore wrote a three-page paper that described both the consolidation of
+the electronics market toward integrated circuits, and the doubling of the number of
+components in an integrated circuit every year for at least a decade. In 1975, he revised
+this prediction to state that the number of components on an integrated circuit would
+double every two years. This prediction more or less held true until just
+recently—around 2012.
+
+Several companies foresaw this slowdown in the rate Moore’s law predicted and
+began to investigate alternative ways to increase computing power. As the saying
+goes, necessity is the mother of innovation, and so it was in this way that multi-core
+processors were born.
+
+This looked like a clever way to solve the bounding problems of Moore’s law, but
+computer scientists soon found themselves facing down the limits of another law:
+Amdahl’s law, named after computer architect Gene Amdahl.
+
+*** Amdahl’s law
+Amdahl’s law describes a way in which to model the potential performance gains
+from implementing the solution to a problem in a parallel manner. Simply put, it
+states that the gains are bounded by how much of the program must be written in a
+sequential manner.
+
+For example, imagine you were writing a program that was largely GUI based: a user
+is presented with an interface, clicks on some buttons, and stuff happens. This type of
+program is bounded by one very large sequential portion of the pipeline: human
+interaction. No matter how many cores you make available to this program, it will
+always be bounded by how quickly the user can interact with the interface.
+
+Now consider a different example, calculating digits of pi. Thanks to a class of algorithms
+called spigot algorithms, this problem is called embarrassingly parallel, which —despite
+sounding made up—is a technical term which means that it can easily be
+divided into parallel tasks. In this case, significant gains can be made by making more
+cores available to your program, and your new problem becomes how to combine
+and store the results.
+
+Amdahl’s law helps us understand the difference between these two problems, and
+can help us decide whether parallelization is the right way to address performance
+
+For problems that are embarrassingly parallel, it is recommended that you write your
+application so that it can scale horizontally. This means that you can take instances of
+your program, run it on more CPUs, or machines, and this will cause the runtime of
+the system to improve. Embarrassingly parallel problems fit this model so well
+because it’s very easy to structure your program in such a way that you can send
+chunks of a problem to different instances of your application.
+
+Scaling horizontally became much easier in the early 2000s when a new paradigm
+began to take hold: cloud computing. Although there are indications that the phrase
+had been used as early as the 1970s, the early 2000s are when the idea really took root
+in the zeitgeist. Cloud computing implied a new kind of scale and approach to application
+deployments and horizontal scaling. Instead of machines that you carefully curated,
+installed software on, and maintained, cloud computing implied access to
+vast pools of resources that were provisioned into machines for workloads on-
+demand. Machines became something that were almost ephemeral, and provisioned
+with characteristics specifically suited to the programs they would run. Usually (but
+not always) these resource pools were hosted in data centers owned by other companies.
+
+This change encouraged a new kind of thinking. Suddenly, developers had relatively
+cheap access to vast amounts of computing power that they could use to solve large
+problems. Solutions could now trivially span many machines and even global regions.
+Cloud computing made possible a whole new set of solutions to problems that were
+previously only solvable by tech giants.
+
+But cloud computing also presented many new challenges. Provisioning these resources,
+communicating between machine instances, and aggregating and storing the results all became
+problems to solve. But among the most difficult was figuring out
+how to model code concurrently. The fact that pieces of your solution could be running on
+disparate machines exacerbated some of the issues commonly faced when modeling a problem
+concurrently. Successfully solving these issues soon led to a new
+type of brand for software, web scale.
+
+
+If software was web scale, among other things, you could expect that it would be
+embarrassingly parallel; that is, web scale software is usually expected to be able to
+handle hundreds of thousands (or more) of simultaneous workloads by adding more
+instances of the application. This enabled all kinds of properties like rolling upgrades,
+elastic horizontally scalable architecture, and geographic distribution. It also introduced
+new levels of complexity both in comprehension and fault tolerance.
+
+And so it is in this world of multiple cores, cloud computing, web scale, and problems
+that may or may not be parallelizable that we find the modern developer, maybe a bit
+overwhelmed. The proverbial buck has been passed to us, and we are expected to rise
+to the challenge of solving problems within the confines of the hardware we’ve been
+handed.
+** Hard Concurrency
+Concurrent code is notoriously difficult to get right. It usually takes a few iterations to
+get it working as expected, and even then it’s not uncommon for bugs to exist in code
+for years before some change in timing (heavier disk utilization, more users logged
+into the system, etc.) causes a previously undiscovered bug to rear its head.
+
+Fortunately everyone runs into the same issues when working with concurrent code.  Because
+of this, computer scientists have been able to label the common issues, which allows us to
+discuss how they arise, why, and how to solve them.  So let’s get started. Following are
+some of the most common issues that make working.
+*** Race Conditions
+
+A race condition occurs when two or more operations must execute in the correct
+order, but the program has not been written so that this order is guaranteed to be
+maintained.
+
+Most of the time, this shows up in what’s called a data race, where one concurrent
+operation attempts to read a variable while at some undetermined time another con‐
+current operation is attempting to write to the same variable.
+Here’s a basic example:
+
+#+begin_src go
+var data int
+go func() {
+    data++
+}()
+if data == 0 {
+    fmt.Printf("the value is %v.\n", data)
+}
+#+end_src
+
+Here, lines 3 and 5 are both trying to access the variable data, but there is no guaran‐
+tee what order this might happen in. There are three possible outcomes to running
+this code:
+
+- Nothing is printed. In this case, line 3 was executed before line 5.
+- “the value is 0” is printed. In this case, lines 5 and 6 were executed before line 3.
+- “the value is 1” is printed. In this case, line 5 was executed before line 3, but line 3 was executed before line 6.
+
+
+
+As you can see, just a few lines of incorrect code can introduce tremendous variability
+into your program.
+
+Most of the time, data races are introduced because the developers are thinking about
+the problem sequentially. They assume *that because a line of code falls before another
+that it will run first*. They assume the goroutine /above/ will be scheduled and execute
+before the data variable is read in the if statement.
+
+When writing concurrent code, you have to meticulously iterate through the possible
+scenarios. Unless you’re utilizing some of the techniques we’ll cover later,
+you have no guarantees that your code will run in the order it’s listed in the source‐
+code. I sometimes find it helpful to imagine a large period of time passing between
+operations. Imagine an hour passes between the time when the goroutine is invoked,
+and when it is run. How would the rest of the program behave? What if it took an
+hour between the goroutine executing successfully and the program reaching the if
+statement? Thinking in this manner helps me because to a computer, the scale may be
+different, but the relative time differentials are more or less the same.
+Indeed, some developers fall into the trap of sprinkling sleeps throughout their code
+exactly because it seems to solve their concurrency problems. Let’s try that in the
+preceding program:
+
+#+begin_src go
+var data int
+go func() {data++}()
+time.Sleep(1*time.Second) // This is bad!
+if data == 0 {
+    fmt.Printf("the value is %v.\n", data)
+}
+#+end_src
+
+Have we solved our data race? No. In fact, it’s still possible for all three outcomes to
+arise from this program, just increasingly unlikely. The longer we sleep in between
+invoking our goroutine and checking the value of data, the closer our program gets to
+achieving correctness—but this probability asymptotically approaches logical correct‐
+ness; it will never be logically correct.
+*** Atomicity
+When something is considered atomic, or to have the property of atomicity, this
+means that within the context that it is operating, it is indivisible, or uninterruptible.
+So what does that really mean, and why is this important to know when working with
+concurrent code?
+
+
+The first thing that’s very important is the word “context.” Something may be atomic
+in one context, but not another. Operations that are atomic within the context of your
+process may not be atomic in the context of the operating system; operations that are
+atomic within the context of the operating system may not be atomic within the con‐
+text of your machine; and operations that are atomic within the context of your
+machine may not be atomic within the context of your application. In other words,
+the atomicity of an operation can change depending on the currently defined scope.
+This fact can work both for and against you!
+
+When thinking about atomicity, very often the first thing you need to do is to define
+the context, or scope, the operation will be considered to be atomic in. Everything
+follows this form.
+
+Now let’s look at the terms “indivisible” and “uninterruptible.” These terms mean that
+within the context you’ve defined, something that is atomic will happen in its entirety
+without anything happening in that context simultaneously. That’s still a mouthful, so
+let’s look at an example:
+
+#+begin_src go
+i++
+#+end_src
+
+
+This is about as simple an example as anyone can contrive, and yet it easily demonstrates
+the concept of atomicity. It may look atomic, but a brief analysis reveals several
+operations:
+
+- Retrieve the value of i.
+- Increment the value of i.
+- Store the value of i.
+
+
+While each of these operations alone is atomic, the combination of the three *may not be*,
+depending on your context. This reveals an interesting property of atomic operations:
+combining them does not necessarily produce a larger atomic operation. Making the
+operation atomic is dependent on which context you’d like it to be atomic within. If your
+context is a program with no concurrent processes, then this code is atomic within that
+context. If your context is a goroutine that doesn’t expose i to other goroutines, then this
+code is atomic.
+
+
+So why do we care? Atomicity is important because if something is atomic, implicitly it is
+safe within concurrent contexts. This allows us to compose logically correct programs,
+and—as we’ll later see—can even serve as a way to optimize concurrent programs.
+*** Memory Access Synchronization
+
+Let’s say we have a data race: two concurrent processes are attempting to access the
+same area of memory, and the way they are accessing the memory is not atomic. Our
+previous example of a simple data race will do nicely with a few modifications:
+
+#+begin_src go
+var data int
+go func() { data++}()
+if data == 0 {
+    fmt.Println("the value is 0.")
+} else {
+    fmt.Printf("the value is %v.\n", data)
+}
+#+end_src
+
+We’ve added an else clause here so that regardless of the value of data we’ll always get
+some output. Remember that as it is written, there is a data race and the output of the
+program will be completely nondeterministic.
+
+In fact, there’s a name for a section of your program that needs exclusive access to a
+shared resource. This is called a critical section. In this example, we have three critical
+sections:
+
+- Our goroutine, which is incrementing the data variables.
+- Our if statement, which checks whether the value of data is 0.
+- Our ~fmt.Printf~ statement, which retrieves the value of data for output.
+
+There are various ways to guard your program’s critical sections, and Go has some better
+ideas on how to deal with this, but one way to solve this problem is to synchronize access
+to the memory between your critical sections. Let’s see what that looks like.
+
+
+The following code is not idiomatic Go (and I don’t suggest you attempt to solve your data
+race problems like this), but it very simply demonstrates memory access synchronization.
+If any of the types, functions, or methods in this example are foreign to you, that’s OK.
+Focus on the concept of synchronizing access to the memory by following the callouts.
+
+#+begin_src go
+var memoryAccess sync.Mutex
+// Here we add a variable that will allow our code to synchronize access to the data
+// variable’s memory.
+var value int
+go func() {
+    memoryAccess.Lock()
+// Here we declare that until we declare otherwise, our goroutine should have
+// exclusive access to the memory
+    value++
+    memoryAccess.Unlock()
+// Here we declare that the goroutine is done with this memory.
+}()
+memoryAccess.Lock()
+// Here we once again declare that the following conditional statements should have
+// exclusive access to the memory
+
+if value == 0 {
+    fmt.Printf("the value is %v.\n", value)
+} else {
+    fmt.Printf("the value is %v.\n", value)
+}
+memoryAccess.Unlock()
+// Here we declare we’re once again done with this memory.
+#+end_src
+
+In this example we’ve created a convention for developers to follow. Anytime developers
+want to access the data variable’s memory, they must first call Lock, and when they’re
+finished they must call Unlock. Code between those two statements can then assume it has
+exclusive access to data; we have successfully synchronized access to the memory. Also note
+that if developers don’t follow this convention, we have no guarantee of exclusive access!
+
+You may have noticed that while we have solved our data race, we haven’t actually solved our
+race condition! The order of operations in this program is still nondeterministic; we’ve
+just narrowed the scope of the nondeterminism a bit. In this example, either the goroutine
+will execute first, or both our if and else blocks will. We still don’t know which will
+occur first in any given execution of this program. Later, we’ll explore the tools to solve
+this kind of issue properly.
+
+On its face this seems pretty simple: if you find you have critical sections, add points to
+synchronize access to the memory! Easy, right? Well…sort of.
+
+It is true that you can solve some problems by synchronizing access to the memory, but as we
+just saw, it doesn’t automatically solve data races or logical correctness. Further, it
+can also create maintenance and performance problems.
+*** Deadlocks, Livelocks, and Starvation
+
+The previous sections have all been about discussing program correctness in that if these
+issues are managed correctly, your program will never give an incorrect answer.
+Unfortunately, even if you successfully handle these classes of issues, there is another
+class of issues to contend with: deadlocks, livelocks, and starvation. These issues all
+concern ensuring your program has something useful to do at all times. If not handled
+properly, your program could enter a state in which it will stop functioning altogether.
+
+
+*Watch:* [[https://youtu.be/w_Cug4_-7F0][Deadlock and livelock]]
+
+**** Deadlocks
+A deadlocked program is one in which all concurrent processes are waiting on one
+another. In this state, the program will never recover without outside intervention.
+
+If that sounds grim, it’s because it is! The Go runtime attempts to do its part and will
+detect some deadlocks (all goroutines must be blocked, or “asleep”[fn:1]), but this doesn’t
+do much to help you prevent deadlocks.
+
+To help solidify what a deadlock is, let’s first look at an example. Again, it’s safe to
+ignore any types, functions, methods, or packages you don’t know and just follow the code
+callouts.
+
+#+begin_src go
+type value struct {
+    mu    sync.Mutex
+    value int
+}
+var wg sync.WaitGroup
+printSum := func(v1, v2 *value) {
+    defer wg.Done()
+    v1.mu.Lock() // Here we attempt to enter the critical section for the incoming value.
+    defer v1.mu.Unlock()
+    // Here we use the defer statement to exit the critical section before printSum
+    time.Sleep(2*time.Second)
+    // Here we sleep for a period of time to simulate work (and trigger a deadlock).
+    v2.mu.Lock()
+    defer v2.mu.Unlock()
+    fmt.Printf("sum=%v\n", v1.value + v2.value)
+}
+var a, b value
+wg.Add(2)
+go printSum(&a, &b)
+go printSum(&b, &a)
+wg.Wait()
+#+end_src
+
+If you were to try and run this code, you’d probably see:
+#+begin_src shell
+fatal error: all goroutines are asleep - deadlock!
+#+end_src
+
+Why? If you look carefully, you’ll see a timing issue in this code. Following is a graphical
+representation of what’s going on. The boxes represent functions, the horizontal lines calls
+to these functions, and the vertical bars lifetimes of the function at the head of the
+graphic:
+
+
+[[file:Introduction/2022-07-31_06-24-13_screenshot.png]]
+
+Essentially, we have created two gears that cannot turn together: our first call to print
+Sum locks a and then attempts to lock b, but in the meantime our second call to print Sum
+has locked b and has attempted to lock a. Both goroutines wait infinitely on each other.
+
+
+It seems pretty obvious why this deadlock is occurring when we lay it out graphically like
+that, but we would benefit from a more rigorous definition. It turns out there are a few
+conditions that must be present for deadlocks to arise, and in 1971, Edgar Coff‐ man
+enumerated these conditions in a paper. The conditions are now known as the /Coffman
+Conditions/ and are the basis for techniques that help detect, prevent, and correct
+deadlock.
+***** Coffman Conditions
+
++ Mutual Exclusion
+    A concurrent process holds exclusive rights to a resource at any one time.
++ Wait For Condition
+    A concurrent process must simultaneously hold a resource and be waiting for an
+  additional resource.
++ No Preemption
+    A resource held by a concurrent process can only be released by that process, so it
+  fulfills this condition.
++ Circular Wait
+    A concurrent process (P1) must be waiting on a chain of other concurrent processes
+  (P2), which are in turn waiting on it (P1), so it fulfills this final condition too.
+
+Let’s examine our contrived program and determine if it meets all four conditions:
+
+1. The ~printSum~ function does require exclusive rights to both a and b, so it fulfills this condition.
+2. Because ~printSum~ holds either a or b and is waiting on the other, it fulfills this condition.
+3. We haven’t given any way for our goroutines to be preempted.
+4. Our first invocation of printSum is waiting on our second invocation, and vice versa
+**** TODO Livelock
+
+Livelocks are programs that are actively performing concurrent operations, but these
+operations do nothing to move the state of the program forward.
+
+Have you ever been in a hallway walking toward another person? She moves to one
+side to let you pass, but you’ve just done the same. So you move to the other side, but
+she’s also done the same. Imagine this going on forever, and you understand livelocks.
+
+Let’s actually write some code that will help demonstrate this scenario. First, we’ll set
+up a few helper functions that will simplify the example. In order to have a working
+example, the code here utilizes several topics we haven’t yet covered. I don’t advise
+attempting to understand it in any detail until you have a firm grasp on the sync
+package. Instead, I recommend following the code callouts to understand the high‐
+lights, and then turning your attention to the second code block, which contains the
+heart of the example.
+
+#+begin_src go
+cadence := sync.NewCond(&sync.Mutex{})
+go func() {
+    for range time.Tick(1*time.Millisecond) {
+         cadence.Broadcast()
+    }
+}()
+
+takeStep := func() {
+    cadence.L.Lock()
+    cadence.Wait()
+    cadence.L.Unlock()
+}
+
+tryDir := func(dirName string, dir *int32, out *bytes.Buffer) bool {
+    fmt.Fprintf(out, " %v", dirName)
+    atomic.AddInt32(dir, 1)
+    takeStep()
+    if atomic.LoadInt32(dir) == 1 {
+        fmt.Fprint(out, ". Success!")
+        return true
+    }
+    takeStep()
+    atomic.AddInt32(dir, -1)
+    return false
+}
+
+var left, right int32
+tryLeft := func(out *bytes.Buffer) bool { return tryDir("left", &left, out) }
+tryRight := func(out *bytes.Buffer) bool { return tryDir("right", &right, out) }
+tryDir allows a person to attempt to move in a direction and returns whether or
+#+end_src
+**** TODO Starvation
+
+Starvation is any situation where a concurrent process cannot get all the resources it
+needs to perform work.
+
+When we discussed livelocks, the resource each goroutine was starved of was a
+shared lock. Livelocks warrant discussion separate from starvation because in a live‐
+lock, all the concurrent processes are starved equally, and no work is accomplished.
+More broadly, starvation usually implies that there are one or more greedy concurrent
+process that are unfairly preventing one or more concurrent processes from accomplishing
+work as efficiently as possible, or maybe at all.
+
+
+
+
+
+
+* Footnotes
+
+[fn:1] There is an accepted proposal to allow the runtime to detect partial deadlocks, but
+it has not been imple‐ mented. For more information, see
+https://github.com/golang/go/issues/13759.
