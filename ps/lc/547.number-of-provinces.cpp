@@ -26,10 +26,10 @@
 #define sz(v) ((int)((v).size()))
 using namespace std;
 
-void dfs(vector<vector<int>> g, vector<bool> v, int index = 0) {
+void dfs(vector<vector<int>> &g, vector<bool> &v, int index = 0) {
   v[index] = 1;
   for (int i = 0; i < g.size(); i++) {
-    if (!v[i])
+    if (!v[g[index][i]])
       dfs(g, v, i);
   }
 }
@@ -37,7 +37,12 @@ void dfs(vector<vector<int>> g, vector<bool> v, int index = 0) {
 int findCircleNum(vector<vector<int>> &isConnected) {
   int ans = 1;
   vector<bool> v(isConnected.size());
-  dfs(isConnected, vector<bool> v)
+  dfs(isConnected, v);
+  for (int i = 0; i < v.size(); i++) {
+    if (!v[i])
+      ans++, dfs(isConnected, v, i);
+  }
+  return ans;
 }
 
 int main() {
