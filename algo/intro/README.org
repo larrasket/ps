@@ -1,0 +1,211 @@
+#+title: Into Algorithms
+#+DATE:  <2022-08-14>
+
+#+BEGIN_PREVIEW
+Recently while preparing to some coding interviews I decided to restudy algorithms from one
+of the references that I did not ever like, that is "Introduction to Algorithms". However, I
+felt the need to read some algorithms in depth, so.. here we go.
+#+END_PREVIEW
+
+* Sorting
+Many computer scientists consider sorting to be the most fundamental problem in the study of
+algorithms. There are several reasons:
+
++ Sometimes an application inherently needs to sort information. For example, in order to
+prepare customer statements, banks need to sort checks by check number.
+
++ Algorithms often use sorting as a key subroutine. For example, a program that
+renders graphical objects which are layered on top of each other might have to sort the
+objects according to an “above” relation so that it can draw these objects from bottom to
+top. We shall see numerous algorithms in this text that use sorting as a subroutine.
+
++ We can draw from among a wide variety of sorting algorithms, and they em-
+ploy a rich set of techniques. In fact, many important techniques used through- out
+algorithm design appear in the body of sorting algorithms that have been developed over the
+years. In this way, sorting is also a problem of historical interest.
+
++ We can prove a nontrivial lower bound for sorting Our best upper bounds match the lower
+bound asymptotically, and so we know that our sorting algorithms are asymptotically optimal.
+Moreover, we can use the lower bound for sorting to prove lower bounds for certain other
+problems.
+
++ Many engineering issues come to the fore when implementing sorting algorithms. The
+fastest sorting program for a particular situation may depend on many factors, such as prior
+knowledge about the keys and satellite data, the memory hierarchy (caches and virtual
+memory) of the host computer, and the software environment. Many of these issues are best
+dealt with at the algorithmic level, rather than by “tweaking” the code.
+
+** Heapsort
+The term “heap” was originally coined in the context of heapsort, but it has since come to
+refer to “garbage-collected storage,” such as the programming languages Java and Lisp
+provide. Our heap data structure is not garbage-collected storage, and whenever we refer to
+heaps in this book, we shall mean a data structure rather than an aspect of garbage
+collection.
+
+*** Heap
+The (binary) heap data structure is an *array* object that we can view as a nearly complete
+*binary tree*  as shown in Figure 6.1:
+
+
+[[file:Heapsort/2022-08-14_08-32-05_screenshot.png]]
+
+
+Each node of the tree corresponds to an element of the array. The tree is completely ﬁlled
+on all levels except possibly the lowest, which is ﬁlled from the left up to a point. An
+array A that represents a heap is an object with two attributes: A:length, which (as
+usual) gives the number of elements in the array, and A:heap-size, which represents how many
+elements in the heap are stored within array A. The root of the tree is A[0] and given the
+index i of a node, we can easily compute the indices of its parent, left child, and right
+child:
+
+*Parent*:
+#+begin_src c++
+int parent(i) {
+    return i/2;
+}
+#+end_src
+
+*Left*:
+#+begin_src c++
+int left(i) {
+    return 2i;
+}
+#+end_src
+
+
+*Right*:
+#+begin_src c++
+int left(i) {
+    return 2i+1;
+}
+#+end_src
+
+There are two kinds of binary heaps: max-heaps and min-heaps. In both kinds,
+the values in the nodes satisfy a heap property, the speciﬁcs of which depend on
+the kind of heap. In a *max-heap*, the max-heap property is that for every node i
+other than the root,
+
+\begin{equation*}
+A[\text{Parent($i$)}] \ge A[i]
+\end{equation*}
+
+that is, the value of a node is at most the value of its parent. Thus, the largest element
+in a max-heap is stored at the root, and the subtree rooted at a node contains values no
+larger than that contained at the node itself. A min-heap is organized in the opposite way;
+the min-heap property is that for every node i other than the root,
+
+\begin{equation*}
+A[\text{Parent($i$)}] \le A[i]
+\end{equation*}
+
+For the heapsort algorithm, we use max-heaps.
+
+Viewing a heap as a tree, we deﬁne the height of a node in a heap to be _the number of edges
+on the longest simple downward path from the node to a leaf_, and we deﬁne the height of the
+heap to be the height of its root. We shall see that the basic operations on heaps run in
+time at most proportional to the height of the tree and thus take $O\log{n}$ time.
+
+*** Maintaining the heap property
+In order to maintain the max-heap property, we call the procedure ~max_heapify~
+Its inputs are an array A and an index i into the array. When it is called, MAX -
+~HEAPIFY~ assumes that the binary trees rooted at LEFT(i) and RIGHT(i) are max-
+heaps, but that AŒi might be smaller than its children, thus violating the max-heap
+property. ~MAX_HEAPIFY~ lets the value at A[i] “float down” in the max-heap so
+that the subtree rooted at index i obeys the max-heap property.
+
+#+begin_src c++
+template <typename T>
+void maxHeapify(Heap<T>& A, int i) {
+  int l = left(i);
+  int r = right(i);
+  int largest;
+  if (l <= A.heapsize - 1 && A[l] > A[i])
+    largest = l;
+  else
+    largest = i;
+  if (r <= A.heapsize - 1 && A[r] > A[largest])
+    largest = r;
+  if (largest != i) {
+    swap(A[i], A[largest]);
+    maxHeapify(A, largest);
+  }
+}
+#+end_src
+
+*** The heapsort algorithm
+The heapsort algorithm starts by using BUILD-MAX-HEAP to build a max-heap on the input array
+$A[1..n]$ where $n = A.length$. Since the maximum element of the array is stored at the root
+$A[1]$ we can put it into its correct final position by exchanging it with A[n]. If we now
+discard node n from the heap and we can do so by simply decrementing $A.heap-size$ we
+observe that the children of the root remain max-heaps, but the new root element might
+violate the max-heap property. All we need to do to restore the max-heap property, however,
+is call MAX HEAPIFY (A,1), the heapsort algorithm then repeats this process for the max-heap
+of size n-1 down to a heap of size 2.
+#+begin_src c++
+void heapsort(Heap<T>& A) {
+  buildMaxHeap(A);
+  for (int i = A.heapsize - 1; i >= 1; i--) {
+    swap(A[0], A[i]);
+    A.heapsize--;
+    maxHeapify(A, 0);
+    print(A);
+  }
+}
+#+end_src
+
+*** Sheet
+| Terminology                     | Description                                                                       |
+|---------------------------------+-----------------------------------------------------------------------------------|
+| Parent of a heap node $i$       | $\frac{i}{2}$                                                                     |
+| Left of a heap node $i$         | $2i$                                                                              |
+| Right of a heap node $i$        | $2i+1$                                                                            |
+| The height of a node in a heap  | the number of edges on the longest simple downward path from the node to a lea  f |
+
+*** \text{Chosen Exercises}
+**** The minimum and maximum numbers of elements in a heap of height $h$
+The minimum and maximum numbers of elements in a heap of height $h$ At least $2^h$ and at
+most $2^{h + 1} − 1$. Can be seen because a complete binary tree of depth $h − 1$ has
+$\sum_{i = 0}^{h - 1} 2^i = 2^h - 1$ elements, and the number of elements in a heap of depth
+$h$ is between the number for a complete binary tree of depth $h − 1$ exclusive and the
+number in a complete binary tree of depth $h$ inclusive.
+*** Some Problems
++ [[https://leetcode.com/problems/kth-largest-element-in-an-array/][215. Kth Largest Element in an Array]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/215.kth-largest-element-in-an-array.cpp][Solution]])/
++ [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Solution]])/
++ [[https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/][378. Kth Smallest Element in a Sorted Matrix]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/0378_kth-smallest-element-in-a-sorted-matrix.cpp][Solution]])/
+** TODO Qucksort
+** TODO Sorting in Linear Time
+** TODO Medians and Order Statistics
+* Data Structures
+Algorithms may require several different types of operations to be performed on sets. For
+example, many algorithms need only the ability to insert elements into, delete elements
+from, and test membership in a set. We call a dynamic set that supports these operations a
+dictionary. Other algorithms require more complicated operations. For example, min-priority
+queues.
+** Stack and Queues
+Stacks and queues are dynamic sets in which the element removed from the set by the DELETE
+operation is prespeciﬁed. In a stack, the element deleted from the set is the one most
+recently inserted: the stack implements a last-in, ﬁrst-out, or LIFO, policy. Similarly, in
+a queue, the element deleted is always the one that has been in the set for the longest
+time: the queue implements a ﬁrst-in, ﬁrst-out, or FIFO, policy. There are several efﬁcient
+ways to implement stacks and queues on a computer. In this section we show how to use a
+simple array to implement each
+**** Some Problems
++ [[https://leetcode.com/problems/valid-parentheses/][20. Valid Parentheses]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/20.valid-parentheses.cpp][Solution]])/
++ [[https://leetcode.com/problems/next-greater-node-in-linked-list/][1019. Next Greater Node In Linked List]] /([[https://github.com/salehmu/leet/blob/main/ps/lc/1019.next-greater-node-in-linked-list.cpp][Solution]])/
+*** Linked Lists
+A linked list is a data structure in which the objects are arranged in a linear order.
+Unlike an array, however, in which the linear order is determined by the array indices, the
+order in a linked list is determined by a pointer in each object. Linked lists provide a
+simple, flexible representation for dynamic sets, supporting (though not necessarily
+efficiently).
+**** Some Problems
++ [[https://leetcode.com/problems/palindrome-linked-list/][234. Palindrome Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/234.palindrome-linked-list.cpp][Solution]])/
++ [[https://leetcode.com/problems/merge-two-sorted-lists/][21. Merge Two Sorted Lists]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/21.merge-two-sorted-lists.cpp][Solution]])/
++ [[https://leetcode.com/problems/remove-nth-node-from-end-of-list/][19. Remove Nth Node From End of List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/19.remove-nth-node-from-end-of-list.cpp][Solution]])/
++ [[https://leetcode.com/problems/swap-nodes-in-pairs/][24. Swap Nodes in Pairs]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/24.swap-nodes-in-pairs.cpp][Solution]])/
++ [[https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/][2130. Maximum Twin Sum of a Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/2130.maximum-twin-sum-of-a-linked-list.cpp][Solution]])/
++ [[https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/][2095. Delete the Middle Node of a Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/2095.delete-the-middle-node-of-a-linked-list.cpp][Solution]])/
++ [[https://leetcode.com/problems/merge-in-between-linked-lists/][1669. Merge In Between Linked Lists]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/1669.merge-in-between-linked-lists.cpp][Solution]])/
++ [[https://leetcode.com/problems/flatten-binary-tree-to-linked-list/][114. Flatten Binary Tree to Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/144.flatten-binary-tree-to-linked-list.cpp][Solution]])/
++ [[https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/][430. Flatten a Multilevel Doubly Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/430.flatten-a-multilevel-doubly-linked-list.cpp][Solution]])/
++ [[https://www.lintcode.com/problem/380/][380. Intersection of Two Linked Lists]]. /([[https://github.com/salehmu/leet/blob/main/ps/nt/380.cpp][Solution]])/
