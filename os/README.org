@@ -26,7 +26,6 @@ those who program them but also highly useful to those who write programs on the
 them.
 #+END_PREVIEW
 
-
 A modern general-purpose computer system consists of one or more CPUs and
 a number of device controllers connected through a common bus that provides
 access between components and shared memory (Figure 1.2). Each device
@@ -37,3 +36,95 @@ USB hub, to which several devices can connect. A device controller maintains
 some local buffer storage and a set of special-purpose registers. The device
 controller is responsible for moving the data between the peripheral devices
 that it controls and its local buffer storage.
+
+* Computer-System Organization
+
+Consider a typical computer operation: a program performing I/O. To start an
+I/O operation, the device driver loads the appropriate registers in the device
+controller. The device controller, in turn, examines the contents of these reg-
+isters to determine what action to take (such as “read a character from the
+keyboard”). The controller starts the transfer of data from the device to its local
+buffer. Once the transfer of data is complete, the device controller informs the
+device driver that it has finished its operation. The device driver then gives
+control to other parts of the operating system, possibly returning the data or a
+pointer to the data if the operation was a read. For other operations, the device
+driver returns status information such as “write completed successfully” or
+“device busy”. But how does the controller inform the device driver that it has
+finished its operation? This is accomplished via an interrupt.
+
+** Interrupts
+
+Typically, operating systems have a device driver for each device controller. This device
+driver understands the device controller and provides the rest of the operating system with
+a uniform interface to the device. The CPU and the device controllers can execute in
+parallel, competing for memory cycles. To ensure orderly access to the shared memory, a
+memory controller synchronizes access to the memory.
+
+When the CPU is interrupted, it stops what it is doing and immediately _transfers execution
+to a fixed location_. The fixed location usually contains the starting address where the
+service routine for the interrupt is located.  The interrupt service routine executes; on
+completion, the CPU resumes the interrupted computation.
+
+Interrupts are an important part of a computer architecture. Each computer design has its
+own interrupt mechanism, but several functions are common.  The interrupt must transfer
+control to the appropriate /interrupt service routine[fn:1]/.  The straightforward method for
+managing this transfer would be to invoke a generic routine to examine the interrupt
+information. The routine, in turn, would call the interrupt-specific handler. However,
+interrupts must be handled quickly, as they occur very frequently. *A table* of pointers to
+interrupt routines can be used instead to provide the necessary speed. The interrupt routine
+is called indirectly through the table, with no intermediate routine needed.  Generally, the
+table of pointers is stored in low memory (*the first hundred* or so locations). These
+locations hold the addresses of the interrupt service routines for the various devices. This
+array, or *interrupt vector*, of addresses is then indexed by a unique number, given with
+the interrupt request, to provide the address of the interrupt service routine for the
+interrupting device. Operating systems as different as Windows and UNIX dispatch interrupts
+in this manner.
+
+The interrupt architecture must also save the state information of whatever was interrupted,
+so that it can restore this information after servicing the interrupt. If the interrupt
+routine needs to modify the processor state —for instance, by modifying register values—it
+must explicitly save the current state and then restore that state before returning. After
+the interrupt is serviced, the saved return address is loaded into the program counter, and
+the interrupted computation resumes as though the interrupt had not occurred.
+
+The basic interrupt mechanism works as follows:
+
++ The CPU hardware has a wire called the *interrupt-request line* that the CPU _senses after executing every instruction_.
++ When the CPU detects that a controller has asserted a signal on the interrupt-request line, it reads the interrupt number and jumps to the interrupt-handler routine by using that interrupt number as an index into the interrupt vector.
++ It then starts execution at the address associated with that index. The interrupt handler saves any state it will be changing during its operation, determines the cause of the interrupt, performs the necessary processing, performs a state restore, and executes a return from interrupt instruction to return the CPU to the execution state prior to the interrupt.
+
+We say that the device controller raises an interrupt by asserting a signal on the interrupt
+request line, the CPU catches the interrupt and dispatches it to the interrupt handler, and
+the handler clears the interrupt by servicing the device. The following figure summarizes
+the cycle:
+
+#+DOWNLOADED: screenshot @ 2022-08-17 09:45:44
+[[file:Computer-System_Organization/2022-08-17_09-45-44_screenshot.png]]
+
+The CPU can load instructions only from memory, so any programs must first be loaded into
+memory to run. General-purpose computers run most of their programs from rewritable memory,
+called main memory (also called random-access memory, or RAM). Main memory commonly is
+implemented in a semiconductor technology called dynamic random-access memory (DRAM).
+
+Computers use other forms of memory as well. For example, the first pro- gram to run on
+computer power-on is a bootstrap program, which then loads the operating system. Since RAM
+is volatile—loses its content when power is turned off or otherwise lost—we cannot trust it
+to hold the bootstrap pro- gram. Instead, for this and some other purposes, the computer
+uses electrically erasable programmable read-only memory (EEPROM) and other forms of
+firmware storage that is infrequently written to and is nonvolatile. EEPROM can be changed
+but cannot be changed frequently. In addition, it is low speed, and so it contains mostly
+static programs and data that aren’t frequently used.  For example, the iPhone uses EEPROM
+to store serial numbers and hardware information about the device.
+
+All forms of memory provide an array of bytes. Each byte has its own address. Interaction is
+achieved through a sequence of load or store instructions to specific memory addresses.
+The load instruction moves a byte or word from main memory to an internal register within
+the CPU, whereas the store instruction moves the content of a register to main memory. Aside
+from explicit loads and stores, the CPU automatically loads instructions from main memory
+for execution from the location stored in the program counter.
+
+* Footnotes
+
+[fn:1] An important note is that whenever an interrupt is generated, control is given for
+the kernel. The kernel is responsible for sending the request for the coresponding I/O
+device (from ISR table, so-called /interrupt-vector/).
