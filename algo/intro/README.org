@@ -162,12 +162,12 @@ void heapsort(Heap<T>& A) {
 | The height of a node in a heap  | the number of edges on the longest simple downward path from the node to a lea  f |
 
 *** \text{Chosen Exercises}
-**** The minimum and maximum numbers of elements in a heap of height $h$
-The minimum and maximum numbers of elements in a heap of height $h$ At least $2^h$ and at
-most $2^{h + 1} − 1$. Can be seen because a complete binary tree of depth $h − 1$ has
-$\sum_{i = 0}^{h - 1} 2^i = 2^h - 1$ elements, and the number of elements in a heap of depth
-$h$ is between the number for a complete binary tree of depth $h − 1$ exclusive and the
-number in a complete binary tree of depth $h$ inclusive.
++  The minimum and maximum numbers of elements in a heap of height $h$
+    The minimum and maximum numbers of elements in a heap of height $h$ At least $2^h$ and at
+    most $2^{h + 1} − 1$. Can be seen because a complete binary tree of depth $h − 1$ has
+    $\sum_{i = 0}^{h - 1} 2^i = 2^h - 1$ elements, and the number of elements in a heap of depth
+    $h$ is between the number for a complete binary tree of depth $h − 1$ exclusive and the
+    number in a complete binary tree of depth $h$ inclusive.
 *** Some Problems
 + [[https://leetcode.com/problems/kth-largest-element-in-an-array/][215. Kth Largest Element in an Array]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/215.kth-largest-element-in-an-array.cpp][Solution]])/
 + [[https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/][1749. Maximum Absolute Sum of Any Subarray]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/1749.maximum-absolute-sum-of-any-subarray.cpp][Solution]])/
@@ -175,7 +175,7 @@ number in a complete binary tree of depth $h$ inclusive.
 ** TODO Qucksort
 ** TODO Sorting in Linear Time
 ** TODO Medians and Order Statistics
-* Data Structures
+* Elementary Data Structures
 Algorithms may require several different types of operations to be performed on sets. For
 example, many algorithms need only the ability to insert elements into, delete elements
 from, and test membership in a set. We call a dynamic set that supports these operations a
@@ -192,13 +192,13 @@ simple array to implement each
 **** Some Problems
 + [[https://leetcode.com/problems/valid-parentheses/][20. Valid Parentheses]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/20.valid-parentheses.cpp][Solution]])/
 + [[https://leetcode.com/problems/next-greater-node-in-linked-list/][1019. Next Greater Node In Linked List]] /([[https://github.com/salehmu/leet/blob/main/ps/lc/1019.next-greater-node-in-linked-list.cpp][Solution]])/
-*** Linked Lists
+** Linked Lists
 A linked list is a data structure in which the objects are arranged in a linear order.
 Unlike an array, however, in which the linear order is determined by the array indices, the
 order in a linked list is determined by a pointer in each object. Linked lists provide a
 simple, flexible representation for dynamic sets, supporting (though not necessarily
 efficiently).
-**** Some Problems
+*** Some Problems
 + [[https://leetcode.com/problems/palindrome-linked-list/][234. Palindrome Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/234.palindrome-linked-list.cpp][Solution]])/
 + [[https://leetcode.com/problems/merge-two-sorted-lists/][21. Merge Two Sorted Lists]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/21.merge-two-sorted-lists.cpp][Solution]])/
 + [[https://leetcode.com/problems/remove-nth-node-from-end-of-list/][19. Remove Nth Node From End of List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/19.remove-nth-node-from-end-of-list.cpp][Solution]])/
@@ -209,3 +209,61 @@ efficiently).
 + [[https://leetcode.com/problems/flatten-binary-tree-to-linked-list/][114. Flatten Binary Tree to Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/144.flatten-binary-tree-to-linked-list.cpp][Solution]])/
 + [[https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/][430. Flatten a Multilevel Doubly Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/430.flatten-a-multilevel-doubly-linked-list.cpp][Solution]])/
 + [[https://www.lintcode.com/problem/380/][380. Intersection of Two Linked Lists]]. /([[https://github.com/salehmu/leet/blob/main/ps/nt/380.cpp][Solution]])/
++ [[https://leetcode.com/problems/reverse-linked-list/][206. Reverse Linked List]]. /([[https://github.com/salehmu/leet/blob/main/ps/lc/0206_reverse-linked-list.go][Solution]])/
+** TODO Hashing
+* Binary Search Tree
+The search tree data structure supports many dynamic-set operations, including SEARCH,
+MINIMUM, MAXIMUM, PREDECESSOR, SUCCESSOR, INSERT, and DELETE. Thus, we can use a search tree
+both as a dictionary and as a priority queue.
+
+A binary search tree is organized, as the name suggests, in a binary tree, we can represent
+such a tree by a linked data structure in which each node is an object. In addition to a key
+and satellite data, each node contains attributes left, right, and p that point to the nodes
+corresponding to its left child, its right child, and its parent, respectively. If a child
+or the parent is missing, the appropriate attribute contains the value NIL. The root node is
+the only node in the tree whose parent is NIL.
+
+
+Let $x$ be a node in a binary search tree. If y is a node in the left subtree
+of $x$, then $y.key \le x.key$. If $y$ is a node in the right subtree of x, then
+ $y.key \ge x.key$.
+
+The binary-search-tree property allows us to print out all the keys in a binary
+search tree in sorted order by a simple recursive algorithm, called an /inorder tree
+walk/. This algorithm is so named because it prints the key of the root of a subtree
+between printing the values in its left subtree and printing those in its right subtree.
+(Similarly, a preorder tree walk prints the root before the values in either subtree,
+and a postorder tree walk prints the root after the values in its subtrees.)
+** \text{Chosen Exercises}
++ What is the difference between the binary-search-tree property and the min-heap property? Can the min-heap property be used to print out the keys of an $n$-node tree in sorted order in $O(n)$ time? Show how, or explain why not.
+  + The binary-search-tree property guarantees that all nodes in the left subtree are smaller, and all nodes in the right subtree are larger.
+  + The min-heap property only guarantees the general child-larger-than-parent relation, but doesn't distinguish between left and right children. For this reason, the min-heap property can't be used to print out the keys in sorted order in linear time because we have no way of knowing which subtree contains the next smallest element.
+** Successor and Predecessor
+Given a node in a binary search tree, sometimes we need to find its successor in the sorted
+order determined by an inorder tree walk. If all keys are distinct, *the successor of a node
+$x$ is the node with _the smallest key greater_ than $x.key$.* The structure of a binary search
+tree allows us to determine the successor of a node without ever comparing keys. The
+following procedure returns the successor of a node x in a binary search tree if it exists,
+and NIL if $x$ has the largest key in the tree:
+
+#+begin_src c
+    // step 1 of the above algorithm
+    if (n->right != NULL)
+        return minValue(n->right);
+
+    // step 2 of the above algorithm
+    struct node* p = n->parent;
+    while (p != NULL && n == p->right) {
+        n = p;
+        p = p->parent;
+    }
+    return p;
+#+end_src
+
+Both of these procedures run in $O(h)$ time on a tree of height $h$ since, as in TREE-
+SEARCH, the sequence of nodes encountered forms a simple path downward from
+the root.
+** TODO Deletion
+** TODO Tree Balancing
+** TODO Threaded Binary Tree
+* TODO Non-binary Trees
