@@ -123,6 +123,18 @@ the CPU, whereas the store instruction moves the content of a register to main m
 from explicit loads and stores, the CPU automatically loads instructions from main memory
 for execution from the location stored in the program counter.
 
+** TODO Introductive— Processing
+** DONE Introductive— Multiprocessor System
+On modern computers, from mobile devices to servers, multiprocessor systems now dominate
+the landscape of computing. Traditionally, such systems have two (or more) processors, each
+with a single-core CPU. The processors share the computer bus and sometimes the clock,
+memory, and peripheral devices. The primary advantage of multiprocessor systems is
+increased throughput. That is, by increasing the number of processors, we expect to get more
+work done in less time. The speed-up ratio with N processors is not N, however; it is less
+than N. When multiple processors cooperate on a task, a certain amount of overhead is
+incurred in keeping all the parts working correctly.  This overhead, plus contention for
+shared resources, lowers the expected gain from additional processors.
+
 * Footnotes
 
 [fn:1] An important note is that whenever an interrupt is generated, control is given for
