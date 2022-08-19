@@ -1,6 +1,4 @@
 #+TITLE: Draft Note Book
-
-
 * Draft
 
 (This draft is made for topics I can't organize, such as miscellaneous algorthims that I
