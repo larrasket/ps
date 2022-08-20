@@ -43,7 +43,7 @@ some local buffer storage and a set of special-purpose registers. The device
 controller is responsible for moving the data between the peripheral devices
 that it controls and its local buffer storage.
 
-* Computer-System Organization
+* Computer-System Organization :chapter_1:
 
 Consider a typical computer operation: a program performing I/O. To start an
 I/O operation, the device driver loads the appropriate registers in the device
@@ -129,8 +129,8 @@ the CPU, whereas the store instruction moves the content of a register to main m
 from explicit loads and stores, the CPU automatically loads instructions from main memory
 for execution from the location stored in the program counter.
 
-** TODO Introductive— Processing
-** DONE Introductive— Multiprocessor System
+** TODO  Processing :introductive:
+** DONE  Multiprocessor System :introductive:
 On modern computers, from mobile devices to servers, multiprocessor systems now dominate
 the landscape of computing. Traditionally, such systems have two (or more) processors, each
 with a single-core CPU. The processors share the computer bus and sometimes the clock,
@@ -140,11 +140,74 @@ work done in less time. The speed-up ratio with N processors is not N, however; 
 than N. When multiple processors cooperate on a task, a certain amount of overhead is
 incurred in keeping all the parts working correctly.  This overhead, plus contention for
 shared resources, lowers the expected gain from additional processors.
+* TODO System Calls :chapter_2:
+* Why Applications Are Operating-System-Specific :chapter_2:
+Why Applications Are Operating-System Specific Fundamentally, applications compiled on one
+operating system are not executable on other operating systems. If they were, the world
+would be a better place, and our choice of what operating system to use would depend on
+utility and features rather than which applications were available.
+
+Based on our earlier discussion, we can now see part of the problem—each operating system
+provides a unique set of system calls. System calls are part of the set of services provided
+by operating systems for use by applications. Even if system calls were somehow uniform,
+other barriers would make it difficult for us to execute application programs on different
+operating systems. But if you have used multiple operating systems, you may have used some
+of the same applications on them. How is that possible?  An application can be made
+available to run on multiple operating systems in one of three ways:
+
+1. The application can be written in an interpreted language (such as Python
+or Ruby) that has an interpreter available for multiple operating systems.  The interpreter
+reads each line of the source program, executes equivalent instructions on the native
+instruction set, and calls native operating sys- tem calls. Performance suffers relative to
+that for native applications, and the interpreter provides only a subset of each operating
+system’s features, possibly limiting the feature sets of the associated applications.
+
+
+
+2. The application can be written in a language that includes a virtual
+machine containing the running application. The virtual machine is part of the language’s
+full RTE. One example of this method is Java. Java has an RTE that includes a loader,
+byte-code verifier, and other components that load the Java application into the Java
+virtual machine. This RTE has been ported, or developed, for many operating systems, from
+mainframes to smartphones, and in theory any Java app can run within the RTE wherever it is
+available. Systems of this kind have disadvantages similar to those of interpreters,
+discussed above.
+
+
+
+3. The application developer can use a standard language or API in which
+the compiler generates binaries in a machine- and operating-system- specific language. The
+application must be ported to each operating sys- tem on which it will run. This porting can
+be quite time consuming and must be done for each new version of the application, with
+subsequent testing and debugging. Perhaps the best-known example is the POSIX API and its
+set of standards for maintaining source-code compatibility between different variants of
+UNIX-like operating systems.
+
+* Operating-System Design and Implementation :chapter_2:
+
+The first problem in designing a system is to define goals and specifications. At the
+highest level, the design of the system will be affected by the choice of hard- ware and the
+type of system: traditional desktop/laptop, mobile, distributed, or real time[fn:2].
+
+
+Beyond this highest design level, the requirements may be much harder to specify. The
+requirements can, however, be divided into two basic groups: _user goals_ and _system goals_.
+
+User[fn:3]s want certain obvious properties in a system. The system should be convenient to use,
+easy to learn and to use, reliable, safe, and fast. Of course, these specifications are not
+particularly useful in the system design, since there is no general agreement on how to
+achieve them.
 
 
 
 * Footnotes
 
+[fn:3] Such needs might be ignored in some specifications, for example designing an os that
+would be used for embedded systems purpose.
+[fn:2] Implies the need of thinking of the resources available before implementing. ofc
+android devices will enjoy less battery usage, such a thing should be considered during
+designing the os.
+
 [fn:1] An important note is that whenever an interrupt is generated, control is given for
-the kernel. The kernel is responsible for sending the request for the coresponding I/O
+the kernel. The kernel is responsible for sending the request for the corresponding I/O
 device (from ISR table, so-called /interrupt-vector/).
