@@ -1,6 +1,12 @@
 #+TITLE: Introduction into Operating Systems
 #+DATE:  <2022-08-01>
 
+
+#+begin_abstract
+Some notes and exercises from OPERATING-SYSTEM CONCEPTS
+#+end_abstract
+
+
 An operating system is software that manages a computer’s hardware. It also provides a basis
 for application programs and acts as an intermediary between the computer user and the
 computer hardware. An amazing aspect of operating systems is how they vary in accomplishing
@@ -134,6 +140,8 @@ work done in less time. The speed-up ratio with N processors is not N, however; 
 than N. When multiple processors cooperate on a task, a certain amount of overhead is
 incurred in keeping all the parts working correctly.  This overhead, plus contention for
 shared resources, lowers the expected gain from additional processors.
+
+
 
 * Footnotes
 

@@ -7,6 +7,7 @@
 #include <array>
 #include <climits>
 #include <cmath>
+#include <cstdio>
 #include <deque>
 #include <iomanip>
 #include <iostream>
@@ -52,6 +53,7 @@ int main() {
   for (auto &k : myvec) {
     for (auto &p : k) {
       cout << p << " ";
+      printf("fuck");
     }
     cout << endl;
   }
