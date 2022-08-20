@@ -199,6 +199,40 @@ particularly useful in the system design, since there is no general agreement on
 achieve them.
 
 
+** Mechanisms and Policies :introductive:
+*Mechanisms determine how to do something*; policies determine _what will be done_.  For
+example, the timer construct is a mechanism for ensuring CPU protection, but deciding how
+long the timer is to be set for a particular user is a policy decision.
+
+The separation of policy and mechanism is important for flexibility. Policies are likely to
+change across places or over time. In the worst case, each change in policy would require a
+change in the underlying mechanism. A general mechanism flexible enough to work across a
+range of policies is preferable.  A change in policy would then require redefinition of only
+certain parameters of the system. For instance, consider a mechanism for giving priority to
+certain types of programs over others. If the mechanism is properly separated from policy,
+it can be used either to support a policy decision that I/O-intensive programs should have
+priority over CPU-intensive ones or to support the opposite policy.
+
+
+Microkernel-based operating systems (will be discussed later) take the separation of
+mechanism and policy to one extreme by implementing a basic set of primitive building
+blocks. These blocks are almost policy free, allowing more advanced mechanisms and policies
+to be added via user-created kernel modules or user programs themselves. In contrast,
+consider Windows, an enormously popular commercial operating system available for over three
+decades. Microsoft has closely encoded both mechanism and policy into the system to enforce
+a global look and feel across all devices that run the Windows operating system. All
+applications have similar interfaces, because the interface itself is built into the kernel
+and system libraries. Apple has adopted a similar strategy with its macOS and iOS operating
+systems.
+
+We can make a similar comparison between commercial and open-source operating systems. For
+instance, contrast Windows, discussed above, with Linux, an open-source operating system
+that runs on a wide range of computing devices and has been available for over 25 years.
+The “standard” Linux kernel has a specific CPU scheduling algorithm, which is a mechanism
+that supports a certain policy. However, anyone is free to modify or replace the scheduler
+to support a different policy.
+
+
 
 * Footnotes
 
