@@ -53,7 +53,7 @@ int main() {
   for (auto &k : myvec) {
     for (auto &p : k) {
       cout << p << " ";
-      printf("fuck");
+      // co printf("fuck");
     }
     cout << endl;
   }
