@@ -42,10 +42,6 @@ public:
   bool validateBinaryTreeNodes(int n, vector<int> &leftChild,
                                vector<int> &rightChild) {
     vector<bool> visited(n, false);
-    bool ans = vldiate(visited, 0, leftChild, rightChild);
-    for (int j = 0; j < n; j++) {
-      if (!visited[j] &&)
-    }
-    return ans;
+    return vldiate(visited, 0, leftChild, rightChild);
   }
 };
