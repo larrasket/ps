@@ -6,7 +6,6 @@
 Some notes and exercises from OPERATING-SYSTEM CONCEPTS
 #+end_abstract
 
-
 An operating system is software that manages a computer’s hardware. It also provides a basis
 for application programs and acts as an intermediary between the computer user and the
 computer hardware. An amazing aspect of operating systems is how they vary in accomplishing
@@ -32,16 +31,15 @@ those who program them but also highly useful to those who write programs on the
 them.
 #+END_PREVIEW
 
-A modern general-purpose computer system consists of one or more CPUs and
-a number of device controllers connected through a common bus that provides
-access between components and shared memory (Figure 1.2). Each device
-controller is in charge of a specific type of device (for example, a disk drive,
-audio device, or graphics display). Depending on the controller, more than one
-device may be attached. For instance, one system USB port can connect to a
-USB hub, to which several devices can connect. A device controller maintains
-some local buffer storage and a set of special-purpose registers. The device
-controller is responsible for moving the data between the peripheral devices
-that it controls and its local buffer storage.
+A modern general-purpose computer system consists of one or more CPUs and a number of device
+controllers connected through a common bus that provides access between components and
+shared memory (Figure 1.2). Each device controller is in charge of a specific type of device
+(for example, a disk drive, audio device, or graphics display). Depending on the controller,
+more than one device may be attached. For instance, one system USB port can connect to a USB
+hub, to which several devices can connect. A device controller maintains some local buffer
+storage and a set of special-purpose registers. The device controller is responsible for
+moving the data between the peripheral devices that it controls and its local buffer
+storage.
 
 * Computer-System Organization :chapter_1:
 
@@ -155,33 +153,15 @@ operating systems. But if you have used multiple operating systems, you may have
 of the same applications on them. How is that possible?  An application can be made
 available to run on multiple operating systems in one of three ways:
 
-1. The application can be written in an interpreted language (such as Python
-or Ruby) that has an interpreter available for multiple operating systems.  The interpreter
-reads each line of the source program, executes equivalent instructions on the native
-instruction set, and calls native operating sys- tem calls. Performance suffers relative to
-that for native applications, and the interpreter provides only a subset of each operating
-system’s features, possibly limiting the feature sets of the associated applications.
+1. The application can be written in an interpreted language (such as Python or Ruby) that has an interpreter available for multiple operating systems.  The interpreter reads each line of the source program, executes equivalent instructions on the native instruction set, and calls native operating sys- tem calls. Performance suffers relative to that for native applications, and the interpreter provides only a subset of each operating system’s features, possibly limiting the feature sets of the associated applications.
 
 
 
-2. The application can be written in a language that includes a virtual
-machine containing the running application. The virtual machine is part of the language’s
-full RTE. One example of this method is Java. Java has an RTE that includes a loader,
-byte-code verifier, and other components that load the Java application into the Java
-virtual machine. This RTE has been ported, or developed, for many operating systems, from
-mainframes to smartphones, and in theory any Java app can run within the RTE wherever it is
-available. Systems of this kind have disadvantages similar to those of interpreters,
-discussed above.
+2. The application can be written in a language that includes a virtual machine containing the running application. The virtual machine is part of the language’s full RTE. One example of this method is Java. Java has an RTE that includes a loader, byte-code verifier, and other components that load the Java application into the Java virtual machine. This RTE has been ported, or developed, for many operating systems, from mainframes to smartphones, and in theory any Java app can run within the RTE wherever it is available. Systems of this kind have disadvantages similar to those of interpreters, discussed above.
 
 
 
-3. The application developer can use a standard language or API in which
-the compiler generates binaries in a machine- and operating-system- specific language. The
-application must be ported to each operating sys- tem on which it will run. This porting can
-be quite time consuming and must be done for each new version of the application, with
-subsequent testing and debugging. Perhaps the best-known example is the POSIX API and its
-set of standards for maintaining source-code compatibility between different variants of
-UNIX-like operating systems.
+3. The application developer can use a standard language or API in which the compiler generates binaries in a machine- and operating-system- specific language. The application must be ported to each operating sys- tem on which it will run. This porting can be quite time consuming and must be done for each new version of the application, with subsequent testing and debugging. Perhaps the best-known example is the POSIX API and its set of standards for maintaining source-code compatibility between different variants of UNIX-like operating systems.
 
 * Operating-System Design and Implementation :chapter_2:
 
@@ -232,9 +212,274 @@ The “standard” Linux kernel has a specific CPU scheduling algorithm, which i
 that supports a certain policy. However, anyone is free to modify or replace the scheduler
 to support a different policy.
 
+* Operating-System Structure :chapter_2:
 
+A system as large and complex as a modern operating system must be engineered carefully if
+it is to function properly and be modified easily. A common approach is to partition the
+task into small components, or modules, rather than have one single system. Each of these
+modules should be a well-defined portion of the system, with carefully defined interfaces
+and functions. You may use a similar approach when you structure your programs: rather than
+placing all of your code in the ~main()~ function, you instead separate logic into a number
+of functions, clearly articulate parameters and return values, and then call those functions
+from ~main()~.
+
+** Monolithic Structure[fn:4]
+
+#+DOWNLOADED: screenshot @ 2022-08-20 07:15:03
+[[file:Operating-System_Structure/2022-08-20_07-15-03_screenshot.png]]
+
+
+The simplest structure for organizing an operating system is no structure at all.  That is,
+place all of the functionality of the kernel into a single, static binary file that runs in
+a single address space. This approach—known as a monolithic structure—is a common technique
+for designing operating systems.
+
+
+An example of such limited structuring is the original UNIX operating system, which consists
+of two separable parts: the kernel and the system programs. The kernel is further separated
+into a series of interfaces and device drivers, which have been added and expanded over the
+years as UNIX has evolved. We can view the traditional UNIX operating system as being
+layered to some extent, as shown in Figure 2.12. Everything below the system-call interface
+and above the physical hardware is the kernel. The kernel provides the file system, CPU
+scheduling, memory management, and other operating- system functions through system calls.
+Taken in sum, that is an enormous amount of functionality to be combined into one single
+address space.
+
+The Linux operating system is based on UNIX and is structured similarly, as shown:
+
+
+#+DOWNLOADED: screenshot @ 2022-08-20 07:18:02
+[[file:Operating-System_Structure/2022-08-20_07-18-02_screenshot.png]]
+
+
+Applications typically use the glibc standard C library when communicating with the system
+call interface to the kernel. The Linux kernel is ~monolithic~ in that it runs entirely in
+kernel mode in a single address space, but as we shall, it does have a modular design that
+allows the kernel to be modified during run time.  Despite the apparent simplicity of
+monolithic kernels, they are difficult to implement and extend. Monolithic kernels do have a
+distinct performance advantage, however: there is very little overhead in the system-call
+interface, and communication within the kernel is fast. Therefore, despite the drawbacks of
+monolithic kernels, their speed and efficiency explains why we still see evidence of this
+structure in the UNIX, Linux, and Windows operating systems.
+** Layered Approach
+
+The monolithic approach is often known as a tightly coupled system because changes to one
+part of the system can have wide-ranging effects on other parts.  Alternatively, we could
+design *a loosely coupled system*. Such a system is divided into separate, smaller components
+that have specific and limited functionality. All these components together comprise the
+kernel. The advantage of this modular approach is that changes in one component affect only
+that component, and no others, allowing system implementers more freedom in creating and
+changing the inner workings of the system.
+
+A system can be made modular in many ways. One method is the layered approach, in which the
+operating system is broken into a number of layers (levels). The bottom layer (layer 0) is
+the hardware; the highest (layer N[fn:5]) is the user interface. This layering structure is
+depicted in Figure 2.14.
+
+An operating-system layer is an implementation of an abstract object made up of data and the
+operations that can manipulate those data. A typical operating-system layer—say, layer
+M—consists of data structures and a set of functions that can be invoked by higher-level
+layers. Layer M, in turn, can invoke operations on lower-level layers.
+
+The main advantage of the layered approach is simplicity of construction
+and debugging. The layers are selected so that each uses functions (operations)
+and services of only lower-level layers. This approach simplifies debugging
+and system verification. The first layer can be debugged without any concern
+for the rest of the system, because, by definition, it uses only the basic hardware
+(which is assumed correct) to implement its functions. Once the first layer is
+debugged, its correct functioning can be assumed while the second layer is
+debugged, and so on. If an error is found during the debugging of a particular
+layer, the error must be on that layer, because the layers below it are already
+debugged. Thus, the design and implementation of the system are simplified.
+
+
+#+DOWNLOADED: screenshot @ 2022-08-20 07:47:49
+[[file:Operating-System_Structure/2022-08-20_07-47-49_screenshot.png]]
+** Microkernels
+As UNIX expanded, the kernel became large and difficult to manage.  In the mid-1980s,
+researchers at Carnegie Mellon University developed an operating system called Mach that
+modularized the kernel using the *micro-kernel* approach. This method structures the
+operating system by removing all nonessential components from the kernel and implementing
+them as user- level programs that reside in separate address spaces. The result is a smaller
+kernel. There is little consensus regarding which services should remain in the kernel and
+which should be implemented in user space[fn:6]. Typically, however, microkernels provide minimal
+process and memory management, in addition to a communication facility. Figure 2.15
+illustrates the architecture of a typical microkernel.
+
+
+#+DOWNLOADED: screenshot @ 2022-08-20 07:56:00
+[[file:Operating-System_Structure/2022-08-20_07-56-00_screenshot.png]]
+
+
+One benefit of the microkernel approach is that it makes extending the operating system
+easier. All new services are added to user space and consequently do not require
+modification of the kernel. When the kernel does have to be modified, the changes tend to be
+fewer, because the microkernel is a smaller kernel. The resulting operating system is easier
+to port from one hardware design to another. The microkernel also provides more security and
+reliability, since most services are running as user—rather than kernel—processes. If a
+service fails, the rest of the operating system remains untouched.
+
+** Hybrid Systems
+In practice, very few operating systems adopt a single, strictly defined struc-
+ture. Instead, they combine different structures, resulting in hybrid systems
+that address performance, security, and usability issues. For example, Linux
+is monolithic, because having the operating system in a single address space
+provides very efficient performance. However, it also modular, so that ne           w
+functionality can be dynamically added to the kernel. Windows is largely
+monolithic as well (again primarily for performance reasons), but it retains
+some behavior typical of microkernel systems, including providing support
+for separate subsystems (known as operating-system personalities) that run as
+user-mode processes. Windows systems also provide support for dynamically
+loadable kernel modules.
+
+*** macOS and iOS
+
+Apple’s macOS operating system is designed to run primarily on desktop and
+laptop computer systems, whereas iOS is a mobile operating system designed
+for the iPhone smartphone and iPad tablet computer. Architecturally, macOS
+and iOS have much in common, and so we present them together, highlighting
+what they share as well as how they differ from each other.
+
+
+- *User experience layer*. This layer defines the software interface that allows users to interact with the computing devices. macOS uses the Aqua user interface, which is designed for a mouse or trackpad, whereas iOS uses the Springboard user interface, which is designed for touch devices.
+
+- *Application frameworks layer*. This layer includes the Cocoa and Cocoa Touch frameworks, which provide an API for the Objective-C and Swift programming languages. The primary difference between Cocoa and Cocoa Touch is that the former is used for developing macOS applications, and the latter by iOS to provide support for hardware features unique to mobile devices, such as touch screens.
+- *Core frameworks*. This layer defines frameworks that support graphics and media including Quicktime and OpenGL.
+
+- *Kernel environment*. This environment, also known as Darwin, includes the Mach microkernel and the BSD UNIX kernel. We will elaborate on Darwin shortly.
+
+
+**** TODO Android
+
+* Introduction to Linux Kernel Modules :programming_proeject:chapter_2:
+
+-----
+
+/TIP!/
+
+/Kernel modules are loaded using the insmod command, which is run as follows:/
+#+begin_src shell
+sudo insmod model.ko
+#+end_src
+
+/To check whether the module has loaded, enter the lsmod command and search
+for the module simple. Recall that the module entry point is invoked when the
+module is inserted into the kernel. To check the contents of this message in the
+kernel log buffer, enter the command/
+
+/Removing the kernel module involves invoking the rmmod command (notice that the .ko suffix
+is unnecessary)/
+
+#+begin_src shell
+sudo rmmode model
+#+end_src
+
+/and use ~dmesg~ to read your outputs from the kernel's log buffer (if any)./
+
+-----
+
+The first part of this project involves following a series of steps for creating and
+inserting a module into the Linux kernel.  You can list all kernel modules that are
+currently loaded by entering the command
+#+begin_src shell
+lsmod
+#+end_src
+
+This command will list the current kernel modules in three columns: name,
+size, and where the module is being used.
+
+Now, observe the following file[fn:7]:
+
+#+begin_src csharp
+#include <linux/init.h>
+#include <linux/kernel.h>
+#include <linux/module.h>
+/* This function is called when the module is loaded. */
+int simple init(void)
+{
+printk(KERN INFO "Loading Kernel Module∖n");
+}
+return 0;
+/* This function is called when the module is removed. */
+void simple exit(void)
+{
+printk(KERN INFO "Removing Kernel Module∖n");
+}
+/* Macros for registering module entry and exit points. */
+module init(simple init);
+module exit(simple exit);
+MODULE LICENSE("GPL");
+MODULE DESCRIPTION("Simple Module");
+MODULE AUTHOR("SGG");
+#+end_src
+
+The function simple ~init()~ is the module entry point, which represents the function that is
+invoked when the module is loaded into the kernel. Similarly, the simple ~exit()~ function
+is the module exit point—the function that is called when the module is removed from the
+kernel.
+
+Notice in the figure how the module entry and exit point functions make calls to the
+~printk()~ function. ~printk()~ is the kernel equivalent of ~printf()~, but its output is sent to
+a kernel log buffer whose contents can be read by the dmesg command. One difference between
+~printf()~ and ~printk()~ is that ~printk()~ allows us to specify a priority flag, whose values
+are given in the ~<linux/printk.h>~ include file. In this instance, the priority is ~KERN INFO~,
+which is defined as an informational message.
+
+As kernel modules are running within the kernel, it is possible to obtain
+values and call functions that are available only in the kernel and not to regular
+user applications. For example, the Linux include file ~<linux/hash.h>~ defines
+several hashing functions for use within the kernel. This file also defines the
+constant value ~GOLDEN_RATIO_PRIME~ (which is defined as an unsigned long).
+This value can be printed out as follows:
+
+#+begin_src C
+#include <linux/printk.h>
+int main() {
+    printk(KERN INFO "%lu∖n", GOLDEN_RATIO_PRIME);
+}
+#+end_src
+
+As another example, the include file ~<linux/gcd.h>~ defines the following function
+
+#+begin_src C
+unsigned long gcd(unsigned long a, unsigned b);
+#+end_src
+
+which returns the greatest common divisor of the parameters $a$ and $b$.
+
+What we have to do, is:
+
+1. Print out the value of ~GOLDEN_RATIO_PRIME~ in the ~simple_init()~ function.
+   #+begin_src C
+static int simple_init(void) {
+  printk(KERN_INFO "Loading Module\n");
+  printk(GOLDEN_RATIO_PRIME) return 0;
+}
+   #+end_src
+2. Print out the greatest common divisor of 3,300 and 24 in the ~simple_exit()~ function.
+   #+begin_src C
+#include <linux/gcd.h>
+static void simple_exit(void) {
+  printk(KERN_INFO "Removing Module\n");
+  printk(gcd(3300, 24));
+}
+   #+end_src
+
+ntdlr. solution: [[https://github.com/athultr1997/OS/blob/master/os_concepts_abraham_silberschatz/chapter_2/programming_projects/linux_kernel_modules/simple.c][here]]
 
 * Footnotes
+
+[fn:7] This file is provided inside the Operating System Concepts book source code.
+[fn:6] This is a design decision problem.
+
+[fn:5] In such a design, if you are in the layer $n$, you can only make calls for the $n-1$
+layer, so you cannot talk to the layer above it nor any of the layers under the $n-1$ of
+course, it can be gathered recursively from $n-1-k$, in which $k$ is the number of the layer
+you are trying to reach, but here is a big performance issue since you have to stack many
+calls just to go though the layers under-hood, this is very expensive for an OS which is to
+be fast. Thus, the monolithic design wins in this comparison, however the layered one wins
+when it comes to software engineering.
+[fn:4] Of course notice, that all of OSs IRL are hybrid.
 
 [fn:3] Such needs might be ignored in some specifications, for example designing an os that
 would be used for embedded systems purpose.
