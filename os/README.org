@@ -669,7 +669,6 @@ the OS calls a special return-from-trap instruction, which, as you might expect,
 into the calling user program while simultaneously reducing the privilege level back to user
 mode.
 * Continue Limited Direct Execution
-
 * Footnotes
 
 [fn:7] This file is provided inside the Operating System Concepts book source code.
