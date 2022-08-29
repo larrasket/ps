@@ -104,6 +104,7 @@ type Blog struct {
 
 Some of the used fields tags:
 | Tag Name        | Description                         |
+
 | ~primaryKey~    | specifies column as primary key     |
 | ~unique~        | specifies column as unique          |
 | ~default~       | specifies column default value      |
