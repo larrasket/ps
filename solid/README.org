@@ -1,0 +1,103 @@
+#+title: SOLID Design Principles
+
+The SOLID design principles are guidelines for building software that is easier to
+understand and maintain while also being more flexible.
+
+This note is written in *C#* context.
+* Single Responsibility Principle
+Robert C. Martin, also known as Uncle Bob, is credited with coming up with the single
+responsibility principle. He's defined it a number of times, but the definition I like best
+is this one:
+
+#+begin_quote
+Each software module should have one and only one reason to change.
+#+end_quote
+
+
+This is a useful definition, but you probably still have some questions. What's a module in
+the context of a C# program? A module in this case might refer to a class or even a single
+function. Okay, but what about a reason to change? What does that mean, and how does it
+relate to responsibilities?.
+
+The individual classes and methods in our applications define what the application does and
+how it does it. We can often improve the design of our software if we're able to separate
+the what from the how. We do this through delegation and encapsulation. Classes should
+encapsulate doing a particular task in a particular way. When they're single-purpose,
+they're usually perfectly suited to this purpose and easy to use. Other classes can delegate
+the specific task to an instance of a class that encapsulates performing that task. When
+classes do too many things, they often end up coupling together things that shouldn't be
+related and make the overall class much harder to use. Trying to provide a general purpose
+tool results in additional complexity that a single-purpose tool wouldn't require.
+
+What is a responsibility? It's a decision our code is making about the specific
+implementation details of some part of what the application does. It's the answer to the
+question of how something is done. Some examples of responsibilities include persistence,
+logging, validation, and, of course, business logic.  How is the application or even just
+this one class going to deal with persistence? Is it using files, a database, some Web API?
+What about logging? Is there some particular framework being used? How is input to the
+system validated? What about business entities?  How do we know if they're valid for a
+particular operation? Where does the code go to enforce this? Mixed into all of these
+concerns might be business rules that actually define how the system should behave from the
+stakeholders perspective. They may not care about the low-level details of how files are
+stored or logs are written, but they definitely care that the system models the business
+problem correctly. SRP suggests that modules should have only one reason to change. Each of
+these decisions may need to be reevaluated in the future.  Persistence might need to change
+from files to a database. The initial choice of logging may prove insufficient, and a new
+framework or provider may need to be added. Validation rules or even the way validation is
+performed might need to be updated in the future. And, of course, business logic is a broad
+category full of many possible responsibilities, any of which might change at different
+times and for different reasons.
+
+Keep this in mind.  *Responsibilities in your code represent things that may change at
+different times and for different reasons*. Another way to think about this is that each
+responsibility is a different axis of change. The potential source of changes to your
+application can help you identify when you might be violating SRP. Even if you work for a
+small company, you might think about where change requests originate in terms of different
+executives within a large company. For example, the CIO may require a change to persistence
+because of a companywide change in database vendors. The security officer may require a more
+robust logging framework be installed to help detect and protect against attackers. The
+chief operations officer may be responsible for ensuring that your system integrates
+effectively with your company's newly acquired subsidiary requiring you to update your
+validation rules. And perhaps marketing just announced a special offering, and now the price
+calculations that your business rules model need to account for this new offer.
+* Open / Closed Principle
+
+The open closed principle, or OCP, is the second of the SOLID principles. OCP says that
+software entities like classes, modules, functions, and so on, should be open for extension
+but closed for modification. Dr. Bertrand Meyer is credited with originating the term in his
+1988 book, Object-Oriented Software Construction.
+
+It should be possible to change the behavior of a method without having to edit its source
+code. Imagine you have a function in your program that does something. Now a new requirement
+comes along that needs to tweak how it works in certain cases. The typical approach most
+developers will take, which is perfectly reasonable, is to add some logic to the function so
+that it does one thing some of the time and something else at other times. This approach is
+fine most of the time and for simple functions. However, as complexity grows, you should
+think about how you might apply OCP so that you're not having to continually perform surgery
+on the same function every time a new requirement arises. Let's break this down a bit
+further. Open to extension in this case means that it's easy to add new behavior. If a
+module in our application is closed to extension, it simply means that it has fixed
+behavior. We can't change it. On the other side, closed to modification means that it's
+unnecessary to change the source or binary code of the system. Code that is closed to
+extension can't be changed without changing the code itself. So by definition, it is not
+closed to modification.
+
+
+The less we need to change the source of our code, the less likely it is that we'll
+introduce new bugs into it. We also won't need to redeploy that code, and that reduces the
+risk of downtime and the impact on downstream dependencies on that module. Code that is open
+to extension usually has fewer conditional statements than code that is closed to extension,
+which means it's probably simpler code that's easier to understand and test. And it's worth
+noting that when we find actual bugs in our code, even if it's otherwise closed to
+modification, it's perfectly acceptable to apply these directly to the code in question
+unless there's a better place to apply the fix. So, basically, even if you're following OCP,
+bug fixes should be an exception to that principle's rule, and you should be perfectly fine
+to apply those as actual changes to the source code when you need to.
+
+
+
+* TODO Liskov Substitution Principle
+
+The original definition of the Liskov Substitution Principle reads Let phi of x be a property
+provable about objects x of type T. Then phi of y should be true for objects y of type S
+where S is a subtype of T.

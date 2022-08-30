@@ -7,7 +7,8 @@
 using namespace std;
 
 void rr();
-int main() { rr(); }
+void r();
+int main() { r(); }
 
 void rr() {
   vector<int> e{1, 2, 3, 4, 5};
@@ -26,10 +27,10 @@ void r() {
     if (nage >= 18) {
       std::cout << "Access granted - you are old enough.";
     } else {
-      throw(nage);
+      throw("fuck");
     }
-  } catch (int myNum) {
+  } catch (string) {
     std::cout << "Access denied - You must be at least 18 years old.\n";
-    std::cout << "Age is: " << myNum;
+    std::cout << "Age is: " << -1;
   }
 }
