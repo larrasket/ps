@@ -3,7 +3,7 @@
 
 
 #+begin_abstract
-Some notes and exercises from OPERATING-SYSTEM CONCEPTS
+notes and exercises from OPERATING-SYSTEM CONCEPTS
 #+end_abstract
 
 An operating system is software that manages a computer’s hardware. It also provides a basis
@@ -139,7 +139,7 @@ than N. When multiple processors cooperate on a task, a certain amount of overhe
 incurred in keeping all the parts working correctly.  This overhead, plus contention for
 shared resources, lowers the expected gain from additional processors.
 * TODO System Calls :chapter_2:
-* Why Applications Are Operating-System-Specific :chapter_2:
+* Why Applications are Operating-System-Specific :chapter_2:
 Why Applications Are Operating-System Specific Fundamentally, applications compiled on one
 operating system are not executable on other operating systems. If they were, the world
 would be a better place, and our choice of what operating system to use would depend on
@@ -163,7 +163,7 @@ available to run on multiple operating systems in one of three ways:
 
 3. The application developer can use a standard language or API in which the compiler generates binaries in a machine- and operating-system- specific language. The application must be ported to each operating sys- tem on which it will run. This porting can be quite time consuming and must be done for each new version of the application, with subsequent testing and debugging. Perhaps the best-known example is the POSIX API and its set of standards for maintaining source-code compatibility between different variants of UNIX-like operating systems.
 
-* Operating-System Design and Implementation :chapter_2:
+* Operating-System Design And Implementation :chapter_2:
 
 The first problem in designing a system is to define goals and specifications. At the
 highest level, the design of the system will be affected by the choice of hard- ware and the
@@ -351,7 +351,7 @@ what they share as well as how they differ from each other.
 
 **** TODO Android
 
-* TODO Introduction to Linux Kernel Modules :programming_proeject:chapter_2:
+* TODO Introduction To Linux Kernel Modules :programming_proeject:chapter_2:
 
 -----
 
@@ -466,7 +466,6 @@ static void simple_exit(void) {
    #+end_src
 
 ntdlr. solution: [[https://github.com/athultr1997/OS/blob/master/os_concepts_abraham_silberschatz/chapter_2/programming_projects/linux_kernel_modules/simple.c][here]]
-* NOTE; HENCEFORWARD I'M GOING TO USE  REMZI H. ARPACI-DUSSEAU INSTEAD OF THE DINOSAUR BOOK
 * The Process :chapter_4:
 The definition of a process, informally, is quite simple: it is a running program The
 program itself is a lifeless thing: it just sits there on the disk, a bunch of instructions
@@ -499,46 +498,41 @@ At any given time, what parts of the machine are important to the execution of t
    *stack pointer* and associated *frame pointer* are used to manage the stack for *function
    parameters*, *local variables*, and *return addresses*.
 
+ + *Programming Interface*
+     The following APIs, in some form, are available on any modern operating system.
 
+   + *Create*: An operating system must include some method to create new processes. When you type a command into the shell, or double-click on an application icon, the OS is invoked to create a new process to run the program you have indicated.
 
+     One mystery that we should unmask a bit is how programs are trans- formed into
+     processes. Specifically, how does the OS get a program up and running? How does
+     process creation actually work?
 
+     The first thing that the OS must do to run a program is to load its code and any
+     static data (e.g., initialized variables) into memory, into the ad- dress space of the
+     process. Programs initially reside on disk (or, in some modern systems, flash-based
+     SSDs) in some kind of executable format; thus, the process of loading a program and
+     static data into memory re- quires the OS to read those bytes from disk and place them
+     in memory somewhere.
 
-+ *Programming Interface*
-    The following APIs, in some form, are available on any modern operating system.
+     In early (or simple) operating systems, the loading process is done eagerly, i.e.,
+     all at once before running the program; modern OSes perform the process lazily, i.e.,
+     by loading pieces of code or data only as they are needed during program execution.
 
-    + *Create*: An operating system must include some method to create new processes. When you type a command into the shell, or double-click on an application icon, the OS is invoked to create a new process to run the program you have indicated.
+     Once the code and static data are loaded into memory, there are a few other things the
+     OS needs to do before running the process. Some memory must be allocated for the
+     program’s run-time stack (or just stack). As you should likely already know, *C
+     programs use the stack for local variables, function parameters, and return addresses*;
+     the OS allocates this memory and gives it to the process. The OS will also likely
+     initialize the stack with arguments; specifically, it will fill in the parameters to
+     the main() function, i.e., ~argc~ and the ~argv~ array.
 
-      One mystery that we should unmask a bit is how programs are trans- formed into
-      processes. Specifically, how does the OS get a program up and running? How does
-      process creation actually work?
-
-      The first thing that the OS must do to run a program is to load its code and any
-      static data (e.g., initialized variables) into memory, into the ad- dress space of the
-      process. Programs initially reside on disk (or, in some modern systems, flash-based
-      SSDs) in some kind of executable format; thus, the process of loading a program and
-      static data into memory re- quires the OS to read those bytes from disk and place them
-      in memory somewhere.
-
-      In early (or simple) operating systems, the loading process is done eagerly, i.e.,
-      all at once before running the program; modern OSes perform the process lazily, i.e.,
-      by loading pieces of code or data only as they are needed during program execution.
-
-      Once the code and static data are loaded into memory, there are a few other things the
-      OS needs to do before running the process. Some memory must be allocated for the
-      program’s run-time stack (or just stack). As you should likely already know, *C
-      programs use the stack for local variables, function parameters, and return addresses*;
-      the OS allocates this memory and gives it to the process. The OS will also likely
-      initialize the stack with arguments; specifically, it will fill in the parameters to
-      the main() function, i.e., ~argc~ and the ~argv~ array.
-
-      The OS may also allocate some memory for the program’s heap. In C programs, the heap
-      is used for explicitly requested /dynamically-allocated data/; programs request such
-      space by calling *malloc()* and free it explicitly by calling *free()*. The heap is
-      needed for data structures such as linked lists, hash tables, trees, and other
-      interesting data structures. The heap will be small at first; as the program runs, and
-      requests more mem- ory via the malloc() library API, the OS may get involved and
-      allocate more memory to the process to help satisfy such calls.
-
+     The OS may also allocate some memory for the program’s heap. In C programs, the heap
+     is used for explicitly requested /dynamically-allocated data/; programs request such
+     space by calling *malloc()* and free it explicitly by calling *free()*. The heap is
+     needed for data structures such as linked lists, hash tables, trees, and other
+     interesting data structures. The heap will be small at first; as the program runs, and
+     requests more mem- ory via the malloc() library API, the OS may get involved and
+     allocate more memory to the process to help satisfy such calls.
 
 
     + *Destroy*: As there is an interface for process creation, systems also provide an interface
@@ -563,6 +557,10 @@ At any given time, what parts of the machine are important to the execution of t
       - *Ready*: In the ready state, a process is ready to run but for some reason the OS has chosen not to run it at this given moment.
 
       - *Blocked*: In the blocked state, a process has performed some kind of operation that makes it not ready to run until some other event takes place. A common example: when a process initiates an I/O request to a disk, it becomes blocked and thus some other process can use the processor.
+
+
+Process can be described as either I/O bound or CPU bound. Briefly we can say that an I/O
+process is a process that does I/O more than CPU, and vice versa.
 ** Data Structures
 
 The OS is a program, and like any program, it has some key data structures that track
@@ -606,7 +604,41 @@ struct proc {
   char name[16];               // Process name (debugging)
 };
 #+end_src
-* Mechanism: Limited Directed Execution :chapter_6:
+** Shedulers
+
+In operating systems there are different type of schedulers:
++ Short-term schedulers (the *CPU scheduler*) which selects which process should be excuted
+  next for the CPU. And this is the one we are mainly intersted in.
+  + sometimes it is the only scheduler in the system (like in UNIX systems).
+  + invoked very frequently (in milliseconds or faster).
++ Long-term schedular, or the job schedular, selects which process should be load into the
+  ready queue.
+
+* Mechanism: Limited Directed Execution
+
+What happen within a function call in a process? A function call translates to a jump
+instruction i.e. the instructions points somewhere else, while the program counter points in
+the consequential instruction. Before that happens, a stack frame is created with all
+information of this program counter (that, it will be used to return again from this
+function call). Then the CPU moves to the desired location from the stack frame, when it
+does finish you now are allowed to pop the counter from the stack frame.
+
+
+There are some differences between a system call and a function call, that's function calls
+mostly executes within the user mode, some of the system calls also run within user mode but
+lots of them run only within kernel mode. Another difference is that kernel does not trust
+user stack, it uses a septate kernel stack when it is running in kernel mode.
+
+One of the reasons that Kernel does not trust the user stack for, is that the user can
+provide a wrong address (or a malicious one), so the kernel sets up *Interrupt Descriptor
+Table (IDT)* at boot time, which has addresses of kernel function to run for a system call
+and other events.
+
+When a system calls accrues, the compiler inserts a special trap instruction (e.g. when you
+try to read). First thing that happens within these instructions, is that it changes user mode into
+kernel mode. Now, the stack pointer updates to point to the kernel stack, on the kernel
+stack we save the old context (registers and etc.. just like function calls), then the trap
+instructions looks up the IDT and jump to the desired function
 
 In order to virtualize the CPU, the operating system needs to somehow share the physical CPU
 among many jobs running seemingly at the same time. The basic idea is simple: run one
@@ -636,6 +668,7 @@ doesn’t do anything that we don’t want it to do, while still running it effi
 second: when we are running a process, how does the operating system stop it from running
 and switch to another process, thus implementing the time sharing we require to virtualize
 the CPU?
+
 ** Problem #1: Restricted Operations
 Direct execution has the obvious advantage of being fast; the program runs naively on the
 hardware CPU and thus executes as quickly as one would expect. But running on the CPU
@@ -668,8 +701,160 @@ needed (if allowed), and thus do the required work for the calling process. When
 the OS calls a special return-from-trap instruction, which, as you might expect, returns
 into the calling user program while simultaneously reducing the privilege level back to user
 mode.
-* Continue Limited Direct Execution
+
+** Problem #2: Switching Between Processes
+The next problem with direct execution is achieving a switch between processes. Switching
+between processes should be simple, right? The OS should just decide to stop one process and
+start another. What’s the big deal? But it actually is a little bit tricky: specifically, if
+a process is running on the CPU, this by definition means the OS is not running[fn:8] . If the OS
+is not running, how can it do anything at all? (hint: it can’t) While this sounds almost
+philosophical, it is a real problem: there is clearly no way for the OS to take an action if
+it is not running on the CPU. Thus we arrive at the crux of the problem.
+
+
+One approach that some systems have taken in the past (for example, early versions of the
+Macintosh operating system, or the old Xerox Alto system) is known as the *cooperative
+approach*. In this style, the OS trusts the /processes/ of the system to behave reasonably.
+Processes that run for too long are assumed to periodically give up the CPU so that the OS
+can decide to run some other task.
+
+Thus, you might ask, how does a friendly process give up the CPU in this utopian world? Most
+processes, as it turns out, transfer control of the CPU to the OS quite frequently by making
+system calls, for example, to open a file and subsequently read it, or to send a message to
+another machine, or to create a new process. Systems like this often include an explicit
+yield system call, which does nothing except to transfer control to the OS so it can run
+other processes.
+
+Applications also transfer control to the OS when they do something illegal. For example, if
+an application divides by zero, or tries to access memory that it shouldn’t be able to
+access, it will generate a trap to the OS. The OS will then have control of the CPU again
+(and likely terminate the offending process).
+
+
+Thus, in a cooperative scheduling system, the OS regains control of the CPU by waiting for a
+system call or an illegal operation of some kind to take place. You might also be thinking:
+isn’t this passive approach less than ideal? What happens, for example, if a process
+(whether malicious, or just full of bugs) ends up in an infinite loop, and never makes a
+system call? What can the OS do then?
+
+*The OS Takes Control*
+
+Without some additional help from the hardware, it turns out the OS can’t do much at all
+when a process refuses to make system calls (or mistakes) and thus return control to the OS.
+In fact, in the cooperative approach, your only recourse when a process gets stuck in an
+infinite loop is to resort to the age-old solution to all problems in computer systems:
+reboot the machine. Thus, we again arrive at a subproblem of our general quest to gain
+control of the CPU.
+
+The answer turns out to be simple and was discovered by a number of people building computer
+systems many years ago: a timer interrupt. A timer device can be programmed to raise an
+interrupt every so many milliseconds; when the interrupt is raised, the currently running
+process is halted, and a pre-configured interrupt handler in the OS runs.  At this point,
+the OS has regained control of the CPU, and thus can do what it pleases: stop the current
+process, and start a different one[fn:9] .
+
+As we discussed before with system calls, the OS must inform the hardware of which code to
+run when the timer interrupt occurs; thus, at boot time, the OS does exactly that. Second,
+also during the boot sequence, the OS must start the timer, which is of course a privileged
+operation. Once the timer has begun, the OS can thus feel safe in that control will
+eventually be returned to it, and thus the OS is free to run user programs. The timer can
+also be turned off (also a privileged operation), something we will discuss later when we
+understand concurrency in more detail.
+
+Note that the hardware has some responsibility when an interrupt occurs, in particular to
+save enough of the state of the program that was running when the interrupt occurred such
+that a subsequent return-from- trap instruction will be able to resume the running program
+correctly.  This set of actions is quite similar to the behavior of the hardware during an
+explicit system-call trap into the kernel, with various registers thus getting saved (e.g.,
+onto a kernel stack) and thus easily restored by the return-from-trap instruction.
+
+* The Multi-Level Feedback Queue
+
+One of the most well-known approaches to scheduling is known as the Multi-level Feedback
+Queue.  was first described by Corbato et al. in 1962 [C+62] in a system known as the
+Compatible Time-Sharing System (CTSS), and this work, along with later work on Multics, led
+the ACM to award Corbato its highest honor, the Turing Award. The scheduler has subsequently
+been refined throughout the years to the implementations you will encounter in some modern
+systems.
+
+The fundamental problem MLFQ tries to address is two-fold. First, it would like to optimize
+turnaround time, which, as we saw in the previous note, is done by running shorter jobs
+first; unfortunately, the OS doesn’t generally know how long a job will run for, exactly the
+knowledge that algorithms like SJF (or STCF) require. Second, MLFQ would like to make a
+system feel responsive to interactive users (i.e., users sitting and staring at the screen,
+waiting for a process to finish), and thus minimize response time; unfortunately, algorithms
+like Round Robin reduce response time but are terrible for turnaround time. Thus, our
+problem: given that we in general do not know anything about a process, how can we build a
+scheduler to achieve these goals? How can the scheduler learn, as the system runs, the
+characteristics of the jobs it is running, and thus make better scheduling decisions?
+
+By now low-level mechanisms of running processes (e.g., context switching) should be clear;
+if they are not, go back a note or two, and read the description of how that stuff works
+again. However, we have yet to understand the high-level policies that an OS scheduler
+employs. We will now do just that, presenting a series of scheduling policies (sometimes
+called disciplines) that various smart and hard-working people have developed over the
+years.
+
+
+Each process have a parent, like a k-tree, the root/parent of all processes is the init
+process. If we have a process, let's say a parent process that excutes ~fork()~, which
+creates a process ~pid~ in UNIX, when the process is created, both the process and its
+parent are running concurrently.
+
+Running concurrently means that both are actng and computing for the CPU, let a system have
+a single CPU
+
+* TODO Lottery scheduling
+* TODO Multi-CPU scheduling
+* TODO Summary dialogue on cpu virtualization
+* TODO A dialogue on memory virtualization
+* TODO Address spaces
+* TODO Memory API
+* TODO Address translation
+* TODO Segmentation
+* TODO Free space management
+* TODO Introduction to paging
+* TODO Translation lookaside buffers
+* TODO Advanced page tables
+* TODO Swapping: mechanisms
+* TODO Swapping: policies
+* TODO Complete WM system
+* TODO A dialogue on concurrency
+* TODO Concurrency and threads
+* TODO Thread API
+* TODO Locks
+* TODO Locked data structures
+* TODO Condition variables
+* TODO Semaphores
+* TODO Concurrency bugs
+* TODO Event-based concurrency
+* TODO Summary dialogue on concurrency
+* TODO Persistence
+* TODO A Dialogue on Persistence
+* TODO I/O Devices
+* TODO Hard Disk Drives
+* TODO Redundant Disk Arrays
+* TODO Files And Directories
+* TODO File System Implementation
+* TODO Fast File System (FFS)
+* TODO Fsck And Journaling
+* TODO Log-Structured File System (LFS)
+* TODO Flash-Based SSDs
+* TODO Data Integrity And Protection
+* TODO Summary Dialogue On Persistence
+* TODO A Dialogue on Distribution
+* TODO Distributed Systems
+* TODO Network File System (NFS)
+* TODO Andrew File System (AFS)
+* TODO Summary Dialogue on Distribution
+
+
+
+
 * Footnotes
+
+[fn:9] Defines by the CPU scheduler
+[fn:8] It is not running, but it is loaded in memoery
 
 [fn:7] This file is provided inside the Operating System Concepts book source code.
 [fn:6] This is a design decision problem.
@@ -692,3 +877,9 @@ designing the os.
 [fn:1] An important note is that whenever an interrupt is generated, control is given for
 the kernel. The kernel is responsible for sending the request for the corresponding I/O
 device (from ISR table, so-called /interrupt-vector/).
+
+
+k
+
+kp
+kopkopk

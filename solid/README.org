@@ -1,9 +1,13 @@
 #+title: SOLID Design Principles
+#+DATE:  <2021-04-04>
 
+
+#+BEGIN_PREVIEW
 The SOLID design principles are guidelines for building software that is easier to
 understand and maintain while also being more flexible.
+#+END_PREVIEW
 
-This note is written in *C#* context.
+
 * Single Responsibility Principle
 Robert C. Martin, also known as Uncle Bob, is credited with coming up with the single
 responsibility principle. He's defined it a number of times, but the definition I like best
@@ -93,7 +97,6 @@ modification, it's perfectly acceptable to apply these directly to the code in q
 unless there's a better place to apply the fix. So, basically, even if you're following OCP,
 bug fixes should be an exception to that principle's rule, and you should be perfectly fine
 to apply those as actual changes to the source code when you need to.
-
 
 
 * TODO Liskov Substitution Principle
