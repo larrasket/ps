@@ -1266,6 +1266,8 @@ flexibility of allowing the choice to be made every time a value is used. It doe
 require more diligence from the programmer, who must think through the consequences of that
 choice during coding. Neither approach is better, and the results are essentially the same.
 ** TODO Interfaces
+** Closures
+https://youtu.be/US3TGA-Dpqo?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6
 ** Packages
 
 The first step for all the example projects in this book has been to create a module file,
