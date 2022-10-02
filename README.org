@@ -1,3 +1,3 @@
 * DEPRECATED. Oct, 02 2022. This repo will be maintained only for the ~ps~ directory
-* Content instead will be perserved on github pages, link below
+* Content instead will be preserved on github pages, link below
 * MOST OF THE CONTENT WILL BE JUST A MIRROR OF https://salehmu.github.io/cs.html, SOMETHINGS MIGHT BE BROKE, NOT READABLE WITH GITHUB'S MARKDOWN RENDERING
