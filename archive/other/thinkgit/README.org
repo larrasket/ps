@@ -1,0 +1,240 @@
+#+TITLE: Reading Think Like a Git: Graph Theory Approach
+#+DATE:  <2022-07-18>
+
+#+BEGIN_PREVIEW
+Noting tips & guides in [[https://think-like-a-git.net/sections/about-this-site.html][think-like-a-git]]
+#+END_PREVIEW
+
+* Graph Theory
+Also read [[file:~/blog/content/computer-science/graph.org][Representations, Implementations and Algorithms of Graphs]]
+
+Graph theory can be used to describe a lot of things, but I'll start off with one of the
+most straightforward examples: maps. You can think of graph theory as a way of encoding
+information about two aspects of a map: places to go, and ways to get there.
+
+Here's a drawing of the city of Königsberg, Prussia in the early 18th century.
+
+[[file:Graph_Theory/2022-07-18_01-35-52_screenshot.png]]
+
+The city was set on both sides of the Pregel River (shown in blue), and included two large
+islands which were connected to each other and the mainland by seven bridges (shown in red).
+Someone had posed the question of whether it was possible to walk through the city and cross
+every bridge exactly once.
+
+
+
+In 1735, a mathematician named Leonhard Euler proved that such a route could not exist. In
+doing so, he basically invented a field of mathematics, which we now call graph theory.
+
+
+Here is the version Euler used in his 1735 proof.
+
+
+#+DOWNLOADED: screenshot @ 2022-07-18 01:49:26
+[[file:Graph_Theory/2022-07-18_01-49-26_screenshot.png]]
+
+While mathematicians may be perfectly content to consider graphs only according to their
+shapes, most programmers and computer scientists tend to use them to compute some kind of
+meaningful results.
+
+As such, it's often useful to label the nodes in a graph in some way. For example, here in
+lovely Portland, Oregon, we love us some public transit. We've got buses, light rail,
+commuter rail, streetcars, and even an aerial tram.
+* Git and Graphs
+
+The reason I've gone on at some length about graph theory is that a Git repository is one
+giant graph.
+
+Most of the time when you interact with Git, you're working with commits in one way or
+another. At the surface level, a Git commit consists of two things: (1) a pointer to the
+state of your code at some moment in time, and (2) zero or more pointers to "parent"
+commits.
+
+
+#+DOWNLOADED: screenshot @ 2022-07-18 01:59:50
+[[file:Git_and_Graphs/2022-07-18_01-59-50_screenshot.png]]
+
+A Git commit is a node in a graph, and each one of those nodes can point to other nodes that
+came before them.
+
+The main point of visualizing git is to help you make sense of your branch history. For
+example, to list all commits in your repository at the command line, you could do
+~git log --oneline --abbrev-commit --all~ —which will get you a flattened view.
+* Git Object Types
+
+Git objects are the actual data of Git, the main thing that the repository is made up of.
+There are four main object types in Git, the first three being the most important to really
+understand the main functions of Git.
+
+All of these types of objects are stored in the Git Object Database,
+which is kept in the Git Directory. Each object is compressed (with
+Zlib) and referenced by the SHA-1 value of its contents plus a small
+header. In the examples, I will use the first 6 characters of the SHA-1
+for simplicity, but the actual value is 40 characters long.
+
+
+In Git, the contents of files are stored as blobs. It is important to note that it is the
+contents that are stored, not the files. The names and modes of the files are not stored
+with the blob, just the contents.
+
+This means that if you have two files anywhere in your project that are exactly the same,
+even if they have different names, Git will only store the blob once. This also means that
+during repository transfers, such as clones or fetches, Git will only transfer the blob
+once, then expand it out into multiple files upon checkout.
+
+The final type of object you will find in a Git database is the tag. This is an object that
+provides a permanent shorthand name for a particular commit. It contains an object, type,
+tag, tagger and a message. Normally the type is commit and the object is the SHA-1 of the
+commit you’re tagging. The tag can also be GPG signed, providing cryptographic integrity to
+a release or version.
+
+In addition to the Git objects, which are immutable – that is, they cannot ever be changed,
+there are references also stored in Git.  Unlike the objects, references can constantly
+change. They are simple pointers to a particular commit, something like a tag, but easily
+moveable.
+
+The data model looks like this:
+
+#+DOWNLOADED: screenshot @ 2022-07-18 04:41:34
+[[file:Git_Object_Types/2022-07-18_04-41-34_screenshot.png]]
+
+Lets look at an example of simple usage of Git and which objects are stored in the Git
+object database as we go.
+
+To begin with, we commit an initial tree of three files and two sub- directories, each
+directory with one file in it. Possibly something like this:
+
+
+#+DOWNLOADED: screenshot @ 2022-07-18 04:46:52
+[[file:Git_Object_Types/2022-07-18_04-46-52_screenshot.png]]
+
+
+
+We have three trees, three blobs and a single commit that points to the top of the tree. The
+current branch points to our last commit and the HEAD file points to the branch we’re
+currently on. This lets Git know which commit will be the parent for the next commit.
+
+[[file:Git_Object_Types/2022-07-18_04-47-46_screenshot.png]]
+
+Now let’s assume that we change the lib/base/base_include.rb file and com- mit again. At
+this point, a new blob is added, which changes the tree that points to it, which changes the
+tree that points to that tree and so on to the top of the entire directory. Then a new
+commit object is added which points to its parent and the new tree, then the branch refer-
+ence is moved forward.  Let’s also say at this point we tag this commit as a release, which
+adds a new tag object.
+
+
+
+At this point, we’ll have the following in Git:
+
+[[file:Git_Object_Types/2022-07-18_04-50-18_screenshot.png]]
+
+
+Notice how the other two blobs that were not changed were not added again. The new trees
+that were added point to the same blobs in the data store that the previous trees pointed
+to.
+
+Now let’s say we modify the init.rb file at the base of the project.  The new blob will have
+to be added, which will add a new top tree, but all the subtrees will not be modified, so
+Git will reuse those refer- ences. Again, the branch reference will move forward and the new
+commit will point to its parent.
+
+
+#+DOWNLOADED: screenshot @ 2022-07-18 04:56:30
+[[file:Git_Object_Types/2022-07-18_04-56-30_screenshot.png]]
+
+At this point, let’s stop to look at the objects we now have in our repository. From this,
+we can easily recreate any of the three directories we committed by following the graph
+from the most recent commit object, and having Git expand the trees that are pointed to.
+
+For instance, if we wanted the first tree, we could look for the parent
+of the parent of the HEAD, or the parent of the tag. If we wanted the
+second tree, we could ask for the commit pointed to by the tag, and
+so on.
+So, what do all the arrows in these illustrations really mean? How does Git actually
+retrieve these objects in practice? Well, it gets the initial SHA-1 of the starting commit
+object by looking in the .git/ refs directory for the branch, tag or remote you specify.
+Then it traverses the objects by walking the trees one by one, checking out the
+blobs under the names listed.
+* Branching and Merging
+Here we come to one of the real strengths of Git, cheap inline branching. This is a feature
+that truly sets it apart and will likely change the way you think about developing code once
+you get used to it.
+
+When you are working on code in Git, storing trees in any state and keeping pointers to them
+is very simple, as we’ve seen. In fact, in Git the act of creating a new branch is simply
+writing a file in the .git/ refs/heads directory that has the SHA-1 of the last commit for
+that branch.
+
+Switching to that branch simply means having Git make your work- ing directory look like the
+tree that SHA-1 points to and updating the HEAD file so each commit from that point on moves
+that branch pointer forward (in other words, it changes the 40 characters in .git/
+refs/heads/[current_branch_name] be the SHA-1 of your last com- mit).
+
+Now, let’s see how Git handles branching, fetching and merging operations abstractly. For
+the following illustrations, we will represent the entire tree and the commit it points to
+as a single object.
+
+[[file:Branching_and_Merging/2022-07-18_05-15-54_screenshot.png]]
+
+Suppose that we work on a project for a while, then we get an idea for something that may
+not work out, but we want to do a quick proof-of-concept. We create a new branch called
+experiment off of our main branch, which is by convention called master. We then switch to
+the new branch and create a few commits.
+
+Then, our boss comes in and says we need a hot fix to production.  So we switch back to our
+master branch, make the change, push the release and then tag the new commit with the
+release number. Then we go back to our experiment branch, continue working and commit again.
+
+Now lets take a look at remotes. Remotes are basically pointers to branches in other peoples
+copies of the same repository, often on other computers. If you got your repository by
+cloning it, rather than initializing it, you should have a remote branch of where you copied
+it from automatically added as origin by default. Which means the tree that was checked out
+during your initial clone would be refer- enced as origin/master, which means “the master
+branch of the origin remote.”
+
+Lets say you clone someone’s repository and make a few changes.  You would have two
+references, one to origin/master which points to where the master branch was on the person’s
+repository you cloned from when you did so, and a master branch that points the most recent
+local commit.
+
+
+Now let’s say you run a fetch. A fetch pulls all the refs and objects that you don’t already
+have from the remote repository you specify.  By default, it is origin, but you can name
+your remotes anything, and you can have more than one. Suppose we fetch from the repository
+that we originally cloned from and they had been doing some work.  They have now committed a
+few times on their master branch, but they also branched off at one point to try an idea,
+and they named the branch idea locally, then pushed that branch. We now have access to those
+changes as origin/idea.
+
+Let’s say you and another developer, Jen, are working on the same project simultaneously.
+She clones from you, and works for a while and commits. You have committed in the meantime
+and want to get your work in sync, so you add her repository as the remote jen, do a fetch
+and merge her changes in, creating a new merge commit.
+
+
+#+DOWNLOADED: screenshot @ 2022-07-18 06:08:12
+[[file:Branching_and_Merging/2022-07-18_06-08-12_screenshot.png]]
+
+Perfectly fine, but it can get a little confusing when you litter the history with all those
+commits that do nothing but merge unshared changes. The longer you keep out of sync, the
+worse this can get.
+
+This is where the rebasing command comes in. With rebase, Git will checkout the upstream
+branch, in this case, Jen’s master branch, and then replay all the changes you’ve done since
+you forked on top of those files, as if you had forked your work off at that point and done
+all your changes, rather than earlier.
+
+Rebase will literally produce a series of patch files of your work and start applying them
+to the upstream branch, automatically making new commits with the same messages as before
+and orphaning your older ones. These objects can then be removed, since nothing points to
+them, when you run the garbage collection tools.
+* Adding and Committing
+
+Now we’ll do some development and periodically commit our changes. We have a few options
+here – we can commit individual files or we can tell the commit command to automatically add
+all modified files in our working directory to the index, then commit it.
+
+A good way to find out what you’re about to commit (that is, what is in your index) is to
+use the status command.
+

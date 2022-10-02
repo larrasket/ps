@@ -1265,7 +1265,21 @@ achieves the same effect as having separate type categories but with the additio
 flexibility of allowing the choice to be made every time a value is used. It does, however,
 require more diligence from the programmer, who must think through the consequences of that
 choice during coding. Neither approach is better, and the results are essentially the same.
-** TODO Interfaces
+** Interfaces
+
+All the types we've looked at so far have been concrete types. A concrete type specifies the
+exact representation of its values and exposes the intrinsic operations of that
+representation, such as arithmetic for numbers, or indexing, append, and range for slices. A
+concrete type may also provide additional behaviors through its methods. When you have a
+value of a con- crete type, you know exactly what it is and what you can do with i
+
+There is another kind of type in Go called an inferface type. An interface is an abstract
+type. It doesn't expose the representation or internal structure of its values, or the set
+of basic operations they support; it reveals only some of their methods. When you have a
+value of an interface type, you know nothing about what it is; you know only what it can do,
+or more precisely, what behaviors are provided by its methods.
+
+
 ** Closures
 https://youtu.be/US3TGA-Dpqo?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6
 ** Packages
@@ -1589,7 +1603,11 @@ type Boat struct {
     Motorized bool
 }
 #+end_src
-** Goroutines
+** TODO Concurrency
+"Execution happens in some non-deterministic order", "Undefined out-of-order execution",
+"Non-sequential execution", "Parts of a program excute out-of-order or in partial order".
+All of those are valid definitions of concurrency.
+*** Goroutines
 
 Go has excellent support for writing concurrent applications, using features that are
 simpler and more intuitive than any other language I have used. In this chapter, I describe
@@ -1886,7 +1904,7 @@ channel. The direction of the arrow for a channel specifies the direction of flo
 + ~chan~  :bidirectional channel (Both read and write)
 + ~chan <-~  :only writing to channel
 + ~<- chan~  :only reading from channel (input channel)
-*** Receiving Without Blocking
+**** Receiving Without Blocking
 
 The simplest use for select statements is to receive from a channel without blocking,
 ensuring that a goroutine won’t have to wait when the channel is empty.

@@ -1,21 +1,3 @@
+* DEPRECATED. Oct, 02 2022. This repo will be maintained only for the ~ps~ directory
+* Content instead will be perserved on github pages, link below
 * MOST OF THE CONTENT WILL BE JUST A MIRROR OF https://salehmu.github.io/cs.html, SOMETHINGS MIGHT BE BROKE, NOT READABLE WITH GITHUB'S MARKDOWN RENDERING
-* Content
-+ [[file:algo/][Algorithms]]
-  + [[file:algo/geomtry][Computational Geometry]]
-  + [[file:algo/dp][Dynamic Programming]]
-  + [[file:algo/graphs/][Graphs]]
-  + [[file:algo/other.org][Draft]]
-+ [[file:csharp/][C# Notes]]
-  + [[file:csharp/files.org][File Streams]]
-  + [[file:csharp/json.org][JSON]]
-  + [[file:csharp/Concurrency.org][Concurrency]]
-  + [[file:csharp/mvc.org][ASP.NET (Model-View Controller)]]
-  + [[file:csharp/buildingAPi.org][Bulding a RESTful API with ASP.NET Core]]
-+ [[file:go/README.org][Go Notes]]
-+ [[file:STD/][STDs]]
-+ [[file:ps/][Problem Solving]]
-+ [[file:psql/][PostgreSQL]]
-+ [[file:ptrns/README.org][Design Patterns]]
-+ [[file:qt/README.org][Qt]]
-+ [[file:system/s-a-d.org][System Analysis and Design]]
-+ [[https://github.com/salehmu/leet/blob/main/API/Designing%20RESTful%20API.org][Designing RESTful APIs]]

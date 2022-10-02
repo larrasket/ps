@@ -116,7 +116,6 @@ integer type of variable, we also know that it is zero-initialized. So after the
 to ~AddOne()~ function, the value of the count must be 1.
 
 
-
 ** TODO Null Object
 ** TODO Specification Pattern
 ** TODO State
