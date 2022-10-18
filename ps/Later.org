@@ -1,0 +1,37 @@
+#+title: For Later
+
+I used to map my leetcode solutions here, in the [[file:OLDREADME.org][old README]]. However, it got missy because I
+passed many problems and at the end it was deprecated. Recently I've found a nice database
+of leetcode's with company wise problems. I decided to solve it (I know I will never finish
+it) from the bottom-up.
+
+* Companies
+Symbols:
+              + */n/a*: lost information.
+              + *Y*: yes, very nice.
+              + *-*: not bad.
+              + *N*: not nice.
+** Zulily
+
+
+            | Problem                            | Tags          | Solution | Notes | nice one? |
+            | [[https://leetcode.com/problems/regular-expression-matching][18. Regular Expression Matching]]    | n/a           | n/a      | n/a   | *N*       |
+            | [[https://leetcode.com/problems/median-of-two-sorted-arrays][4. Median of Two Sorted Arrays]]     | n/a           | n/a      | n/a   | -         |
+            | [[https://leetcode.com/problems/search-in-rotated-sorted-array/][33. Search in Rotated Sorted Array]] | Binary Search | n/a      | n/a   | n/a       |
+** Zillow
+            | Problem                            | Tags          | Solution | Notes                                                                                                       | nice one? |
+            |------------------------------------+---------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+            | [[https://leetcode.com/problems/integer-to-english-words/description/][273. Integer to English Words]]      | n/a           | n/a      | Sucks. I don't have any passion to solve such a problem unless it was a part of a big project or something. | *N*       |
+            | [[https://leetcode.com/problems/lru-cache/][146. LRU Cache]]                     | Design        | n/a      | n/a                                                                                                         | Y         |
+            | [[https://leetcode.com/problems/serialize-and-deserialize-bst/][449. Serialize and Deserialize BST]] | Design        | n/a      | After reading, I'm not sure yet how the string format the string will follow. But it's an interesting one   | Y         |
+            | [[https://leetcode.com/problems/time-based-key-value-store/][981. Time Based Key-Value Store]]    | Design        | n/a      | Design problems are tough, for later.                                                                       | -         |
+            | [[https://leetcode.com/problems/multiply-strings/description/][43. Multiply Strings]]               | Strings       | n/a      | \*Sigh\*                                                                                                    | *N*       |
+            | [[https://leetcode.com/problems/median-of-two-sorted-arrays][4. Median of Two Sorted Arrays]]     | n/a           | n/a      | n/a                                                                                                         | N         |
+            | [[https://leetcode.com/problems/search-in-rotated-sorted-array/][33. Search in Rotated Sorted Array]] | Binary Search | n/a      | n/a                                                                                                         | n/a       |
+            | [[https://leetcode.com/problems/word-search-ii][212. Word Search II]]                | n/a           | n/a      | n/a                                                                                                         | Y         |
+            | [[https://leetcode.com/problems/game-of-life][289 Game of Life]]                   | n/a           | n/a      | n/a                                                                                                         | n/a       |
+*** TODO TODOs
+
+            | Problem          | Tags | Solution | Notes | nice one? |
+            |------------------+------+----------+-------+-----------|
+            | [[https://leetcode.com/problems/word-ladder][127. Word ladder]] | n/a  | n/a      | n/a   | Y         |
