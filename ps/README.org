@@ -51,6 +51,6 @@ Symbols:
               | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]         | n/a          | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][cpp]]      | n/a   | -         |
               | [[https://leetcode.com/problems/merge-k-sorted-lists/description/][23. Merge k Sorted Lists]]                     | Heap         | [[file:lc/0023_merge-k-sorted-lists.cpp][cpp]]      | n/a   | Y         |
               | [[https://leetcode.com/problems/word-search][79. Word Search]]                              | Backtracking | [[file:lc/0079_word-search.cpp][cpp]]      | n/a   | Y         |
-              | [[https://leetcode.com/problems/missing-number][268. Missing Number]]                          | Hashmap      | [[file:lc/268.missing-number.cpp][cpp]]      | n/a   | -         |
+              | [[https://leetcode.com/problems/missing-number][268. Missing Number]]                          | Hashtable    | [[file:lc/268.missing-number.cpp][cpp]]      | n/a   | -         |
               | [[https://leetcode.com/problems/reverse-words-in-a-string/description/][151. Reverse Words in a String]]               | Strings      | [[file:lc/151-reverse-words-in-a-string.cs][cs]]       | n/a   | -         |
-              |                                              |              |          |       |           |
+              | [[https://leetcode.com/problems/bulls-and-cows/][299. Bulls and Cows]]                          | Hashtable    | [[file:lc/0299_bulls-and-cows.cpp][cpp]]      | n/a   | -         |
