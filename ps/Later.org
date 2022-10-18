@@ -31,6 +31,7 @@ Symbols:
             | [[https://leetcode.com/problems/word-search-ii][212. Word Search II]]                   | n/a           | n/a      | n/a                                                                                                         | Y         |
             | [[https://leetcode.com/problems/game-of-life][289 Game of Life]]                      | n/a           | n/a      | n/a                                                                                                         | n/a       |
             | [[https://leetcode.com/problems/evaluate-reverse-polish-notation][150. Evaluate Reverse Polish Notation]] | n/a           | n/a      | n/a                                                                                                         | N         |
+            | [[https://leetcode.com/problems/roman-to-integer][13. Roman to Integer]]                  | n/a           | n/a      | n/a                                                                                                         | N         |
 *** TODO TODOs
 
             | Problem          | Tags | Solution | Notes | nice one? |
