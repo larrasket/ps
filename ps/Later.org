@@ -14,11 +14,16 @@ Symbols:
 ** Zulily
 
 
+            |------------------------------------+---------------+----------+-------+-----------|
             | Problem                            | Tags          | Solution | Notes | nice one? |
+            |------------------------------------+---------------+----------+-------+-----------|
+            | [[https://leetcode.com/problems/word-ladder][127. Word ladder]]                   | n/a           | n/a      | n/a   | Y         |
             | [[https://leetcode.com/problems/regular-expression-matching][18. Regular Expression Matching]]    | n/a           | n/a      | n/a   | *N*       |
             | [[https://leetcode.com/problems/median-of-two-sorted-arrays][4. Median of Two Sorted Arrays]]     | n/a           | n/a      | n/a   | -         |
             | [[https://leetcode.com/problems/search-in-rotated-sorted-array/][33. Search in Rotated Sorted Array]] | Binary Search | n/a      | n/a   | n/a       |
-** Zillow
+            |------------------------------------+---------------+----------+-------+-----------|
+** Pillow
+            |---------------------------------------+---------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
             | Problem                               | Tags          | Solution | Notes                                                                                                       | nice one? |
             |---------------------------------------+---------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
             | [[https://leetcode.com/problems/integer-to-english-words/description/][273. Integer to English Words]]         | n/a           | n/a      | Sucks. I don't have any passion to solve such a problem unless it was a part of a big project or something. | *N*       |
@@ -33,8 +38,40 @@ Symbols:
             | [[https://leetcode.com/problems/evaluate-reverse-polish-notation][150. Evaluate Reverse Polish Notation]] | n/a           | n/a      | n/a                                                                                                         | N         |
             | [[https://leetcode.com/problems/roman-to-integer][13. Roman to Integer]]                  | n/a           | n/a      | n/a                                                                                                         | N         |
             | [[https://leetcode.com/problems/string-to-integer-atoi/][8. String to Integer (atoi)]]           | n/a           | n/a      | n/a                                                                                                         | N         |
-*** TODO TODOs
+            |---------------------------------------+---------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+** Zenefits
+            |-------------------------+--------------+----------+-------+-----------|
+            | Problem                 | Tags         | Solution | Notes | nice one? |
+            |-------------------------+--------------+----------+-------+-----------|
+            | [[https://leetcode.com/problems/n-queens-ii][52. N-Queens II]]         | Backtracking | n/a      | n/a   | n/a       |
+            |-------------------------+--------------+----------+-------+-----------|
 
-            | Problem          | Tags | Solution | Notes | nice one? |
-            |------------------+------+----------+-------+-----------|
-            | [[https://leetcode.com/problems/word-ladder][127. Word ladder]] | n/a  | n/a      | n/a   | Y         |
+* Notes
++ There are many backtracking failed problems, you need to practice them.
++ Resources:
+  + [[https://www.youtube.com/watch?v=hLXVhRzqq18][Search Techniques - Backtracking (Arabic)]]
+  + [[https://www.youtube.com/watch?v=Zq4upTEaQyM][The Backtracking Blueprint: The Legendary 3 Keys To Backtracking Algorithms]]
+  + [[https://www.youtube.com/watch?v=xFv_Hl4B83A&t=22s][6.1 N Queens Problem using Backtracking]]
+  + [[https://www.youtube.com/watch?v=wGbuCyNpxIg][The N Queens Placement Problem Clear Explanation (Backtracking/Recursion)]]
+
+
+|------------------------------------------------------------------------+--------------+----------+-------+-----------|
+| Problem                                                                | Tags         | Solution | Notes | nice one? |
+|------------------------------------------------------------------------+--------------+----------+-------+-----------|
+| [[https://leetcode.com/problems/n-queens/][51. N-Queens]]                                                           | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/letter-combinations-of-a-phone-number/][17. Letter Combinations of a Phone Number]]                              | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/generate-parentheses/][22. Generate Parentheses]]                                               | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/combination-sum-ii/][40. Combination Sum II]]                                                 | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/permutations/][46. Permutations]]                                                       | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/permutations-ii/][47. Permutations II]]                                                    | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/combinations/][77. Combinations]]                                                       | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/subsets/][78. Subsets]]                                                            | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                                         | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/palindrome-partitioning/][131. Palindrome Partitioning]]                                           | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/combination-sum-iii/][216. Combination Sum III]]                                               | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/find-k-pairs-with-smallest-sums/][373. Find K Pairs with Smallest Sums]]                                   | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/beautiful-arrangement/][526. Beautiful Arrangement]]                                             | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/letter-case-permutation/][784. Letter Case Permutation]]                                           | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/letter-tile-possibilities/][1079. Letter Tile Possibilities]]                                        | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/][1415. The k-th Lexicographical String of All Happy Strings of Length n]] | Backtracking | n/a      | n/a   | n/a       |
+|------------------------------------------------------------------------+--------------+----------+-------+-----------|

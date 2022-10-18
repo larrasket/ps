@@ -14,6 +14,7 @@ Symbols:
 
 ** Zulily
 
+              |-----------------------------------------+----------------------+----------+-------+-----------|
               | Problem                                 | Tags                 | Solution | Notes | nice one? |
               |-----------------------------------------+----------------------+----------+-------+-----------|
               | [[https://leetcode.com/problems/merge-intervals][56. Merge Intervals]]                     | n/a                  | [[file:lc/0056_merge-intervals.cpp][cpp]]      | n/a   | Y         |
@@ -22,21 +23,28 @@ Symbols:
               | [[https://leetcode.com/problems/number-of-islands][200. Number of Islands]]                  | Breadth-first search | [[file:lc/200.number-of-islands.cpp][cpp]]      | n/a   | Y         |
               | [[https://leetcode.com/problems/first-unique-character-in-a-string/][387. First Unique Character in a String]] | Strings              | [[file:lc/387.first-unique-character-in-a-string.cpp][cpp]]      | n/a   | N         |
               | [[https://leetcode.com/problems/group-anagrams/][49. Group Anagrams]]                      | Strings              | [[file:lc/49.group-anagrams.cpp][cpp]]      | n/a   | n/a       |
-
+              |-----------------------------------------+----------------------+----------+-------+-----------|
 
 ** Zscaler
 
+              |-----------------------+------+----------+-------------------------------------------------------------------------+-----------|
               | Problem               | Tags | Solution | Notes                                                                   | nice one? |
               |-----------------------+------+----------+-------------------------------------------------------------------------+-----------|
               | [[https://leetcode.com/problems/day-of-the-year/][1154. Day of the Year]] | n/a  | n/a      | Very naive problem, it depends on a useless astronomical understanding. | N         |
+              |-----------------------+------+----------+-------------------------------------------------------------------------+-----------|
 ** Zoho
+              |---------------------------------------------------+----------------+----------+-------+-----------|
               | Problem                                           | Tags           | Solution | Notes | nice one? |
+              |---------------------------------------------------+----------------+----------+-------+-----------|
               | [[https://leetcode.com/problems/two-sum][1. Two Sum]]                                        | n/a            | [[file:lc/1.two-sum.cpp][cpp]]      | n/a   | N         |
               | [[https://leetcode.com/problems/longest-substring-without-repeating-characters/][3. Longest Substring Without Repeating Characters]] | Sliding Window | [[file:lc/0003_longest-substring-without-repeating-characters.cpp][cpp]]      | n/a   | Y         |
+              |---------------------------------------------------+----------------+----------+-------+-----------|
 
 ** Zillow
 
+              |---------------------------------------------------+---------------------+----------+-------+-----------|
               | Problem                                           | Tags                | Solution | Notes | nice one? |
+              |---------------------------------------------------+---------------------+----------+-------+-----------|
               | [[https://leetcode.com/problems/first-unique-character-in-a-string/][387. First Unique Character in a String]]           | Strings             | [[file:lc/387.first-unique-character-in-a-string.cpp][cpp]]      | n/a   | N         |
               | [[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree][236. Lowest Common Ancestor of a Binary Tree]]      | Binary Tree         | [[file:lc/236.lowest-common-ancestor-of-a-binary-tree.cpp][cpp]]      | n/a   | Y         |
               | [[https://leetcode.com/problems/daily-temperatures/description/][739. Daily Temperatures]]                           | Stack               | [[file:lc/0739_daily-temperatures.cpp][cpp]]      | n/a   | Y         |
@@ -57,3 +65,4 @@ Symbols:
               | [[https://leetcode.com/problems/longest-substring-without-repeating-characters][3. Longest Substring Without Repeating Characters]] | n/a                 | [[file:lc/0003_longest-substring-without-repeating-characters.cpp][cpp]]      | n/a   | n/a       |
               | [[https://leetcode.com/problems/max-area-of-island][695. Max Area of Island]]                           | Breadth-fist Search | [[file:lc/0695_max-area-of-island.cpp][cpp]]      | n/a   | Y         |
               | [[https://leetcode.com/problems/move-zeroes][283. Move Zeroes]]                                  | n/a                 | [[file:lc/0283_move-zeroes.cpp][cpp]]      | n/a   |           |
+              |---------------------------------------------------+---------------------+----------+-------+-----------|
