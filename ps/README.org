@@ -36,22 +36,24 @@ Symbols:
 
 ** Zillow
 
-              | Problem                                           | Tags         | Solution | Notes | nice one? |
-              | [[https://leetcode.com/problems/first-unique-character-in-a-string/][387. First Unique Character in a String]]           | Strings      | [[file:lc/387.first-unique-character-in-a-string.cpp][cpp]]      | n/a   | N         |
-              | [[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree][236. Lowest Common Ancestor of a Binary Tree]]      | Binary Tree  | [[file:lc/236.lowest-common-ancestor-of-a-binary-tree.cpp][cpp]]      | n/a   | Y         |
-              | [[https://leetcode.com/problems/daily-temperatures/description/][739. Daily Temperatures]]                           | Stack        | [[file:lc/0739_daily-temperatures.cpp][cpp]]      | n/a   | Y         |
-              | [[https://leetcode.com/problems/path-sum-ii/][113. Path Sum II]]                                  | Binary Tree  | [[file:lc/113.path-sum-ii.cpp][cpp]]      | n/a   | n/a       |
-              | [[https://leetcode.com/problems/word-break/][139. Word Break]]                                   | n/a          | [[https://leetcode.com/problems/word-break/submissions/673027147/][cpp]]      | n/a   | N         |
-              | [[https://leetcode.com/problems/path-sum-iii/][437. Path Sum III]]                                 | Binary Tree  | [[file:lc/437.path-sum-iii.cpp][cpp]]      | n/a   | n/a       |
-              | [[https://leetcode.com/problems/path-sum/][112. Path Sum]]                                     | Binary Tree  | [[file:lc/112.path-sum.cpp][cpp]]      | n/a   | n/a       |
-              | [[https://leetcode.com/problems/string-compression/][443. String Compression]]                           | Strings      | [[https://leetcode.com/problems/string-compression/submissions/671988342/][cpp]]      | n/a   | n/a       |
-              | [[https://leetcode.com/problems/valid-parentheses/][20. Valid Parentheses]]                             | n/a          | [[file:lc/20.valid-parentheses.cpp][cpp]]      | n/a   | -         |
-              | [[https://leetcode.com/problems/two-sum][1. Two Sum]]                                        | n/a          | [[file:lc/1.two-sum.cpp][cpp]]      | n/a   | N         |
-              | [[file:lc/53.maximum-subarray.cpp][53. Maximum Subarray]]                              | n/a          | [[file:lc/53.maximum-subarray.cpp][cpp]]      | n/a   | N         |
-              | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]              | n/a          | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][cpp]]      | n/a   | -         |
-              | [[https://leetcode.com/problems/merge-k-sorted-lists/description/][23. Merge k Sorted Lists]]                          | Heap         | [[file:lc/0023_merge-k-sorted-lists.cpp][cpp]]      | n/a   | Y         |
-              | [[https://leetcode.com/problems/word-search][79. Word Search]]                                   | Backtracking | [[file:lc/0079_word-search.cpp][cpp]]      | n/a   | Y         |
-              | [[https://leetcode.com/problems/missing-number][268. Missing Number]]                               | Hashtable    | [[file:lc/268.missing-number.cpp][cpp]]      | n/a   | -         |
-              | [[https://leetcode.com/problems/reverse-words-in-a-string/description/][151. Reverse Words in a String]]                    | Strings      | [[file:lc/151-reverse-words-in-a-string.cs][cs]]       | n/a   | -         |
-              | [[https://leetcode.com/problems/bulls-and-cows/][299. Bulls and Cows]]                               | Hashtable    | [[file:lc/0299_bulls-and-cows.cpp][cpp]]      | n/a   | -         |
-              | [[https://leetcode.com/problems/longest-substring-without-repeating-characters][3. Longest Substring Without Repeating Characters]] | n/a          | [[file:lc/0003_longest-substring-without-repeating-characters.cpp][cpp]]      | n/a   | n/a       |
+              | Problem                                           | Tags                | Solution | Notes | nice one? |
+              | [[https://leetcode.com/problems/first-unique-character-in-a-string/][387. First Unique Character in a String]]           | Strings             | [[file:lc/387.first-unique-character-in-a-string.cpp][cpp]]      | n/a   | N         |
+              | [[https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree][236. Lowest Common Ancestor of a Binary Tree]]      | Binary Tree         | [[file:lc/236.lowest-common-ancestor-of-a-binary-tree.cpp][cpp]]      | n/a   | Y         |
+              | [[https://leetcode.com/problems/daily-temperatures/description/][739. Daily Temperatures]]                           | Stack               | [[file:lc/0739_daily-temperatures.cpp][cpp]]      | n/a   | Y         |
+              | [[https://leetcode.com/problems/path-sum-ii/][113. Path Sum II]]                                  | Binary Tree         | [[file:lc/113.path-sum-ii.cpp][cpp]]      | n/a   | n/a       |
+              | [[https://leetcode.com/problems/word-break/][139. Word Break]]                                   | n/a                 | [[https://leetcode.com/problems/word-break/submissions/673027147/][cpp]]      | n/a   | N         |
+              | [[https://leetcode.com/problems/path-sum-iii/][437. Path Sum III]]                                 | Binary Tree         | [[file:lc/437.path-sum-iii.cpp][cpp]]      | n/a   | n/a       |
+              | [[https://leetcode.com/problems/path-sum/][112. Path Sum]]                                     | Binary Tree         | [[file:lc/112.path-sum.cpp][cpp]]      | n/a   | n/a       |
+              | [[https://leetcode.com/problems/string-compression/][443. String Compression]]                           | Strings             | [[https://leetcode.com/problems/string-compression/submissions/671988342/][cpp]]      | n/a   | n/a       |
+              | [[https://leetcode.com/problems/valid-parentheses/][20. Valid Parentheses]]                             | n/a                 | [[file:lc/20.valid-parentheses.cpp][cpp]]      | n/a   | -         |
+              | [[https://leetcode.com/problems/two-sum][1. Two Sum]]                                        | n/a                 | [[file:lc/1.two-sum.cpp][cpp]]      | n/a   | N         |
+              | [[file:lc/53.maximum-subarray.cpp][53. Maximum Subarray]]                              | n/a                 | [[file:lc/53.maximum-subarray.cpp][cpp]]      | n/a   | N         |
+              | [[https://leetcode.com/problems/best-time-to-buy-and-sell-stock/][121. Best Time to Buy and Sell Stock]]              | n/a                 | [[file:lc/121.best-time-to-buy-and-sell-stock.cpp][cpp]]      | n/a   | -         |
+              | [[https://leetcode.com/problems/merge-k-sorted-lists/description/][23. Merge k Sorted Lists]]                          | Heap                | [[file:lc/0023_merge-k-sorted-lists.cpp][cpp]]      | n/a   | Y         |
+              | [[https://leetcode.com/problems/word-search][79. Word Search]]                                   | Backtracking        | [[file:lc/0079_word-search.cpp][cpp]]      | n/a   | Y         |
+              | [[https://leetcode.com/problems/missing-number][268. Missing Number]]                               | Hashtable           | [[file:lc/268.missing-number.cpp][cpp]]      | n/a   | -         |
+              | [[https://leetcode.com/problems/reverse-words-in-a-string/description/][151. Reverse Words in a String]]                    | Strings             | [[file:lc/151-reverse-words-in-a-string.cs][cs]]       | n/a   | -         |
+              | [[https://leetcode.com/problems/bulls-and-cows/][299. Bulls and Cows]]                               | Hashtable           | [[file:lc/0299_bulls-and-cows.cpp][cpp]]      | n/a   | -         |
+              | [[https://leetcode.com/problems/longest-substring-without-repeating-characters][3. Longest Substring Without Repeating Characters]] | n/a                 | [[file:lc/0003_longest-substring-without-repeating-characters.cpp][cpp]]      | n/a   | n/a       |
+              | [[https://leetcode.com/problems/max-area-of-island][695. Max Area of Island]]                           | Breadth-fist Search | [[file:lc/0695_max-area-of-island.cpp][cpp]]      | n/a   | Y         |
+              | [[https://leetcode.com/problems/move-zeroes][283. Move Zeroes]]                                  | n/a                 | [[file:lc/0283_move-zeroes.cpp][cpp]]      | n/a   |           |
