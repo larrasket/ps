@@ -46,6 +46,14 @@ Symbols:
             | [[https://leetcode.com/problems/n-queens-ii][52. N-Queens II]]         | Backtracking | n/a      | n/a   | n/a       |
             |-------------------------+--------------+----------+-------+-----------|
 
+** Yelp
+
+            |-------------------------------+------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+            | Problem                       | Tags | Solution | Notes                                                                                                       | nice one? |
+            |-------------------------------+------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+            | [[https://leetcode.com/problems/integer-to-english-words/description/][273. Integer to English Words]] | n/a  | n/a      | Sucks. I don't have any passion to solve such a problem unless it was a part of a big project or something. | *N*       |
+            |-------------------------------+------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+
 * Notes
 + There are many skipped backtracking problems, you need to practice them.
 + Resources:
@@ -61,11 +69,8 @@ Symbols:
 |------------------------------------------------------------------------+--------------+----------+-------+-----------|
 | [[https://leetcode.com/problems/permutations/][46. Permutations]]                                                       | Backtracking | [[file:lc/0046_permutations.cpp][cpp]]      | [[https://salehmu.github.io/computer-science/backtracking_algorithm.html#org60825f8][here]]  | -         |
 | [[https://leetcode.com/problems/letter-combinations-of-a-phone-number/][17. Letter Combinations of a Phone Number]]                              | Backtracking | [[file:lc/0017_letter-combinations-of-a-phone-number.cpp][cpp]]      | [[https://salehmu.github.io/computer-science/backtracking_algorithm.html#org9d93fd6][here]]  | Y         |
-| [[https://leetcode.com/problems/combination-sum-ii/][40. Combination Sum II]]                                                 | Backtracking | n/a      | n/a   | n/a       |
-| [[https://leetcode.com/problems/permutations-ii/][47. Permutations II]]                                                    | Backtracking | n/a      | n/a   | n/a       |
 | [[https://leetcode.com/problems/combinations/][77. Combinations]]                                                       | Backtracking | n/a      | n/a   | n/a       |
 | [[https://leetcode.com/problems/subsets/][78. Subsets]]                                                            | Backtracking | n/a      | n/a   | n/a       |
-| [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                                         | Backtracking | n/a      | n/a   | n/a       |
 | [[https://leetcode.com/problems/palindrome-partitioning/][131. Palindrome Partitioning]]                                           | Backtracking | n/a      | n/a   | n/a       |
 | [[https://leetcode.com/problems/combination-sum-iii/][216. Combination Sum III]]                                               | Backtracking | n/a      | n/a   | n/a       |
 | [[https://leetcode.com/problems/find-k-pairs-with-smallest-sums/][373. Find K Pairs with Smallest Sums]]                                   | Backtracking | n/a      | n/a   | n/a       |
@@ -74,6 +79,9 @@ Symbols:
 | [[https://leetcode.com/problems/letter-tile-possibilities/][1079. Letter Tile Possibilities]]                                        | Backtracking | n/a      | n/a   | n/a       |
 | [[https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/][1415. The k-th Lexicographical String of All Happy Strings of Length n]] | Backtracking | n/a      | n/a   | n/a       |
 | [[https://leetcode.com/problems/generate-parentheses/][22. Generate Parentheses]]                                               | Backtracking | n/a      | n/a   | Y         |
+| [[https://leetcode.com/problems/subsets-ii/][90. Subsets II]]                                                         | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/combination-sum-ii/][40. Combination Sum II]]                                                 | Backtracking | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/permutations-ii/][47. Permutations II]]                                                    | Backtracking | n/a      | n/a   | n/a       |
 |------------------------------------------------------------------------+--------------+----------+-------+-----------|
 
 * Before Publish
@@ -83,3 +91,4 @@ Before finishing the whole list, those must be done.
 | Problem      | Tags         | Solution | Notes | nice one? |
 |--------------+--------------+----------+-------+-----------|
 | [[https://leetcode.com/problems/n-queens/][51. N-Queens]] | Backtracking | n/a      | n/a   | n/a       |
+|--------------+--------------+----------+-------+-----------|

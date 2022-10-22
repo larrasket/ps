@@ -5,12 +5,14 @@ passed many problems and at the end it was deprecated. Recently I've found a nic
 of leetcode's with company wise problems. I decided to solve it (I know I will never finish
 it) from the bottom-up.
 
-* Companies
-Symbols:
-              + */n/a*: lost information.
-              + *Y*: yes, very nice.
-              + *-*: not bad.
-              + *N*: not nice.
+* Companies :toc:
+  - [[#zulily][Zulily]]
+  - [[#zscaler][Zscaler]]
+  - [[#zoho][Zoho]]
+  - [[#zillow][Zillow]]
+  - [[#zenefits][Zenefits]]
+  - [[#zappos][Zappos]]
+  -  [[#yelp][Yelp]]
 
 ** Zulily
 
@@ -75,3 +77,10 @@ Symbols:
               |------------------------------------+------+----------+-------+-----------|
               | [[https://leetcode.com/problems/reverse-words-in-a-string-iii/][557. Reverse Words in a String III]] | n/a  | [[file:lc/0557_reverse-words-in-a-string-iii.go][go]]       | n/a   | -         |
               |------------------------------------+------+----------+-------+-----------|
+**  Yelp
+
+
+              |----------------------------------+------+----------+-----------------------------------+-----------|
+              | Problem                          | Tags | Solution | Notes                             | nice one? |
+              |----------------------------------+------+----------+-----------------------------------+-----------|
+              | [[https://leetcode.com/problems/find-the-closest-palindrome/description/][564. Find the Closest Palindrome]] | n/a  | n/a      | The most "don't solve me" problem | *N*       |
