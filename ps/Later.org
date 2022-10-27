@@ -87,8 +87,9 @@ Symbols:
 * Before Publish
 Before finishing the whole list, those must be done.
 
-|--------------+--------------+----------+-------+-----------|
-| Problem      | Tags         | Solution | Notes | nice one? |
-|--------------+--------------+----------+-------+-----------|
-| [[https://leetcode.com/problems/n-queens/][51. N-Queens]] | Backtracking | n/a      | n/a   | n/a       |
-|--------------+--------------+----------+-------+-----------|
+|----------------------------+---------------------+----------+-------+-----------|
+| Problem                    | Tags                | Solution | Notes | nice one? |
+|----------------------------+---------------------+----------+-------+-----------|
+| [[https://leetcode.com/problems/n-queens/][51. N-Queens]]               | Backtracking        | n/a      | n/a   | -         |
+| [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]] | Deapth-first Search | n/a      | n/a   | Y         |
+|----------------------------+---------------------+----------+-------+-----------|
