@@ -52,6 +52,7 @@ Symbols:
             | Problem                       | Tags | Solution | Notes                                                                                                       | nice one? |
             |-------------------------------+------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
             | [[https://leetcode.com/problems/integer-to-english-words/description/][273. Integer to English Words]] | n/a  | n/a      | Sucks. I don't have any passion to solve such a problem unless it was a part of a big project or something. | *N*       |
+            | [[https://leetcode.com/problems/the-skyline-problem][218. The Skyline Problem]]      | n/a  | n/a      | n/a                                                                                                         | n/a       |
             |-------------------------------+------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
 
 * Notes
@@ -92,4 +93,5 @@ Before finishing the whole list, those must be done.
 |----------------------------+---------------------+----------+-------+-----------|
 | [[https://leetcode.com/problems/n-queens/][51. N-Queens]]               | Backtracking        | n/a      | n/a   | -         |
 | [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]] | Deapth-first Search | n/a      | n/a   | Y         |
+|                            |                     |          |       |           |
 |----------------------------+---------------------+----------+-------+-----------|
