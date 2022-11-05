@@ -45,15 +45,16 @@ Symbols:
             |-------------------------+--------------+----------+-------+-----------|
             | [[https://leetcode.com/problems/n-queens-ii][52. N-Queens II]]         | Backtracking | n/a      | n/a   | n/a       |
             |-------------------------+--------------+----------+-------+-----------|
-
 ** Yelp
 
-            |-------------------------------+------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
-            | Problem                       | Tags | Solution | Notes                                                                                                       | nice one? |
-            |-------------------------------+------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
-            | [[https://leetcode.com/problems/integer-to-english-words/description/][273. Integer to English Words]] | n/a  | n/a      | Sucks. I don't have any passion to solve such a problem unless it was a part of a big project or something. | *N*       |
-            | [[https://leetcode.com/problems/the-skyline-problem][218. The Skyline Problem]]      | n/a  | n/a      | n/a                                                                                                         | n/a       |
-            |-------------------------------+------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+            |-------------------------------+--------------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+            | Problem                       | Tags               | Solution | Notes                                                                                                       | nice one? |
+            |-------------------------------+--------------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+            | [[https://leetcode.com/problems/integer-to-english-words/description/][273. Integer to English Words]] | n/a                | n/a      | Sucks. I don't have any passion to solve such a problem unless it was a part of a big project or something. | *N*       |
+            | [[https://leetcode.com/problems/the-skyline-problem][218. The Skyline Problem]]      | n/a                | n/a      | n/a                                                                                                         | n/a       |
+            | [[https://leetcode.com/problems/word-ladder/][127. Word Ladder]]              | Depth-first Search | n/a      | n/a                                                                                                         | -         |
+            | [[https://leetcode.com/problems/longest-common-prefix/description/][14. Longest Common Prefix]]     | Strings            | n/a      | n/a                                                                                                         | -         |
+            |-------------------------------+--------------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
 
 * Notes
 + There are many skipped backtracking problems, you need to practice them.
@@ -88,10 +89,11 @@ Symbols:
 * Before Publish
 Before finishing the whole list, those must be done.
 
-|----------------------------+---------------------+----------+-------+-----------|
-| Problem                    | Tags                | Solution | Notes | nice one? |
-|----------------------------+---------------------+----------+-------+-----------|
-| [[https://leetcode.com/problems/n-queens/][51. N-Queens]]               | Backtracking        | n/a      | n/a   | -         |
-| [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]] | Deapth-first Search | n/a      | n/a   | Y         |
-|                            |                     |          |       |           |
-|----------------------------+---------------------+----------+-------+-----------|
+|----------------------------+--------------------+----------+-------+-----------|
+| Problem                    | Tags               | Solution | Notes | nice one? |
+|----------------------------+--------------------+----------+-------+-----------|
+| [[https://leetcode.com/problems/n-queens/][51. N-Queens]]               | Backtracking       | n/a      | n/a   | -         |
+| [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]] | Depth-first Search | n/a      | n/a   | Y         |
+| [[https://leetcode.com/problems/word-ladder/][127. Word Ladder]]           | Depth-first Search | n/a      | n/a   | -         |
+| [[https://leetcode.com/problems/longest-common-prefix/description/][14. Longest Common Prefix]]  | Strings            | n/a      | n/a   | -         |
+|----------------------------+--------------------+----------+-------+-----------|
