@@ -54,8 +54,8 @@ Symbols:
             | [[https://leetcode.com/problems/the-skyline-problem][218. The Skyline Problem]]      | n/a                | n/a      | n/a                                                                                                         | n/a       |
             | [[https://leetcode.com/problems/word-ladder/][127. Word Ladder]]              | Depth-first Search | n/a      | n/a                                                                                                         | -         |
             | [[https://leetcode.com/problems/longest-common-prefix/description/][14. Longest Common Prefix]]     | Strings            | n/a      | n/a                                                                                                         | -         |
+            | [[https://leetcode.com/problems/word-ladder/][127. Word Ladder]]              | Depth-first Search | n/a      | n/a                                                                                                         | -         |
             |-------------------------------+--------------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
-
 * Notes
 + There are many skipped backtracking problems, you need to practice them.
 + Resources:
@@ -85,7 +85,6 @@ Symbols:
 | [[https://leetcode.com/problems/combination-sum-ii/][40. Combination Sum II]]                                                 | Backtracking | n/a      | n/a   | n/a       |
 | [[https://leetcode.com/problems/permutations-ii/][47. Permutations II]]                                                    | Backtracking | n/a      | n/a   | n/a       |
 |------------------------------------------------------------------------+--------------+----------+-------+-----------|
-
 * Before Publish
 Before finishing the whole list, those must be done.
 
@@ -94,6 +93,5 @@ Before finishing the whole list, those must be done.
 |----------------------------+--------------------+----------+-------+-----------|
 | [[https://leetcode.com/problems/n-queens/][51. N-Queens]]               | Backtracking       | n/a      | n/a   | -         |
 | [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]] | Depth-first Search | n/a      | n/a   | Y         |
-| [[https://leetcode.com/problems/word-ladder/][127. Word Ladder]]           | Depth-first Search | n/a      | n/a   | -         |
 | [[https://leetcode.com/problems/longest-common-prefix/description/][14. Longest Common Prefix]]  | Strings            | n/a      | n/a   | -         |
 |----------------------------+--------------------+----------+-------+-----------|
