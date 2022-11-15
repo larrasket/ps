@@ -60,6 +60,17 @@ Symbols:
             | [[https://leetcode.com/problems/sliding-window-maximum/][239. Sliding Window Maximum]]                            | n/a                | n/a      | n/a                                                                                                         | n/a       |
             | [[https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/][381. Insert Delete GetRandom O(1) - Duplicates allowed]] | n/a                | n/a      | n/a                                                                                                         | n/a       |
             |--------------------------------------------------------+--------------------+----------+-------------------------------------------------------------------------------------------------------------+-----------|
+** Yandex
+
+| Problem                                                | Tags                | Solution | Notes | nice one? |
+| [[https://leetcode.com/problems/lru-cache/][146. LRU Cache]]                                         | Design              | n/a      | n/a   | Y         |
+| [[https://leetcode.com/problems/generate-parentheses/][22. Generate Parentheses]]                               | Dynamic Programming | n/a      | n/a   | -         |
+| [[https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/][381. Insert Delete GetRandom O(1) - Duplicates allowed]] | n/a                 | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                | n/a                 | n/a      | n/a   | -         |
+| [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]]                             | Depth-first Search  | n/a      | n/a   | Y         |
+| [[https://leetcode.com/problems/median-of-two-sorted-arrays][4. Median of Two Sorted Arrays]]                         | n/a                 | n/a      | n/a   | N         |
+| [[https://leetcode.com/problems/subarray-sums-divisible-by-k/description/][974. Subarray Sums Divisible by K]] | Sliding Window     | n/a      | n/a   | Y         |
+** TODO Zenefits
 * Notes
 + There are many skipped backtracking problems, you need to practice them.
 + Resources:
@@ -92,10 +103,13 @@ Symbols:
 * Before Publish
 Before finishing the whole list, those must be done.
 
-|----------------------------+--------------------+----------+-------+-----------|
-| Problem                    | Tags               | Solution | Notes | nice one? |
-|----------------------------+--------------------+----------+-------+-----------|
-| [[https://leetcode.com/problems/n-queens/][51. N-Queens]]               | Backtracking       | n/a      | n/a   | -         |
-| [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]] | Depth-first Search | n/a      | n/a   | Y         |
-| [[https://leetcode.com/problems/longest-common-prefix/description/][14. Longest Common Prefix]]  | Strings            | n/a      | n/a   | -         |
-|----------------------------+--------------------+----------+-------+-----------|
+|-----------------------------------+--------------------+----------+-------+-----------|
+| Problem                           | Tags               | Solution | Notes | nice one? |
+|-----------------------------------+--------------------+----------+-------+-----------|
+| [[https://leetcode.com/problems/n-queens/][51. N-Queens]]                      | Backtracking       | n/a      | n/a   | -         |
+| [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]]        | Depth-first Search | n/a      | n/a   | Y         |
+| [[https://leetcode.com/problems/longest-common-prefix/description/][14. Longest Common Prefix]]         | Strings            | n/a      | n/a   | -         |
+| [[https://leetcode.com/problems/permutation-in-string/description/][567. Permutation in String]]        | Strings            | n/a      | n/a   | n/a       |
+| [[https://leetcode.com/problems/subarray-sums-divisible-by-k/description/][974. Subarray Sums Divisible by K]] | Sliding Window     | n/a      | n/a   | Y         |
+| [[https://leetcode.com/problems/count-primes/][204. Count Primes]]                 | Math               | n/a      |       | N         |
+|-----------------------------------+--------------------+----------+-------+-----------|
