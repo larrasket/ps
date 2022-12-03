@@ -1,4 +1,4 @@
-package lc
+// package lc
 
 func deleteNode(node *ListNode) {
 	prev := node
