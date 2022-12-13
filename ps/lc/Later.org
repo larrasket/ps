@@ -48,6 +48,12 @@ it) from the bottom up.
               | -                    | [[https://leetcode.com/problems/unique-binary-search-trees][96. Unique Binary Search Trees]]           | DP                  | n/a      | n/a                                                                                                                                                              | n/a       |
               | -                    | [[https://leetcode.com/problems/rotate-image/][48. Rotate Image]]                         | Matrix              | -        | Not a bad problem; however it somehow depends on the understanding of matrix transposing, not likely to be conducted by average solvers who didn't know about it | -         |
               | -                    | [[https://leetcode.com/problems/zigzag-conversion/description/][6. Zigzag Conversion]]                     | String              | n/a      | n/a                                                                                                                                                              | N         |
+              | -                    | [[https://leetcode.com/problems/factorial-trailing-zeroes/][172. Factorial Trailing Zeroes]]           | Math                | n/a      | n/a                                                                                                                                                              | n/a       |
+              | *Wayfair*            | -                                        | -                   | -        | -                                                                                                                                                                | -         |
+              | -                    | [[https://leetcode.com/problems/best-sightseeing-pair/][1014. Best Sightseeing Pair]]              | Dynamic Programming | n/a      | n/a                                                                                                                                                              | n/a       |
+              | -                    | [[https://leetcode.com/problems/longest-palindromic-substring/][5. Longest Palindromic Substring]]         | Dynamic Programming | n/a      | n/a                                                                                                                                                              | -         |
+              | -                    | [[https://leetcode.com/problems/maximum-length-of-repeated-subarray/][718. Maximum Length of Repeated Subarray]] | Dynamic Programming | n/a      | n/a                                                                                                                                                              | n/a       |
+              | -                    | [[https://leetcode.com/problems/sqrtx/][69. Sqrt(x)]]                              | n/a                 | n/a      | n/a                                                                                                                                                              | n/a       |
               |----------------------+------------------------------------------+---------------------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------|
 ** TODO Zenefits
 * Notes
@@ -72,19 +78,6 @@ it) from the bottom up.
 |------------------------------------------------------------------------+--------------+----------+-------+-----------|
 * Before Publish
 Before finishing the whole list, those must be done.
-
-|---+------------------------------------+--------------------+----------+-------+-----------|
-| - | Problem                            | Tags               | Solution | Notes | nice one? |
-|---+------------------------------------+--------------------+----------+-------+-----------|
-| - | [[https://leetcode.com/problems/n-queens/][51. N-Queens]]                       | Backtracking       | n/a      | n/a   | -         |
-| - | [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]]         | Depth-first Search | n/a      | n/a   | Y         |
-| - | [[https://leetcode.com/problems/permutation-in-string/description/][567. Permutation in String]]         | Strings            | n/a      | n/a   | n/a       |
-| - | [[https://leetcode.com/problems/subarray-sums-divisible-by-k/description/][974. Subarray Sums Divisible by K]]  | Sliding Window     | n/a      | n/a   | Y         |
-| - | [[https://leetcode.com/problems/count-primes/][204. Count Primes]]                  | Math               | n/a      |       | N         |
-| - | [[https://leetcode.com/problems/search-in-rotated-sorted-array/description/][33. Search in Rotated Sorted Array]] | -                  | -        | -     | -         |
-| - | [[https://leetcode.com/problems/lru-cache/][146. LRU Cache]]                     | Design             | n/a      | n/a   | Y         |
-| - | [[https://leetcode.com/problems/remove-duplicate-letters/][316. Remove Duplicate Letters]]      | String             | n/a      | n/a   | Y         |
-|---+------------------------------------+--------------------+----------+-------+-----------|
 * Archive
 The problems that are not to be solved, probably..
 
@@ -119,24 +112,46 @@ The problems that are not to be solved, probably..
               | -          | [[https://leetcode.com/problems/n-queens-ii][52. N-Queens II]]                 | Backtracking          | n/a      | n/a                                                      | n/a       |
 
 
+
 ** H, Archive
 Problems that are skipped just because that they are hard; will be resolved in the future. isa.
-              | Company              | Problem                                                | Tags           | Solution | Notes | nice one? |
-              |----------------------+--------------------------------------------------------+----------------+----------+-------+-----------|
-              | *Yelp*               | -                                                      | -              | -        | -     | -         |
-              |----------------------+--------------------------------------------------------+----------------+----------+-------+-----------|
-              | -                    | [[https://leetcode.com/problems/the-skyline-problem][218. The Skyline Problem]]                               | H,n/a          | n/a      | n/a   | n/a       |
-              | -                    | [[https://leetcode.com/problems/letter-case-permutation/][784. Letter Case Permutation]]                           | H,Backtracking | n/a      | n/a   | n/a       |
-              | -                    | [[https://leetcode.com/problems/sliding-window-maximum/][239. Sliding Window Maximum]]                            | H,n/a          | n/a      | n/a   | n/a       |
-              | -                    | [[https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/][381. Insert Delete GetRandom O(1) - Duplicates allowed]] | H,n/a          | n/a      | n/a   | n/a       |
-              |----------------------+--------------------------------------------------------+----------------+----------+-------+-----------|
-              | *Yandex*             | -                                                      | -              | -        | -     | -         |
-              | -                    | [[https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/][381. Insert Delete GetRandom O(1) - Duplicates allowed]] | H,n/a          | n/a      | n/a   | n/a       |
-              | -                    | [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                | n/a            | n/a      | n/a   | -         |
-              | *Works-Applications* | -                                                      | -              | -        | -     | -         |
-              | -                    | [[https://leetcode.com/problems/k-inverse-pairs-array/][629. K Inverse Pairs Array]]                             | n/a            | n/a      | n/a   | n/a       |
-              | -                    | [[https://leetcode.com/problems/course-schedule-iii/][630. Course Schedule III]]                               | n/a            | n/a      | n/a   | n/a       |
-              | *Wish*               | -                                                      | -              | -        | -     | -         |
-              | -                    | [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                | n/a            | n/a      | n/a   | -         |
-              | -                    | [[https://leetcode.com/problems/sliding-window-maximum/][239. Sliding Window Maximum]]                            | H,n/a          | n/a      | n/a   | n/a       |
-              |----------------------+--------------------------------------------------------+----------------+----------+-------+-----------|
+              | Company              | Problem                                                | Tags                  | Solution | Notes | nice one? |
+              |----------------------+--------------------------------------------------------+-----------------------+----------+-------+-----------|
+              | *Yelp*               | -                                                      | -                     | -        | -     | -         |
+              |----------------------+--------------------------------------------------------+-----------------------+----------+-------+-----------|
+              | -                    | [[https://leetcode.com/problems/the-skyline-problem][218. The Skyline Problem]]                               | H,n/a                 | n/a      | n/a   | n/a       |
+              | -                    | [[https://leetcode.com/problems/letter-case-permutation/][784. Letter Case Permutation]]                           | H,Backtracking        | n/a      | n/a   | n/a       |
+              | -                    | [[https://leetcode.com/problems/sliding-window-maximum/][239. Sliding Window Maximum]]                            | H,n/a                 | n/a      | n/a   | n/a       |
+              | -                    | [[https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/][381. Insert Delete GetRandom O(1) - Duplicates allowed]] | H,n/a                 | n/a      | n/a   | n/a       |
+              |----------------------+--------------------------------------------------------+-----------------------+----------+-------+-----------|
+              | *Yandex*             | -                                                      | -                     | -        | -     | -         |
+              | -                    | [[https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/][381. Insert Delete GetRandom O(1) - Duplicates allowed]] | H,n/a                 | n/a      | n/a   | n/a       |
+              | -                    | [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                | n/a                   | n/a      | n/a   | -         |
+              | *Works-Applications* | -                                                      | -                     | -        | -     | -         |
+              | -                    | [[https://leetcode.com/problems/k-inverse-pairs-array/][629. K Inverse Pairs Array]]                             | n/a                   | n/a      | n/a   | n/a       |
+              | -                    | [[https://leetcode.com/problems/course-schedule-iii/][630. Course Schedule III]]                               | n/a                   | n/a      | n/a   | n/a       |
+              | *Wish*               | -                                                      | -                     | -        | -     | -         |
+              | -                    | [[https://leetcode.com/problems/trapping-rain-water/][42. Trapping Rain Water]]                                | n/a                   | n/a      | n/a   | -         |
+              | -                    | [[https://leetcode.com/problems/sliding-window-maximum/][239. Sliding Window Maximum]]                            | H,n/a                 | n/a      | n/a   | n/a       |
+              |----------------------+--------------------------------------------------------+-----------------------+----------+-------+-----------|
+              | *Wayfair*            | -                                                      | -                     | -        | -     | -         |
+              | -                    | [[https://leetcode.com/problems/maximal-rectangle/description/][85. Maximal Rectangle]]                                  | H,Dynamic Programming | n/a      | n/a   | n/a       |
+
+|---+------------------------------------+--------------------+----------+-------+-----------|
+| - | Problem                            | Tags               | Solution | Notes | nice one? |
+|---+------------------------------------+--------------------+----------+-------+-----------|
+| - | [[https://leetcode.com/problems/n-queens/][51. N-Queens]]                       | Backtracking       | n/a      | n/a   | -         |
+| - | [[https://leetcode.com/problems/reconstruct-itinerary/description/][332. Reconstruct Itinerary]]         | Depth-first Search | n/a      | n/a   | Y         |
+| - | [[https://leetcode.com/problems/permutation-in-string/description/][567. Permutation in String]]         | Strings            | n/a      | n/a   | n/a       |
+| - | [[https://leetcode.com/problems/subarray-sums-divisible-by-k/description/][974. Subarray Sums Divisible by K]]  | Sliding Window     | n/a      | n/a   | Y         |
+| - | [[https://leetcode.com/problems/count-primes/][204. Count Primes]]                  | Math               | n/a      |       | N         |
+| - | [[https://leetcode.com/problems/search-in-rotated-sorted-array/description/][33. Search in Rotated Sorted Array]] | -                  | -        | -     | -         |
+| - | [[https://leetcode.com/problems/lru-cache/][146. LRU Cache]]                     | Design             | n/a      | n/a   | Y         |
+| - | [[https://leetcode.com/problems/remove-duplicate-letters/][316. Remove Duplicate Letters]]      | String             | n/a      | n/a   | Y         |
+|---+------------------------------------+--------------------+----------+-------+-----------|
+
+** Resolve
+
+              | Company   | Problem | Tags | Solution | Notes | nice one? |
+              |-----------+---------+------+----------+-------+-----------|
+              | *Wayfair* | -       | -    | -        | -     | -         |
