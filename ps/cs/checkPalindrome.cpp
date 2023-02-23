@@ -24,6 +24,6 @@ typedef pair<int, int> pi;
 priority_queue<pi, vector<pi>, greater<pi>> pq;
 bool solution(string inputString) {
   auto tmp = inputString;
-  reverse(begend(tmp));
+  reverse(inputString.begin(), inputString.end());
   return tmp == inputString;
 }
