@@ -1,9 +1,0 @@
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/bin/Debug/Preverse.exe
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/bin/Debug/Preverse.pdb
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/bin/Debug/mscorlib.dll
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/bin/Debug/mscorlib.pdb
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/obj/Debug/Preverse.csproj.AssemblyReference.cache
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/obj/Debug/Preverse.csproj.CoreCompileInputs.cache
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/obj/Debug/Preverse.csproj.CopyComplete
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/obj/Debug/Preverse.exe
-/mnt/0E08DBBF08DBA3CD/me/leet/csharp/JSON/Preverse/obj/Debug/Preverse.pdb

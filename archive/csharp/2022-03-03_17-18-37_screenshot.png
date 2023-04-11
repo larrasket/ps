@@ -1,5 +1,0 @@
-How does an HTTP web request work?
-As you know, ASP.NET Core is a framework for building web applications that serve
-data from a server. One of the most common scenarios for web developers is building
-a web app that you can view in a web browser. The high-level process you can expect
-from any web server is shown in figure 1.7.

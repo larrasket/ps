@@ -1,3 +1,0 @@
- With .NET Core alone, it?s possible to build console applications that run cross-
-platform. Microsoft created ASP.NET Core to be an additional layer on top of console
-applications, such that converting to a web application involves adding and compos-

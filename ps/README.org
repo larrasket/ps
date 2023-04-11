@@ -7,6 +7,6 @@ to change soon. However:
 + ~cc/~ Codeforces (purged and deprecated)
 + ~cs/~ Codesignal (inactive)
 + ~he/~ Hackerearth (purged and deprecated)
-+ ~lc/~ Leetcode (active)
 + ~nt/~ Lintcode (inactive)
++ ~fl/~ Failed problems. (active, as long as am I)
 + ~Map/~, ~qwr~, ~tempModule~, ~...~. Dumps, I don't remember why they are here.

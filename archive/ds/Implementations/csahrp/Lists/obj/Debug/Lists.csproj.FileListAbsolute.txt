@@ -1,6 +1,0 @@
-/mnt/0E08DBBF08DBA3CD/me/temp/leet/ds/Implementations/csahrp/Lists/bin/Debug/Lists.exe
-/mnt/0E08DBBF08DBA3CD/me/temp/leet/ds/Implementations/csahrp/Lists/bin/Debug/Lists.pdb
-/mnt/0E08DBBF08DBA3CD/me/temp/leet/ds/Implementations/csahrp/Lists/obj/Debug/Lists.csproj.AssemblyReference.cache
-/mnt/0E08DBBF08DBA3CD/me/temp/leet/ds/Implementations/csahrp/Lists/obj/Debug/Lists.csproj.CoreCompileInputs.cache
-/mnt/0E08DBBF08DBA3CD/me/temp/leet/ds/Implementations/csahrp/Lists/obj/Debug/Lists.exe
-/mnt/0E08DBBF08DBA3CD/me/temp/leet/ds/Implementations/csahrp/Lists/obj/Debug/Lists.pdb

@@ -1,7 +1,0 @@
-#+TITLE: Readme
-* Algorithms
-  + [[file:geomtry/][Computational Geometry]]
-  + [[file:dp/][Dynamic Programming]]
-  + [[file:graphs/][Graphs]]
-  + [[file:other.org][other&randoms]]
------

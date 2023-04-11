@@ -1,4 +1,0 @@
-/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/opt/clion/bin/ninja/linux/ninja -G Ninja /home/ghd/temp/leet/ds/Implementations/cpp/Lists
--- Configuring done
--- Generating done
--- Build files have been written to: /home/ghd/temp/leet/ds/Implementations/cpp/Lists/cmake-build-debug

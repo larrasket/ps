@@ -1,3 +1,0 @@
-/home/ghd/temp/leet/ds/Implementations/cpp/Lists/cmake-build-debug/CMakeFiles/Lists.dir
-/home/ghd/temp/leet/ds/Implementations/cpp/Lists/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ghd/temp/leet/ds/Implementations/cpp/Lists/cmake-build-debug/CMakeFiles/rebuild_cache.dir
