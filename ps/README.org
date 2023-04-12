@@ -1,4 +1,4 @@
-#+title: OJs Problem Solving Solutions
+#+title: OJs Solutions
 
 Naming is a little missy, I've a hard dependency on it in my git system, so it is not going
 to change soon. However:
