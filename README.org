@@ -1,3 +1,4 @@
+#+OPTIONS: toc:nil
 /A mirror of my leetcode OJ solutions/. For other OJs check the [[file:ps/][ps/]] directory.
 
 You also may find [[https://github.com/salehmu/euler][/euler]] interesting.
