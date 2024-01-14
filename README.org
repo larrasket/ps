@@ -8,10 +8,10 @@ Directory naming:
 - [[file:ps/cs/][cs]]: [[https://codesignal.com/][codesignal]].
 - [[file:ps/cw/][cw]]: [[https://www.codewars.com/][codewars]].
 - [[file:ps/fl/][fl]]: failed problems.
-- [[file:ps/he/][he]]: [[https://www.hackerearth.com/][hackerearth]]
-- [[file:ps/nt/][nt]]: [[https://www.lintcode.com/][lintcode]]
+- [[file:ps/he/][he]]: [[https://www.hackerearth.com/][hackerearth]].
+- [[file:ps/nt/][nt]]: [[https://www.lintcode.com/][lintcode]].
+- [[file:ps/cg/][cg]]: [[https://codegolf.stackexchange.com/][codegolf]].
 
-You also may find [[https://git.sr.ht/~lr0/euler][/euler]] interesting.
 
 - [2024-01-13 Sat 21:17]: Looking here now as it has been 4 years since I
   started doing competitive programming, it's funny how I used so many different
