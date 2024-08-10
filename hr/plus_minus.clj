@@ -1,4 +1,4 @@
-(ns plus-minus)
+(ns hr)
   
 (defn plusMinus [arr]
   (if (empty? arr)
@@ -11,5 +11,14 @@
       (println (with-precision 6 (float (/ n l))))
       (println (with-precision 6 (float (/ z l)))))))
 
-(plusMinus [1 1 0 -1 -1])
+;; https://www.hackerrank.com/challenges/three-month-preparation-kit-mini-max-sum
+(defn miniMaxSum [arr]
+  (let [sarr (sort arr)
+        minsum (reduce + (take 4 sarr))
+        maxsum (reduce + (drop 1 sarr))]
+    (print (format "%d %d" minsum maxsum))))
+    
+
+
+
 
