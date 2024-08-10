@@ -2,6 +2,7 @@
 
 Directory naming:
 
+-   [hr](hr/): hackerrank
 -   [cc](ps/cc/): [codechef](https://www.codechef.com/).
 -   [cf](ps/cf/): [codeforces](https://codeforces.com/).
 -   [cs](ps/cs/): [codesignal](https://codesignal.com/).
