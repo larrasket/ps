@@ -3,7 +3,6 @@
             [clojure.edn :as edn]
             [clojure.pprint :as pp]))
 
-
 (defn plusMinus
   [arr]
   (if (empty? arr)
@@ -24,7 +23,6 @@
         maxsum (reduce + (drop 1 sarr))]
     (print (format "%d %d" minsum maxsum))))
 
-
 ;; https://www.hackerrank.com/challenges/three-month-preparation-kit-time-conversion
 (defn timeConversion
   [s]
@@ -36,3 +34,19 @@
                 (and (= "12" ih) (= dn "AM")) "00"
                 :else ih)]
     (format "%s:%s:%s" h m s)))
+
+;; https://www.hackerrank.com/challenges/three-month-preparation-kit-breaking-best-and-worst-records
+(defn breakingRecords [scores]
+  (loop [minscore (scores 0)
+         maxscore (scores 0)
+         mr 0
+         ml 0
+         s (rest scores)]
+    (if (empty? s)
+      [ml mr]
+      (cond
+        (> (first s) maxscore) (recur minscore (first s) mr (inc ml) (rest s))
+        (< (first s) minscore) (recur (first s) maxscore (inc mr) ml (rest s))
+        :else (recur minscore maxscore mr ml (rest s))))))
+
+(breakingRecords [12 24 10 24])
