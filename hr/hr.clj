@@ -49,4 +49,32 @@
         (< (first s) minscore) (recur (first s) maxscore (inc mr) ml (rest s))
         :else (recur minscore maxscore mr ml (rest s))))))
 
-(breakingRecords [12 24 10 24])
+;; https://www.hackerrank.com/challenges/three-month-preparation-kit-camel-case
+;; (require '[clojure.string :as str])
+(defn camel-case []
+  (let [i (read-line)]
+    (println (camel-case-help (str/split i #"\;")))))
+
+(defn camel-case-help [[o t r]]
+  (cond (= o "S")
+        (str/lower-case
+         (cond (= t "M")
+               (str/join #" " (str/split ((str/split r #"\(") 0) #"(?=[A-Z])"))
+               (or (= t "C") (= t "V")) (str/join #" " (str/split r #"(?=[A-Z])"))))
+        (= o "C")
+        (cond
+          (= t "M")
+          (str/replace-first (apply str (mapv str/capitalize
+                                              (str/split (str r "()") #" ")))
+                             #"^." str/lower-case)
+          (= t "V")
+          (str/replace-first (apply str (mapv str/capitalize
+                                              (str/split r #" ")))
+                             #"^." str/lower-case)
+          :else (apply str (mapv str/capitalize
+                                 (str/split r #" "))))))
+
+;; (loop [i (read-line)]
+;;     (when i
+;;       (println (camel-case-help (str/split i #"\;")))
+;;       (recur (read-line))))
