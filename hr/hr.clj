@@ -78,3 +78,16 @@
 ;;     (when i
 ;;       (println (camel-case-help (str/split i #"\;")))
 ;;       (recur (read-line))))
+
+;; TODO https://www.hackerrank.com/challenges/three-month-preparation-kit-divisible-sum-pairs
+
+;; https://www.hackerrank.com/challenges/three-month-preparation-kit-lonely-integer
+;; better version:
+;; (defn lonelyinteger [a]
+;;   (->> (frequencies a) (filter #(= 1 (val %))) (ffirst)))
+
+(defn lonelyinteger [a]
+  (ffirst
+   (filter #(not= (first %)
+                  (first (rest %)))
+           (partition-all 2 (sort a)))))
