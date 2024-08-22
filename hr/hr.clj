@@ -91,3 +91,16 @@
    (filter #(not= (first %)
                   (first (rest %)))
            (partition-all 2 (sort a)))))
+
+(defn gradingStudents [grades]
+  (loop
+      [g grades
+       i 0
+       nf #(- 5 (mod % 5))]
+    (cond
+      (= i (count g)) g
+      (and (< (nf (g i)) 3) (>= (g i) 38))
+      (recur (assoc g i (+ (nf (g i) ) (g i)))
+             (inc i)
+             nf)
+      :else (recur g (inc i) nf))))
