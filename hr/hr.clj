@@ -51,10 +51,6 @@
 
 ;; https://www.hackerrank.com/challenges/three-month-preparation-kit-camel-case
 ;; (require '[clojure.string :as str])
-(defn camel-case []
-  (let [i (read-line)]
-    (println (camel-case-help (str/split i #"\;")))))
-
 (defn camel-case-help [[o t r]]
   (cond (= o "S")
         (str/lower-case
@@ -73,6 +69,10 @@
                              #"^." str/lower-case)
           :else (apply str (mapv str/capitalize
                                  (str/split r #" "))))))
+
+(defn camel-case []
+  (let [i (read-line)]
+    (println (camel-case-help (str/split i #"\;")))))
 
 ;; (loop [i (read-line)]
 ;;     (when i
