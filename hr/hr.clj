@@ -104,3 +104,15 @@
              (inc i)
              nf)
       :else (recur g (inc i) nf))))
+
+;; https://www.hackerrank.com/challenges/three-month-preparation-kit-diagonal-difference
+(defn diagonalDifference [arr]
+  (loop
+      [i 0
+       j (- (count arr) 1)
+       l 0
+       r 0
+       labs #(if (< % 0) (* % -1) %)]
+    (if (>= i (count arr))
+      (labs (- l r))
+      (recur (inc i) (dec j) (+ l ((arr i) i)) (+ r ((arr i) j)) labs))))
