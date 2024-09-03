@@ -116,3 +116,12 @@
     (if (>= i (count arr))
       (labs (- l r))
       (recur (inc i) (dec j) (+ l ((arr i) i)) (+ r ((arr i) j)) labs))))
+
+;; https://www.hackerrank.com/challenges/three-month-preparation-kit-countingsort1
+(defn countingSort [arr]
+  (loop [freq (frequencies arr)
+         i 0
+         res []]
+    (if (= i 100)
+      res
+      (recur freq (inc i) (conj res (or (freq i) 0))))))
