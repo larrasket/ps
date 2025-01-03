@@ -1,7 +1,6 @@
 (ns hr
-  (:require [clojure.string :as str]
-            [clojure.edn :as edn]
-            [clojure.pprint :as pp]))
+  (:require
+   [clojure.string :as str]))
 
 (defn plusMinus
   [arr]
